@@ -1,0 +1,76 @@
+.create-campaign-page {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4; /* Light background color */
+}
+
+.create-campaign-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333; /* Darker text color */
+}
+
+.campaign-form {
+  max-width: 600px;
+  margin: 0 auto; /* Center the form */
+  background: white; /* White background for the form */
+  padding: 20px;
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.campaign-form label {
+  margin-top: 10px;
+  display: block;
+  font-weight: bold;
+}
+
+.campaign-form input,
+.campaign-form textarea {
+  width: 100%; /* Full width */
+  padding: 10px;
+  margin: 5px 0 15px 0; /* Margin around input fields */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 4px; /* Rounded corners */
+}
+
+.campaign-form .submit-button {
+  background-color: #da5424; /* Green color for the button */
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%; /* Full width */
+  font-size: 16px;
+}
+
+.campaign-form .submit-button:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
+/* Join Us Section */
+.join-us {
+/* Navbar color */
+  color: white;
+  padding: 20px;
+  text-align: center;
+  margin-top: 30px; /* Space from the form */
+}
+
+/* Updated h2 heading color */
+.join-us h2 {
+  color: #283044; /* Same as navbar color */
+}
+
+/* Footer */
+.footer {
+  background-color: #343a40; /* Dark background */
+  color: white;
+  text-align: center;
+  padding: 20px 0; /* Increased vertical padding for a thicker footer */
+  width: 100%; /* Full width */
+  position: relative;
+  bottom: 0; /* Stick to bottom */
+  font-size: 16px; /* Increase font size if needed */
+}

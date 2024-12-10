@@ -1,0 +1,121 @@
+/* src/about.css */
+.about-page {
+    font-family: Arial, sans-serif;
+    color: #333;
+    padding: 20px;
+    max-width: 100%;
+}
+
+.about-header {
+    text-align: center;
+    margin-bottom: 40px;
+    background: linear-gradient(120deg, #283044, #4a6572);
+    color: #fff;
+    padding: 40px 20px;
+    border-radius: 10px;
+}
+
+.about-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.about-header .intro-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.cta-button {
+    background-color: #283044;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #1f2a36; /* Slightly darker shade for hover */
+    transform: scale(1.05);
+}
+
+.features {
+    margin: 40px 0;
+    text-align: center;
+}
+
+.features h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #283044; /* Heading color for consistency */
+}
+
+.feature-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Updated background color for Core Values feature cards */
+.feature-card {
+    background-color: #283044; /* Updated to match requested color */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    flex: 1 1 300px;
+    max-width: 300px;
+    transition: transform 0.3s ease;
+    color: #ffffff; /* Ensure text is readable on dark background */
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #ffffff; /* Updated text color for contrast */
+}
+
+.feature-card p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #d1d1d1; /* Lighter color for paragraph text */
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Plain white background for Join Us section */
+.join-us {
+    text-align: center;
+    margin-top: 40px;
+    background-color: #ffffff;
+    color: #283044;
+    padding: 40px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.join-us h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.join-us p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 10px;
+    background-color: #f1f1f1;
+    color: #555;
+    font-size: 0.9rem;
+    border-top: 1px solid #e1e1e1;
+}

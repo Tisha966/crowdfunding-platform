@@ -1,0 +1,99 @@
+/* src/explore.css */
+
+.explore-page {
+  font-family: Arial, sans-serif;
+  color: #333;
+  padding: 40px 20px;
+  background-color: #f8f8f8; /* Light background for contrast */
+}
+
+.explore-title {
+  text-align: center;
+  font-size: 48px;
+  color: #283044; /* Matching color from home.css */
+  margin-bottom: 40px;
+}
+
+.create-campaign-button {
+  display: block;
+  margin: 0 auto 40px auto;
+  background-color: #ff7f50; /* Same as cta-button */
+  color: #fff;
+  padding: 12px 24px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.create-campaign-button:hover {
+  background-color: #e06d43; /* Darker shade for hover effect */
+}
+
+.campaign-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* Space between campaign cards */
+}
+
+.campaign-container {
+  background-color: #fff; /* White background for campaign cards */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 300px; /* Fixed width for uniformity */
+  overflow: hidden; /* To contain the image */
+  transition: transform 0.3s;
+}
+
+.campaign-container:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.campaign-image {
+  width: 100%;
+  height: 180px; /* Fixed height for images */
+  overflow: hidden;
+}
+
+.campaign-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cover the area without distortion */
+}
+
+.campaign-text {
+  padding: 20px;
+}
+
+.campaign-text h3 {
+  font-size: 24px;
+  color: #283044; /* Title color */
+  margin-bottom: 10px;
+}
+
+.campaign-text p {
+  font-size: 16px;
+  color: #555; /* Description color */
+  margin: 5px 0;
+}
+
+.campaign-text strong {
+  color: #ff7f50; /* Highlight funding goal with the same color */
+}
+.learn-more-button {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #3498db; /* Button color */
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.learn-more-button:hover {
+  background-color: #2980b9; /* Darker shade on hover */
+}
