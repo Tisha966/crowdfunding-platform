@@ -87,10 +87,346 @@
     margin-bottom: 30px;
   }
   
-  .footer {
-    background-color: #283044;
-    color: #fff;
-    text-align: center;
-    padding: 20px;
+  /* Footer Styling */
+.footer {
+  background-color: #2c2c2c; /* Dark background */
+  color: #ffffff; /* White text */
+  padding: 30px 0;
+  font-family: Arial, sans-serif;
+}
+
+.footer-container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+/* Footer Top */
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #555;
+  padding-bottom: 15px;
+}
+
+.footer-logo h2 {
+  font-size: 1.8rem;
+  color: #ffffff;
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #00bfff; /* Light Blue on Hover */
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15px;
+}
+
+.footer-bottom p {
+  font-size: 0.9rem;
+}
+
+.footer-social a {
+  color: #ffffff;
+  font-size: 1.2rem;
+  margin-left: 15px;
+  transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+  color: #00bfff; /* Light Blue for Social Icons on Hover */
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+  .footer-top,
+  .footer-bottom {
+      flex-direction: column;
+      text-align: center;
   }
-  
+
+  .footer-links {
+      flex-direction: column;
+      gap: 10px;
+  }
+
+  .footer-social a {
+      margin: 10px 5px 0;
+  }
+}
+
+
+/* Hero Section */
+.hero {
+  background-color: #f5f5f5; /* Light grey background */
+  padding: 50px 0;
+  font-family: Arial, sans-serif;
+}
+
+.hero-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+/* Left Content */
+.hero-content {
+  max-width: 50%;
+}
+
+.hero-heading {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #333333; /* Dark grey text */
+  margin-bottom: 20px;
+}
+
+.hero-subtext {
+  font-size: 1.1rem;
+  color: #555555; /* Medium grey text */
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.btn-primary,
+.btn-secondary {
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #283044; /* Blue button */
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: #283044; /* Darker blue on hover */
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 2px solid #283044;
+  color: #283044;
+}
+
+.btn-secondary:hover {
+  background-color: gray;
+  color: #ffffff;
+}
+
+/* Right Content (Image) */
+.hero-image {
+  max-width: 45%;
+  text-align: right;
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px; /* Optional rounded corners */
+}
+
+/* Responsive Hero Section */
+@media (max-width: 768px) {
+  .hero-container {
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .hero-content,
+  .hero-image {
+      max-width: 100%;
+  }
+
+  .hero-image {
+      margin-top: 20px;
+  }
+}
+/* Footer Styles */
+.footer {
+  background-color: #333333; /* Dark gray for the background */
+  color: white;
+  padding: 20px 0; /* Reduced padding to make footer smaller */
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+}
+
+.footer-container {
+  width: 85%;
+  margin: 0 auto;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: center; /* Center the content horizontally */
+  align-items: center;
+  margin-bottom: 20px; /* Reduced space between logo and links */
+  flex-wrap: wrap;
+}
+
+.footer-logo {
+  text-align: center; /* Center the logo */
+}
+
+.footer-logo h2 {
+  font-size: 24px; /* Reduced font size for a smaller header */
+  margin-bottom: 8px; /* Reduced margin for closer proximity */
+}
+
+.footer-description {
+  font-size: 12px; /* Smaller description text */
+  color: #aaa; /* Lighter gray for description */
+  margin-bottom: 15px; /* Reduced margin for closer proximity */
+}
+
+.footer-links {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px; /* Reduced gap for a more compact design */
+  flex-wrap: wrap;
+}
+
+.footer-link-column {
+  margin-bottom: 15px; /* Reduced margin */
+  flex: 1;
+  min-width: 160px; /* Reduced min-width for columns */
+  padding-right: 15px; /* Reduced padding */
+}
+
+.footer-link-column h3 {
+  font-size: 16px; /* Smaller font size */
+  color: #fff;
+  margin-bottom: 12px; /* Reduced margin */
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.footer-link-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-link-column ul li {
+  margin: 6px 0; /* Reduced space between list items */
+}
+
+.footer-link-column ul li a {
+  text-decoration: none;
+  color: #bbb; /* Light gray for links */
+  font-size: 12px; /* Smaller link size */
+  transition: color 0.3s ease;
+}
+
+.footer-link-column ul li a:hover {
+  color: #fff;
+}
+
+.footer-social {
+  display: flex;
+  gap: 10px; /* Reduced gap */
+  justify-content: center; /* Centered the social media icons */
+  margin-top: 10px; /* Reduced space above social icons */
+}
+
+.social-link {
+  text-decoration: none;
+  color: #bbb;
+  font-size: 16px; /* Slightly smaller social icon size */
+  transition: color 0.3s ease;
+}
+
+.social-link:hover {
+  color: #fff;
+}
+
+.newsletter-input {
+  padding: 8px;
+  margin-top: 8px;
+  width: 200px; /* Reduced width for a smaller input */
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  font-size: 12px; /* Smaller input text */
+  margin-bottom: 12px; /* Reduced margin */
+}
+
+.newsletter-btn {
+  padding: 8px 16px;
+  background-color: #555; /* Slightly lighter gray */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px; /* Smaller button text */
+}
+
+.newsletter-btn:hover {
+  background-color: #444;
+}
+
+.footer-bottom {
+  margin-top: 20px; /* Reduced margin for clarity */
+  font-size: 12px; /* Smaller font size for copyright text */
+  color: #bbb;
+  text-align: center; /* Centered the "All Rights Reserved" text */
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .footer-top {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px; /* Reduced margin for mobile */
+  }
+
+  .footer-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Adjusted gap for mobile view */
+  }
+
+  .footer-link-column {
+    text-align: center;
+    margin-bottom: 15px;
+    padding-right: 0;
+  }
+
+  .newsletter-input {
+    width: 80%;
+  }
+
+  .newsletter-btn {
+    width: 80%;
+  }
+}
+
