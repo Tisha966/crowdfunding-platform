@@ -3,22 +3,42 @@ import React from 'react';
 import { Link } from 'react-router-dom'; // Import Link component from react-router-dom
 import moneyImage from './assets/images/moneyimg.jpg'; 
 import fundsImage from './assets/images/fund3.jpg';
+
 import './home.css';
 
 const Home = () => {
   return (
     <div className="home-page">
 <header className="home-hero">
+
   <h1>Welcome to CrowdFunding</h1>
   <p>Empowering ideas, one contribution at a time.</p>
   <Link to="/about">
     <button className="cta-button">ABOUT CROWDFUNDING</button>
   </Link>
 </header>
+<section className="hero">
+        <div className="hero-container">
+          <div className="hero-content">
+            <h1 className="hero-heading" >Empower Ideas, Fund Dreams</h1>
+            <p className="hero-subtext" >
+              Join our community to explore and support creative campaigns that bring change to the world.
+            </p>
+            <div className="hero-buttons">
+              <Link to="/explore" className="btn-primary">Explore Campaigns</Link> {/* Link for Explore */}
+              <a href="/create-campaign" className="btn-secondary">Explore Ideas</a>
+            </div>
+          </div>
+
+          <div className="hero-image">
+            <img src={fundsImage} alt="Hero Image" />
+          </div>
+        </div>
+      </section>
 
 
       <section className="features">
-  <h2>Why Choose Us?</h2>
+  <h2 style={{color:"#ff7f50"}}>Why Choose Us?</h2>
   <div className="feature-cards">
     <div className="feature-card">
       <h3>Easy to Use</h3>
@@ -30,31 +50,13 @@ const Home = () => {
     </div>
     <div className="feature-card">
       <h3>Secure Payments</h3>
-      <p>Fast and secure transactions to keep your contributions safe.</p>
+      <p >Fast and secure transactions to keep your contributions safe.</p>
     </div>
   </div>
 </section>
 
 
-      <section className="hero">
-        <div className="hero-container">
-          <div className="hero-content">
-            <h1 className="hero-heading">Empower Ideas, Fund Dreams</h1>
-            <p className="hero-subtext">
-              Join our community to explore and support creative campaigns that bring change to the world.
-            </p>
-            <div className="hero-buttons">
-              <Link to="/explore" className="btn-primary">Explore Campaigns</Link> {/* Link for Explore */}
-              <a href="/create-campaign" className="btn-secondary">Create Campaign</a>
-            </div>
-          </div>
-
-          <div className="hero-image">
-            <img src={fundsImage} alt="Hero Image" />
-          </div>
-        </div>
-      </section>
-
+   
       {/* Updated Footer Section */}
       <footer className="footer">
         <div className="footer-container">

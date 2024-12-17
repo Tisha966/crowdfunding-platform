@@ -1,76 +1,247 @@
-.create-campaign-page {
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4; /* Light background color */
-}
-
-.create-campaign-title {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #333; /* Darker text color */
-}
-
-.campaign-form {
-  max-width: 600px;
-  margin: 0 auto; /* Center the form */
-  background: white; /* White background for the form */
-  padding: 20px;
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-}
-
-.campaign-form label {
-  margin-top: 10px;
-  display: block;
-  font-weight: bold;
-}
-
-.campaign-form input,
-.campaign-form textarea {
-  width: 100%; /* Full width */
-  padding: 10px;
-  margin: 5px 0 15px 0; /* Margin around input fields */
-  border: 1px solid #ccc; /* Light gray border */
-  border-radius: 4px; /* Rounded corners */
-}
-
-.campaign-form .submit-button {
-  background-color: #da5424; /* Green color for the button */
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 100%; /* Full width */
-  font-size: 16px;
-}
-
-.campaign-form .submit-button:hover {
-  background-color: #218838; /* Darker green on hover */
-}
-
 /* Join Us Section */
 .join-us {
-/* Navbar color */
-  color: white;
-  padding: 20px;
   text-align: center;
-  margin-top: 30px; /* Space from the form */
+  background-color: #fff;
+  padding: 40px 20px;
+  margin: 30px auto;
+  max-width: 800px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Updated h2 heading color */
 .join-us h2 {
-  color: #283044; /* Same as navbar color */
+  color: #283044;
+  margin-bottom: 10px;
 }
 
-/* Footer */
-.footer {
-  background-color: #343a40; /* Dark background */
-  color: white;
+.join-us p {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.join-us-button {
+  display: inline-block;
+  text-decoration: none;
+  color: #fff;
+  background-color: #da5424;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.join-us-button:hover {
+  background-color: #c64a1c;
+}
+
+/* Fundraising Categories */
+.categories {
+  background-color: #f9f9f9;
+  padding: 40px 20px;
   text-align: center;
-  padding: 20px 0; /* Increased vertical padding for a thicker footer */
-  width: 100%; /* Full width */
-  position: relative;
-  bottom: 0; /* Stick to bottom */
-  font-size: 16px; /* Increase font size if needed */
+  border-radius: 8px;
+  margin: 20px auto;
+  max-width: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.categories-title {
+  font-size: 36px;
+  color: #008080; /* Teal color */
+  margin-top: 10px;
+  margin-bottom: 30px;
+  font-weight: bold;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  font-family: 'Arial', sans-serif;
+}
+
+.category-list {
+  display: flex;
+  flex: 1;
+  gap: 30px;
+  justify-content: space-between;
+}
+
+.category-column {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 48%;
+}
+
+.category-heading {
+  font-size: 22px;
+  color: #2c3e50;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.category-column ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.category-column ul li {
+  font-size: 16px;
+  color: #7f8c8d;
+  margin: 8px 0;
+}
+
+.category-column ul li:hover {
+  color: #da5424;
+  cursor: pointer;
+}
+
+/* Image styling */
+.category-image {
+  width: 40%; /* Adjust width as necessary */
+  height: auto;
+}
+
+.category-image img {
+  width: 100%;
+  height: 120%; /* Increased height to make the image larger */
+  object-fit: cover; /* Ensures the image covers the div properly without stretching */
+  border-radius: 8px;
+}
+
+/* Responsive Design for Small Screens */
+@media (max-width: 768px) {
+  .categories {
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .category-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .category-column {
+    width: 80%;
+    margin-bottom: 30px;
+  }
+
+  .category-image {
+    width: 100%;
+    margin-top: 20px;
+    height: 200px; /* Adjust height for small screens */
+  }
+}
+
+/* Hero Image Section */
+
+/* Fundraising Categories */
+.categories {
+  background-color: #f9f9f9;
+  padding: 40px 20px;
+  text-align: center;
+  border-radius: 8px;
+  margin: 20px auto;
+  max-width: 1000px;
+  display: flex;
+  align-items: center; /* Align content vertically */
+  justify-content: space-between; /* Space between categories and image */
+}
+
+.categories-title {
+  font-size: 36px;
+  color: #008080; /* Teal color */
+  margin-top: 10px;
+  margin-bottom: 30px;
+  font-weight: bold;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  font-family: 'Arial', sans-serif;
+}
+
+.category-list {
+  display: flex;
+  flex: 1; /* Makes sure the category list takes up available space */
+  gap: 30px;
+  justify-content: space-between;
+}
+
+.category-column {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 48%;
+}
+
+.category-heading {
+  font-size: 22px;
+  color: #2c3e50;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.category-column ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.category-column ul li {
+  font-size: 16px;
+  color: #7f8c8d;
+  margin: 8px 0;
+}
+
+.category-column ul li:hover {
+  color: #da5424;
+  cursor: pointer;
+}
+
+/* Image styling */
+.category-image {
+  width: 40%; /* Adjust width as necessary */
+  height: auto;
+}
+
+.category-image img {
+  width: 100%;
+  height: auto; /* Ensures the image scales properly */
+  border-radius: 8px; /* Optional: rounded corners */
+}
+
+/* Responsive Design for Small Screens */
+@media (max-width: 768px) {
+  .categories {
+    flex-direction: column; /* Stack categories and image on smaller screens */
+    text-align: left; /* Align text to left */
+  }
+
+  .category-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .category-column {
+    width: 80%;
+    margin-bottom: 30px;
+  }
+
+  .category-image {
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+.categories-title {
+  font-size: 36px;
+  color: #03366d; /* Changed to a teal color */
+  margin-top: 20px;
+  margin-bottom: 40px;
+  font-weight: 700;
+  text-align: center; /* Centers the title */
+  text-transform: capitalize;
+  letter-spacing: 1.5px;
+  font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
 }

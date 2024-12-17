@@ -1,92 +1,55 @@
-// src/CreateCampaign.js
 import React, { useState } from 'react';
-import './createCampaign.css';
-import { Link } from 'react-router-dom';
-import fundImage from './assets/images/fund8.png';
+import { Link } from 'react-router-dom';  // Keep only one import statement
+import './Dashboard.css'; // Import the CSS for styling
 
-const CreateCampaign = ({ addCampaign }) => {
-  const [campaign, setCampaign] = useState({
-    title: '',
-    description: '',
-    goal: '',
-    image: null,
-  });
+const Dashboard = () => {
+  const [sidebarVisible, setSidebarVisible] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setCampaign({ ...campaign, [name]: value });
-  };
-
-  const handleImageUpload = (e) => {
-    setCampaign({ ...campaign, image: e.target.files[0] });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    addCampaign(campaign);
-    alert('Campaign created successfully!');
-    setCampaign({
-      title: '',
-      description: '',
-      goal: '',
-      image: null,
-    });
+  // Function to toggle sidebar visibility
+  const toggleSidebar = () => {
+    setSidebarVisible(!sidebarVisible);
   };
 
   return (
-    <div className="create-campaign-page">
-      {/* Campaign Form */}
-    
-      <h1 className="categories-title" style={{color:"#ff7f50"}}>Explore Fundraising Ideas </h1>
+    <div className="dashboard-container">
+      {/* Sidebar */}
+      <div className={`sidebar ${sidebarVisible ? 'show' : ''}`}>
+        <div className="sidebar-header">
+          <h2>All Categories</h2>
+          <button className="close-btn" onClick={toggleSidebar}>×</button>
+        </div>
+        <ul className="sidebar-menu">
+          <li><Link to="/dashboard/contribute">Contribute</Link></li>
+          <li><Link to="/dashboard/fundraise">Fundraise</Link></li>
+          <li><Link to="/dashboard/my-profile">My Profile</Link></li>
+          <li><Link to="/dashboard/my-campaigns">My Campaigns</Link></li>
+          <li><Link to="/dashboard/logout">Logout</Link></li>
+        </ul>
+      </div>
 
+      {/* Main Content */}
+      <div className={`dashboard-content ${sidebarVisible ? 'shifted' : ''}`}>
+        
+        {/* Open Menu Icon (Arrow) */}
+        <div className="toggle-btn" onClick={toggleSidebar} > &gt; </div>
 
-{/* Fundraising Categories */}
-<section className="categories">
-  <div className="category-list">
-    <div className="category-column">
-      <h3 className="category-heading">Popular Causes</h3>
-      <ul>
-        <li>🐾 Animal Causes</li>
-        <li>🩺 Cancer</li>
-        <li>🚀 Entrepreneurial Projects</li>
-        <li>🎓 Kids</li>
-        <li>🌟 Nonprofit Causes</li>
-        <li>🏃 Runs, Walks, and Rides</li>
-      </ul>
-    </div>
-    <div className="category-column">
-      <h3 className="category-heading">Additional Causes</h3>
-      <ul>
-        <li>✈️ Trips and Adventures</li>
-        <li>🎖️ Military and Veterans</li>
-        <li>🏥 Medical Expenses</li>
-        <li>🏫 Schools and Education</li>
-        <li>⚽ Sports Teams</li>
-        <li>🗳️ Political Campaigns</li>
-      </ul>
-    </div>
-  </div>
-  {/* Image next to the categories */}
-  <div className="category-image">
-    <img src={fundImage} alt="Fundraising Ideas" />
-  </div>
-</section>
+        {/* Option Selection */}
+        <div className="options">
+          <div className="option-card">
+            <h3 style={{color:"teal"}}>Login as a Contributor</h3>
+            <p>Want to contribute to a campaign? Click below.</p>
+            <Link to="/contribute" className="option-btn">Contribute</Link>
+          </div>
+          <div className="option-card">
+            <h3 style={{color:"teal"}}>Login as a Fundraiser</h3>
+            <p>Want to create a campaign? Click below.</p>
+            <Link to="/fundraise" className="option-btn" >Fundraise</Link>
+          </div>
+        </div>
 
+      </div>
 
-
-      {/* Join Us Section */}
-      <section className="join-us">
-        <h2>Join Us and Make a Difference!</h2>
-        <p>
-          Start a campaign, share your story, and gather support to make your
-          dream a reality.
-        </p>
-        <Link to="/explore" className="join-us-button">
-          Explore Campaigns
-        </Link>
-      </section>
-
-      {/* Footer Section */}
+      {/* Footer */}
       <footer className="footer">
         <div className="footer-container">
           <div className="footer-top">
@@ -175,4 +138,4 @@ const CreateCampaign = ({ addCampaign }) => {
   );
 };
 
-export default CreateCampaign;
+export default Dashboard;

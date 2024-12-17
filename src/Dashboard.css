@@ -1,0 +1,404 @@
+/* Main content area */
+.dashboard-content {
+    margin-left: 250px;
+    padding: 30px;
+    width: 100%;
+    background-color: #f4f4f4;
+    transition: margin-left 0.3s ease;
+  }
+  
+  .dashboard-content.shifted {
+    margin-left: 0;
+  }
+  
+  /* Option section */
+  .options {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    width: 100%;
+    gap: 20px;
+  }
+  
+  .option-card {
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 30%; /* Reduced width to make the boxes smaller */
+    padding: 15px; /* Reduced padding */
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .option-card h3 {
+    font-size: 18px; /* Slightly smaller font size */
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .option-card p {
+    font-size: 14px; /* Smaller font size */
+    color: #666;
+    margin-bottom: 15px;
+  }
+  
+  .option-btn {
+    display: inline-block;
+    padding: 8px 16px; /* Reduced padding */
+    background-color: #0056b3;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px; /* Slightly smaller font size */
+    transition: background-color 0.3s ease;
+  }
+  
+  .option-btn:hover {
+    background-color: #004085;
+  }
+  
+  .option-card:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+  }
+  
+  /* Sidebar (hidden by default) */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    color: white;
+    transition: left 0.3s ease;
+  }
+  
+  .sidebar.show {
+    left: 0;
+  }
+  
+  .sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .sidebar-menu {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar-menu li {
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .sidebar-menu li a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .sidebar-menu li:hover {
+    background-color: #444;
+  }
+  
+  /* Open Menu Icon (Arrow) */
+  .toggle-btn {
+    background-color: #0056b3;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: absolute;
+    top: 20px; /* Adjust the position as needed */
+    left: 20px; /* Position it on the left side of the screen */
+    transition: background-color 0.3s ease;
+  }
+  
+  .toggle-btn:hover {
+    background-color: #004085;
+  }
+
+  
+  /* Option section */
+.options {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    width: 100%;
+    gap: 10px; /* Reduced gap between the cards */
+  }
+  
+  .option-card {
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 45%; /* Keep the same width */
+    padding: 8px; /* Reduced padding */
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .option-card h3 {
+    font-size: 16px; /* Reduced font size */
+    color: #333;
+    margin-bottom: 8px; /* Reduced margin */
+  }
+  
+  .option-card p {
+    font-size: 12px; /* Smaller font size */
+    color: #666;
+    margin-bottom: 12px; /* Reduced margin */
+  }
+  
+  .option-btn {
+    display: inline-block;
+    padding: 6px 12px; /* Reduced padding */
+    background-color: #0056b3;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .option-btn:hover {
+    background-color: #004085;
+  }
+  
+  .option-card:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Sidebar (hidden by default) */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    color: white;
+    transition: left 0.3s ease;
+  }
+  
+  .sidebar.show {
+    left: 0;
+  }
+  
+  .sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .sidebar-menu {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar-menu li {
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .sidebar-menu li a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .sidebar-menu li:hover {
+    background-color: #444;
+  }
+  
+  /* Open Menu Icon (Arrow) */
+  .toggle-btn {
+    background-color: #0056b3;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: absolute;
+    top: 70px; /* Moved the icon slightly lower */
+    left: 20px; /* Positioned on the left side */
+    transition: background-color 0.3s ease;
+  }
+  
+  .toggle-btn:hover {
+    background-color: #004085;
+  }
+/* Dashboard container */
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    transition: all 0.3s ease;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 250px;
+    background-color: #333;
+    color: white;
+    padding-top: 20px;
+    position: fixed;
+    height: 100%;
+    transform: translateX(-100%); /* Hidden by default */
+    transition: transform 0.3s ease;
+  }
+  
+  .sidebar.show {
+    transform: translateX(0); /* Show when 'show' class is added */
+  }
+  
+  .sidebar-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .sidebar-header h2 {
+    font-size: 18px;
+    color: #fff;
+    margin: 0;
+  }
+  
+  .close-btn {
+    font-size: 30px;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  
+  .sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar-menu li {
+    padding: 12px;
+    text-align: left;
+  }
+  
+  .sidebar-menu li a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    display: block;
+    padding-left: 20px;
+  }
+  
+  .sidebar-menu li a:hover {
+    background-color: #444;
+    border-radius: 5px;
+  }
+  
+  /* Main content area */
+  .dashboard-content {
+    margin-left: 250px;
+    padding: 30px;
+    width: 100%;
+    background-color: #f4f4f4;
+    transition: margin-left 0.3s ease;
+  }
+  
+  .dashboard-content.shifted {
+    margin-left: 0;
+  }
+  
+  .toggle-btn-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  
+  .toggle-btn {
+    background-color: teal;
+    color: white;
+    padding: 6px 12px; /* Reduced padding to make it smaller */
+    border: none;
+    cursor: pointer;
+    border-radius: 20px; /* Rounded corners for a bean shape */
+    font-size: 14px; /* Smaller font size */
+    width: 40px; /* Elongated shape */
+    height: 25px; /* Reduced height for bean-like shape */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center the text inside the button */
+  }
+  
+  .toggle-btn:hover {
+    background-color: gray;
+  }
+  
+  
+  /* Option section */
+  .options {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 40px;
+  }
+  
+  .option-card {
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10%; /* Makes the box circular */
+    width: 200px; /* Adjust width */
+    height: 200px; /* Adjust height */
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 20px; /* Reduce margin to bring the boxes closer */
+  }
+  
+  .option-card h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .option-card p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  .option-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: gray;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .option-btn:hover {
+    background-color: teal;
+  }
+    
+  
+  

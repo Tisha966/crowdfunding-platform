@@ -7,7 +7,7 @@ const About = () => {
     <div className="about-page">
       {/* Investor Stats Section */}
       <div className="stats-container">
-        <h2 className="stats-header">JOIN OVER 1 MILLION INVESTORS</h2>
+        <h2 className="stats-header" style={{color :"teal"}}>JOIN OVER 1 MILLION INVESTORS</h2>
         <div className="stats">
           <div className="stat">
           <h1>₹18,750</h1>

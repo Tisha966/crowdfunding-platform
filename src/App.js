@@ -10,12 +10,15 @@ import Contact from './Contact';
 import SignUp from './SignUp';
 import './index.css';
 import CampaignDetails from './CampaignDetails';
+import Dashboard from './Dashboard';
+import { faHandHoldingUsd } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const App = () => {
   return (
     <Router>
       <nav className="navbar">
-        <h1 className="logo">CrowdFunding</h1>
+        <h1 className="logo"> <FontAwesomeIcon icon={faHandHoldingUsd} style={{ color: '#ff7f50', marginRight: '8px' }} />CrowdFunding</h1>
         <ul className="nav-links">
           <li><Link to="/">Home</Link></li>
           {/* <li><Link to="/explore">Explore</Link></li>  */}
@@ -24,7 +27,7 @@ const App = () => {
           {/* <li><Link to="/create-campaign">Create Campaign</Link></li>  */}
           <li><Link to="/login">Login</Link></li>
           {/* <li><Link to="/contact">Contact</Link></li> */}
-          
+          <li><Link to="/dashboard">Dashboard</Link></li>
 
           
         </ul>
@@ -38,6 +41,8 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/campaign/:id" element={<CampaignDetails />} /> 
+        <Route path="/dashboard" element={<Dashboard />} />
+
         
       </Routes>
     </Router>

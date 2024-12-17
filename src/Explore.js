@@ -7,9 +7,17 @@ import shelterImage from "./assets/images/disaster.jpg";
 import farmerImage from "./assets/images/farmer.jpg";
 import aidImage from "./assets/images/aid.jpg";
 import forestImage from "./assets/images/forest.jpg";
-
+import { FaSearch } from 'react-icons/fa'; // Importing search icon
+import tusharImage from "./assets/images/tushar.jpeg";
+import surgicalImage from "./assets/images/surgical.jpg";
+import oldladyImage from "./assets/images/oldlady.jpeg";
+import orphanImage from "./assets/images/orphan.jpg";
+import cancerImage from "./assets/images/cancer.jpg";
+import accidentImage from "./assets/images/accident.jpg";
 
 const Explore = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+
   // Campaigns data (sample)
   const [campaigns] = useState([
     {
@@ -19,25 +27,7 @@ const Explore = () => {
       daysLeft: 41,
       supporters: 208,
       donationTime: 'Last donation an hour ago',
-      image: 'https://via.placeholder.com/300x200', // Replace with actual image URL
-    },
-    {
-      id: 2,
-      title: 'Help Tushar Soni Fight Acute Mixed Phenotype Leukemia',
-      raised: '₹3,00,931',
-      daysLeft: 10,
-      supporters: 121,
-      donationTime: 'Last donation 40 minutes ago',
-      image: 'https://via.placeholder.com/300x200',
-    },
-    {
-      id: 3,
-      title: 'Contribution for Ravi - Cancer Treatment Support',
-      raised: '₹12,73,339',
-      daysLeft: 4,
-      supporters: 275,
-      donationTime: 'Last donation 2 days ago',
-      image: 'https://via.placeholder.com/300x200',
+      image: oldladyImage, // Replace with actual image URL
     },
     {
       id: 4,
@@ -48,15 +38,7 @@ const Explore = () => {
       donationTime: 'Last donation 1 hour ago',
       image: aidImage,
     },
-    {
-      id: 5,
-      title: 'Support Ramesh’s Family After Tragic Accident',
-      raised: '₹1,85,000',
-      daysLeft: 15,
-      supporters: 98,
-      donationTime: 'Last donation 5 hours ago',
-      image: 'https://via.placeholder.com/300x200',
-    },
+   
     {
       id: 6,
       title: 'Empower Rural Students with Education Resources',
@@ -65,6 +47,43 @@ const Explore = () => {
       supporters: 500,
       donationTime: 'Last donation 2 hours ago',
       image: schoolImage,
+    },
+    {
+      id: 9,
+      title: 'Assistance for Victims of Natural Disasters',
+      raised: '₹6,50,000',
+      daysLeft: 9,
+      supporters: 290,
+      donationTime: 'Last donation 30 minutes ago',
+      image: shelterImage,
+    },
+    {
+      id: 3,
+      title: 'Contribution for Ravi - Cancer Treatment Support',
+      raised: '₹12,73,339',
+      daysLeft: 4,
+      supporters: 275,
+      donationTime: 'Last donation 2 days ago',
+      image: cancerImage,
+    },
+ 
+    {
+      id: 5,
+      title: 'Support Ramesh’s Family After Tragic Accident',
+      raised: '₹1,85,000',
+      daysLeft: 15,
+      supporters: 98,
+      donationTime: 'Last donation 5 hours ago',
+      image: accidentImage,
+    },
+    {
+      id: 2,
+      title: 'Help Tushar Soni Fight Acute Mixed Phenotype Leukemia',
+      raised: '₹3,00,931',
+      daysLeft: 10,
+      supporters: 121,
+      donationTime: 'Last donation 40 minutes ago',
+      image: tusharImage,
     },
     {
       id: 7,
@@ -84,15 +103,7 @@ const Explore = () => {
       donationTime: 'Last donation 1 day ago',
       image: forestImage,
     },
-    {
-      id: 9,
-      title: 'Assistance for Victims of Natural Disasters',
-      raised: '₹6,50,000',
-      daysLeft: 9,
-      supporters: 290,
-      donationTime: 'Last donation 30 minutes ago',
-      image: shelterImage,
-    },
+   
     {
       id: 10,
       title: 'Donate for Education of Orphan Children',
@@ -100,7 +111,7 @@ const Explore = () => {
       daysLeft: 18,
       supporters: 162,
       donationTime: 'Last donation 4 hours ago',
-      image: 'https://via.placeholder.com/300x200',
+      image: orphanImage,
     },
     {
       id: 11,
@@ -109,7 +120,7 @@ const Explore = () => {
       daysLeft: 28,
       supporters: 360,
       donationTime: 'Last donation 3 hours ago',
-      image: 'https://via.placeholder.com/300x200',
+      image: surgicalImage,
     },
     {
       id: 12,
@@ -120,36 +131,51 @@ const Explore = () => {
       donationTime: 'Last donation 1 day ago',
       image: farmerImage,
     },
-  
   ]);
+
+  const filteredCampaigns = campaigns.filter((campaign) =>
+    campaign.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="explore-page">
-     {/* Filtering Section */}
-<div className="filters">
-  <span style={{ fontWeight: 'bold', color: '#333' }}>Showing fundraisers for </span>
-  <select>
-    <option>All Categories</option>
-    <option>Education</option>
-    <option>Medical</option>
-  </select>
-  <span style={{ fontWeight: 'bold', color: '#333' }}> under </span>
-  <select>
-    <option>Trending</option>
-    <option>Newest</option>
-  </select>
-  <span style={{ fontWeight: 'bold', color: '#333' }}> from </span>
-  <select>
-    <option>All Locations</option>
-    <option>India</option>
-    <option>USA</option>
-  </select>
-  <button className="reset-filters">Reset Filters</button>
-</div>
+      {/* Search Bar Section */}
+      <div className="search-bar">
+        <FaSearch className="search-icon" />
+        <input
+          type="text"
+          placeholder="Search campaigns"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-input"
+        />
+      </div>
+
+      {/* Filtering Section */}
+      <div className="filters">
+        <span style={{ fontWeight: 'bold', color: '#333' }}>Showing fundraisers for </span>
+        <select>
+          <option>All Categories</option>
+          <option>Education</option>
+          <option>Medical</option>
+        </select>
+        <span style={{ fontWeight: 'bold', color: '#333' }}> under </span>
+        <select>
+          <option>Trending</option>
+          <option>Newest</option>
+        </select>
+        <span style={{ fontWeight: 'bold', color: '#333' }}> from </span>
+        <select>
+          <option>All Locations</option>
+          <option>India</option>
+          <option>USA</option>
+        </select>
+        <button className="reset-filters">Reset Filters</button>
+      </div>
 
       {/* Campaign Cards */}
       <div className="campaign-container">
-        {campaigns.map((campaign) => (
+        {filteredCampaigns.map((campaign) => (
           <div key={campaign.id} className="campaign-card">
             <img src={campaign.image} alt={campaign.title} className="campaign-image" />
             <h3 className="campaign-title">{campaign.title}</h3>
@@ -164,13 +190,13 @@ const Explore = () => {
       </div>
 
       {/* Bottom Section */}
-      
-<div className="bottom-banner">
-  <h3>Start Monthly Donations To Save Lives</h3>
-  <Link to="/campaign-details"> {/* Add the link to the CampaignDetails page */}
-    <button className="monthly-donation-btn">Start Giving Monthly</button>
-  </Link>
-</div>
+      <div className="bottom-banner">
+        <h3>Start Monthly Donations To Save Lives</h3>
+        <Link to="/campaign-details"> {/* Add the link to the CampaignDetails page */}
+          <button className="monthly-donation-btn">Start Giving Monthly</button>
+        </Link>
+      </div>
+
       <footer className="footer">
         <div className="footer-container">
           <div className="footer-top">
