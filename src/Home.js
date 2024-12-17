@@ -8,11 +8,14 @@ import './home.css';
 const Home = () => {
   return (
     <div className="home-page">
-      <header className="home-hero">
-        <h1>Welcome to CrowdFunding</h1>
-        <p>Empowering ideas, one contribution at a time.</p>
-        <button className="cta-button">Get Started</button>
-      </header>
+<header className="home-hero">
+  <h1>Welcome to CrowdFunding</h1>
+  <p>Empowering ideas, one contribution at a time.</p>
+  <Link to="/about">
+    <button className="cta-button">ABOUT CROWDFUNDING</button>
+  </Link>
+</header>
+
 
       <section className="features">
   <h2>Why Choose Us?</h2>

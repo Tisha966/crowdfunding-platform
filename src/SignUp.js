@@ -1,68 +1,57 @@
-// src/SignUp.js
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './signup.css';
 
 const SignUp = () => {
-  const navigate = useNavigate(); // Create a navigate function
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleSignUp = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError('');
-
-    // Simulating an API call
-    try {
-      // Mocking a successful signup response
-      await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate a delay
-      alert('Sign Up successful! You can now log in.');
-      navigate('/login'); // Redirect to login after successful signup
-    } catch (err) {
-      setError('Sign Up failed! Please try again.'); // Handle errors appropriately
-    } finally {
-      setLoading(false);
-    }
+    alert('Account created successfully!');
   };
 
   return (
     <div className="signup-container">
-      <h2>Sign Up</h2>
-      {error && <p className="error-message">{error}</p>}
-      <form onSubmit={handleSignUp} className="signup-form">
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          placeholder="Enter your email"
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          placeholder="Enter your password"
-        />
-        <button type="submit" disabled={loading}>
-          {loading ? 'Signing Up...' : 'Sign Up'}
-        </button>
-      </form>
-      <p>
-        Already have an account?{' '}
-        <button onClick={() => navigate('/login')} className="login-button">
-          Log In
-        </button>
-      </p>
+      <div className="signup-box">
+        <div className="social-section">
+          <h2 className="social-title">Continue with</h2>
+          <button className="social-btn google-btn">
+            <img src="https://img.icons8.com/color/24/google-logo.png" alt="Google" /> Google
+          </button>
+          <button className="social-btn facebook-btn">
+            <img src="https://img.icons8.com/color/24/facebook-new.png" alt="Facebook" /> Facebook
+          </button>
+          <button className="social-btn apple-btn">
+            <img src="https://img.icons8.com/ios-filled/24/mac-os.png" alt="Apple" /> Apple
+          </button>
+        </div>
+
+        <div className="divider"></div>
+
+        <div className="form-section">
+        <h1 className="title">
+    Join Us and Invest in the Future
+  </h1>
+  <p className="subtitle">
+    Sign up now and be part of a community that believes in success, security, 
+    and boundless growth.
+  </p>
+          <form onSubmit={handleSubmit} className="signup-form">
+            <input type="email" placeholder="Email" className="input-field" required />
+            <input type="text" placeholder="Full Name" className="input-field" required />
+            <input type="password" placeholder="Password" className="input-field" required />
+            <button type="submit" className="submit-btn">
+              Sign Up
+            </button>
+          </form>
+          <p className="login-link">
+            Already have an account?{' '}
+            <span className="link" onClick={() => navigate('/login')}>
+              Log in
+            </span>
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

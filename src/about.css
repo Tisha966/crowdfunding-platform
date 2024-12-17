@@ -23,101 +23,8 @@
     color: #555;
   }
   
-  .core-values {
-    background-color: #fff;
-    padding: 50px 20px;
-  }
+
   
-  .core-values h2 {
-    font-size: 30px;
-    text-align: center;
-    margin-bottom: 40px;
-  }
-  
-  .core-values-list {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-  }
-  
-  .core-value-item {
-    width: 300px;
-    padding: 20px;
-    text-align: center;
-    border-left: 5px solid #007bff;
-    margin-bottom: 30px;
-    transition: transform 0.3s ease;
-  }
-  
-  .core-value-item:hover {
-    transform: translateY(-10px);
-  }
-  
-  .core-value-icon {
-    font-size: 40px;
-    color: #007bff;
-  }
-  
-  .core-value-item h3 {
-    font-size: 22px;
-    margin-top: 15px;
-  }
-  
-  .core-value-item p {
-    font-size: 16px;
-    color: #777;
-    margin-top: 10px;
-  }
-  
-  .dos-donts {
-    background-color: #f9f9f9;
-    padding: 50px 20px;
-  }
-  
-  .dos-donts h2 {
-    font-size: 30px;
-    text-align: center;
-    margin-bottom: 40px;
-  }
-  
-  .dos-donts-list {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-  
-  .dos-item, .donts-item {
-    width: 45%;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .dos-item h3, .donts-item h3 {
-    font-size: 24px;
-    margin-bottom: 15px;
-  }
-  
-  .dos-item ul, .donts-item ul {
-    list-style: none;
-    padding-left: 0;
-  }
-  
-  .dos-item li, .donts-item li {
-    font-size: 16px;
-    margin-bottom: 10px;
-  }
-  
-  .checkmark, .crossmark {
-    margin-right: 10px;
-    font-size: 18px;
-    color: #007bff;
-  }
-  
-  .crossmark {
-    color: #e74c3c;
-  }
   
   .footer {
     text-align: center;
@@ -126,4 +33,155 @@
     color: #555;
   }
 
-  
+    .about-page {
+  font-family: Arial, sans-serif;
+  background: #f8f9fa;
+  padding: 2rem;
+}
+
+/* Investor Stats Section */
+.stats-container {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.stats-header {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin: 1.5rem 0;
+}
+
+.stat h1 {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.stat p {
+  font-size: 1rem;
+  color: #666;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tags span {
+  padding: 0.5rem 1rem;
+  background: #e9ecef;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+/* Testimonials Section */
+.testimonials-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.testimonial-card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.testimonial-card p {
+  font-size: 0.9rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.testimonial-card h4 {
+  font-size: 1.2rem;
+  margin-bottom: 0.2rem;
+  color: teal;
+}
+
+.testimonial-card span {
+  font-size: 0.8rem;
+  color: #666;
+}
+/* Container style to hide overflow and create scrolling effect */
+.tags-container {
+  width: 100%;
+  overflow: hidden; /* Hide anything that moves out of the container */
+  position: relative; /* Ensure absolute positioning of the spans */
+  display: flex;
+}
+
+/* Style for each span */
+.tags span {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: #e9ecef;
+  border-radius: 20px;
+  font-size: 1rem; /* Increased for readability */
+  white-space: nowrap; /* Ensure text doesn't wrap */
+  margin-right: 3rem; /* Add space between each span */
+  animation: moveAnimation 15s linear infinite; /* Slow down the movement */
+}
+
+/* Spans that should not move */
+.tags span.no-move {
+  animation: none; /* No animation for the static spans */
+}
+
+/* Animation for moving spans */
+@keyframes moveAnimation {
+  0% {
+    transform: translateX(100%); /* Start from off-screen right */
+  }
+  100% {
+    transform: translateX(-100%); /* End at off-screen left */
+  }
+}
+
+/* Container style to hide overflow and create scrolling effect */
+.tags-container {
+  width: 100%;
+  overflow: hidden; /* Hide anything that moves out of the container */
+  position: relative; /* Ensure absolute positioning of the spans */
+  display: flex;
+}
+
+/* Style for each span */
+.tags span {
+  display: inline-block;
+  padding: 0.3rem 0.7rem; /* Smaller padding */
+  background: #e9ecef;
+  border-radius: 20px;
+  font-size: 0.8rem; /* Smaller font size */
+  white-space: nowrap; /* Ensure text doesn't wrap */
+  margin-right: 1.5rem; /* Reduced space between each span */
+  animation: moveAnimation 15s linear infinite; /* Slow down the movement */
+}
+
+/* Spans that should not move */
+.tags span.no-move {
+  animation: none; /* No animation for the static spans */
+}
+
+/* Animation for moving spans */
+@keyframes moveAnimation {
+  0% {
+    transform: translateX(100%); /* Start from off-screen right */
+  }
+  100% {
+    transform: translateX(-100%); /* End at off-screen left */
+  }
+}
+

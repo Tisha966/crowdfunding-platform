@@ -1,127 +1,137 @@
-/* src/login.css */
-
+/* Container */
 .login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f8f8f8;
+  font-family: Arial, sans-serif;
+}
+
+/* Login Box */
+.login-box {
+  display: flex;
+  width: 800px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Social Section (Left Side) */
+.social-section {
+  width: 40%;
+  background-color: #f0f0f0;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #f0f2f5; /* Adjust background as needed */
-  padding: 20px; /* Optional: Add padding around the container */
+  align-items: flex-start;
+  text-align: left;
 }
 
-.login-title {
-  font-size: 24px;
-  color: #283044; /* Change to match navbar color */
-  padding-top: 60px;
+.social-title {
+  font-size: 18px;
   margin-bottom: 20px;
 }
 
-.login-form label {
-  display: block;
-  font-size: 14px;
-  color: #555;
-  text-align: left;
-  margin-top: 20px;
-}
-
-.login-form input[type="email"],
-.login-form input[type="password"] {
-  width: 100%;
-  padding: 12px;
-  margin-top: 8px;
-  font-size: 14px;
-  color: #333;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  background-color: #f9f9f9;
-}
-
-.login-button {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  color: #fff;
-  background-color: #007bff; /* Match navbar color */
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 20px;
-  transition: background-color 0.3s;
-}
-
-.login-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
-}
-
-.separator {
+.social-btn {
   display: flex;
   align-items: center;
-  text-align: center;
-  margin: 20px 0;
-}
-
-.separator span {
-  padding: 0 10px;
-  color: #888;
-  font-size: 14px;
-}
-
-.separator::before,
-.separator::after {
-  content: "";
-  flex: 1;
-  border-bottom: 1px solid #ddd;
-}
-
-.google-login-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
+  margin: 10px 0;
   padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
   font-size: 14px;
-  color: #444;
-  background-color: transparent; /* Remove box style */
-  border: 1px solid #ddd; /* Optional: add border */
-  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s;
 }
 
-.google-login-button img {
-  width: 18px;
+.social-btn img {
   margin-right: 10px;
 }
 
-.google-login-button:hover {
-  background-color: #f7f7f7; /* Light background on hover */
+.google-btn:hover {
+  background-color: #fce8e6;
 }
 
-.signup-link {
-  margin-top: 20px;
+.facebook-btn:hover {
+  background-color: #e7f0ff;
 }
 
-.signup-button {
-  background-color: transparent; /* Transparent background for sign up button */
-  color: #007bff; /* Match navbar color */
-  border: none;
-  cursor: pointer;
-  text-decoration: underline; /* Underline to indicate it's a link */
+.apple-btn:hover {
+  background-color: #e0e0e0;
 }
 
-.signup-button:hover {
-  color: #0056b3; /* Darker blue on hover */
+/* Divider */
+.divider {
+  width: 2px;
+  background-color: #ddd;
+  height: 100%;
 }
 
-/* Footer Styles */
-.footer {
-  margin-top: auto; /* Pushes footer to the bottom */
-  padding: 10px 0;
+/* Form Section (Right Side) */
+.form-section {
+  width: 60%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.subtitle {
   font-size: 14px;
   color: #555;
+  margin-bottom: 20px;
+}
+
+.link {
+  color: #0073e6;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* Form Fields */
+.input-field {
   width: 100%;
-  background-color: #f0f2f5; /* Match container background */
-  border-top: 1px solid #ddd; /* Optional: add a top border */
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.submit-btn {
+  width: 100%;
+  background-color: #0073e6;
+  color: #ffffff;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: #005bb5;
+}
+
+.forgot-link {
+  margin-top: 10px;
+  color: #0073e6;
+  cursor: pointer;
+  font-size: 14px;
 }

@@ -125,27 +125,27 @@ const Explore = () => {
 
   return (
     <div className="explore-page">
-      {/* Filtering Section */}
-      <div className="filters">
-        <span>Showing fundraisers for </span>
-        <select>
-          <option>All Categories</option>
-          <option>Education</option>
-          <option>Medical</option>
-        </select>
-        <span> under </span>
-        <select>
-          <option>Trending</option>
-          <option>Newest</option>
-        </select>
-        <span> from </span>
-        <select>
-          <option>All Locations</option>
-          <option>India</option>
-          <option>USA</option>
-        </select>
-        <button className="reset-filters">Reset Filters</button>
-      </div>
+     {/* Filtering Section */}
+<div className="filters">
+  <span style={{ fontWeight: 'bold', color: '#333' }}>Showing fundraisers for </span>
+  <select>
+    <option>All Categories</option>
+    <option>Education</option>
+    <option>Medical</option>
+  </select>
+  <span style={{ fontWeight: 'bold', color: '#333' }}> under </span>
+  <select>
+    <option>Trending</option>
+    <option>Newest</option>
+  </select>
+  <span style={{ fontWeight: 'bold', color: '#333' }}> from </span>
+  <select>
+    <option>All Locations</option>
+    <option>India</option>
+    <option>USA</option>
+  </select>
+  <button className="reset-filters">Reset Filters</button>
+</div>
 
       {/* Campaign Cards */}
       <div className="campaign-container">

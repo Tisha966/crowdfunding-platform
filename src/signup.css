@@ -1,94 +1,146 @@
-/* src/signup.css */
+/* Container */
 .signup-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  min-height: 100vh; /* Ensures it takes the full height of the viewport */
-  background-color: #f0f2f5; /* Light background color */
-  padding: 20px; /* Padding for better spacing */
-  font-family: Arial, sans-serif; /* Font styling */
+  align-items: center;
+  height: 100vh;
+  background-color: #f8f8f8;
+  font-family: Arial, sans-serif;
 }
 
-.signup-container h2 {
-  margin-bottom: 20px; /* Spacing below the heading */
-  color: #333; /* Dark text color */
-  text-align: center; /* Center the heading */
-}
-
-.signup-form {
+/* SignUp Box */
+.signup-box {
   display: flex;
-  flex-direction: column; /* Stack input fields vertically */
-  width: 100%; /* Make form responsive */
-  max-width: 400px; /* Max width of form */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
-  border-radius: 10px; /* Rounded corners */
-  padding: 30px; /* Padding for form */
-  background-color: #fff; /* White background for form */
-  transition: transform 0.3s ease; /* Smooth transition for hover effect */
+  width: 800px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
-.signup-form:hover {
-  transform: translateY(-2px); /* Slight lift effect on hover */
+/* Social Section (Left Side) */
+.social-section {
+  width: 40%;
+  background-color: #f0f0f0;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
 }
 
-.signup-form label {
-  margin-bottom: 5px; /* Space between label and input */
-  font-weight: bold; /* Bold label */
+.social-title {
+  font-size: 18px;
+  margin-bottom: 20px;
 }
 
-.signup-form input {
-  padding: 12px; /* Padding inside input */
-  margin-bottom: 20px; /* Space below each input */
-  border: 1px solid #ddd; /* Light border */
-  border-radius: 4px; /* Rounded corners */
-  transition: border-color 0.3s ease; /* Smooth transition for border color */
-}
-
-.signup-form input:focus {
-  border-color: #007bff; /* Blue border on focus */
-  outline: none; /* Remove default outline */
-}
-
-.signup-form button {
-  padding: 12px; /* Padding inside button */
-  background-color: #007bff; /* Primary button color */
-  color: white; /* Button text color */
-  border: none; /* No border */
-  border-radius: 4px; /* Rounded corners */
-  cursor: pointer; /* Pointer cursor on hover */
-  transition: background-color 0.3s, transform 0.2s; /* Smooth transition for hover */
-}
-
-.signup-form button:hover {
-  background-color: #0056b3; /* Darker shade on hover */
-  transform: scale(1.05); /* Slightly enlarge button on hover */
-}
-
-.error-message {
-  color: red; /* Error message color */
-  margin-bottom: 10px; /* Space below error message */
-}
-
-/* Login button styling */
-.login-button {
-  background-color: transparent;
-  color: #007bff; /* Blue color for login button */
-  border: none;
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
   cursor: pointer;
-  text-decoration: underline; /* Underlined text */
 }
 
-.login-button:hover {
-  color: #0056b3; /* Darker shade on hover */
+.social-btn img {
+  margin-right: 10px;
 }
 
-/* Responsive Design */
-@media (max-width: 480px) {
-  .signup-form {
-    padding: 20px; /* Reduce padding for smaller screens */
-  }
-  .signup-form button {
-    padding: 10px; /* Adjust button padding for smaller screens */
-  }
+.google-btn:hover {
+  background-color: #fce8e6;
 }
+
+.facebook-btn:hover {
+  background-color: #e7f0ff;
+}
+
+.apple-btn:hover {
+  background-color: #e0e0e0;
+}
+
+/* Divider */
+.divider {
+  width: 2px;
+  background-color: #ddd;
+  height: 100%;
+}
+
+/* Form Section (Right Side) */
+.form-section {
+  width: 60%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: teal;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.link {
+  color: #0073e6;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* Form Fields */
+.input-field {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.submit-btn {
+  width: 100%;
+  background-color: #0073e6;
+  color: #ffffff;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: #005bb5;
+}
+
+.login-link {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.login-link .link {
+  color: #0073e6;
+  cursor: pointer;
+}
+
+.login-link .link:hover {
+  text-decoration: underline;
+}
+
