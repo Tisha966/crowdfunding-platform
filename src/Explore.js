@@ -164,10 +164,13 @@ const Explore = () => {
       </div>
 
       {/* Bottom Section */}
-      <div className="bottom-banner">
-        <h3>Start Monthly Donations To Save Lives</h3>
-        <button className="monthly-donation-btn">Start Giving Monthly</button>
-      </div>
+      
+<div className="bottom-banner">
+  <h3>Start Monthly Donations To Save Lives</h3>
+  <Link to="/campaign-details"> {/* Add the link to the CampaignDetails page */}
+    <button className="monthly-donation-btn">Start Giving Monthly</button>
+  </Link>
+</div>
       <footer className="footer">
         <div className="footer-container">
           <div className="footer-top">

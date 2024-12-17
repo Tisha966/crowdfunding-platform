@@ -25,6 +25,8 @@ const App = () => {
           <li><Link to="/login">Login</Link></li>
           {/* <li><Link to="/contact">Contact</Link></li> */}
           
+
+          
         </ul>
       </nav>
       <Routes>
@@ -36,6 +38,7 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/campaign/:id" element={<CampaignDetails />} /> 
+        
       </Routes>
     </Router>
   );
