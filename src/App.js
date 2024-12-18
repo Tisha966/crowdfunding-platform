@@ -13,6 +13,7 @@ import CampaignDetails from './CampaignDetails';
 import Dashboard from './Dashboard';
 import { faHandHoldingUsd } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Chatbot from './Chatbot';
 
 const App = () => {
   return (
@@ -23,12 +24,13 @@ const App = () => {
           <li><Link to="/">Home</Link></li>
           {/* <li><Link to="/explore">Explore</Link></li>  */}
           {/* <li><Link to="/about">About</Link></li> */}
-        
-          {/* <li><Link to="/create-campaign">Create Campaign</Link></li>  */}
+{/*         
+           <li><Link to="/create-campaign">Create Campaign</Link></li>   */}
           <li><Link to="/login">Login</Link></li>
           {/* <li><Link to="/contact">Contact</Link></li> */}
           <li><Link to="/dashboard">Dashboard</Link></li>
-
+          <li><Link to="/chatbot">Chatbot</Link></li>
+      
           
         </ul>
       </nav>
@@ -40,8 +42,9 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/campaign/:id" element={<CampaignDetails />} /> 
+        <Route path="/campaignDetails/:id" element={<CampaignDetails />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/chatbot" element={<Chatbot />} />
 
         
       </Routes>
