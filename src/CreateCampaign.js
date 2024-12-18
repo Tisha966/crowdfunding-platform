@@ -37,7 +37,7 @@ const CreateCampaign = ({ addCampaign }) => {
     <div className="create-campaign-page">
       {/* Campaign Form */}
     
-      <h1 className="categories-title" style={{color:"#ff7f50"}}>Explore Fundraising Ideas </h1>
+      <h1 className="categories-title" style={{color:"teal"}}>Explore Fundraising Ideas </h1>
 
 
 {/* Fundraising Categories */}
@@ -72,6 +72,37 @@ const CreateCampaign = ({ addCampaign }) => {
   </div>
 </section>
 
+<section className="explore-ideas-section">
+  
+  
+  <div className="campaign-ideas-container">
+    
+    <div className="campaign-idea">
+      <h3>Health & Wellness Initiative</h3>
+      <p>Raising funds to provide health services and wellness programs for underprivileged communities.</p>
+    </div>
+    
+    <div className="campaign-idea">
+      <h3>Animal Shelter Development</h3>
+      <p>Supporting the creation of safe spaces for abandoned and rescued animals.</p>
+    </div>
+
+    <div className="campaign-idea">
+      <h3>Educational Support Fund</h3>
+      <p>Creating scholarships and programs to support students from disadvantaged backgrounds.</p>
+    </div>
+
+    <div className="campaign-idea">
+      <h3>Clean Water Access</h3>
+      <p>Campaign to bring clean and safe drinking water to remote villages.</p>
+    </div>
+
+    <div className="campaign-idea">
+      <h3>Startup Incubator</h3>
+      <p>Support for innovative entrepreneurs looking to launch their startups and ideas.</p>
+    </div>
+  </div>
+</section>
 
 
       {/* Join Us Section */}
