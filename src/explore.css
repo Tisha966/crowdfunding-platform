@@ -26,48 +26,65 @@
 
 /* Campaign Cards */
 .campaign-container {
-  display: flex;
-  gap: 20px;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
+  display: grid; /* Use Grid Layout */
+  grid-template-columns: repeat(4, 1fr); /* 4 cards per row */
+  gap: 20px; /* Space between cards */
+  justify-items: center; /* Align cards horizontally in the center */
+  padding: 20px; /* Padding around the container */
 }
+
 .campaign-card {
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 300px;
+  width: 250px;
+  height: 280px;
   padding: 15px;
   text-align: center;
   transition: transform 0.3s ease;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertical alignment */
+  align-items: center;     /* Horizontal alignment */
 }
+
 .campaign-card:hover {
   transform: scale(1.03);
 }
+
 .campaign-image {
-  width: 100%;
-  border-radius: 10px 10px 0 0;
-  height: 180px;
+  width: 50%;
+  border-radius: 10px;
+  height: 100px; /* Adjust image height */
   object-fit: cover;
+  margin-bottom: 10px; /* Space between image and text */
 }
+
 .campaign-title {
-  font-size: 16px;
+  font-size: 12px;
   font-weight: bold;
-  margin: 10px 0;
+  margin: 7px 0;
 }
+
 .campaign-raised {
   color: teal;
   font-size: 14px;
 }
+
 .campaign-info {
   font-size: 12px;
   color: gray;
 }
+
 .campaign-footer {
   display: flex;
   justify-content: space-between;
-  font-size: 12px;
-  margin-top: 10px;
+  font-size: 10px;
+  margin-top: 5px;
+  width: 100%; /* Align footer content properly */
 }
+
 
 /* Bottom Banner */
 .bottom-banner {
