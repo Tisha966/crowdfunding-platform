@@ -1,428 +1,255 @@
-/* Main content area */
-.dashboard-content {
-    margin-left: 250px;
-    padding: 30px;
-    width: 100%;
-    background-color: #f4f4f4;
-    transition: margin-left 0.3s ease;
-  }
-  
-  .dashboard-content.shifted {
-    margin-left: 0;
-  }
-  
- 
-  
-.options {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 40px;
-    width: 100%;
-    gap: 10px; /* Reduced gap between the cards */
-  }
-  
-  .option-card {
-    background-color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    width: 45%; /* Keep the same width */
-    padding: 8px; /* Reduced padding */
-    text-align: center;
-    transition: transform 0.3s ease;
-  }
-  
-  .option-card h3 {
-    font-size: 16px; /* Reduced font size */
-    color: #333;
-    margin-bottom: 8px; /* Reduced margin */
-  }
-  
-  .option-card p {
-    font-size: 12px; /* Smaller font size */
-    color: #666;
-    margin-bottom: 12px; /* Reduced margin */
-  }
-  
-  .option-btn {
-    display: inline-block;
-    padding: 6px 12px; /* Reduced padding */
-    background-color: #0056b3;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .option-btn:hover {
-    background-color: #004085;
-  }
-  
-  .option-card:hover {
-    transform: scale(1.05);
-  }
-  
-  /* Sidebar (hidden by default) */
-  .sidebar {
-    position: fixed;
-    top: 0;
-    left: -250px;
-    width: 250px;
-    height: 100%;
-    background-color: #333;
-    color: white;
-    transition: left 0.3s ease;
-  }
-  
-  .sidebar.show {
-    left: 0;
-  }
-  
-  .sidebar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-  }
-  
-  .sidebar-menu {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .sidebar-menu li {
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .sidebar-menu li a {
-    color: white;
-    text-decoration: none;
-  }
-  
-  .sidebar-menu li:hover {
-    background-color: #444;
-  }
-  
-  /* Open Menu Icon (Arrow) */
-  .toggle-btn {
-    background-color: #0056b3;
-    color: white;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    font-size: 22px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    position: absolute;
-    top: 70px; /* Moved the icon slightly lower */
-    left: 20px; /* Positioned on the left side */
-    transition: background-color 0.3s ease;
-  }
-  
-  .toggle-btn:hover {
-    background-color: #004085;
-  }
-/* Dashboard container */
-.dashboard-container {
-    display: flex;
-    height: 100vh;
-    font-family: Arial, sans-serif;
-    transition: all 0.3s ease;
-  }
-  
-/* Sidebar */
-.sidebar {
-  width: 250px;
-  background-color: #333;
-  color: white;
-  padding-top: 20px;
-  position: fixed;
-  height: auto; /* Allow the height to adjust based on content */
-  max-height: 80%; /* Limit the height to 80% of the viewport height */
-  transform: translateX(-100%); /* Hidden by default */
-  transition: transform 0.3s ease;
-}
-
-.sidebar.show {
-  transform: translateX(0); /* Show when 'show' class is added */
-}
-
-.sidebar-header {
-  text-align: center;
-  margin-bottom: 20px; /* Reduced margin for a smaller header */
-}
-
-.sidebar-header h2 {
-  font-size: 18px;
-  color: #fff;
+/* General Reset */
+* {
   margin: 0;
-}
-
-.close-btn {
-  font-size: 30px;
-  color: white;
-  background: none;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-}
-
-.sidebar-menu {
-  list-style: none;
   padding: 0;
-  margin: 0;
-}
-
-.sidebar-menu li {
-  padding: 8px 12px; /* Reduced padding to make menu items more compact */
-  text-align: left;
-}
-
-.sidebar-menu li a {
-  color: white;
-  text-decoration: none;
-  font-size: 14px;
-  display: block;
-  padding-left: 20px;
-}
-
-.sidebar-menu li a:hover {
-  background-color: #444;
-  border-radius: 5px;
-}
-
-  /* Main content area */
-  .dashboard-content {
-    margin-left: 250px;
-    padding: 30px;
-    width: 100%;
-    background-color: #f4f4f4;
-    transition: margin-left 0.3s ease;
-  }
-  
-  .dashboard-content.shifted {
-    margin-left: 0;
-  }
-  
-  .toggle-btn-container {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 20px;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-  }
-  
-  .toggle-btn {
-    background-color: teal;
-    color: white;
-    padding: 6px 12px; /* Reduced padding to make it smaller */
-    border: none;
-    cursor: pointer;
-    border-radius: 20px; /* Rounded corners for a bean shape */
-    font-size: 14px; /* Smaller font size */
-    width: 40px; /* Elongated shape */
-    height: 25px; /* Reduced height for bean-like shape */
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Center the text inside the button */
-  }
-  
-  .toggle-btn:hover {
-    background-color: gray;
-  }
-  
-  
-  /* Option section */
-  .options {
-    display: flex;
-    justify-content: space-evenly;
-    margin-top: 40px;
-  }
-  
-  .option-card {
-    background-color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 10%; /* Makes the box circular */
-    width: 200px; /* Adjust width */
-    height: 200px; /* Adjust height */
-    padding: 20px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: 0 20px; /* Reduce margin to bring the boxes closer */
-  }
-  
-  .option-card h3 {
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  .option-card p {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 10px;
-  }
-  
-  .option-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: gray;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .option-btn:hover {
-    background-color: teal;
-  }
-    
-/* Quick Actions Section */
-.quick-actions {
-  margin-top: 40px;
-  padding: 20px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.quick-actions h2 {
-  margin-bottom: 25px;
-  font-size: 20px;
-  color: #283044;
-  font-weight: 700;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.actions-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 15px;
-  padding: 0 20px;
-}
-
-.action-card {
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  width: 120px;
-  height: 120px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  color: #333;
-  transition: all 0.3s ease;
   box-sizing: border-box;
-}
-
-.action-card i {
-  font-size: 30px;
-  color: #00796b;
-  margin-bottom: 8px;
-}
-
-.action-card p {
-  font-size: 12px;
-  font-weight: 500;
-  color: #666;
-  margin: 0;
-}
-
-.action-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-  background-color: #e0f2f1;
-}
-
-/* Dashboard container */
-.dashboard-container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
   font-family: Arial, sans-serif;
 }
 
-/* Sidebar */
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: -250px;
-  width: 250px;
-  height: 100%;
-  background-color: #333;
-  color: white;
-  transition: left 0.3s ease;
-}
-
-.sidebar.show {
-  left: 0;
-}
-
-/* Main content area */
-.dashboard-content {
-  margin-left: 0; /* Default margin for when sidebar is hidden */
-  padding: 30px;
-  width: 100%;
-  background-color: #f4f4f4;
-  transition: margin-left 0.3s ease;
-  flex: 1; /* Ensure the content area takes up available space */
-  margin-bottom: 60px; /* Space for the footer */
-}
-
-.dashboard-content.shifted {
-  margin-left: 250px; /* Shift content when sidebar is visible */
-}
-
-/* Footer */
-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #333;
-  color: white;
-  text-align: center;
-  padding: 10px;
-  z-index: 10;
-}
-
-/* Toggle Button */
-.toggle-btn {
-  background-color: teal;
-  color: white;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  font-size: 15px;
+/* Dashboard Layout */
+.dashboard {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 100vh;
+  background-color: #f1f1f1;
+}
+
+/* Sidebar Styling */
+.sidebar {
+  background-color: #283044;
+  color: #fff;
+  width: 250px;
+  padding: 20px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.sidebar .logo {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+}
+
+.sidebar nav ul {
+  list-style: none;
+}
+
+.sidebar nav ul li {
+  padding: 10px 15px;
   cursor: pointer;
-  position: absolute;
-  top: 70px;
-  left: 20px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+}
+
+.sidebar nav ul li:hover,
+.sidebar nav ul .active {
+  background-color: #0073aa;
+  color: #fff;
+}
+
+/* Main Content */
+.content {
+  flex: 1;
+  padding: 20px;
+  background-color: #fff;
+  overflow-y: auto;
+}
+
+.content-header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+/* Welcome Panel */
+.welcome-panel {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.welcome-panel h2 {
+  margin-bottom: 10px;
+}
+
+.welcome-panel .buttons {
+  margin-top: 15px;
+}
+
+.customize-btn {
+  background-color: #0073aa;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.customize-btn:hover {
+  background-color: #005177;
+}
+
+.welcome-panel .link {
+  color: #0073aa;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Cards Section */
+.content-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.card h3 {
+  margin-bottom: 15px;
+}
+
+.card input,
+.card textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.save-btn {
+  background-color: #0073aa;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.save-btn:hover {
+  background-color: #005177;
+}
+
+/* List Styling */
+.card ul {
+  list-style: none;
+}
+
+.card ul li {
+  margin-bottom: 10px;
+  color: #555;
+  cursor: pointer;
+}
+
+.card ul li:hover {
+  text-decoration: underline;
+}
+.login-options {
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.login-options h3 {
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.login-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.login-buttons button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #fff;
+  background-color: teal;
   transition: background-color 0.3s ease;
 }
 
-.toggle-btn:hover {
+.login-buttons button:hover {
   background-color: gray;
 }
 
+.login-buttons .fundraiser-btn {
+  background-color: teal;
+}
+
+.login-buttons .fundraiser-btn:hover {
+  background-color: gray;
+}
+
+/* Welcome Panel */
+.welcome-panel {
+  display: flex;
+  justify-content: space-between; /* Aligns left and right sections */
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.welcome-content {
+  flex: 1; /* Takes up left side */
+}
+
+.login-options {
+  width: 300px; /* Controls the width */
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.login-options h3 {
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.login-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.login-buttons button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #fff;
+  background-color: teal;
+  transition: background-color 0.3s ease;
+}
+
+.login-buttons button:hover {
+  background-color: gray;
+}
+
+.fundraiser-btn {
+  background-color: teal;
+}
+
+.fundraiser-btn:hover {
+  background-color: gray;
+}

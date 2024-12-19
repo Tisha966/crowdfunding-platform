@@ -15,13 +15,13 @@ const SignUp = () => {
       <div className="signup-box">
         <div className="social-section">
           <h2 className="social-title">Continue with</h2>
-          <button className="social-btn google-btn">
+          <button className="social-btn google-btn"style={{color:"gray"}}>
             <img src="https://img.icons8.com/color/24/google-logo.png" alt="Google" /> Google
           </button>
-          <button className="social-btn facebook-btn">
+          <button className="social-btn facebook-btn"style={{color:"gray"}}>
             <img src="https://img.icons8.com/color/24/facebook-new.png" alt="Facebook" /> Facebook
           </button>
-          <button className="social-btn apple-btn">
+          <button className="social-btn apple-btn"style={{color:"gray"}}>
             <img src="https://img.icons8.com/ios-filled/24/mac-os.png" alt="Apple" /> Apple
           </button>
         </div>
