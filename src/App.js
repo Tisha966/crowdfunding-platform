@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './Home';
@@ -17,6 +16,10 @@ import { faHandHoldingUsd } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FaSun, FaMoon } from 'react-icons/fa'; // Import sun/moon icons
 import './index.css';
+
+
+import TwoStepForm from './TwoStepForm'; // Import TwoStepForm
+
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -43,11 +46,7 @@ const App = () => {
         {/* Navigation Links */}
         <ul className="nav-links">
           <li><Link to="/">Home</Link></li>
-          {/* <li><Link to="/explore">Explore</Link></li> */}
-          {/* <li><Link to="/about">About</Link></li> */}
-          {/* <li><Link to="/create-campaign">Create Campaign</Link></li> */} 
           <li><Link to="/login">Login</Link></li>
-          {/* <li><Link to="/contact">Contact</Link></li> */}
           <li><Link to="/dashboard">Dashboard</Link></li>
           <li><Link to="/chatbot">Chatbot</Link></li>
           <li><Link to="/blog">Blog</Link></li>
@@ -68,7 +67,8 @@ const App = () => {
         <Route path="/chatbot" element={<Chatbot />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/faq" element={<FAQ />} />
-
+       
+        <Route path="/TwoStepForm" element={<TwoStepForm />} /> {/* Add TwoStepForm route here */}
       </Routes>
     </Router>
   );

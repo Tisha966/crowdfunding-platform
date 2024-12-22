@@ -1,6 +1,7 @@
 import React from 'react';
 import './Dashboard.css';
 import { Link } from "react-router-dom";
+import TwoStepForm from './TwoStepForm';
 
 const Dashboard = () => {
   return (
@@ -46,18 +47,28 @@ const Dashboard = () => {
         {/* Welcome Panel */}
         <section className="welcome-panel">
   <div className="welcome-content">
-    <h2>Welcome to Your Campaign Dashboard!</h2>
+    <h2 style={{textAlign:"left"}}>Welcome to Your Campaign Dashboard!</h2>
     <p>Manage your crowdfunding campaigns, track donations, and connect with supporters easily.</p>
     <div className="buttons" style={{color:"teal"}}>
       {/* Start a New Campaign Button as a Link */}
       <Link to="/campaignDetails/:id">
-        <button 
-          style={{ backgroundColor: "gray", color: "white", border: "none", padding: "10px 15px", borderRadius: "5px" }}
-        >
-          Start a New Campaign
-        </button>
-      </Link>
-      
+  <button
+    style={{
+      backgroundColor: "gray",
+      color: "white",
+      border: "none",
+      padding: "5px 10px",  // Reduced padding
+      borderRadius: "5px",
+      fontSize: "0.875rem",  // Reduced font size
+      cursor: "pointer",  // Optional: adds a pointer cursor on hover
+      width: "150px",  // Set a fixed width for the button
+      textAlign: "center",  // Ensures the text is centered
+    }}
+  >
+    Start a New Campaign
+  </button>
+</Link>
+
       <p>or, <Link to="/explore" style={{color: "teal"}}>explore trending campaigns</Link></p>
     </div>
   </div>
@@ -70,9 +81,10 @@ const Dashboard = () => {
       <Link to="/login">
         <button className="contributor-btn">Login as a Contributor</button>
       </Link>
-      <Link to="/login">
-        <button className="fundraiser-btn">Login as a Fundraiser</button>
-      </Link>
+      <Link to="/TwoStepForm">
+  <button className="fundraiser-btn">Login as a Fundraiser</button>
+</Link>
+
     </div>
   </div>
 </section>

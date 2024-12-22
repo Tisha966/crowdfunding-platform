@@ -22,11 +22,22 @@ const CampaignDetails = () => {
     <div className="main-container">
     <div className="content">
       {/* Welcome Heading */}
-      <h1 className="campaign-heading">
-  <span style={{ color: 'teal' }}>WELCOME!</span> CREATE YOUR OWN CAMPAIGN
+      <h1
+  className="campaign-heading"
+  style={{
+    textAlign: 'center',
+    position: 'absolute',
+    top: '0',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    margin: '0',
+    paddingTop: '85px', // Optional: Adjust for spacing from the very top
+  }}
+>
+  <span style={{ color: 'teal' }}>WELCOME!</span>{' '}
+  <span style={{ color: '#283044' }}>CREATE YOUR OWN CAMPAIGN</span>
 </h1>
 
-  
       {/* Campaign Details Layout */}
       <div className="campaign-layout">
         {/* Left Side: Steps and Information */}
