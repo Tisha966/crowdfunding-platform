@@ -1,33 +1,34 @@
 const express = require('express');
-const Campaign = require('../models/CampaignModel'); // Adjust the path
 const router = express.Router();
+const Campaign = require('./campaignModel');
 
-// Create Campaign Route
-router.post('/', async (req, res) => {
-  const { title, description, targetAmount, creator } = req.body;
-
-  const newCampaign = new Campaign({
-    title,
-    description,
-    targetAmount,
-    creator,
-  });
+// Create a new campaign
+router.post('/create', async (req, res) => {
+  const { title, description, image, daysLeft, votingLimit } = req.body;
 
   try {
-    const savedCampaign = await newCampaign.save();
-    res.status(201).json(savedCampaign);
+    const newCampaign = new Campaign({
+      title,
+      description,
+      image,
+      daysLeft,
+      votingLimit
+    });
+
+    await newCampaign.save();
+    res.status(201).json({ message: 'Campaign created successfully!', campaign: newCampaign });
   } catch (error) {
-    res.status(500).json({ message: 'Error creating campaign' });
+    res.status(500).json({ error: 'Failed to create campaign' });
   }
 });
 
-// Get All Campaigns Route
-router.get('/', async (req, res) => {
+// Get all campaigns (for the Explore page)
+router.get('/all', async (req, res) => {
   try {
     const campaigns = await Campaign.find();
     res.status(200).json(campaigns);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching campaigns' });
+    res.status(500).json({ error: 'Failed to fetch campaigns' });
   }
 });
 

@@ -373,3 +373,111 @@
     margin-bottom: 15px; /* Reduced bottom margin */
   }
 }
+
+/* General Container */
+.fundraising-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+.content {
+  display: flex;
+  gap: 40px;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+/* Steps Section */
+.steps {
+  flex: 1;
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.step h1 {
+  font-size: 3rem;
+  color: #0A7C46;
+  margin-right: 15px;
+  margin-top: 0;
+}
+
+.step h2 {
+  font-size: 1.5rem;
+  color: #333333;
+  margin-bottom: 5px;
+}
+
+.step p {
+  font-size: 1rem;
+  color: #666666;
+  margin: 0;
+}
+
+.step:not(:last-child) {
+  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 20px;
+}
+
+/* Success Message */
+.success-message {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #0A7C46;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* Buttons Section */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.cta-btn, .secondary-btn {
+  padding: 12px 25px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cta-btn {
+  background-color: #0A7C46;
+  color: white;
+}
+
+.cta-btn:hover {
+  background-color: #086535;
+}
+
+.secondary-btn {
+  background-color: white;
+  color: #0A7C46;
+  border: 2px solid #0A7C46;
+}
+
+.secondary-btn:hover {
+  background-color: #F0F8F1;
+}
+
+/* Animation Section */
+.animation {
+  flex: 1;
+  max-width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

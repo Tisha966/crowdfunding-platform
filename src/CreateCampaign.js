@@ -1,14 +1,14 @@
 // src/CreateCampaign.js
-import React, { useState } from 'react';
-import './createCampaign.css';
-import { Link } from 'react-router-dom';
-import fundImage from './assets/images/fund8.png';
+import React, { useState } from "react";
+import "./createCampaign.css";
+import { Link } from "react-router-dom";
+import fundImage from "./assets/images/fund8.png";
 
 const CreateCampaign = ({ addCampaign }) => {
   const [campaign, setCampaign] = useState({
-    title: '',
-    description: '',
-    goal: '',
+    title: "",
+    description: "",
+    goal: "",
     image: null,
   });
 
@@ -24,11 +24,11 @@ const CreateCampaign = ({ addCampaign }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addCampaign(campaign);
-    alert('Campaign created successfully!');
+    alert("Campaign created successfully!");
     setCampaign({
-      title: '',
-      description: '',
-      goal: '',
+      title: "",
+      description: "",
+      goal: "",
       image: null,
     });
   };
@@ -36,81 +36,130 @@ const CreateCampaign = ({ addCampaign }) => {
   return (
     <div className="create-campaign-page">
       {/* Campaign Form */}
-    
-      <h1 className="categories-title" style={{color:"teal"}}>Explore Fundraising Ideas </h1>
+      <h1 className="categories-title" style={{ color: "teal" }}>
+        Explore Fundraising Ideas
+      </h1>
 
+      <div className="fundraising-container">
+        <div className="content">
+          <div className="steps">
+            <div className="step">
+              <h1>1.</h1>
+              <div>
+                <h2>Start a free fundraiser</h2>
+                <p>Start a free fundraiser by filling in all the relevant details</p>
+              </div>
+            </div>
+            <div className="step">
+              <h1>2.</h1>
+              <div>
+                <h2>Share Your Fundraiser</h2>
+                <p>Share your fundraiser with friends, family, and strangers to raise funds quickly</p>
+              </div>
+            </div>
+            <div className="step">
+              <h1>3.</h1>
+              <div>
+                <h2>Withdraw All Donations</h2>
+                <p>Withdraw all the money you receive at any point in your fundraising journey</p>
+              </div>
+            </div>
 
-{/* Fundraising Categories */}
-<section className="categories">
-  <div className="category-list">
-    <div className="category-column">
-      <h3 className="category-heading">Popular Causes</h3>
-      <ul>
-        <li>🐾 Animal Causes</li>
-        <li>🩺 Cancer</li>
-        <li>🚀 Entrepreneurial Projects</li>
-        <li>🎓 Kids</li>
-        <li>🌟 Nonprofit Causes</li>
-        <li>🏃 Runs, Walks, and Rides</li>
-      </ul>
-    </div>
-    <div className="category-column">
-      <h3 className="category-heading">Additional Causes</h3>
-      <ul>
-        <li>✈️ Trips and Adventures</li>
-        <li>🎖️ Military and Veterans</li>
-        <li>🏥 Medical Expenses</li>
-        <li>🏫 Schools and Education</li>
-        <li>⚽ Sports Teams</li>
-        <li>🗳️ Political Campaigns</li>
-      </ul>
-    </div>
-  </div>
-  {/* Image next to the categories */}
-  <div className="category-image">
-    <img src={fundImage} alt="Fundraising Ideas" />
-  </div>
-</section>
+            <p className="success-message">
+              Your fundraising journey is successful! We wish you a speedy recovery!
+            </p>
 
-<section className="explore-ideas-section">
-  
-  
-  <div className="campaign-ideas-container">
-    
-    <div className="campaign-idea">
-      <h3>Health & Wellness Initiative</h3>
-      <p>Raising funds to provide health services and wellness programs for underprivileged communities.</p>
-    </div>
-    
-    <div className="campaign-idea">
-      <h3>Animal Shelter Development</h3>
-      <p>Supporting the creation of safe spaces for abandoned and rescued animals.</p>
-    </div>
+            <div className="buttons">
+              <button className="cta-btn">START A FREE FUNDRAISER</button>
+              <button className="secondary-btn">GET A CALLBACK</button>
+            </div>
+          </div>
 
-    <div className="campaign-idea">
-      <h3>Educational Support Fund</h3>
-      <p>Creating scholarships and programs to support students from disadvantaged backgrounds.</p>
-    </div>
+          {/* Lottie Animation */}
+          <div className="animation">
+            <lottie-player
+              src="https://assets10.lottiefiles.com/packages/lf20_qp1q7mct.json"
+              background="transparent"
+              speed="1"
+              style={{ width: "100%", height: "auto" }}
+              loop
+              autoplay
+            ></lottie-player>
+          </div>
+        </div>
+      </div>
 
-    <div className="campaign-idea">
-      <h3>Clean Water Access</h3>
-      <p>Campaign to bring clean and safe drinking water to remote villages.</p>
-    </div>
+      {/* Fundraising Categories */}
+      <section className="categories">
+        <div className="category-list">
+          <div className="category-column">
+            <h3 className="category-heading">Popular Causes</h3>
+            <ul>
+              <li>🐾 Animal Causes</li>
+              <li>🩺 Cancer</li>
+              <li>🚀 Entrepreneurial Projects</li>
+              <li>🎓 Kids</li>
+              <li>🌟 Nonprofit Causes</li>
+              <li>🏃 Runs, Walks, and Rides</li>
+            </ul>
+          </div>
+          <div className="category-column">
+            <h3 className="category-heading">Additional Causes</h3>
+            <ul>
+              <li>✈️ Trips and Adventures</li>
+              <li>🎖️ Military and Veterans</li>
+              <li>🏥 Medical Expenses</li>
+              <li>🏫 Schools and Education</li>
+              <li>⚽ Sports Teams</li>
+              <li>🗳️ Political Campaigns</li>
+            </ul>
+          </div>
+        </div>
+        {/* Image next to the categories */}
+        <div className="category-image">
+          <img src={fundImage} alt="Fundraising Ideas" />
+        </div>
+      </section>
 
-    <div className="campaign-idea">
-      <h3>Startup Incubator</h3>
-      <p>Support for innovative entrepreneurs looking to launch their startups and ideas.</p>
-    </div>
-  </div>
-</section>
-
+      {/* Explore Ideas Section */}
+      <section className="explore-ideas-section">
+        <div className="campaign-ideas-container">
+          <div className="campaign-idea">
+            <h3>Health & Wellness Initiative</h3>
+            <p>
+              Raising funds to provide health services and wellness programs for underprivileged
+              communities.
+            </p>
+          </div>
+          <div className="campaign-idea">
+            <h3>Animal Shelter Development</h3>
+            <p>Supporting the creation of safe spaces for abandoned and rescued animals.</p>
+          </div>
+          <div className="campaign-idea">
+            <h3>Educational Support Fund</h3>
+            <p>
+              Creating scholarships and programs to support students from disadvantaged
+              backgrounds.
+            </p>
+          </div>
+          <div className="campaign-idea">
+            <h3>Clean Water Access</h3>
+            <p>Campaign to bring clean and safe drinking water to remote villages.</p>
+          </div>
+          <div className="campaign-idea">
+            <h3>Startup Incubator</h3>
+            <p>
+              Support for innovative entrepreneurs looking to launch their startups and ideas.
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* Join Us Section */}
       <section className="join-us">
         <h2>Join Us and Make a Difference!</h2>
         <p>
-          Start a campaign, share your story, and gather support to make your
-          dream a reality.
+          Start a campaign, share your story, and gather support to make your dream a reality.
         </p>
         <Link to="/explore" className="join-us-button">
           Explore Campaigns
@@ -124,8 +173,7 @@ const CreateCampaign = ({ addCampaign }) => {
             <div className="footer-logo">
               <h2>CrowdFunding</h2>
               <p className="footer-description">
-                Empowering dreams and bringing projects to life. Join us to
-                create change.
+                Empowering dreams and bringing projects to life. Join us to create change.
               </p>
             </div>
 
