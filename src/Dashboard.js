@@ -76,13 +76,13 @@ const Dashboard = () => {
   {/* Login Options Card */}
   <div className="card login-options">
     <h3>Login Options</h3>
-    <div className="login-buttons">
+    <div className="login-buttons" >
       {/* Add Links for Login Options */}
       <Link to="/login">
         <button className="contributor-btn">Login as a Contributor</button>
       </Link>
       <Link to="/TwoStepForm">
-  <button className="fundraiser-btn">Login as a Fundraiser</button>
+  <button className="fundraiser-btn" >Login as a Fundraiser</button>
 </Link>
 
     </div>

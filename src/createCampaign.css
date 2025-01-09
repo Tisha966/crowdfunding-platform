@@ -406,7 +406,7 @@
 
 .step h1 {
   font-size: 3rem;
-  color: #0A7C46;
+  color: #283044;
   margin-right: 15px;
   margin-top: 0;
 }
@@ -432,7 +432,7 @@
 .success-message {
   font-size: 1.1rem;
   font-weight: bold;
-  color: #0A7C46;
+  color: #283044;
   margin-bottom: 30px;
   text-align: center;
 }
@@ -455,29 +455,105 @@
 }
 
 .cta-btn {
-  background-color: #0A7C46;
+  background-color: #283044;
   color: white;
 }
 
 .cta-btn:hover {
-  background-color: #086535;
+  background-color: #283044;
 }
 
 .secondary-btn {
   background-color: white;
-  color: #0A7C46;
-  border: 2px solid #0A7C46;
+  color: #283044;
+  border: 2px solid #283044;
 }
 
 .secondary-btn:hover {
   background-color: #F0F8F1;
 }
+.fundraising-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-/* Animation Section */
-.animation {
+.content {
   flex: 1;
-  max-width: 500px;
+}
+
+.fundraising-container {
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Space between content and image */
+  align-items: flex-start; /* Align items at the top */
+  padding: 20px;
+}
+
+.content {
+  flex: 1; /* Content takes the available space */
+  max-width: 60%; /* Restrict the content width */
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Spacing between the steps */
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+}
+
+.image-container {
+  flex-shrink: 0; /* Prevent the image from shrinking */
+  width: 300px; /* Adjust size as needed */
+  height: 300px; /* Adjust size as needed */
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 20px;
 }
+
+.image-container img {
+  width: 100%; /* Make the image fill the container */
+  height: 100%; /* Make the image fill the container */
+  border-radius: 10px; /* Optional: rounded corners */
+  object-fit: cover; /* Ensures the image covers the circle area */
+}
+
+.success-message {
+  margin-top: 20px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.cta-btn, .secondary-btn {
+  padding: 12px 25px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cta-btn {
+  background-color: #283044;
+  color: white;
+}
+
+.cta-btn:hover {
+  background-color: #283044;
+}
+
+.secondary-btn {
+  background-color: white;
+  color: #283044;
+  border: 2px solid #283044;
+}
+

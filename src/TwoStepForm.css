@@ -1,33 +1,234 @@
 .two-step-form-container {
-    max-width: 800px;
-    margin: 30px auto;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #d1d1d1;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px; /* Reduced font size */
+  box-sizing: border-box;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Heading */
+.two-step-form-container h2 {
+  font-size: 28px;
+  color: #333333;
+  margin-bottom: 25px;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* Labels */
+.two-step-form-container label {
+  display: block;
+  font-size: 16px;
+  color: #555555;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+/* Input Fields */
+.two-step-form-container input,
+.two-step-form-container textarea,
+.two-step-form-container select {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: #333333;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  background-color: #ffffff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Focused Input Fields */
+.two-step-form-container input:focus,
+.two-step-form-container textarea:focus,
+.two-step-form-container select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.6);
+}
+
+/* Step Indicator */
+.two-step-form-container .step-indicator {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 25px;
+}
+
+/* Button Group */
+.two-step-form-container .button-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Buttons */
+.two-step-form-container button {
+  padding: 12px 20px;
+  background-color: teal;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.two-step-form-container button:hover {
+  background-color: gray;
+  transform: translateY(-2px);
+}
+
+/* Back Button */
+.two-step-form-container .back-button {
+  background-color: #6c757d;
+  color: #ffffff;
+}
+
+.two-step-form-container .back-button:hover {
+  background-color: #5a6268;
+}
+
+/* Success Message */
+.two-step-form-container .new-form h2 {
+  font-size: 28px;
+  color: #28a745;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.two-step-form-container .new-form p {
+  font-size: 18px;
+  color: #555555;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* Progress Bar */
+.progress-bar {
+  width: 100%;
+  height: 12px;
+  background-color: #e9ecef;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.progress-bar .progress {
+  height: 100%;
+  width: 50%; /* Dynamic width based on step */
+  background-color: #007bff;
+  border-radius: 6px;
+  transition: width 0.4s ease-in-out;
+}
+
+/* Textarea and Select Enhancements */
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+input[type="file"] {
+  padding: 6px;
+  font-size: 14px;
+}
+
+select {
+  appearance: none;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iN3B4IiBoZWlnaHQ9IjNweCIgdmlld0JveD0iMCAwIDcgMyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTYuNjU3NTQgMEwzLjQwMzI0IDMuMjUwNDdMMC4xNDg5MzggMEgyLjAwNzA2TDQuNzg2OTcgMi43NzkwNUw3LjU2Njg4IDBaIiBmaWxsPSIjNTU1Ii8+Cjwvc3ZnPg==');
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
   }
-  
-  .step-indicator {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 20px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .next-button,
-  .back-button {
-    padding: 10px 20px;
-    background-color: teal;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 20px;
-  }
-  
-  .next-button:hover,
-  .back-button:hover {
-    background-color: gray;
-  }
-  
+}
+
+/* Adjust input styles for additional fields */
+.two-step-form-container input,
+.two-step-form-container textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+}
+
+.two-step-form-container input[type="file"] {
+  padding: 0;
+}
+
+.two-step-form-container input[type="date"] {
+  width: 48%;
+  margin-right: 4%;
+}
+
+.two-step-form-container input[type="date"]:last-child {
+  margin-right: 0;
+}
+
+/* Progress Bar Container */
+.progress-bar {
+  width: 100%;
+  height: 14px;
+  background-color: #f1f1f1;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 20px;
+  border: 1px solid #dcdcdc;
+}
+
+/* Progress Bar Progress */
+.progress-bar .progress {
+  height: 100%;
+  background: linear-gradient(90deg, gray, #283044);
+  transition: width 0.4s ease-in-out;
+}
+
+/* Steps (Numbers 1 and 2) */
+.progress-bar .steps {
+  position: absolute;
+  top: -25px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.progress-bar .step {
+  color: #999;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.progress-bar .step.active {
+  color: orange;
+}
