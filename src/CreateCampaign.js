@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import "./createCampaign.css";
 import { Link } from "react-router-dom";
 import fundImage from "./assets/images/fund8.png";
+import Image from './assets/images/fund9.png';
+
 
 const CreateCampaign = ({ addCampaign }) => {
   const [campaign, setCampaign] = useState({
@@ -36,59 +38,47 @@ const CreateCampaign = ({ addCampaign }) => {
   return (
     <div className="create-campaign-page">
       {/* Campaign Form */}
-      <h1 className="categories-title" style={{ color: "teal" }}>
+      <h1 className="categories-title" style={{ color: "#da5424" }}>
         Explore Fundraising Ideas
       </h1>
-
       <div className="fundraising-container">
-        <div className="content">
-          <div className="steps">
-            <div className="step">
-              <h1>1.</h1>
-              <div>
-                <h2>Start a free fundraiser</h2>
-                <p>Start a free fundraiser by filling in all the relevant details</p>
-              </div>
-            </div>
-            <div className="step">
-              <h1>2.</h1>
-              <div>
-                <h2>Share Your Fundraiser</h2>
-                <p>Share your fundraiser with friends, family, and strangers to raise funds quickly</p>
-              </div>
-            </div>
-            <div className="step">
-              <h1>3.</h1>
-              <div>
-                <h2>Withdraw All Donations</h2>
-                <p>Withdraw all the money you receive at any point in your fundraising journey</p>
-              </div>
-            </div>
-
-            <p className="success-message">
-              Your fundraising journey is successful! We wish you a speedy recovery!
-            </p>
-
-            <div className="buttons">
-              <button className="cta-btn">START A FREE FUNDRAISER</button>
-              <button className="secondary-btn">GET A CALLBACK</button>
-            </div>
-          </div>
-
-          {/* Lottie Animation */}
-          <div className="animation">
-            <lottie-player
-              src="https://assets10.lottiefiles.com/packages/lf20_qp1q7mct.json"
-              background="transparent"
-              speed="1"
-              style={{ width: "100%", height: "auto" }}
-              loop
-              autoplay
-            ></lottie-player>
-          </div>
+  <div className="content">
+    <div className="steps">
+      <div className="step">
+        <h1 style={{ color: "gray" }}>1.</h1>
+        <div>
+          <h2>Start a free fundraiser</h2>
+          <p>Start a free fundraiser by filling in all the relevant details</p>
         </div>
       </div>
+      <div className="step">
+        <h1 style={{ color: "gray" }}>2.</h1>
+        <div>
+          <h2>Share Your Fundraiser</h2>
+          <p>Share your fundraiser with friends, family, and strangers to raise funds quickly</p>
+        </div>
+      </div>
+      <div className="step">
+        <h1 style={{ color: "gray" }}>3.</h1>
+        <div>
+          <h2>Withdraw All Donations</h2>
+          <p>Withdraw all the money you receive at any point in your fundraising journey</p>
+        </div>
+      </div>
+      
+      <div className="buttons">
+        <button className="cta-btn">START A FREE FUNDRAISER</button>
+        <button className="secondary-btn">GET A CALLBACK</button>
+      </div>
+    </div>
+  </div>
+  <div className="image-container">
+    <img src={Image} alt="Fundraising" />
+  </div>
+</div>
 
+         
+        
       {/* Fundraising Categories */}
       <section className="categories">
         <div className="category-list">
@@ -122,7 +112,7 @@ const CreateCampaign = ({ addCampaign }) => {
       </section>
 
       {/* Explore Ideas Section */}
-      <section className="explore-ideas-section">
+      {/* <section className="explore-ideas-section">
         <div className="campaign-ideas-container">
           <div className="campaign-idea">
             <h3>Health & Wellness Initiative</h3>
@@ -153,7 +143,7 @@ const CreateCampaign = ({ addCampaign }) => {
             </p>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Join Us Section */}
       <section className="join-us">

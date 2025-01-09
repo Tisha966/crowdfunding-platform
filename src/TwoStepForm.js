@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import './TwoStepForm.css'; // Import your CSS file
+import './TwoStepForm.css';
 
 const TwoStepForm = () => {
-  const [step, setStep] = useState(1); // Track the step
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -20,7 +20,7 @@ const TwoStepForm = () => {
     whyRaiseFunds: '',
   });
 
-  const [submitted, setSubmitted] = useState(false); // To track if the form has been submitted
+  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,32 +38,13 @@ const TwoStepForm = () => {
     });
   };
 
-  const handleToggleBold = () => {
-    setFormData({
-      ...formData,
-      bold: !formData.bold,
-    });
-  };
-
-  const handleToggleItalic = () => {
-    setFormData({
-      ...formData,
-      italic: !formData.italic,
-    });
-  };
-
   const handleNextStep = () => {
-    setStep(2); // Move to the next step
+    setStep(step + 1);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitted(true); // Mark form as submitted
-  };
-
-  const handleAnotherFormSubmit = (e) => {
-    e.preventDefault();
-    alert('Another form has been submitted!');
+    setSubmitted(true);
   };
 
   const formTextStyle = {
@@ -78,13 +59,6 @@ const TwoStepForm = () => {
         image: 'Upload Image',
         language: 'Language',
         next: 'Next',
-        relationship: 'Relationship (e.g., sibling, mother)',
-        employmentStatus: 'Employment Status',
-        mobileNumber: 'Mobile Number',
-        minAmount: 'Minimum Amount',
-        educationStatus: 'Education Status',
-        heardAbout: 'How did you hear about crowdfunding?',
-        whyRaiseFunds: 'Why do you want to raise funds?',
         submit: 'Submit',
         congratulations: 'Congratulations, ',
         liveFundMessage: ' your fund is live!',
@@ -94,13 +68,6 @@ const TwoStepForm = () => {
         image: 'चित्र अपलोड करें',
         language: 'भाषा',
         next: 'अगला',
-        relationship: 'रिश्ता (जैसे भाई, माँ)',
-        employmentStatus: 'रोजगार स्थिति',
-        mobileNumber: 'मोबाइल नंबर',
-        minAmount: 'न्यूनतम राशि',
-        educationStatus: 'शिक्षा की स्थिति',
-        heardAbout: 'आपने क्राउडफंडिंग के बारे में कैसे सुना?',
-        whyRaiseFunds: 'आप धन क्यों इकट्ठा करना चाहते हैं?',
         submit: 'जमा करें',
         congratulations: 'बधाई हो, ',
         liveFundMessage: ' आपका फंड लाइव है!',
@@ -111,66 +78,55 @@ const TwoStepForm = () => {
   };
 
   return (
-    <div>
+    <div className="two-step-form-container">
       {!submitted ? (
         <>
+          {/* Progress Bar */}
+          <div className="progress-bar">
+  <div 
+    className="progress" 
+    style={{ width: `${(step / 2) * 100}%` }}
+  ></div>
+  <div className="steps">
+    <span className={`step ${step >= 1 ? 'active' : ''}`}>1</span>
+    <span className={`step ${step >= 2 ? 'active' : ''}`}>2</span>
+  </div>
+</div>
+
+
+
+
           {/* Step 1 */}
           {step === 1 && (
             <form>
-              <h2>{getLocalizedText('whyRaiseFunds')}</h2>
-              <div>
-                <label htmlFor="description">{getLocalizedText('description')}:</label>
-                <textarea
-                  id="description"
-                  name="description"
-                  value={formData.description}
-                  onChange={handleChange}
-                  style={formTextStyle}
-                />
-              </div>
+              <h2>{getLocalizedText('description')}</h2>
+              <textarea
+                id="description"
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                style={formTextStyle}
+              />
 
-              <div className="step-indicator">
-                <button type="button" onClick={handleToggleBold}>
-                  {formData.bold ? 'Unbold' : 'Bold'}
-                </button>
-                <button type="button" onClick={handleToggleItalic}>
-                  {formData.italic ? 'Unitalic' : 'Italic'}
-                </button>
-              </div>
+              <label htmlFor="image">{getLocalizedText('image')}:</label>
+              <input
+                type="file"
+                id="image"
+                name="image"
+                accept="image/*"
+                onChange={handleFileChange}
+              />
 
-              <div>
-                <label htmlFor="image">{getLocalizedText('image')}:</label>
-                <input
-                  type="file"
-                  id="image"
-                  name="image"
-                  accept="image/*"
-                  onChange={handleFileChange}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="language">{getLocalizedText('language')}:</label>
-                <select
-                  id="language"
-                  name="language"
-                  value={formData.language}
-                  onChange={handleChange}
-                >
-                  <option value="en">English</option>
-                  <option value="hi">Hindi</option>
-                </select>
-              </div>
-
-              <div>
-                <label htmlFor="whyRaiseFunds">{getLocalizedText('whyRaiseFunds')}:</label>
-                <textarea
-                  id="whyRaiseFunds"
-                  name="whyRaiseFunds"
-                  value={formData.whyRaiseFunds}
-                  onChange={handleChange}
-                />
-              </div>
+              <label htmlFor="language">{getLocalizedText('language')}:</label>
+              <select
+                id="language"
+                name="language"
+                value={formData.language}
+                onChange={handleChange}
+              >
+                <option value="en">English</option>
+                <option value="hi">Hindi</option>
+              </select>
 
               <button type="button" onClick={handleNextStep}>
                 {getLocalizedText('next')}
@@ -180,125 +136,58 @@ const TwoStepForm = () => {
 
           {/* Step 2 */}
           {step === 2 && (
-            <div>
-              <h2>{getLocalizedText('relationship')}</h2>
-              <div>
-  <h2>{getLocalizedText('relationship')}</h2>
-  <div>
-    <label htmlFor="relationship">{getLocalizedText('relationship')}:</label>
-    <select
-      id="relationship"
-      name="relationship"
-      value={formData.relationship}
-      onChange={handleChange}
-      style={{
-        maxHeight: '100px', // Limits dropdown height
-        overflowY: 'auto', // Adds scrolling for long lists
-      }}
-    >
-      <option value="">{getLocalizedText('relationship')}</option>
-      <option value="parent">Parent</option>
-      <option value="sibling">Sibling</option>
-      <option value="friend">Friend</option>
-      <option value="spouse">Spouse</option>
-      <option value="colleague">Colleague</option>
-      <option value="other">Other</option>
-    </select>
+            <form onSubmit={handleSubmit}>
+              <div class="two-step-form-container">
+  <h2>Fundraiser Details</h2>
+ 
+
+  {/* <!-- Fundraiser Title --> */}
+  <label for="fundraiser-title">Fundraiser Title</label>
+  <input type="text" id="fundraiser-title" placeholder="Enter fundraiser title" />
+
+  {/* <!-- Fundraising Goal --> */}
+  <label for="goal-amount">Fundraising Goal (in USD)</label>
+  <input type="number" id="goal-amount" placeholder="Enter target amount" />
+
+  {/* <!-- Reason for Fundraising --> */}
+  <label for="fundraiser-reason">Reason for Fundraising</label>
+  <textarea id="fundraiser-reason" placeholder="Describe the purpose"></textarea>
+
+  {/* <!-- Beneficiary Details --> */}
+  <label for="beneficiary-name">Beneficiary Name</label>
+  <input type="text" id="beneficiary-name" placeholder="Enter beneficiary's name" />
+
+  {/* <!-- Document Upload --> */}
+  <label for="documents">Upload Documents</label>
+  <input type="file" id="documents" />
+
+  {/* <!-- Bank Details --> */}
+  <label for="account-number">Bank Account Number</label>
+  <input type="text" id="account-number" placeholder="Enter account number" />
+  <label for="ifsc-code">IFSC Code</label>
+  <input type="text" id="ifsc-code" placeholder="Enter IFSC code" />
+
+  {/* <!-- Campaign Duration --> */}
+  <label for="campaign-duration">Campaign Duration</label>
+  <input type="date" id="start-date" placeholder="Start Date" />
+  <input type="date" id="end-date" placeholder="End Date" />
+
+  {/* <!-- Buttons --> */}
+  <div class="button-group">
+    <button type="button" class="back-button">Back</button>
+    <button type="submit" >Submit</button>
   </div>
 </div>
-              <div>
-  <label htmlFor="educationStatus">{getLocalizedText('educationStatus')}:</label>
-  <select
-    id="educationStatus"
-    name="educationStatus"
-    value={formData.educationStatus}
-    onChange={handleChange}
-    style={{
-      maxHeight: '100px', // Limits the dropdown height
-      overflowY: 'auto', // Adds scrolling if options exceed the height
-    }}
-  >
-    <option value="">{getLocalizedText('educationStatus')}</option>
-    <option value="highschool">High School</option>
-    <option value="bachelor">Bachelor's Degree</option>
-    <option value="master">Master's Degree</option>
-    <option value="phd">PhD</option>
-    <option value="other">Other</option>
-  </select>
-</div>
-<div>
-  <label htmlFor="gender">{getLocalizedText('gender')}:</label>
-  <select
-    id="gender"
-    name="gender"
-    value={formData.gender}
-    onChange={handleChange}
-    style={{
-      maxHeight: '100px', // Limits dropdown height
-      overflowY: 'auto', // Adds scrolling for long lists
-    }}
-  >
-    <option value="">{getLocalizedText('gender')}</option>
-    <option value="male">{getLocalizedText('male')}</option>
-    <option value="female">{getLocalizedText('female')}</option>
-    <option value="other">{getLocalizedText('other')}</option>
-  </select>
-</div>
-              <div>
-                <label htmlFor="minAmount">{getLocalizedText('minAmount')}:</label>
-                <input
-                  type="number"
-                  id="minAmount"
-                  name="minAmount"
-                  value={formData.minAmount}
-                  onChange={handleChange}
-                />
-              </div>
 
-              <div>
-  <label htmlFor="employmentStatus">{getLocalizedText('employmentStatus')}:</label>
-  <select
-    id="employmentStatus"
-    name="employmentStatus"
-    value={formData.employmentStatus}
-    onChange={handleChange}
-    style={{
-      maxHeight: '100px', // Ensures the dropdown is scrollable if options exceed the height
-      overflowY: 'auto', // Enables scrolling within the dropdown
-    }}
-  >
-    <option value="">{getLocalizedText('employmentStatus')}</option>
-    <option value="unemployed">Unemployed</option>
-    <option value="employed">Employed</option>
-    <option value="selfemployed">Self-Employed</option>
-    <option value="student">Student</option>
-    <option value="retired">Retired</option>
-    <option value="other">Other</option>
-  </select>
-</div>
-
-
-              <div>
-                <label htmlFor="heardAbout">{getLocalizedText('heardAbout')}:</label>
-                <input
-                  type="text"
-                  id="heardAbout"
-                  name="heardAbout"
-                  value={formData.heardAbout}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <button onClick={handleSubmit}>
+              <button type="submit" >
                 {getLocalizedText('submit')}
               </button>
-            </div>
+            </form>
           )}
         </>
       ) : (
-        // After form submission, show a personalized message
         <div className="new-form">
-          <h2>{getLocalizedText('congratulations')}{formData.name},</h2>
+          <h2>{getLocalizedText('congratulations')}{formData.name}</h2>
           <p>{getLocalizedText('liveFundMessage')}</p>
         </div>
       )}
