@@ -15,7 +15,7 @@ const SignUp = () => {
     const userData = {
       name,
       email,
-      password, // If you plan to send a password, include it here
+      password,
     };
 
     try {
@@ -32,13 +32,12 @@ const SignUp = () => {
       if (response.ok) {
         setMessage('Account created successfully!');
         console.log('User details:', data);
-        // Optionally, navigate to login or homepage
         navigate('/login');
       } else {
         setMessage(data.message || 'Error creating account');
       }
     } catch (error) {
-      setMessage('Error: ' + error.message);
+      setMessage(`Error: ${error.message}`);
     }
   };
 

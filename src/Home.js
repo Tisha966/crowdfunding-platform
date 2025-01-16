@@ -27,7 +27,7 @@ const Home = () => {
         <h1>Welcome to CrowdFunding</h1>
         <p>Empowering ideas, one contribution at a time.</p>
         <Link to="/about">
-          <button className="cta-button">ABOUT CROWDFUNDING</button>
+          <button className="cta-button" style={{backgroundColor:"#ff7f50"}}>ABOUT CROWDFUNDING</button>
         </Link>
       </header>
 
