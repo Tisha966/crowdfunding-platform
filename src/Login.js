@@ -7,9 +7,13 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    setMessage(''); // Reset message before submission
 
     const loginData = {
       email,
@@ -28,15 +32,27 @@ const Login = () => {
       const data = await response.json();
 
       if (response.ok) {
+        setIsSuccess(true);
         setMessage('Logged in successfully!');
         console.log('Logged-in user:', data);
-        // Optionally, navigate to the home page or dashboard
+
+        // Save JWT token to localStorage
+        localStorage.setItem('token', data.token);
+
+        // Optionally, save user data
+        localStorage.setItem('user', JSON.stringify(data.user));
+
+        // Navigate to the dashboard
         navigate('/dashboard');
       } else {
-        setMessage(data.message || 'Login failed');
+        setIsSuccess(false);
+        setMessage(data.message || 'Login failed. Please check your credentials.');
       }
     } catch (error) {
-      setMessage('Error: ' + error.message);
+      setIsSuccess(false);
+      setMessage('An error occurred: ' + error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -84,12 +100,12 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button type="submit" className="submit-btn">
-              Log in
+            <button type="submit" className="submit-btn" disabled={isLoading}>
+              {isLoading ? 'Logging in...' : 'Log in'}
             </button>
             <p className="forgot-link">Forgot password?</p>
           </form>
-          {message && <p className="message">{message}</p>}
+          {message && <p className={`message ${isSuccess ? 'success' : 'error'}`}>{message}</p>}
         </div>
       </div>
     </div>

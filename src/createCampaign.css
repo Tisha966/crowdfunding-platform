@@ -1,559 +1,121 @@
-/* Join Us Section */
-.join-us {
-  text-align: center;
-  background-color: #fff;
-  padding: 40px 20px;
-  margin: 30px auto;
-  max-width: 800px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.join-us h2 {
-  color: #283044;
-  margin-bottom: 10px;
+body {
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  background: none;
 }
 
-.join-us p {
-  color: #666;
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
-.join-us-button {
-  display: inline-block;
-  text-decoration: none;
-  color: #fff;
-  background-color: #da5424;
-  padding: 10px 20px;
-  border-radius: 4px;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
-}
-
-.join-us-button:hover {
-  background-color: #c64a1c;
-}
-
-/* Fundraising Categories */
-.categories {
-  background-color: #f9f9f9;
-  padding: 40px 20px;
-  text-align: center;
-  border-radius: 8px;
-  margin: 20px auto;
-  max-width: 1000px;
+/* Container Style */
+.container {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  height: 100vh;
+  background-image: url('./assets/images/fund12.jpg'); /* Background image */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: relative;
 }
 
-.categories-title {
-  font-size: 36px;
-  color: #008080; /* Teal color */
-  margin-top: 10px;
-  margin-bottom: 30px;
-  font-weight: bold;
-  text-transform: capitalize;
-  letter-spacing: 1px;
-  font-family: 'Arial', sans-serif;
-}
-
-.category-list {
-  display: flex;
-  flex: 1;
-  gap: 30px;
-  justify-content: space-between;
-}
-
-.category-column {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  width: 48%;
-}
-
-.category-heading {
-  font-size: 22px;
-  color: #2c3e50;
-  margin-bottom: 10px;
-  font-weight: 600;
-}
-
-.category-column ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.category-column ul li {
-  font-size: 16px;
-  color: #7f8c8d;
-  margin: 8px 0;
-}
-
-.category-column ul li:hover {
-  color: #da5424;
-  cursor: pointer;
-}
-
-/* Image styling */
-.category-image {
-  width: 40%; /* Adjust width as necessary */
-  height: auto;
-}
-
-.category-image img {
+/* Overlay Style */
+.overlay {
+  background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for better text visibility */
   width: 100%;
-  height: 120%; /* Increased height to make the image larger */
-  object-fit: cover; /* Ensures the image covers the div properly without stretching */
-  border-radius: 8px;
-}
-
-/* Responsive Design for Small Screens */
-@media (max-width: 768px) {
-  .categories {
-    flex-direction: column;
-    text-align: left;
-  }
-
-  .category-list {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .category-column {
-    width: 80%;
-    margin-bottom: 30px;
-  }
-
-  .category-image {
-    width: 100%;
-    margin-top: 20px;
-    height: 200px; /* Adjust height for small screens */
-  }
-}
-
-/* Hero Image Section */
-
-/* Fundraising Categories */
-.categories {
-  background-color: #f9f9f9;
-  padding: 40px 20px;
-  text-align: center;
-  border-radius: 8px;
-  margin: 20px auto;
-  max-width: 1000px;
+  height: 100%;
   display: flex;
-  align-items: center; /* Align content vertically */
-  justify-content: space-between; /* Space between categories and image */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
 }
 
-.categories-title {
-  font-size: 36px;
-  color: #008080; /* Teal color */
-  margin-top: 10px;
-  margin-bottom: 30px;
+.header h1 {
+  font-size: 2.5rem;
   font-weight: bold;
-  text-transform: capitalize;
-  letter-spacing: 1px;
-  font-family: 'Arial', sans-serif;
-}
-
-.category-list {
-  display: flex;
-  flex: 1; /* Makes sure the category list takes up available space */
-  gap: 30px;
-  justify-content: space-between;
-}
-
-.category-column {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  width: 48%;
-}
-
-.category-heading {
-  font-size: 22px;
-  color: #2c3e50;
   margin-bottom: 10px;
-  font-weight: 600;
+  max-width: 80%;
+  line-height: 1.3;
 }
 
-.category-column ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.category-column ul li {
-  font-size: 16px;
-  color: #7f8c8d;
-  margin: 8px 0;
-}
-
-.category-column ul li:hover {
-  color: #da5424;
-  cursor: pointer;
-}
-
-/* Image styling */
-.category-image {
-  width: 40%; /* Adjust width as necessary */
-  height: auto;
-}
-
-.category-image img {
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
   width: 100%;
-  height: auto; /* Ensures the image scales properly */
-  border-radius: 8px; /* Optional: rounded corners */
 }
 
-/* Responsive Design for Small Screens */
-@media (max-width: 768px) {
-  .categories {
-    flex-direction: column; /* Stack categories and image on smaller screens */
-    text-align: left; /* Align text to left */
-  }
-
-  .category-list {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .category-column {
-    width: 80%;
-    margin-bottom: 30px;
-  }
-
-  .category-image {
-    width: 100%;
-    margin-top: 20px;
-  }
-}
-.categories-title {
-  font-size: 36px;
-  color: #03366d; /* Changed to a teal color */
-  margin-top: 20px;
-  margin-bottom: 40px;
-  font-weight: 700;
-  text-align: center; /* Centers the title */
-  text-transform: capitalize;
-  letter-spacing: 1.5px;
-  font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
-}
-.explore-ideas-section {
+.option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  padding: 50px 20px;
-  background-color: #f4f4f4;
+  width: 250px;
+  padding: 20px;
+  background-color: rgba(247, 236, 236, 0.4); /* Transparent background with 40% opacity */
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.explore-ideas-section h2 {
-  font-size: 2rem;
+
+.option:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.option h2 {
+  margin-top: 10px;
+  font-size: 1.5rem;
   color: #333;
 }
 
-.explore-ideas-section p {
-  font-size: 1rem;
-  margin-bottom: 20px;
+.option p {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
 }
 
-.campaign-ideas-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
-  justify-items: center;
-}
-
-.campaign-idea {
-  background-color: #fff;
-  padding: 8px; /* Reduced padding to make the circle smaller */
-  border-radius: 50%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 80%; /* Make the circle smaller */
-  max-width: 200px; /* Reduce the maximum width to make it smaller */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.campaign-idea h3 {
-  font-size: 1.2rem; /* Reduced font size */
-  color: #283044;
-  margin-bottom: 8px; /* Reduced margin for better spacing */
-}
-
-.campaign-idea p {
-  font-size: 0.9rem; /* Reduced font size */
-  color: #555;
-  text-align: center;
-}
-
-/* Fundraising Categories */
-.categories {
-  background-color: #f9f9f9;
-  padding: 40px 20px;
-  text-align: center;
-  border-radius: 8px;
-  margin: 20px auto;
-  max-width: 1000px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.category-list {
-  display: flex;
-  flex: 1;
-  gap: 30px;
-  justify-content: space-between;
-}
-
-/* Adjusted padding and margin for category column */
-.category-column {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  width: 48%;
-  margin-bottom: 0; /* Ensure there's no margin at the bottom */
-}
-
-/* Campaign Ideas Section */
-.explore-ideas-section {
-  text-align: center;
-  padding: 20px 20px; /* Reduced padding */
-  margin-top: 10px; /* Reduced top margin */
-}
-
-.campaign-ideas-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-/* Individual Campaign Idea Card */
-.campaign-idea {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 50%;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  width: 48%;
-  margin-bottom: 20px; /* Slightly reduced bottom margin */
-}
-
+/* Responsive Styles */
 @media (max-width: 768px) {
-  .categories {
+  .container {
     flex-direction: column;
-    text-align: left;
   }
 
-  .category-list {
-    flex-direction: column;
-    align-items: center;
+  .header {
+    text-align: center;
   }
 
-  .category-column {
-    width: 80%;
-    margin-bottom: 20px; /* Reduced margin for small screens */
-  }
-
-  .category-image {
+  .option {
     width: 100%;
-    margin-top: 20px;
-  }
-
-  .campaign-idea {
-    width: 80%; /* Adjust width for small screens */
-    margin-bottom: 15px; /* Reduced bottom margin */
+    margin-bottom: 10px;
   }
 }
 
-/* General Container */
-.fundraising-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  font-family: 'Arial', sans-serif;
-}
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 2rem; /* Adjust title size for mobile */
+  }
 
-.content {
-  display: flex;
-  gap: 40px;
-  flex-direction: row;
-  align-items: flex-start;
+  .option h2 {
+    font-size: 1.2rem;
+  }
 }
-
-/* Steps Section */
-.steps {
-  flex: 1;
-}
-
-.step {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 20px;
-}
-
-.step h1 {
-  font-size: 3rem;
-  color: #283044;
-  margin-right: 15px;
-  margin-top: 0;
-}
-
-.step h2 {
-  font-size: 1.5rem;
-  color: #333333;
-  margin-bottom: 5px;
-}
-
-.step p {
-  font-size: 1rem;
-  color: #666666;
-  margin: 0;
-}
-
-.step:not(:last-child) {
-  border-bottom: 1px solid #eeeeee;
-  padding-bottom: 20px;
-}
-
-/* Success Message */
-.success-message {
-  font-size: 1.1rem;
+.header h1 {
+  font-size: 2rem;
   font-weight: bold;
-  color: #283044;
-  margin-bottom: 30px;
+  margin: 25px;
+  margin-top:5px;
   text-align: center;
+  white-space: nowrap; /* Prevents the text from wrapping */
+  width: 100%; /* Ensures the header takes up the full width */
+  overflow: visible; /* Ensures the text is visible even if it overflows */
 }
-
-/* Buttons Section */
-.buttons {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 20px;
-}
-
-.cta-btn, .secondary-btn {
-  padding: 12px 25px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.cta-btn {
-  background-color: #283044;
-  color: white;
-}
-
-.cta-btn:hover {
-  background-color: #283044;
-}
-
-.secondary-btn {
-  background-color: white;
-  color: #283044;
-  border: 2px solid #283044;
-}
-
-.secondary-btn:hover {
-  background-color: #F0F8F1;
-}
-.fundraising-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.content {
-  flex: 1;
-}
-
-.fundraising-container {
-  display: flex; /* Use flexbox for layout */
-  justify-content: space-between; /* Space between content and image */
-  align-items: flex-start; /* Align items at the top */
-  padding: 20px;
-}
-
-.content {
-  flex: 1; /* Content takes the available space */
-  max-width: 60%; /* Restrict the content width */
-}
-
-.steps {
-  display: flex;
-  flex-direction: column;
-  gap: 20px; /* Spacing between the steps */
-}
-
-.step {
-  display: flex;
-  align-items: flex-start;
-}
-
-.image-container {
-  flex-shrink: 0; /* Prevent the image from shrinking */
-  width: 300px; /* Adjust size as needed */
-  height: 300px; /* Adjust size as needed */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: 20px;
-}
-
-.image-container img {
-  width: 100%; /* Make the image fill the container */
-  height: 100%; /* Make the image fill the container */
-  border-radius: 10px; /* Optional: rounded corners */
-  object-fit: cover; /* Ensures the image covers the circle area */
-}
-
-.success-message {
-  margin-top: 20px;
-}
-
-.buttons {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 20px;
-}
-
-.cta-btn, .secondary-btn {
-  padding: 12px 25px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.cta-btn {
-  background-color: #283044;
-  color: white;
-}
-
-.cta-btn:hover {
-  background-color: #283044;
-}
-
-.secondary-btn {
-  background-color: white;
-  color: #283044;
-  border: 2px solid #283044;
-}
-
