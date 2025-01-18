@@ -1,0 +1,126 @@
+/* General container styling */
+.capital-raise-container {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    padding: 60px 15px;
+    background-color: #ffffff;
+    color: #333;
+    line-height: 1.5;
+  }
+  
+  /* Header section */
+  .capital-raise-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  
+  .capital-raise-header h1 {
+    font-size: 2.5rem; /* Large bold font */
+    font-weight: 600;
+    color: #222; /* Darker text */
+    margin: 0;
+  }
+  
+  .capital-raise-header p {
+    font-size: 1.2rem; /* Subheader font size */
+    color: #555; /* Light gray for the subtitle */
+    margin-top: 15px;
+  }
+  
+  /* Testimonial section layout */
+  .testimonial-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: flex-start;
+  }
+  
+  /* Sidebar for the list */
+  .testimonial-sidebar {
+    flex: 1;
+    max-width: 200px;
+    padding-top: 10px;
+  }
+  
+  .testimonial-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .testimonial-sidebar li {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #666; /* Soft gray color for sidebar text */
+    padding: 8px 0;
+    border-left: 3px solid transparent;
+    cursor: pointer;
+  }
+  
+  .testimonial-sidebar li:hover {
+    color: #007bff; /* Blue hover effect */
+    border-left: 3px solid #007bff;
+  }
+  
+  /* Testimonial content (quote & author) */
+  .testimonial-content {
+    flex: 3;
+    max-width: 600px;
+  }
+  
+  .testimonial-content blockquote {
+    font-size: 1.5rem; /* Bigger font for the quote */
+    font-style: italic;
+    color: #444; /* Medium dark gray */
+    margin: 0 0 20px 0;
+  }
+  
+  .testimonial-content blockquote span.highlight {
+    color: teal; /* Bright blue for emphasized text */
+    font-weight: bold;
+  }
+  
+  .testimonial-content .author {
+    font-size: 0.9rem;
+    color:  rgb(255, 127, 80); /* Light gray for author details */
+    margin-top: 10px;
+    line-height: 1.4;
+  }
+  
+  /* Image section */
+.testimonial-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 400px; /* Increased container size for the image */
+  }
+  
+  .testimonial-image img {
+    width: 100%;
+    max-width: 250px; /* Increased image size */
+    border-radius: 10px; /* Keeps the rounded corners */
+  }
+  
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .testimonial-section {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .testimonial-sidebar {
+      max-width: 100%;
+      text-align: center;
+    }
+  
+    .testimonial-content {
+      max-width: 100%;
+      text-align: center;
+    }
+  
+    .testimonial-image {
+      max-width: 200px;
+    }
+  }
+  

@@ -50,8 +50,12 @@ function CreateCampaign() {
             <h2>Sports Funding</h2>
             <p>Help athletes and sports teams with the resources they need to pursue their goals.</p>
           </div>
+          
         </div>
+       
       </div>
+     
+      
     </div>
   );
 }
