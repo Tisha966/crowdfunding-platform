@@ -10,7 +10,7 @@ const Login = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setMessage(''); // Reset message before submission
@@ -29,24 +29,23 @@ const Login = () => {
         body: JSON.stringify(loginData),
       });
 
-      const data = await response.json();
-
       if (response.ok) {
+        const data = await response.json();
         setIsSuccess(true);
         setMessage('Logged in successfully!');
-        console.log('Logged-in user:', data);
 
         // Save JWT token to localStorage
         localStorage.setItem('token', data.token);
 
-        // Optionally, save user data
+        // Save user data (optional)
         localStorage.setItem('user', JSON.stringify(data.user));
 
-        // Navigate to the dashboard
+        // Redirect to the dashboard
         navigate('/dashboard');
       } else {
+        const errorData = await response.json();
         setIsSuccess(false);
-        setMessage(data.message || 'Login failed. Please check your credentials.');
+        setMessage(errorData.message || 'Login failed. Please check your credentials.');
       }
     } catch (error) {
       setIsSuccess(false);
@@ -83,7 +82,7 @@ const Login = () => {
             </span>
           </p>
 
-          <form onSubmit={handleSubmit} className="login-form">
+          <form onSubmit={handleLogin} className="login-form">
             <input
               type="email"
               placeholder="Email"

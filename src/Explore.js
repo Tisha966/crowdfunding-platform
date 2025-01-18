@@ -26,7 +26,7 @@ const Explore = () => {
       raised: '₹4,06,089',
       daysLeft: 41,
       supporters: 208,
-      donationTime: 'Last donation an hour ago',
+     
       image: oldladyImage, // Replace with actual image URL
     },
     {
@@ -35,7 +35,7 @@ const Explore = () => {
       raised: '₹2,14,589',
       daysLeft: 25,
       supporters: 132,
-      donationTime: 'Last donation 1 hour ago',
+      
       image: aidImage,
     },
    
@@ -45,7 +45,7 @@ const Explore = () => {
       raised: '₹5,00,000',
       daysLeft: 60,
       supporters: 500,
-      donationTime: 'Last donation 2 hours ago',
+      
       image: schoolImage,
     },
     {
@@ -54,7 +54,7 @@ const Explore = () => {
       raised: '₹6,50,000',
       daysLeft: 9,
       supporters: 290,
-      donationTime: 'Last donation 30 minutes ago',
+     
       image: shelterImage,
     },
     {
@@ -63,7 +63,7 @@ const Explore = () => {
       raised: '₹12,73,339',
       daysLeft: 4,
       supporters: 275,
-      donationTime: 'Last donation 2 days ago',
+      
       image: cancerImage,
     },
  
@@ -73,7 +73,7 @@ const Explore = () => {
       raised: '₹1,85,000',
       daysLeft: 15,
       supporters: 98,
-      donationTime: 'Last donation 5 hours ago',
+    
       image: accidentImage,
     },
     {
@@ -82,7 +82,7 @@ const Explore = () => {
       raised: '₹3,00,931',
       daysLeft: 10,
       supporters: 121,
-      donationTime: 'Last donation 40 minutes ago',
+     
       image: tusharImage,
     },
     {
@@ -91,7 +91,7 @@ const Explore = () => {
       raised: '₹3,50,000',
       daysLeft: 30,
       supporters: 215,
-      donationTime: 'Last donation 3 hours ago',
+     
       image: waterImage,
     },
     {
@@ -100,7 +100,7 @@ const Explore = () => {
       raised: '₹7,20,000',
       daysLeft: 12,
       supporters: 380,
-      donationTime: 'Last donation 1 day ago',
+      
       image: forestImage,
     },
    
@@ -110,7 +110,7 @@ const Explore = () => {
       raised: '₹2,95,000',
       daysLeft: 18,
       supporters: 162,
-      donationTime: 'Last donation 4 hours ago',
+     
       image: orphanImage,
     },
     {
@@ -119,7 +119,7 @@ const Explore = () => {
       raised: '₹9,10,000',
       daysLeft: 28,
       supporters: 360,
-      donationTime: 'Last donation 3 hours ago',
+      
       image: surgicalImage,
     },
     {
@@ -128,7 +128,7 @@ const Explore = () => {
       raised: '₹3,50,000',
       daysLeft: 19,
       supporters: 210,
-      donationTime: 'Last donation 1 day ago',
+      
       image: farmerImage,
     },
   ]);
