@@ -16,9 +16,11 @@ import { faHandHoldingUsd } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FaSun, FaMoon } from 'react-icons/fa'; // Import sun/moon icons
 import './index.css';
+import Why from './Why';
 
-
+import PrivateRoute from './PrivateRoute';
 import TwoStepForm from './TwoStepForm'; // Import TwoStepForm
+import CapitalRaise from './CapitalRaise';
 
 
 const App = () => {
@@ -46,10 +48,13 @@ const App = () => {
         {/* Navigation Links */}
         <ul className="nav-links">
           <li><Link to="/">Home</Link></li>
+          <li><Link to="/why">Why Us</Link></li>
+          <li><Link to="/capitalRaise">CapitalRaise</Link></li>
+          <li><Link to="/blog">Blog</Link></li>
           <li><Link to="/login">Login</Link></li>
           <li><Link to="/dashboard">Dashboard</Link></li>
           <li><Link to="/chatbot">Chatbot</Link></li>
-          <li><Link to="/blog">Blog</Link></li>
+          
         </ul>
       </nav>
 
@@ -62,13 +67,30 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/why" element={<Why />} />
+        <Route path="/capitalRaise" element={<CapitalRaise />} />
         <Route path="/campaignDetails/:id" element={<CampaignDetails />} />
-        <Route path="/dashboard" element={<Dashboard/>} />
+        <Route
+    path="/dashboard"
+    element={
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    }
+  />
         <Route path="/chatbot" element={<Chatbot />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/faq" element={<FAQ />} />
+        
        
-        <Route path="/TwoStepForm" element={<TwoStepForm />} /> {/* Add TwoStepForm route here */}
+        <Route
+    path="/TwoStepForm"
+    element={
+      <PrivateRoute>
+        <TwoStepForm />
+      </PrivateRoute>
+    }
+  />
       </Routes>
     </Router>
   );
