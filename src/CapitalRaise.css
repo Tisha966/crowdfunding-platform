@@ -15,8 +15,9 @@
   
   .capital-raise-header h1 {
     font-size: 2.5rem; /* Large bold font */
+     background: linear-gradient(90deg, #283044, gray);
     font-weight: 600;
-    color: #222; /* Darker text */
+    color: whitesmoke; /* Darker text */
     margin: 0;
   }
   
@@ -123,4 +124,367 @@
       max-width: 200px;
     }
   }
+  .capital-raise-container {
+    font-family: 'Arial', sans-serif;
+    margin: 20px auto;
+    max-width: 1200px;
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
   
+  .capital-raise-header h1 {
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .capital-raise-header p {
+    font-size: 18px;
+    text-align: center;
+    color: #666;
+  }
+  
+  .testimonial-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .testimonial-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .testimonial-sidebar li {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .testimonial-content blockquote {
+    font-style: italic;
+    color: #555;
+    margin-bottom: 15px;
+  }
+  
+  .author {
+    font-size: 16px;
+    color: #444;
+    text-align: left;
+  }
+  
+  .testimonial-image img {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+  
+  .raise-page {
+    margin-top: 40px;
+  }
+  
+  .header-section .main-heading {
+    font-size: 32px;
+    text-align: center;
+    color: teal;
+  }
+  
+  
+  
+  
+  .sub-heading {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #666;
+  }
+  
+  .button-group {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .button-group .btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 5px;
+    border: 2px solid #333;
+    background-color: transparent;
+    color: #333;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .button-group .btn.active {
+    background-color: #283044;
+    color: #fff;
+  }
+  
+  .timeline-section {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+  }
+  
+  .timeline-step {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .step-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .step-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .step-card p {
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .timeline-bar {
+    position: relative;
+    height: 5px;
+    background: #ddd;
+    margin: 20px auto;
+    width: 80%;
+    border-radius: 5px;
+  }
+  
+  .timeline-progress {
+    position: absolute;
+    height: 5px;
+    background: #333;
+    width: 75%; /* Adjust based on progress */
+    border-radius: 5px;
+  }
+  
+  .progress-indicator {
+    position: absolute;
+    top: -6px;
+    width: 12px;
+    height: 12px;
+    background: #333;
+    border-radius: 50%;
+  }
+  
+  /* General Timeline Line */
+.timeline-bar {
+  position: relative;
+  height: 5px;
+  background: #ddd;
+  margin: 20px auto;
+  width: 80%;
+  border-radius: 5px;
+}
+
+.timeline-progress {
+  position: absolute;
+  height: 5px;
+  background: #333;
+  width: 75%; /* Adjust based on progress */
+  border-radius: 5px;
+}
+
+.progress-indicator {
+  position: absolute;
+  top: -6px;
+  width: 12px;
+  height: 12px;
+  background: #333;
+  border-radius: 50%;
+}
+
+/* Connecting Lines for Additional Boxes */
+.additional-timeline {
+  position: relative;
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+}
+
+.additional-timeline::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  height: 5px;
+  width: 80%;
+  background: #ddd;
+  z-index: -1;
+}
+
+.timeline-step {
+  text-align: center;
+  position: relative;
+}
+
+.timeline-step::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 10px;
+  width: 10px;
+  background: #333;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.step-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 250px;
+}
+
+.step-card h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.step-card p {
+  font-size: 16px;
+  color: #555;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .additional-timeline {
+    flex-direction: column;
+    width: 90%;
+  }
+
+  .additional-timeline::before {
+    width: 5px;
+    height: 100%;
+    top: 0;
+    left: 50%;
+  }
+
+  
+}    
+.timeline-step::after, 
+.timeline-step::before {
+  content: none; /* Ensure no pseudo-elements appear */
+  display: none; /* Hide any generated content */
+  width: 0;
+  height: 0;
+}
+.timeline-section {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.timeline-step {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  position: relative;
+}
+
+.step-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.step-card h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.step-card p {
+  font-size: 16px;
+  color: #555;
+}
+
+/* Connecting lines for the timeline */
+.timeline-bar {
+  position: relative;
+  height: 5px;
+  background: #ddd;
+  margin: 20px auto;
+  width: 80%;
+  border-radius: 5px;
+}
+
+.timeline-progress {
+  position: absolute;
+  height: 5px;
+  background: #333;
+  width: 75%; /* Adjust based on progress */
+  border-radius: 5px;
+}
+
+.progress-indicator {
+  position: absolute;
+  top: -6px;
+  width: 12px;
+  height: 12px;
+  background: #333;
+  border-radius: 50%;
+}
+
+/* Additional Box Timeline */
+.additional-timeline {
+  position: relative;
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+}
+
+.additional-timeline::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  height: 5px;
+  width: 80%;
+  background: #ddd;
+  z-index: -1;
+}
+
+.timeline-step::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 10px;
+  width: 10px;
+  background: #333;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .additional-timeline {
+    flex-direction: column;
+    width: 90%;
+  }
+
+  .additional-timeline::before {
+    width: 5px;
+    height: 100%;
+    top: 0;
+    left: 50%;
+  }
+}
