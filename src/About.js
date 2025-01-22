@@ -81,6 +81,11 @@ const About = () => {
     <span>Invested in India’s First Smart Village</span>
   </div>
   
+  <div className="testimonial-card">
+    <p>"I love that I can support local artisans. Crowdfunding is a fantastic way to empower Indian entrepreneurs!"</p>
+    <h4>Mansi Shukla</h4>
+    <span>Invested in Handmade Indian Artifacts</span>
+  </div>
 </div>
 
       <footer className="footer">
