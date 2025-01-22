@@ -14,29 +14,32 @@ const CampaignDetails = () => {
       formData.append('description', campaignData.description);
       formData.append('daysLeft', campaignData.daysLeft);
       formData.append('numSupporters', campaignData.numSupporters);
-
-      const response = await fetch('http://localhost:5000/api/campaigns/create', {
+  
+      const response = await fetch('http://localhost:5001/api/campaigns/create', {
         method: 'POST',
         body: formData,
       });
-
+  
       if (response.ok) {
         const data = await response.json();
         console.log(data);
-        alert("Campaign Created Successfully!");
+        alert('Campaign Created Successfully!');
         document.getElementById('campaignForm').reset();
       } else {
         throw new Error(`Error: ${response.statusText}`);
       }
     } catch (error) {
-      alert("Error submitting campaign: " + error.message);
+      console.error('Error submitting campaign:', error);
+      alert('Error submitting campaign: ' + error.message);
+    } finally {
+      setIsLoading(false); // Stop loading after the submission
     }
   };
-
+  
   // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setIsLoading(true);
+    setIsLoading(true); // Start loading
 
     const campaignData = {
       title: event.target.title.value,
@@ -109,7 +112,7 @@ const CampaignDetails = () => {
       </div>
 
       {/* Loader */}
-      {isLoading && <div id="loader" className="loader"></div>}
+      {isLoading && <div id="loader" className="loader">Loading...</div>}
 
       {/* Footer Section */}
       <footer className="footer">

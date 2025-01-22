@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom"; // Import Link for navigation
 import "./Why.css";
+import Testimonials from "./Testimonials";
 
 const Why = () => {
   return (
     <div className="crowdfunding-container">
-      <h1 className="crowdfunding-title">Why invest in our Crowdfunding Platform?</h1>
+      <h1 className="crowdfunding-title" style={{color:" teal"}}>Why invest in our Crowdfunding Platform?</h1>
       <p className="crowdfunding-subtitle">
         Empower projects, build your portfolio, and be a part of meaningful change.
       </p>
@@ -75,7 +76,7 @@ const Why = () => {
           Learn more in our Investor FAQ →
         </Link>
       </div>
-      
+      <Testimonials/>
     </div>
   );
 };
