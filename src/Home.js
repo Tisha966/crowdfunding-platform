@@ -25,7 +25,7 @@ const Home = () => {
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
   /> */}
         <h1>Welcome to CrowdFunding</h1>
-        <p>Empowering ideas, one contribution at a time.</p>
+        <p style={{color:"white"}}>Empowering ideas, one contribution at a time.</p>
         <Link to="/about">
           <button className="cta-button" style={{backgroundColor:"#ff7f50"}}>ABOUT CROWDFUNDING</button>
         </Link>
@@ -111,7 +111,7 @@ const Home = () => {
 
               <div className="footer-link-column">
                 <h3>Newsletter</h3>
-                <p>Stay updated with our latest news and campaigns.</p>
+                <p style={{color:"gray"}}>Stay updated with our latest news and campaigns.</p>
                 <input type="email" placeholder="Your Email" className="newsletter-input" />
                 <button className="newsletter-btn">Subscribe</button>
               </div>
