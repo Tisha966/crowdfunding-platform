@@ -268,7 +268,7 @@ const Explore = () => {
           </div>
 
           <div className="footer-bottom">
-            <p>&copy; 2024 CrowdFunding. All Rights Reserved.</p>
+            <p style={{color:"whitesmoke"}}>&copy; 2024 CrowdFunding. All Rights Reserved.</p>
           </div>
         </div>
       </footer>
