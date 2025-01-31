@@ -130,7 +130,7 @@ const About = () => {
       
                     <div className="footer-link-column">
                       <h3>Newsletter</h3>
-                      <p>Stay updated with our latest news and campaigns.</p>
+                      <p style={{color:"gray"}}>Stay updated with our latest news and campaigns.</p>
                       <input type="email" placeholder="Your Email" className="newsletter-input" />
                       <button className="newsletter-btn">Subscribe</button>
                     </div>

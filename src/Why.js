@@ -6,8 +6,20 @@ import Testimonials from "./Testimonials";
 const Why = () => {
   return (
     <div className="crowdfunding-container">
-      <h1 className="crowdfunding-title" style={{color:" teal"}}>Why invest in our Crowdfunding Platform?</h1>
-      <p className="crowdfunding-subtitle">
+   <h1 
+  className="crowdfunding-title" 
+  style={{
+    color: "gray", 
+    fontFamily:"revert-layer", /* Change font family */
+    fontWeight: "350", /* Semi-bold font weight */
+    fontStyle: "normal", /* Set font style to normal for a clean professional look */
+    letterSpacing: "0.5px", /* Slightly increase letter spacing */
+  }}
+>
+  Why invest in our Crowdfunding Platform?
+</h1>
+
+      <p className="crowdfunding-subtitle" style={{color:"teal"}}>
         Empower projects, build your portfolio, and be a part of meaningful change.
       </p>
       <div className="crowdfunding-cards-wrapper">
@@ -67,7 +79,7 @@ const Why = () => {
         </div>
       </div>
       <div className="crowdfunding-warning">
-        <p>
+        <p style={{color:"whitesmoke"}}>
           Never invest more than you can afford to lose.
           <br />
           Investing in startups carries risks, but it also opens doors to high rewards and meaningful contributions.

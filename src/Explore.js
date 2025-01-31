@@ -17,6 +17,10 @@ import accidentImage from "./assets/images/accident.jpg";
 
 const Explore = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All Categories'); // Added state
+  const [sortOption, setSortOption] = useState('Trending'); // Added state
+  const [selectedLocation, setSelectedLocation] = useState('All Locations');
+  
 
   // Campaigns data (sample)
   const [campaigns] = useState([
@@ -153,26 +157,43 @@ const Explore = () => {
 
       {/* Filtering Section */}
       <div className="filters">
-        <span style={{ fontWeight: 'bold', color: '#333' }}>Showing fundraisers for </span>
-        <select>
+        <span style={{ fontWeight: 'bold', color: '#333' }}>
+          Showing fundraisers for{' '}
+        </span>
+        <select
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+        >
           <option>All Categories</option>
           <option>Education</option>
           <option>Medical</option>
         </select>
-        <span style={{ fontWeight: 'bold', color: '#333' }}> under </span>
-        <select>
+        <select
+          value={sortOption}
+          onChange={(e) => setSortOption(e.target.value)}
+        >
           <option>Trending</option>
           <option>Newest</option>
         </select>
-        <span style={{ fontWeight: 'bold', color: '#333' }}> from </span>
-        <select>
+        <select
+          value={selectedLocation}
+          onChange={(e) => setSelectedLocation(e.target.value)}
+        >
           <option>All Locations</option>
           <option>India</option>
           <option>USA</option>
         </select>
-        <button className="reset-filters">Reset Filters</button>
+        <button
+          className="reset-filters"
+          onClick={() => {
+            setSelectedCategory('All Categories');
+            setSortOption('Trending');
+            setSelectedLocation('All Locations');
+          }}
+        >
+          Reset Filters
+        </button>
       </div>
-
       {/* Campaign Cards */}
       <div className="campaign-container">
         {filteredCampaigns.map((campaign) => (
@@ -239,7 +260,7 @@ const Explore = () => {
 
               <div className="footer-link-column">
                 <h3>Newsletter</h3>
-                <p>Stay updated with our latest news and campaigns.</p>
+                <p style={{color:"gray"}}>Stay updated with our latest news and campaigns.</p>
                 <input type="email" placeholder="Your Email" className="newsletter-input" />
                 <button className="newsletter-btn">Subscribe</button>
               </div>
