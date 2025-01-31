@@ -1,13 +1,60 @@
-import React, { useState } from "react";
-import "./CapitalRaise.css";
-import Image from "./assets/images/tisha.jpg"; // Correct path and extension
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import './CapitalRaise.css';
+import Image from './assets/images/tisha.jpg'; // Correct path and extension
+import { Link } from 'react-router-dom';
 
-const CapitalRaise = () => {
-  const [selectedOption, setSelectedOption] = useState("launchASAP");
+function CapitalRaise() {
+  const [selectedOption, setSelectedOption] = useState('launchASAP');
+  const [raisedAmount, setRaisedAmount] = useState(0);
+  const [targetAmount, setTargetAmount] = useState(10000); // Adjust target amount as needed
+  const [percentageRaised, setPercentageRaised] = useState(0);
+  const [donors, setDonors] = useState([]);
+
+
+
+  useEffect(() => {
+    // Calculate the percentage raised whenever the raisedAmount changes
+    setPercentageRaised((raisedAmount / targetAmount) * 100);
+  }, [raisedAmount, targetAmount]);
+
+  const handleDonation = async (e) => {
+    e.preventDefault();
+    const donorName = e.target.donorName.value;
+    const donationAmount = parseFloat(e.target.donationAmount.value);
+  
+    if (!isNaN(donationAmount) && donationAmount > 0 && donorName) {
+      try {
+        const response = await fetch("http://localhost:5001/api/donations", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name: donorName, amount: donationAmount }),
+        });
+  
+        if (!response.ok) {
+          throw new Error("Failed to save donation");
+        }
+  
+        const data = await response.json();
+  
+        // Update state only after a successful API call
+        setRaisedAmount((prev) => prev + donationAmount);
+        setDonors((prev) => [...prev, { name: donorName, amount: donationAmount }]);
+  
+        // Clear input fields
+        e.target.donorName.value = "";
+        e.target.donationAmount.value = "";
+  
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+  };
+  
 
   const renderContent = () => {
-    if (selectedOption === "takeTime") {
+    if (selectedOption === 'takeTime') {
       return (
         <div className="timeline-section">
           <div className="timeline-step">
@@ -99,8 +146,22 @@ const CapitalRaise = () => {
 
   return (
     <div className="capital-raise-container">
-      <div className="capital-raise-header">
-        <h1>More than just a capital raise</h1>
+    <div className="capital-raise-header">
+      <h1 style={{
+        fontSize: '1.5rem',
+        fontWeight: '500',
+        color: 'white',
+        textAlign: 'center',
+        marginBottom: '20px',
+        letterSpacing: '1px',
+        textTransform: 'uppercase',
+        lineHeight: '1.3',
+        fontFamily: "'Roboto', sans-serif"
+      }}>
+        More than just a capital raise
+      </h1>
+  
+  
         <p>
           Now you have thousands of Indian investors who will support your vision.
           Just ask, and they might...
@@ -119,16 +180,32 @@ const CapitalRaise = () => {
         </div>
 
         <div className="testimonial-content">
-          <blockquote>
-            "In year 1, we scaled our product sales to over ₹6 crore. Our community
-            investors are proud to be associated with us and say, <span className="highlight">This is something I’m proud to back.</span>"
-          </blockquote>
+        <blockquote style={{
+  fontStyle: 'italic',
+  fontSize: '1.2rem',
+  color: '#555',
+  borderLeft: '4px solid #6c757d',
+  paddingLeft: '15px',
+  margin: '20px 0',
+  lineHeight: '1.6',
+  fontFamily: "sans-serif"
+}}>
+  "In year 1, we scaled our product sales to over ₹6 crore. Our community
+  investors are proud to be associated with us and say, 
+  <span className="highlight" style={{
+    color: 'teal',
+    fontWeight: 'bold'
+  }}>
+    This is something I’m proud to back.
+  </span>"
+</blockquote>
+
           <p className="author">
-            <strong style={{ fontSize: "25px"}}>Tisha Gupta</strong>
+            <strong style={{ fontSize: '25px' }}>Tisha Gupta</strong>
             <br />
-            <span style={{ color: "gray", fontWeight: "bold" }}>Founder, Indian Organic Foods</span>
+            <span style={{ color: 'gray', fontWeight: 'bold' }}>Founder, Indian Organic Foods</span>
             <br />
-            <span style={{ color: "gray", fontWeight: "bold" }}>Raised ₹5 crore from 2,000 investors</span>
+            <span style={{ color: 'gray', fontWeight: 'bold' }}>Raised ₹5 crore from 2,000 investors</span>
           </p>
         </div>
         <div className="testimonial-image">
@@ -147,14 +224,14 @@ const CapitalRaise = () => {
           </p>
           <div className="button-group">
             <button
-              className={`btn ${selectedOption === "takeTime" ? "active" : ""}`}
-              onClick={() => setSelectedOption("takeTime")}
+              className={`btn ${selectedOption === 'takeTime' ? 'active' : ''}`}
+              onClick={() => setSelectedOption('takeTime')}
             >
               I can take my time
             </button>
             <button
-              className={`btn ${selectedOption === "launchASAP" ? "active" : ""}`}
-              onClick={() => setSelectedOption("launchASAP")}
+              className={`btn ${selectedOption === 'launchASAP' ? 'active' : ''}`}
+              onClick={() => setSelectedOption('launchASAP')}
             >
               I need to launch ASAP
             </button>
@@ -163,16 +240,52 @@ const CapitalRaise = () => {
 
         {renderContent()}
 
-        <div className="timeline-bar">
-          <div className="timeline-progress">
-            <div className="progress-indicator" style={{ left: '75%' }}></div>
-          </div>
-        </div>
-
         {renderAdditionalBoxes()}
+
+        {/* Donation Section */}
+        <div className="donation-section">
+          <h2>Donate to Support Our Vision</h2>
+          <div className="progress-container">
+            <div className="progress-bar" style={{ width: `${percentageRaised}%` }}></div>
+          </div>
+          <div className="fund-info">
+            <p>Raised: ₹{raisedAmount.toFixed(2)}</p>
+            <p>Target: ₹{targetAmount}</p>
+            <p>Percentage Raised: {percentageRaised.toFixed(2)}%</p>
+          </div>
+
+          <form onSubmit={handleDonation} className="donation-form">
+  <input
+    type="text"
+    name="donorName"
+    placeholder="Enter your name"
+    required
+  />
+  <input
+    type="number"
+    name="donationAmount"
+    placeholder="Enter donation amount"
+    min="0.01"
+    step="0.01"
+    required
+  />
+  <button type="submit">Donate</button>
+</form>
+
+
+<h3>Donor List</h3>
+<ul className="donor-list">
+  {donors.map((donor, index) => (
+    <li key={index}>
+      {donor.name} donated: ₹{donor.amount.toFixed(2)}
+    </li>
+  ))}
+</ul>
+
+        </div>
       </div>
     </div>
   );
-};
+}
 
 export default CapitalRaise;
