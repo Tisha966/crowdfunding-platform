@@ -11,24 +11,18 @@ const PlaybookSection = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5001/api/feedback/submit', {
-        email,
-        message,
-      });
-      console.log('Response:', response); // Check the full response from the server
-      if (response && response.data) {
-        setStatus({ type: 'success', message: response.data.message });
-        setEmail('');  // Reset email field
-        setMessage('');  // Reset message field
-      }
+        const response = await axios.post('http://localhost:5001/api/feedback/submit', {
+            email,
+            message
+        }, {
+            headers: { "Content-Type": "application/json" }
+        });
+
+        setStatus({ type: "success", message: "Feedback successfully submitted!" });
+        setEmail(""); // Clear input fields
+        setMessage("");
     } catch (error) {
-      if (error.response) {
-        console.error('Error response:', error.response.data); // Log the specific error response
-        setStatus({ type: 'error', message: error.response.data.message || 'Error saving feedback' });
-      } else {
-        console.error('Error message:', error.message); // Fallback for other errors (e.g., no response)
-        setStatus({ type: 'error', message: 'Error saving feedback' });
-      }
+        setStatus({ type: "error", message: "Something went wrong. Please try again." });
     }
   };
   
