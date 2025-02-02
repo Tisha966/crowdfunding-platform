@@ -3,49 +3,51 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const multer = require('multer');
-const path = require('path'); // Ensure path is imported
+const path = require('path');
+
 const authRoutes = require('./routes/userRoutes');
 const campaignRoutes = require('./routes/campaignRoutes');
-const Donation = require('./models/donation'); // Ensure this is correct
-const feedbackRoutes = require('./routes/feedbackRoutes'); // Move feedbackRoutes here
+const feedbackRoutes = require('./routes/feedbackRoutes');
+
+const Campaign = require('./models/campaignModel');
+const Donation = require('./models/donation'); 
+const donationRoutes = require('./routes/donationRoutes');
+const Feedback = require('./models/feedbackModel'); 
 
 dotenv.config();
 
-// Initialize app (This should come before app.use)
 const app = express();
 const port = process.env.PORT || 5001;
 
-// CORS configuration
+// CORS Configuration
 const corsOptions = {
   origin: ['http://localhost:3000', 'https://your-frontend-app.com'],
   methods: ['GET', 'POST'],
   credentials: true,
 };
 
-app.use(cors(corsOptions));  // Apply CORS
-app.use(express.json());  // Middleware to parse JSON request bodies
-app.use(express.urlencoded({ extended: true }));  // Middleware to parse URL-encoded bodies
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/api/donations', donationRoutes);
 
-// Use feedbackRoutes here (After app is initialized)
-app.use('/api/feedback', feedbackRoutes);
-
-// Serve static files from the uploads folder
+// Serve static files
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Multer storage configuration
+// Multer Storage Configuration
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/'); // Path to save files
+    cb(null, 'uploads/'); 
   },
   filename: (req, file, cb) => {
     cb(null, `${Date.now()}-${file.originalname}`);
   },
 });
-
 const upload = multer({ storage });
-const Campaign = require('./models/campaignModel');
+
+// Campaign Creation Route
 app.post('/api/campaigns/create', upload.single('image'), async (req, res) => {
-  console.log('Received data:', req.body); // Debugging: Check the request data
+  console.log('Received data:', req.body);
   try {
     if (!req.file) {
       return res.status(400).json({ message: 'No file uploaded' });
@@ -58,11 +60,11 @@ app.post('/api/campaigns/create', upload.single('image'), async (req, res) => {
       description,
       daysLeft,
       numSupporters,
-      imagePath: req.file ? req.file.path : null,
+      imagePath: req.file.path.replace(/\\/g, "/"), // Ensuring cross-platform compatibility
     });
 
     await newCampaign.save();
-    console.log('Campaign saved:', newCampaign); // Debugging: Check if the campaign was saved
+    console.log('Campaign saved:', newCampaign);
     res.status(201).json({ message: 'Campaign created successfully!', data: newCampaign });
   } catch (err) {
     console.error('Error saving campaign:', err);
@@ -70,61 +72,73 @@ app.post('/api/campaigns/create', upload.single('image'), async (req, res) => {
   }
 });
 
-app.post('/donate', async (req, res) => {
-  console.log('Received request at /donate'); // Log request received
-  console.log('Request Body:', req.body); // Log request data
 
-  try {
-    const { donorName, donationAmount } = req.body;
 
-    if (!donorName || !donationAmount) {
-      console.log('❌ Invalid request:', req.body);
-      return res.status(400).json({ message: 'Invalid donation' });
-    }
+app.post('/api/feedback/submit', async (req, res) => {
+  console.log("Received feedback:", req.body); // Debugging step
 
-    console.log('Attempting to save donation...');
-
-    const donation = new Donation({ name: donorName, amount: donationAmount });
-    await donation.save();
-
-    console.log('✅ Donation saved:', donation);
-    res.status(200).json({ message: 'Donation successful', donation });
-  } catch (error) {
-    console.error('❌ Error saving donation:', error);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
-
-app.post('/api/feedback/submit', (req, res) => {
   const { email, message } = req.body;
-
-  // Example validation
   if (!email || !message) {
     return res.status(400).json({ message: 'Email and message are required' });
   }
 
-  // Assuming you're saving feedback to MongoDB
-  const feedback = new Feedback({ email, message });
-  feedback.save()
-    .then(() => {
-      res.status(200).json({ message: 'Feedback submitted successfully' });
-    })
-    .catch((err) => {
-      res.status(500).json({ message: 'Error saving feedback', error: err });
-    });
+  try {
+    const feedback = new Feedback({ email, message });
+    await feedback.save();
+    res.status(200).json({ message: 'Feedback submitted successfully' });
+  } catch (err) {
+    console.error('Error saving feedback:', err);
+    res.status(500).json({ message: 'Error saving feedback', error: err });
+  }
 });
+const handleDonation = async (e) => {
+  e.preventDefault();
 
+  try {
+    const donationData = {
+      name,  // Ensure these values exist
+      email,
+      amount,
+      message
+    };
+
+    // Validate before sending
+    if (!donationData.name || !donationData.email || !donationData.amount) {
+      console.error("Missing required fields");
+      return;
+    }
+
+    const response = await axios.post("http://localhost:5001/api/donations", donationData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.status === 200 || response.status === 201) {
+      console.log("Donation successfully submitted:", response.data);
+    } else {
+      console.error("Unexpected response:", response);
+    }
+  } catch (error) {
+    console.error("Error:", error.response?.data || error.message);
+  }
+};
+
+// Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/campaigns', campaignRoutes);
+app.use('/api/feedback', feedbackRoutes);
 
+// Database Connection
 mongoose
   .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Connected to MongoDB'))
+  .then(() => console.log('✅ Connected to MongoDB'))
   .catch((error) => {
     console.error('MongoDB connection error:', error.message);
     process.exit(1);
   });
 
+// Start Server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });

@@ -1,9 +1,10 @@
+// routes/donationRoutes.js
 const express = require('express');
 const router = express.Router();
 const Donation = require('../models/donation'); // Your donation model
 
 // Donation route
-app.post('/donate', async (req, res) => {
+router.post('/', async (req, res) => {
   console.log('Received donation request:', req.body); // Debugging: Log received request
 
   const { donorName, donationAmount } = req.body;
@@ -25,6 +26,5 @@ app.post('/donate', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-
 
 module.exports = router;
