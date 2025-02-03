@@ -40,10 +40,10 @@ function CapitalRaise() {
 
       if (response.status === 201) {
         console.log('Donation successfully submitted');
-        setDonationStatus('Donation successfully submitted! Thank you for your support!'); // Update status on success
+        setDonationStatus('Donation successfully submitted! Thank you for your support!');
       } else {
         console.error('Unexpected response:', response);
-        setDonationStatus('Something went wrong, please try again.'); // Handle unexpected responses
+        setDonationStatus('Something went wrong, please try again.');
       }
     } catch (error) {
       console.error('Error:', error.response?.data || error.message);
@@ -265,9 +265,12 @@ function CapitalRaise() {
             />
             <button type="submit">Donate</button>
           </form>
+          <div className="donation-status" style={{ color: 'green', fontSize: '16px', fontWeight: 'bold' }}>
+    {donationStatus && <p>{donationStatus}</p>}
+  </div>
+</div>
         </div>
-      </div>
-    </div>
+     </div>
   );
 }
 
