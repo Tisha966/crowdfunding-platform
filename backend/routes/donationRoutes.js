@@ -1,27 +1,38 @@
-const express = require("express");
-const Donation = require("../models/donation");
+const express = require('express');
+const Donation = require('../models/donation');
+const Campaign = require('../models/campaign'); // Import Campaign model
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
-  console.log("Received donation request:", req.body);
+router.post('/', async (req, res) => {
+  const { name, email, amount, campaign } = req.body;
 
-  const { name, email, amount } = req.body; // Removed message from destructuring
-
-  // Input validation (message is no longer required)
-  if (!name || !email || typeof amount !== "number" || amount <= 0) {
-    return res.status(400).json({ error: "Invalid donation data" });
+  // Validate input
+  if (!name || !email || typeof amount !== 'number' || amount <= 0 || !campaign) {
+    return res.status(400).json({ error: 'Invalid donation data' });
   }
 
   try {
-    const newDonation = new Donation({ name, email, amount }); // Removed message field
+    // Check if the campaign exists
+    const campaignExists = await Campaign.findById(campaign);
+    if (!campaignExists) {
+      return res.status(400).json({ error: 'Campaign not found' });
+    }
+
+    // Create new donation with campaign reference
+    const newDonation = new Donation({ name, email, amount, campaign });
     await newDonation.save();
 
-    console.log("Donation saved:", newDonation);
-    res.status(201).json({ message: "Donation successful!", donation: newDonation });
+    // Fetch donation with populated campaign details
+    const donationWithCampaign = await Donation.findById(newDonation._id).populate('campaign');
+
+    res.status(201).json({
+      message: 'Donation successful!',
+      donation: donationWithCampaign, // Now includes campaign details
+    });
   } catch (err) {
-    console.error("Error saving donation:", err);
-    res.status(500).json({ error: "Server error while saving donation" });
+    console.error('Error saving donation:', err);
+    res.status(500).json({ error: 'Server error while saving donation' });
   }
 });
 

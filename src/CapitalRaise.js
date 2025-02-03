@@ -14,6 +14,9 @@ function CapitalRaise() {
   const [email, setEmail] = useState('');
   const [amount, setAmount] = useState('');
   const [message, setMessage] = useState('');
+  const [selectedCampaign, setSelectedCampaign] = useState('');
+  const [campaignDetails, setCampaignDetails] = useState(null);
+
 
   const [donationStatus, setDonationStatus] = useState(''); 
   useEffect(() => {
@@ -29,6 +32,7 @@ function CapitalRaise() {
       name, // Name from the input
       email, // Email from the input
       amount: Number(amount), // Convert amount to number if needed
+      campaign: selectedCampaign,
     };
 
     try {
@@ -41,6 +45,7 @@ function CapitalRaise() {
       if (response.status === 201) {
         console.log('Donation successfully submitted');
         setDonationStatus('Donation successfully submitted! Thank you for your support!');
+        setCampaignDetails(response.data.campaignDetails);
       } else {
         console.error('Unexpected response:', response);
         setDonationStatus('Something went wrong, please try again.');
@@ -240,31 +245,47 @@ function CapitalRaise() {
 
         {/* Donation Section */}
         <div className="donation-section">
-          <form onSubmit={handleDonation}>
-            <h2>Make a Donation</h2>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Your Name"
-              required
-            />
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Your Email"
-              required
-            />
-            <input
-              type="number"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              placeholder="Donation Amount"
-              required
-            />
-            <button type="submit">Donate</button>
-          </form>
+        <form onSubmit={handleDonation}>
+  <h2>Make a Donation</h2>
+
+  {/* Campaign Dropdown */}
+  <select
+    value={selectedCampaign}
+    onChange={(e) => setSelectedCampaign(e.target.value)}
+    required
+  >
+    <option value="">Select a Campaign</option>
+    <option value="health">Health-related</option>
+    <option value="accident">Accident-related</option>
+    <option value="afforestation">Afforestation</option>
+    {/* Add more campaign options as needed */}
+  </select>
+
+  <input
+    type="text"
+    value={name}
+    onChange={(e) => setName(e.target.value)}
+    placeholder="Your Name"
+    required
+  />
+  <input
+    type="email"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+    placeholder="Your Email"
+    required
+  />
+  <input
+    type="number"
+    value={amount}
+    onChange={(e) => setAmount(e.target.value)}
+    placeholder="Donation Amount"
+    required
+  />
+  <button type="submit">Donate</button>
+</form>
+
+          
           <div className="donation-status" style={{ color: 'green', fontSize: '16px', fontWeight: 'bold' }}>
     {donationStatus && <p>{donationStatus}</p>}
   </div>

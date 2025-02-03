@@ -4,8 +4,7 @@ const donationSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
   amount: { type: Number, required: true },
-  // Remove or leave out the message field if you no longer need it
-  // message: { type: String, required: false },
+  campaign: { type: mongoose.Schema.Types.ObjectId, ref: 'Campaign', required: true }, // Reference to the Campaign model
 });
 
 const Donation = mongoose.model('Donation', donationSchema);
