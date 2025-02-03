@@ -23,6 +23,8 @@ import PrivateRoute from './PrivateRoute';
 import TwoStepForm from './TwoStepForm';
 import CapitalRaise from './CapitalRaise';
 import PlayBook from './PlaybookSection';
+import QRScanner from './QRScanner'; 
+import QRCodeGenerator from './QRCodeGenerator';
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -59,6 +61,8 @@ const App = () => {
             <li><Link to="/login">Login</Link></li>
             <li><Link to="/dashboard">Dashboard</Link></li>
             <li><Link to="/chatbot">Chatbot</Link></li>
+           
+           
           </ul>
         </nav>
 
@@ -75,6 +79,8 @@ const App = () => {
           <Route path="/why" element={<Why />} />
           <Route path="/capitalRaise" element={<CapitalRaise />} />
           <Route path="/campaignDetails/:id" element={<CampaignDetails />} />
+          <Route path="/qrScanner" element={<QRScanner/>} />
+          <Route path="/qrCodeGenerator" element={<QRCodeGenerator />} />
 
           {/* Private Routes */}
           <Route
@@ -96,6 +102,7 @@ const App = () => {
           <Route path="/chatbot" element={<Chatbot />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/faq" element={<FAQ />} />
+         
         </Routes>
       </div>
     </Router>
