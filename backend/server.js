@@ -91,38 +91,24 @@ app.post('/api/feedback/submit', async (req, res) => {
     res.status(500).json({ message: 'Error saving feedback', error: err });
   }
 });
-const handleDonation = async (e) => {
-  e.preventDefault();
+app.post('/api/donations', async (req, res) => {
+  console.log('Received donation data:', req.body); // Debugging
+
+  const { name, email, amount } = req.body; // Removed message field
+
+  if (!name || !email || !amount) {
+    return res.status(400).json({ error: 'Missing required fields' });
+  }
 
   try {
-    const donationData = {
-      name,  // Ensure these values exist
-      email,
-      amount,
-      message
-    };
-
-    // Validate before sending
-    if (!donationData.name || !donationData.email || !donationData.amount) {
-      console.error("Missing required fields");
-      return;
-    }
-
-    const response = await axios.post("http://localhost:5001/api/donations", donationData, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (response.status === 200 || response.status === 201) {
-      console.log("Donation successfully submitted:", response.data);
-    } else {
-      console.error("Unexpected response:", response);
-    }
+    const donation = new Donation({ name, email, amount }); // No message field
+    await donation.save();
+    res.status(201).json({ message: 'Donation successfully saved!' });
   } catch (error) {
-    console.error("Error:", error.response?.data || error.message);
+    res.status(500).json({ error: 'Failed to save donation' });
   }
-};
+});
+
 
 // Routes
 app.use('/api/auth', authRoutes);
