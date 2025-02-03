@@ -38,6 +38,7 @@ const Home = () => {
             <p className="hero-subtext">
               Join our community to explore and support creative campaigns that bring change to the world.
             </p>
+            
             <div className="hero-buttons">
               <Link to="/explore" className="btn-primary">Explore Campaigns</Link>
               <a href="/create-campaign" className="btn-secondary">Explore Ideas</a>

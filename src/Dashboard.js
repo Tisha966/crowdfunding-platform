@@ -2,7 +2,7 @@ import React from 'react';
 import './Dashboard.css';
 import { Link } from "react-router-dom";
 import TwoStepForm from './TwoStepForm';
-
+import QRCodeGenerator from './QRCodeGenerator'; 
 const Dashboard = () => {
   return (
     <div className="dashboard">
@@ -72,6 +72,14 @@ const Dashboard = () => {
       <p>or, <Link to="/explore" style={{color: "teal"}}>explore trending campaigns</Link></p>
     </div>
   </div>
+ {/* QR Code Generator Section */}
+<div className="card">
+  <h3>Generate QR Code</h3>
+  <p style={{ color: "teal", fontSize: "1rem" }}>
+    Use the QR code generator to easily share your crowdfunding campaign with others. Simply generate a unique QR code and share it with potential donors to get direct access to your campaign page.
+  </p>
+  <QRCodeGenerator /> {/* Add QRCodeGenerator component here */}
+</div>
 
   {/* Login Options Card */}
   <div className="card login-options">
