@@ -1,29 +1,27 @@
-// routes/donationRoutes.js
-const express = require('express');
+const express = require("express");
+const Donation = require("../models/donation");
+
 const router = express.Router();
-const Donation = require('../models/donation'); // Your donation model
 
-// Donation route
-router.post('/', async (req, res) => {
-  console.log('Received donation request:', req.body); // Debugging: Log received request
+router.post("/", async (req, res) => {
+  console.log("Received donation request:", req.body);
 
-  const { donorName, donationAmount } = req.body;
+  const { name, email, amount } = req.body; // Removed message from destructuring
 
-  if (!donorName || !donationAmount) {
-    console.log('Invalid donation:', req.body);
-    return res.status(400).json({ message: 'Invalid donation' });
+  // Input validation (message is no longer required)
+  if (!name || !email || typeof amount !== "number" || amount <= 0) {
+    return res.status(400).json({ error: "Invalid donation data" });
   }
 
   try {
-    // Save donation to the database
-    const donation = new Donation({ name: donorName, amount: donationAmount });
-    await donation.save();
-    
-    console.log('Donation saved:', donation); // Debugging: Log the saved donation
-    res.status(200).json({ message: 'Donation successful', donation });
-  } catch (error) {
-    console.error('Database Save Error:', error);
-    res.status(500).json({ message: 'Server error' });
+    const newDonation = new Donation({ name, email, amount }); // Removed message field
+    await newDonation.save();
+
+    console.log("Donation saved:", newDonation);
+    res.status(201).json({ message: "Donation successful!", donation: newDonation });
+  } catch (err) {
+    console.error("Error saving donation:", err);
+    res.status(500).json({ error: "Server error while saving donation" });
   }
 });
 
