@@ -9,6 +9,7 @@ const Login = () => {
   const [message, setMessage] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [userRole, setUserRole] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -40,8 +41,8 @@ const Login = () => {
         // Save user data (optional)
         localStorage.setItem('user', JSON.stringify(data.user));
 
-        // Redirect to the dashboard
-        navigate('/dashboard');
+        // Ask user to select role
+        setMessage('Please select your role: Contributor or Fundraiser');
       } else {
         const errorData = await response.json();
         setIsSuccess(false);
@@ -52,6 +53,16 @@ const Login = () => {
       setMessage('An error occurred: ' + error.message);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleRoleSelection = (role) => {
+    setUserRole(role);
+    localStorage.setItem('role', role); // Save user role to localStorage
+    if (role === 'contributor') {
+      navigate('/capitalRaise'); // Navigate to CapitalRaise.js page
+    } else if (role === 'fundraiser') {
+      navigate('/campaignDetails/:id'); // Navigate to CampaignDetails.jsx page
     }
   };
 
@@ -104,7 +115,16 @@ const Login = () => {
             </button>
             <p className="forgot-link">Forgot password?</p>
           </form>
+
           {message && <p className={`message ${isSuccess ? 'success' : 'error'}`}>{message}</p>}
+
+          {isSuccess && !userRole && (
+            <div className="role-selection">
+              <p>Select your role:</p>
+              <button onClick={() => handleRoleSelection('contributor')}>Contributor</button>
+              <button onClick={() => handleRoleSelection('fundraiser')}>Fundraiser</button>
+            </div>
+          )}
         </div>
       </div>
     </div>
