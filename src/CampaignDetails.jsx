@@ -9,11 +9,11 @@ const CampaignDetails = () => {
   const createCampaign = async (campaignData) => {
     try {
       const formData = new FormData();
-      formData.append('image', campaignData.image);
-      formData.append('title', campaignData.title);
-      formData.append('description', campaignData.description);
-      formData.append('daysLeft', campaignData.daysLeft);
-      formData.append('numSupporters', campaignData.numSupporters);
+      formData.append('image', campaignData.image);    // Append image
+    formData.append('title', campaignData.title);
+    formData.append('description', campaignData.description);
+    formData.append('daysLeft', String(campaignData.daysLeft));    // Ensure string format
+    formData.append('numSupporters', String(campaignData.numSupporters)); 
   
       const response = await fetch('http://localhost:5001/api/campaigns/create', {
         method: 'POST',

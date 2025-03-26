@@ -616,3 +616,68 @@ select:focus {
   outline: none;
   border-color: #6c757d;
 }
+/* Explore Section */
+.explore-section {
+  background-color: #f8f9fa;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.explore-section h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.explore-section p {
+  font-size: 1.5rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.explore-button {
+  padding: 12px 30px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  background-color: #283044;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s ease;
+}
+
+.explore-button:hover {
+  background-color: gray;
+  transform: scale(1.05);
+}
+
+.explore-button:focus {
+  outline: none;
+}
+
+.explore-button:active {
+  background-color: #283044;
+}
+.alert-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 12px; /* Slightly reduced padding */
+  border-radius: 5px;
+  border: 1px solid #f5c6cb;
+  font-size: 0.5 rem; /* Smaller font size */
+  margin: 20px 0;
+  font-weight: 100; /* Adjusted font weight to be more readable */
+  display: flex;
+  align-items: center;
+}
+
+.alert-message .icon {
+  margin-right: 10px; /* Reduced margin for icon */
+  font-size: 2rem; /* Slightly smaller icon */
+}

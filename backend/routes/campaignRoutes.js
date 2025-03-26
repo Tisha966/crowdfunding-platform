@@ -1,47 +1,51 @@
 const express = require('express');
-const Campaign = require('../models/campaignModel'); // Import the campaign model
+const multer = require('multer');
+const Campaign = require('../models/campaignModel');
 const router = express.Router();
 
-// POST request to create a new campaign
-router.post('/create', async (req, res) => {
-  try {
-    const { title, description, image, daysLeft, numSupporters } = req.body;
+// ✅ Configure Multer for image uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  }
+});
+const upload = multer({ storage });
 
-    // Ensure required fields are provided
-    if (!title || !description || !image || !daysLeft) {
-      return res.status(400).json({ error: 'Required fields are missing' });
+router.post('/create', upload.single('image'), async (req, res) => {
+  console.log('Received form data:', req.body);
+  console.log('Uploaded file:', req.file);
+
+  if (!req.file) {
+    return res.status(400).json({ error: 'Image upload failed' });
+  }
+
+  try {
+    const { title, description, daysLeft, numSupporters } = req.body;
+
+    // Ensure the request has all necessary fields
+    if (!title || !description || !daysLeft || !numSupporters) {
+      return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    // Create a new campaign object
+    const imagePath = req.file.path;
+
     const newCampaign = new Campaign({
       title,
       description,
-      image,
-      daysLeft,
-      numSupporters: numSupporters || 0,  // Default numSupporters to 0 if not provided
+      imagePath,
+      daysLeft: parseInt(daysLeft),
+      numSupporters: parseInt(numSupporters)
     });
 
-    // Save the campaign to the database
     await newCampaign.save();
+    res.status(201).json({ message: 'Campaign created successfully', campaign: newCampaign });
 
-    res.status(201).json({
-      message: 'Campaign created successfully',
-      campaign: newCampaign,
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to create campaign' });
-  }
-});
-
-// GET request to fetch all campaigns
-router.get('/', async (req, res) => {
-  try {
-    const campaigns = await Campaign.find();
-    res.status(200).json(campaigns); // Send all campaigns
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to fetch campaigns' });
+  } catch (error) {
+    console.error('Error creating campaign:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
