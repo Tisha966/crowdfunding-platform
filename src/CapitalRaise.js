@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Image from './assets/images/tisha.jpg'; // Ensure the path is correct
 import axios from 'axios';
 
+
 function CapitalRaise() {
   const [selectedOption, setSelectedOption] = useState('launchASAP');
   const [raisedAmount, setRaisedAmount] = useState(0);
@@ -250,16 +251,17 @@ function CapitalRaise() {
 
   {/* Campaign Dropdown */}
   <select
-    value={selectedCampaign}
-    onChange={(e) => setSelectedCampaign(e.target.value)}
-    required
-  >
-    <option value="">Select a Campaign</option>
-    <option value="health">Health-related</option>
-    <option value="accident">Accident-related</option>
-    <option value="afforestation">Afforestation</option>
-    {/* Add more campaign options as needed */}
-  </select>
+  value={selectedCampaign}
+  onChange={(e) => setSelectedCampaign(e.target.value)}
+  required
+>
+  <option value="">Select a Campaign</option>
+  <option value="health">Health-related</option>
+  <option value="accident">Accident-related</option>
+  <option value="afforestation">Afforestation</option>
+  {/* Add more campaign options as needed */}
+</select>
+
 
   <input
     type="text"
