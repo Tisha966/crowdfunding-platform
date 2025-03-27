@@ -1,39 +1,36 @@
 const express = require('express');
-const Donation = require('../models/donation');
+const router = express.Router();
+const Donation = require('../models/donationModel');
 const Campaign = require('../models/campaignModel');
 
-const router = express.Router();
-
-// POST request to handle donations
+// ✅ POST: Save donation and update campaign
 router.post('/', async (req, res) => {
+  const { campaignId, donor, name, amount } = req.body;
+
+  if (!campaignId || !donor || !name || !amount) {
+    return res.status(400).json({ message: 'All fields are required' });
+  }
+
   try {
-    console.log('🔹 Donation API hit:', req.body);
-
-    const { name, email, amount, campaign } = req.body;
-    if (!name || !email || !amount || !campaign) {
-      return res.status(400).json({ error: 'All fields are required' });
-    }
-
-    // Check if campaign exists
-    const campaignExists = await Campaign.findOne({ title: campaign });
-    if (!campaignExists) {
-      console.log('❌ Campaign not found:', campaign);
-      return res.status(404).json({ error: 'Campaign not found' });
-    }
-
     // Save donation
-    const newDonation = new Donation({
-      name,
-      email,
-      amount,
-      campaign: campaignExists._id, // Store campaign reference
-    });
-
+    const newDonation = new Donation({ campaignId, donor, name, amount });
     await newDonation.save();
-    res.status(201).json({ message: 'Donation successful!', donation: newDonation });
-  } catch (err) {
-    console.error('❌ Error processing donation:', err);
-    res.status(500).json({ error: 'Internal Server Error' });
+
+    // Update campaign with new amount raised and supporters
+    const campaign = await Campaign.findById(campaignId);
+    if (!campaign) {
+      return res.status(404).json({ message: 'Campaign not found' });
+    }
+
+    // Update amount and supporters dynamically
+    campaign.amountRaised += Number(amount);
+    campaign.supporters += 1;
+    await campaign.save();
+
+    res.status(201).json({ message: 'Donation successful', donation: newDonation });
+  } catch (error) {
+    console.error('Error saving donation:', error);
+    res.status(500).json({ message: 'Server error' });
   }
 });
 
