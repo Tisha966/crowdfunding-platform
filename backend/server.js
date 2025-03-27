@@ -14,28 +14,27 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5001;
 
-// CORS Configuration
+// ✅ CORS Configuration
 const corsOptions = {
   origin: ['http://localhost:3000', 'https://your-frontend-app.com'],
   methods: ['GET', 'POST'],
   credentials: true,
 };
 
-// Middleware
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Routes
+// ✅ Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/campaigns', campaignRoutes);
 app.use('/api/feedback', feedbackRoutes);
-app.use('/api/donations', donationRoutes); // ✅ Removed duplicate donation route from server.js
+app.use('/api/donations', donationRoutes);
 
-// Serve static files
+// ✅ Serve static images from the uploads folder
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Database Connection
+// ✅ Database Connection
 mongoose
   .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('✅ Connected to MongoDB'))
@@ -44,7 +43,7 @@ mongoose
     process.exit(1);
   });
 
-// Start Server
+// ✅ Start Server
 app.listen(port, () => {
   console.log(`🚀 Server running on http://localhost:${port}`);
 });
