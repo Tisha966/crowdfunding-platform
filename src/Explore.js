@@ -1,39 +1,50 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';  
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';  
 import './explore.css';
 
 const Explore = () => {
   const location = useLocation();
-  const message = location.state?.message;
+  const navigate = useNavigate();
+  
+  const message = location.state?.message;   // ✅ Get the donation success message
   const [campaigns, setCampaigns] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
 
+  // ✅ Fetch campaigns from backend
+  const fetchCampaigns = async () => {
+    try {
+      const res = await axios.get('http://localhost:5001/api/campaigns');
+      console.log('Fetched campaigns:', res.data);
+      setCampaigns(res.data);
+    } catch (error) {
+      console.error('Error fetching campaigns:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ✅ Refetch campaigns on page load & after donation
   useEffect(() => {
-    const fetchCampaigns = async () => {
-      try {
-        const res = await axios.get('http://localhost:5001/api/campaigns');
-        console.log('Fetched campaigns:', res.data);
-        setCampaigns(res.data);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching campaigns:', error);
-        setLoading(false);
-      }
-    };
-    fetchCampaigns();
-  }, []);
+    fetchCampaigns();      // Fetch on page load
 
+    // ✅ Refetch if donation message is received
+    if (message) {
+      fetchCampaigns();
+    }
+  }, [message]);            // ✅ Dependency on message
+
+  // ✅ Navigate to the Donation page
   const handleDonate = (campaignId) => {
-    const cleanId = campaignId.trim();  // ✅ Trim the ID to avoid newline issues
+    const cleanId = campaignId.trim();  
     navigate(`/donate/${cleanId}`);
   };
 
   return (
     <div className="explore-container">
       <h1>Explore Campaigns</h1>
+
+      {message && <p className="success-message">{message}</p>}  {/* ✅ Display donation message */}
 
       {loading ? (
         <p>Loading...</p>
@@ -49,7 +60,9 @@ const Explore = () => {
                 />
                 <h2>{campaign.title}</h2>
                 <p>{campaign.description}</p>
-                <p style={{ color: "teal" }}>₹{campaign.numSupporters} raised</p>
+
+                {/* ✅ Display dynamically updated amountRaised */}
+                <p style={{ color: "teal" }}>₹{campaign.amountRaised} raised</p>
                 <p style={{ color: '#e74c3c', fontWeight: 'bold' }}>{campaign.daysLeft} Days Left</p>
 
                 <button onClick={() => handleDonate(campaign._id)}>Donate</button>

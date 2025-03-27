@@ -4,34 +4,50 @@ const Donation = require('../models/donationModel');
 const Campaign = require('../models/campaignModel');
 
 // ✅ POST: Save donation and update campaign
-router.post('/', async (req, res) => {
+// ✅ POST: Add donation and update campaign amountRaised dynamically
+router.post('/donate', async (req, res) => {
   const { campaignId, donor, name, amount } = req.body;
 
   if (!campaignId || !donor || !name || !amount) {
-    return res.status(400).json({ message: 'All fields are required' });
+    return res.status(400).json({ error: 'All fields are required' });
   }
 
   try {
-    // Save donation
-    const newDonation = new Donation({ campaignId, donor, name, amount });
+    // ✅ Save the donation
+    const newDonation = new Donation({
+      campaignId,
+      donor,
+      name,
+      amount: Number(amount)
+    });
+
     await newDonation.save();
 
-    // Update campaign with new amount raised and supporters
+    // ✅ Find the related campaign
     const campaign = await Campaign.findById(campaignId);
+
     if (!campaign) {
       return res.status(404).json({ message: 'Campaign not found' });
     }
 
-    // Update amount and supporters dynamically
+    // ✅ Increment amountRaised and supporters count
     campaign.amountRaised += Number(amount);
     campaign.supporters += 1;
+
     await campaign.save();
 
-    res.status(201).json({ message: 'Donation successful', donation: newDonation });
+    // ✅ Send updated campaign data
+    res.status(201).json({
+      message: 'Donation successful',
+      donation: newDonation,
+      updatedCampaign: campaign   // ✅ Send the updated campaign data
+    });
+
   } catch (error) {
-    console.error('Error saving donation:', error);
-    res.status(500).json({ message: 'Server error' });
+    console.error('Error processing donation:', error);
+    res.status(500).json({ error: 'Server error' });
   }
 });
+
 
 module.exports = router;

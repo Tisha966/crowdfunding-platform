@@ -18,14 +18,9 @@ const DonationPage = () => {
   useEffect(() => {
     const fetchCampaign = async () => {
       try {
-        console.log('Raw ID:', campaignId);  
-        
-        // ✅ Sanitize the ID by trimming whitespace and encoding
         const sanitizedId = encodeURIComponent(campaignId.trim());
-        console.log('Sanitized ID:', sanitizedId); 
-
         const res = await axios.get(`http://localhost:5001/api/campaigns/${sanitizedId}`);
-        
+
         if (res.status === 200) {
           setCampaign(res.data);
         } else {
@@ -59,14 +54,15 @@ const DonationPage = () => {
   
     try {
       const response = await axios.post('http://localhost:5001/api/campaigns/donate', donationData);
-  
+
       if (response.status === 201) {
         setMessage('Donation successful! 🎉');
-  
-        // ✅ Delay navigation by 2 seconds
+
+        // ✅ Force a page reload after donation to show updated campaigns
         setTimeout(() => {
-          navigate('/explore');
-        }, 2000);  // 2 seconds delay
+          window.location.href = '/explore';  // ✅ Reloads the page with updated data
+        }, 2000);
+        
       } else {
         setMessage('Failed to donate. Please try again.');
       }
@@ -75,58 +71,57 @@ const DonationPage = () => {
       setMessage('Error: Unable to process donation.');
     }
   };
-  
-  
+
   if (loading) return <p>Loading campaign details...</p>;
   if (error) return <p>{error}</p>;
 
   return (
     <div className="donation-page">
-  <h1>{campaign?.title}</h1>
+      <h1>{campaign?.title}</h1>
 
-  {/* Inline CSS to make the image smaller */}
-  <img 
-    src={`http://localhost:5001/${campaign?.imagePath}`} 
-    alt={campaign?.title}
-    style={{ 
-      width: '50%',          // Smaller width
-      maxHeight: '300px',    // Smaller height
-      display: 'block',      // Ensure it takes full width space
-      margin: '0 auto',      // Center the image
-      borderRadius: '10px'   // Rounded corners
-    }} 
-  />
+      <p><strong>Amount Raised:</strong> ₹{campaign?.amountRaised}</p>
 
-  <p>{campaign?.description}</p>
+      <img 
+        src={`http://localhost:5001/${campaign?.imagePath}`} 
+        alt={campaign?.title}
+        style={{ 
+          width: '50%',
+          maxHeight: '300px',
+          display: 'block',
+          margin: '0 auto',
+          borderRadius: '10px'
+        }} 
+      />
 
-  <form onSubmit={handleDonation}>
-    <input
-      type="text"
-      placeholder="Your Name"
-      value={donorName}
-      onChange={(e) => setDonorName(e.target.value)}
-      required
-    />
-    <input
-      type="email"
-      placeholder="Your Email"
-      value={donorEmail}
-      onChange={(e) => setDonorEmail(e.target.value)}
-      required
-    />
-    <input
-      type="number"
-      placeholder="Amount"
-      value={amount}
-      onChange={(e) => setAmount(e.target.value)}
-      required
-    />
-    <button type="submit">Donate</button>
-  </form>
+      <p>{campaign?.description}</p>
 
-  {message && <p>{message}</p>}
-</div>
+      <form onSubmit={handleDonation}>
+        <input
+          type="text"
+          placeholder="Your Name"
+          value={donorName}
+          onChange={(e) => setDonorName(e.target.value)}
+          required
+        />
+        <input
+          type="email"
+          placeholder="Your Email"
+          value={donorEmail}
+          onChange={(e) => setDonorEmail(e.target.value)}
+          required
+        />
+        <input
+          type="number"
+          placeholder="Amount"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          required
+        />
+        <button type="submit">Donate</button>
+      </form>
 
+      {message && <p>{message}</p>}
+    </div>
   );
 };
 
