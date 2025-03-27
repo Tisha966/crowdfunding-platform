@@ -1,6 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const Campaign = require('../models/campaignModel');
+const Donation = require('../models/donationModel');  // Import Donation model
 const router = express.Router();
 
 // ✅ Configure Multer for image uploads
@@ -13,6 +14,7 @@ const storage = multer.diskStorage({
   }
 });
 const upload = multer({ storage });
+
 
 // ✅ POST: Create a new campaign
 router.post('/create', upload.single('image'), async (req, res) => {
@@ -37,7 +39,8 @@ router.post('/create', upload.single('image'), async (req, res) => {
       description,
       imagePath,
       daysLeft: parseInt(daysLeft),
-      numSupporters: parseInt(numSupporters)
+      supporters: parseInt(numSupporters),
+      amountRaised: 0   // ✅ Initialize amount raised to 0
     });
 
     await newCampaign.save();
@@ -49,11 +52,12 @@ router.post('/create', upload.single('image'), async (req, res) => {
   }
 });
 
+
 // ✅ GET: Fetch all campaigns
 router.get('/', async (req, res) => {
   try {
     const campaigns = await Campaign.find({});
-     console.log('Fetched campaigns:', campaigns);  // ✅ Debug: log campaigns
+
     if (!campaigns || campaigns.length === 0) {
       return res.status(404).json({ message: 'No campaigns available' });
     }
@@ -62,6 +66,71 @@ router.get('/', async (req, res) => {
   } catch (error) {
     console.error('Error fetching campaigns:', error);
     res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+// ✅ GET: Fetch a single campaign by ID
+router.get('/:id', async (req, res) => {
+  const id = req.params.id.trim();  // ✅ Trim whitespace
+  console.log('Received ID:', id);
+
+  try {
+    const campaign = await Campaign.findById(id);
+
+    if (!campaign) {
+      return res.status(404).json({ message: 'Campaign not found' });
+    }
+
+    res.status(200).json(campaign);
+  } catch (error) {
+    console.error('Error fetching campaign:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
+// ✅ POST: Add donation and update campaign
+router.post('/donate', async (req, res) => {
+  const { campaignId, donor, name, amount } = req.body;
+
+  if (!campaignId || !donor || !name || !amount) {
+    return res.status(400).json({ error: 'All fields are required' });
+  }
+
+  try {
+    // ✅ Save donation
+    const newDonation = new Donation({
+      campaignId,
+      donor,
+      name,
+      amount: Number(amount)
+    });
+
+    await newDonation.save();
+
+    // ✅ Update campaign dynamically
+    const campaign = await Campaign.findById(campaignId);
+
+    if (!campaign) {
+      return res.status(404).json({ message: 'Campaign not found' });
+    }
+
+    // Increment amountRaised and supporters
+    campaign.amountRaised += Number(amount);
+    campaign.supporters += 1;
+
+    await campaign.save();
+
+    res.status(201).json({
+      message: 'Donation successful',
+      donation: newDonation,
+      updatedCampaign: campaign
+    });
+
+  } catch (error) {
+    console.error('Error processing donation:', error);
+    res.status(500).json({ error: 'Server error' });
   }
 });
 
