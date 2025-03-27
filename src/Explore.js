@@ -9,8 +9,9 @@ const Explore = () => {
   useEffect(() => {
     const fetchCampaigns = async () => {
       try {
-        const res = await axios.get('http://localhost:5001/api/campaigns');  // Fetch all campaigns
-        setCampaigns(res.data);  // Store campaigns in state
+        const res = await axios.get('http://localhost:5001/api/campaigns');
+        console.log('Fetched campaigns:', res.data);  // ✅ Debug: log campaigns
+        setCampaigns(res.data);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching campaigns:', error);
@@ -23,9 +24,9 @@ const Explore = () => {
   const handleDonate = async (campaignId) => {
     try {
       const donationData = {
-        amount: 100,                
-        campaignId: campaignId,    
-        donor: "test@example.com"  
+        amount: 100,
+        campaignId: campaignId,
+        donor: "test@example.com"
       };
 
       const response = await axios.post('http://localhost:5001/api/donations', donationData);
