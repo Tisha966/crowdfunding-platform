@@ -5,9 +5,8 @@ const campaignSchema = new mongoose.Schema({
   description: { type: String, required: true },
   imagePath: { type: String, required: true },
   daysLeft: { type: Number, required: true },
-  numSupporters: { type: Number, default: 0 }
+  supporters: { type: Number, default: 0 },   // ✅ Track supporters
+  amountRaised: { type: Number, default: 0 }  // ✅ Track raised amount
 });
 
-const Campaign = mongoose.model('Campaign', campaignSchema);
-
-module.exports = Campaign;
+module.exports = mongoose.model('Campaign', campaignSchema);

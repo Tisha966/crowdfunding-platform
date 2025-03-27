@@ -2,60 +2,11 @@ import React, { useState, useEffect } from 'react';
 import './CapitalRaise.css';
 import { Link } from 'react-router-dom';
 import Image from './assets/images/tisha.jpg'; // Ensure the path is correct
-import axios from 'axios';
 
 
 function CapitalRaise() {
   const [selectedOption, setSelectedOption] = useState('launchASAP');
-  const [raisedAmount, setRaisedAmount] = useState(0);
-  const [targetAmount, setTargetAmount] = useState(10000);
-  const [percentageRaised, setPercentageRaised] = useState(0);
-  const [donors, setDonors] = useState([]);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [amount, setAmount] = useState('');
-  const [message, setMessage] = useState('');
-  const [selectedCampaign, setSelectedCampaign] = useState('');
-  const [campaignDetails, setCampaignDetails] = useState(null);
 
-
-  const [donationStatus, setDonationStatus] = useState(''); 
-  useEffect(() => {
-    // Ensure we don't divide by zero
-    setPercentageRaised(targetAmount > 0 ? (raisedAmount / targetAmount) * 100 : 0);
-  }, [raisedAmount, targetAmount]);
-
- 
-  const handleDonation = async (e) => {
-    e.preventDefault();
-
-    const donationData = {
-      name, // Name from the input
-      email, // Email from the input
-      amount: Number(amount), // Convert amount to number if needed
-      campaign: selectedCampaign,
-    };
-
-    try {
-      const response = await axios.post('http://localhost:5001/api/donations', donationData, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (response.status === 201) {
-        console.log('Donation successfully submitted');
-        setDonationStatus('Donation successfully submitted! Thank you for your support!');
-        setCampaignDetails(response.data.campaignDetails);
-      } else {
-        console.error('Unexpected response:', response);
-        setDonationStatus('Something went wrong, please try again.');
-      }
-    } catch (error) {
-      console.error('Error:', error.response?.data || error.message);
-      setDonationStatus('Error: Unable to process donation. Please try again later.'); // Handle errors
-    }
-  };
   const renderContent = () => {
     if (selectedOption === 'takeTime') {
       return (
@@ -241,59 +192,9 @@ function CapitalRaise() {
         </div>
 
         {renderContent()}
-
         {renderAdditionalBoxes()}
-
-        {/* Donation Section */}
-        <div className="donation-section">
-        <form onSubmit={handleDonation}>
-  <h2>Make a Donation</h2>
-
-  {/* Campaign Dropdown */}
-  <select
-  value={selectedCampaign}
-  onChange={(e) => setSelectedCampaign(e.target.value)}
-  required
->
-  <option value="">Select a Campaign</option>
-  <option value="health">Health-related</option>
-  <option value="accident">Accident-related</option>
-  <option value="afforestation">Afforestation</option>
-  {/* Add more campaign options as needed */}
-</select>
-
-
-  <input
-    type="text"
-    value={name}
-    onChange={(e) => setName(e.target.value)}
-    placeholder="Your Name"
-    required
-  />
-  <input
-    type="email"
-    value={email}
-    onChange={(e) => setEmail(e.target.value)}
-    placeholder="Your Email"
-    required
-  />
-  <input
-    type="number"
-    value={amount}
-    onChange={(e) => setAmount(e.target.value)}
-    placeholder="Donation Amount"
-    required
-  />
-  <button type="submit">Donate</button>
-</form>
-
-          
-          <div className="donation-status" style={{ color: 'green', fontSize: '16px', fontWeight: 'bold' }}>
-    {donationStatus && <p>{donationStatus}</p>}
-  </div>
-</div>
-        </div>
-     </div>
+      </div>
+    </div>
   );
 }
 

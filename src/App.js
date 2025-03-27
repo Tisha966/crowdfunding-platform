@@ -25,6 +25,7 @@ import CapitalRaise from './CapitalRaise';
 import PlayBook from './PlaybookSection';
 import QRScanner from './QRScanner'; 
 import QRCodeGenerator from './QRCodeGenerator';
+import DonationPage from './DonationPage';
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -81,6 +82,8 @@ const App = () => {
           <Route path="/campaignDetails/:id" element={<CampaignDetails />} />
           <Route path="/qrScanner" element={<QRScanner/>} />
           <Route path="/qrCodeGenerator" element={<QRCodeGenerator />} />
+          <Route path="/donate/:campaignId" element={<DonationPage />} />
+
 
           {/* Private Routes */}
           <Route

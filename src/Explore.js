@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';  
+import { useLocation } from 'react-router-dom';
 import './explore.css';
 
 const Explore = () => {
+  const location = useLocation();
+  const message = location.state?.message;
   const [campaigns, setCampaigns] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCampaigns = async () => {
       try {
         const res = await axios.get('http://localhost:5001/api/campaigns');
-        console.log('Fetched campaigns:', res.data);  // ✅ Debug: log campaigns
+        console.log('Fetched campaigns:', res.data);
         setCampaigns(res.data);
         setLoading(false);
       } catch (error) {
@@ -21,26 +26,9 @@ const Explore = () => {
     fetchCampaigns();
   }, []);
 
-  const handleDonate = async (campaignId) => {
-    try {
-      const donationData = {
-        amount: 100,
-        campaignId: campaignId,
-        donor: "test@example.com"
-      };
-
-      const response = await axios.post('http://localhost:5001/api/donations', donationData);
-
-      if (response.status === 201) {
-        alert('Donation successful!');
-        console.log('Donation data:', response.data);
-      } else {
-        alert(response.data.error || 'Failed to donate');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Failed to donate');
-    }
+  const handleDonate = (campaignId) => {
+    const cleanId = campaignId.trim();  // ✅ Trim the ID to avoid newline issues
+    navigate(`/donate/${cleanId}`);
   };
 
   return (
@@ -61,8 +49,9 @@ const Explore = () => {
                 />
                 <h2>{campaign.title}</h2>
                 <p>{campaign.description}</p>
-                <p>₹{campaign.numSupporters} raised</p>
-                <p>{campaign.daysLeft} Days Left</p>
+                <p style={{ color: "teal" }}>₹{campaign.numSupporters} raised</p>
+                <p style={{ color: '#e74c3c', fontWeight: 'bold' }}>{campaign.daysLeft} Days Left</p>
+
                 <button onClick={() => handleDonate(campaign._id)}>Donate</button>
               </div>
             ))
