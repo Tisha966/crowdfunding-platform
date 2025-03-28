@@ -1,36 +1,48 @@
-import React, { useState } from "react";  // Add useState here
-import "./PlaybookSection.css"; // Import the CSS file
+import React, { useState } from "react";  
+import "./PlaybookSection.css"; 
 import axios from 'axios';
 
 const PlaybookSection = () => {
-  const [email, setEmail] = useState('');  // useState for email
-  const [message, setMessage] = useState('');  // useState for message
-  const [status, setStatus] = useState(null);  // useState for status
+  const [name, setName] = useState('');          // ✅ Added name field
+  const [email, setEmail] = useState('');  
+  const [message, setMessage] = useState('');  
+  const [status, setStatus] = useState(null);  
 
-  // Handle form submission
+  // ✅ Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-        const response = await axios.post('http://localhost:5001/api/feedback/submit', {
-            email,
-            message
-        }, {
-            headers: { "Content-Type": "application/json" }
-        });
 
-        setStatus({ type: "success", message: "Feedback successfully submitted!" });
-        setEmail(""); // Clear input fields
-        setMessage("");
+    console.log('Submitting:', { name, email, message });
+
+    try {
+      const response = await axios.post(
+        'http://localhost:5001/api/feedback/submit',
+        { name, email, message },   // ✅ Sending all required fields
+        {
+          headers: { "Content-Type": "application/json" }
+        }
+      );
+
+      setStatus({ type: "success", message: "Feedback successfully submitted!" });
+
+      // ✅ Clear input fields after submission
+      setName("");
+      setEmail("");
+      setMessage("");
+
     } catch (error) {
-        setStatus({ type: "error", message: "Something went wrong. Please try again." });
+      console.error('Error:', error);
+      setStatus({
+        type: "error",
+        message: error.response?.data?.message || "Something went wrong. Please try again."
+      });
     }
   };
-  
-  
 
   return (
     <div className="playbook-container">
-      {/* Templates Section */}
+
+      {/* ✅ Templates Section */}
       <div className="section templates">
         <h2>Templates</h2>
         <p>
@@ -56,11 +68,10 @@ const PlaybookSection = () => {
         </div>
       </div>
 
+      {/* ✅ Resources Section */}
       <div className="section resources">
         <h2>Resources</h2>
-        <p>
-          Additional resources to share with your team or deepen your fundraising strategy.
-        </p>
+        <p>Additional resources to share with your team or deepen your fundraising strategy.</p>
         <div className="list">
           <div className="list-item">
             <a href="#">Community Round Case Studies</a>
@@ -75,18 +86,18 @@ const PlaybookSection = () => {
             <a href="#">Contracts to send your investors</a>
           </div>
           <div className="list-item">
-            <a href="#">Investor Presentation Templates</a> {/* New Item */}
+            <a href="#">Investor Presentation Templates</a>
           </div>
           <div className="list-item">
-            <a href="#">Fundraising Strategy Guide</a> {/* New Item */}
+            <a href="#">Fundraising Strategy Guide</a>
           </div>
           <div className="list-item">
-            <a href="#">Crowdfunding Legal Considerations</a> {/* New Item */}
+            <a href="#">Crowdfunding Legal Considerations</a>
           </div>
         </div>
       </div>
 
-      {/* Best Practices Section */}
+      {/* ✅ Best Practices Section */}
       <div className="section best-practices">
         <h2>Best Practices</h2>
         <p>Discover expert insights and proven techniques for a successful crowdfunding campaign.</p>
@@ -110,7 +121,7 @@ const PlaybookSection = () => {
         </div>
       </div>
 
-      {/* Video Tutorials Section */}
+      {/* ✅ Video Tutorials Section */}
       <div className="section video-tutorials">
         <h2>Video Tutorials</h2>
         <p>Step-by-step guides to maximize your fundraising efforts.</p>
@@ -128,21 +139,32 @@ const PlaybookSection = () => {
             <span>6 min watch</span>
           </div>
           <div className="list-item">
-            <a href="#">Building a Strong Investor Network</a> {/* New Item */}
-            <span>7 min watch</span> {/* New Item */}
+            <a href="#">Building a Strong Investor Network</a>
+            <span>7 min watch</span>
           </div>
           <div className="list-item">
-            <a href="#">Optimizing Your Campaign Landing Page</a> {/* New Item */}
-            <span>4 min watch</span> {/* New Item */}
+            <a href="#">Optimizing Your Campaign Landing Page</a>
+            <span>4 min watch</span>
           </div>
         </div>
       </div>
 
-      {/* Feedback Form Section (Moved to End) */}
+      {/* ✅ Feedback Form Section */}
       <div className="section feedback-form">
         <h2>Questions? Feedback?</h2>
         <p>We'd love to know how we can make these guides more helpful for you. Drop us a note below!</p>
+
         <form onSubmit={handleSubmit}>
+          {/* ✅ Name Field */}
+          <label>Your Name</label>
+          <input
+            type="text"
+            placeholder="Enter your name"
+            required
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+
           <label>Your Email</label>
           <input
             type="email"
@@ -151,6 +173,7 @@ const PlaybookSection = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+
           <label>What's on your mind?</label>
           <textarea
             placeholder="Share your thoughts..."
@@ -158,8 +181,10 @@ const PlaybookSection = () => {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
+
           <button type="submit">Submit</button>
         </form>
+
         {status && (
           <div className={`status ${status.type}`}>
             {status.message}
