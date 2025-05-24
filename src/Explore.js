@@ -14,7 +14,7 @@ const Explore = () => {
   // ✅ Fetch campaigns from backend
   const fetchCampaigns = async () => {
     try {
-      const res = await axios.get('http://localhost:5001/api/campaigns');
+      const res = await axios.get('http://localhost:5002/api/campaigns');
       console.log('Fetched campaigns:', res.data);
       setCampaigns(res.data);
     } catch (error) {

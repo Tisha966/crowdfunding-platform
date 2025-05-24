@@ -111,20 +111,20 @@ const About = () => {
                     <div className="footer-link-column">
                       <h3>Resources</h3>
                       <ul>
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">FAQ</a></li>
+                        <li><a href="/about">Help Center</a></li>
+                        <li><a href="/about">Terms of Service</a></li>
+                        <li><a href="/about">Privacy Policy</a></li>
+                        <li><a href="/about">FAQ</a></li>
                       </ul>
                     </div>
       
                     <div className="footer-link-column">
                       <h3>Follow Us</h3>
                       <div className="footer-social">
-                        <a href="#" className="social-link"><i className="fab fa-facebook-f"></i></a>
-                        <a href="#" className="social-link"><i className="fab fa-twitter"></i></a>
-                        <a href="#" className="social-link"><i className="fab fa-instagram"></i></a>
-                        <a href="#" className="social-link"><i className="fab fa-linkedin-in"></i></a>
+                        <a href="/about" className="social-link"><i className="fab fa-facebook-f"></i></a>
+                        <a href="/about" className="social-link"><i className="fab fa-twitter"></i></a>
+                        <a href="/about" className="social-link"><i className="fab fa-instagram"></i></a>
+                        <a href="/about" className="social-link"><i className="fab fa-linkedin-in"></i></a>
                       </div>
                     </div>
       

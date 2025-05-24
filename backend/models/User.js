@@ -27,6 +27,7 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-const User = mongoose.model('User', userSchema);
+// Ensure mongoose doesn't overwrite the model if it already exists in the models cache
+const User = mongoose.models.User || mongoose.model('User', userSchema);
 
 module.exports = User;

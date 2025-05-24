@@ -19,7 +19,7 @@ const DonationPage = () => {
     const fetchCampaign = async () => {
       try {
         const sanitizedId = encodeURIComponent(campaignId.trim());
-        const res = await axios.get(`http://localhost:5001/api/campaigns/${sanitizedId}`);
+        const res = await axios.get(`http://localhost:5002/api/campaigns/${sanitizedId}`);
 
         if (res.status === 200) {
           setCampaign(res.data);
@@ -46,6 +46,7 @@ const DonationPage = () => {
     }
   
     const donationData = {
+      
       campaignId: campaignId.trim(),
       amount: Number(amount),
       donor: donorEmail,
@@ -53,7 +54,7 @@ const DonationPage = () => {
     };
   
     try {
-      const response = await axios.post('http://localhost:5001/api/campaigns/donate', donationData);
+      const response = await axios.post('http://localhost:5002/api/campaigns/donate', donationData);
 
       if (response.status === 201) {
         setMessage('Donation successful! 🎉');
@@ -82,7 +83,7 @@ const DonationPage = () => {
       <p><strong>Amount Raised:</strong> ₹{campaign?.amountRaised}</p>
 
       <img 
-        src={`http://localhost:5001/${campaign?.imagePath}`} 
+        src={`http://localhost:5002/${campaign?.imagePath}`} 
         alt={campaign?.title}
         style={{ 
           width: '50%',

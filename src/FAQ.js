@@ -104,7 +104,14 @@ function FAQ() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <span className="search-icon">🔍</span>
+         <span
+  className="search-icon"
+  role="img"
+  aria-label="search icon"
+>
+  🔍
+</span>
+
         </div>
       </div>
       <h1 style={{color:"teal"}}> GETTING STARTED</h1>

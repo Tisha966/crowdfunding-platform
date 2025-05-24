@@ -13,9 +13,10 @@ const CampaignDetails = () => {
     formData.append('title', campaignData.title);
     formData.append('description', campaignData.description);
     formData.append('daysLeft', String(campaignData.daysLeft));    // Ensure string format
-    formData.append('numSupporters', String(campaignData.numSupporters)); 
-  
-      const response = await fetch('http://localhost:5001/api/campaigns/create', {
+    // formData.append('numSupporters', String(campaignData.numSupporters)); 
+    formData.append('supporters', String(campaignData.numSupporters));
+    
+      const response = await fetch('http://localhost:5002/api/campaigns/create', {
         method: 'POST',
         body: formData,
       });
@@ -44,10 +45,11 @@ const CampaignDetails = () => {
     const campaignData = {
       title: event.target.title.value,
       description: event.target.description.value,
-      image: event.target.image.files[0], // Access image file directly
+      image: event.target.image.files[0],
       daysLeft: event.target.daysLeft.value,
-      numSupporters: event.target.numSupporters.value,
+      supporters: event.target.numSupporters.value,  // ✅ Updated key name
     };
+    
 
     await createCampaign(campaignData);  // Call the createCampaign function with the form data
   };

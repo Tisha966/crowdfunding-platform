@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './CapitalRaise.css';
+import Image from './assets/images/tishaimage.jpg'; // Ensure the path is correct
 import { Link } from 'react-router-dom';
-import Image from './assets/images/tisha.jpg'; // Ensure the path is correct
 
 
-function CapitalRaise() {
+const CapitalRaise = () => {
   const [selectedOption, setSelectedOption] = useState('launchASAP');
 
   const renderContent = () => {
@@ -114,7 +114,6 @@ function CapitalRaise() {
         }}>
           More than just a capital raise
         </h1>
-
         <p>
           Now you have thousands of Indian investors who will support your vision.
           Just ask, and they might...
@@ -194,8 +193,90 @@ function CapitalRaise() {
         {renderContent()}
         {renderAdditionalBoxes()}
       </div>
+
+      <section className="capital-raise">
+        <h2>We're with You from Day 1 to Launch</h2>
+        <div className="timeline">
+          <div className="step">
+            <div className="circle step-1"><span>1</span></div>
+            <p>Apply</p>
+          </div>
+          <div className="step">
+            <div className="circle step-2"><span>2</span></div>
+            <p>Craft your story</p>
+          </div>
+          <div className="step">
+            <div className="circle step-3"><span>3</span></div>
+            <p>Set your own terms</p>
+          </div>
+          <div className="step">
+            <div className="circle step-4"><span>4</span></div>
+            <p>Prepare your legal docs</p>
+          </div>
+          <div className="step">
+            <div className="circle step-5"><span>5</span></div>
+            <p>Launch your funding round</p>
+          </div>
+        </div>
+        <button className="get-started">Get Started</button>
+      </section>
+        <footer className="footer">
+              <div className="footer-container">
+                <div className="footer-top">
+                  <div className="footer-logo">
+                    <h2>CrowdFunding</h2>
+                    <p className="footer-description">Empowering dreams and bringing projects to life. Join us to create change.</p>
+                  </div>
+      
+                  <div className="footer-links">
+                    <div className="footer-link-column">
+                      <h3>Quick Links</h3>
+                      <ul>
+                        <li><Link to="/">Home</Link></li>
+                        <li><Link to="/about">About</Link></li>
+                        <li><Link to="/explore">Explore</Link></li>
+                        <li><Link to="/contact">Contact</Link></li>
+                        <li><Link to="/login">Login</Link></li>
+                        
+                      </ul>
+                    </div>
+      
+                    <div className="footer-link-column">
+                      <h3>Resources</h3>
+                      <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="/faq">FAQ</a></li>
+                      </ul>
+                    </div>
+      
+                    <div className="footer-link-column">
+                      <h3>Follow Us</h3>
+                      <div className="footer-social">
+                        <a href="#" className="social-link"><i className="fab fa-facebook-f"></i></a>
+                        <a href="#" className="social-link"><i className="fab fa-twitter"></i></a>
+                        <a href="#" className="social-link"><i className="fab fa-instagram"></i></a>
+                        <a href="#" className="social-link"><i className="fab fa-linkedin-in"></i></a>
+                      </div>
+                    </div>
+      
+                    <div className="footer-link-column">
+                      <h3>Newsletter</h3>
+                      <p style={{color:"gray"}}>Stay updated with our latest news and campaigns.</p>
+                      <input type="email" placeholder="Your Email" className="newsletter-input" />
+                      <button className="newsletter-btn">Subscribe</button>
+                    </div>
+                  </div>
+                </div>
+      
+                <div className="footer-bottom">
+                  <p style={{color:"whitesmoke"}}>&copy; 2024 CrowdFunding. All Rights Reserved.</p>
+                </div>
+              </div>
+            </footer>
     </div>
   );
-}
+};
 
 export default CapitalRaise;
