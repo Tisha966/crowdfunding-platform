@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandHoldingUsd } from '@fortawesome/free-solid-svg-icons';
-import { FaSun, FaMoon } from 'react-icons/fa';
+
 import './index.css';
 
 // Import Components
@@ -17,10 +17,10 @@ import Contact from './Contact';
 import Blog from './Blog';
 import FAQ from './FAQ';
 import Dashboard from './Dashboard';
-import Chatbot from './Chatbot';
+
 import Why from './Why';
-import PrivateRoute from './PrivateRoute';
-import TwoStepForm from './TwoStepForm';
+//import PrivateRoute from './PrivateRoute';
+//import TwoStepForm from './TwoStepForm';
 import CapitalRaise from './CapitalRaise';
 import PlayBook from './PlaybookSection';
 import QRScanner from './QRScanner'; 
@@ -28,21 +28,23 @@ import QRCodeGenerator from './QRCodeGenerator';
 import DonationPage from './DonationPage';
 
 const App = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+
   const [user, setUser] = useState(null);
 
   // ✅ Check for token and user info on app load
   useEffect(() => {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('username');
-
+    const userType = localStorage.getItem('userType'); // 👈
+  
     if (token && username) {
-      setUser({ name: username, token });
+      setUser({ name: username, token, type: userType }); // 👈 Add type
     }
   }, []);
+  
 
   // Toggle dark mode function
-  const toggleDarkMode = () => setIsDarkMode((prevMode) => !prevMode);
+ 
 
   // Logout Function
   const handleLogout = () => {
@@ -53,7 +55,7 @@ const App = () => {
 
   return (
     <Router>
-      <div className={isDarkMode ? 'app dark-mode' : 'app'}>
+      
         
         {/* Navigation Bar */}
         <nav className="navbar">
@@ -70,26 +72,25 @@ const App = () => {
 
           {/* Navigation Links */}
           <ul className="nav-links">
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/why">Why Us</Link></li>
-            <li><Link to="/explore">Explore</Link></li>
-            <li><Link to="/playBook">PlayBook</Link></li>
-            <li><Link to="/capitalRaise">CapitalRaise</Link></li>
-            <li><Link to="/blog">Blog</Link></li>
+  <li><Link to="/">Home</Link></li>
 
-            {/* Conditionally render login/logout */}
-            {user ? (
-              <>
-                <li><Link to="/dashboard">Dashboard</Link></li>
-                <li><button onClick={handleLogout}>Logout</button></li>
-              </>
-            ) : (
-              <li><Link to="/login">Login</Link></li>
-            )}
-            
-            <li><Link to="/chatbot">Chatbot</Link></li>
-          </ul>
-        </nav>
+  {user ? (
+    <>
+      <li><Link to="/dashboard">Dashboard</Link></li>
+      <li><button onClick={handleLogout}>Logout</button></li>
+    </>
+  ) : (
+    <li><Link to="/login">Login</Link></li>
+  )}
+
+  <li><Link to="/why">Why Us</Link></li>
+  <li><Link to="/explore">Explore</Link></li>
+  <li><Link to="/playBook">PlayBook</Link></li>
+  <li><Link to="/capitalRaise">CapitalRaise</Link></li>
+  <li><Link to="/blog">Blog</Link></li>
+</ul>
+
+</nav>
 
         {/* Routes */}
         <Routes>
@@ -98,7 +99,9 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/playbook" element={<PlayBook />} />
           <Route path="/create-campaign" element={<CreateCampaign />} />
-          <Route path="/login" element={<Login />} />
+          
+          <Route path="/login" element={<Login setUser={setUser} />} />
+
           <Route path="/signup" element={<SignUp />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/why" element={<Why />} />
@@ -109,30 +112,15 @@ const App = () => {
           <Route path="/donate/:campaignId" element={<DonationPage />} />
 
           {/* Private Routes */}
-          <Route
-            path="/dashboard"
-            element={
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/TwoStepForm"
-            element={
-              <PrivateRoute>
-                <TwoStepForm />
-              </PrivateRoute>
-            }
-          />
-          <Route path="/chatbot" element={<Chatbot />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          
           <Route path="/blog" element={<Blog />} />
           <Route path="/faq" element={<FAQ />} />
 
           {/* Redirect unknown routes to home */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
-      </div>
+   
     </Router>
   );
 };

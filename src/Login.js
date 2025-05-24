@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './login.css';
 
-const Login = () => {
+const Login = ({ setUser }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,35 +14,50 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setMessage(''); // Reset message before submission
+    setMessage('');
 
-    const loginData = {
-      email,
-      password,
-    };
+    const loginData = { email, password };
 
     try {
-      const response = await fetch('http://localhost:5001/api/auth/login', {
+      const response = await fetch('http://localhost:5002/api/auth/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(loginData),
       });
 
       if (response.ok) {
         const data = await response.json();
-        setIsSuccess(true);
-        setMessage('Logged in successfully!');
+        console.log("✅ Login Response Data:", data);
 
-        // Save JWT token to localStorage
         localStorage.setItem('token', data.token);
 
-        // Save user data (optional)
-        localStorage.setItem('user', JSON.stringify(data.user));
+        // ✅ Store correct user data
+        if (data.user) {
+          localStorage.setItem('userEmail', data.user.email);
+          localStorage.setItem('username', data.user.username);
+          setUser({ name: data.user.username, token: data.token });
+        } else {
+          localStorage.setItem('userEmail', data.email);
+          localStorage.setItem('username', data.username);
+          setUser({ name: data.username, token: data.token });
+        }
+        // ✅ Save token and user info
+if (data.user && data.user.email) {
+  localStorage.setItem('userEmail', data.user.email); // ✅ Corrected!
+} else if (data.email) {
+  localStorage.setItem('userEmail', data.email);
+} else {
+  console.warn("Email not found in response");
+}
 
-        // Ask user to select role
-        setMessage('Please select your role: Contributor or Fundraiser');
+
+        setIsSuccess(true);
+        setMessage('Logged in successfully! Please select your role: Contributor or Fundraiser');
+
+        if (data.campaigns) {
+          localStorage.setItem('contributedCampaigns', JSON.stringify(data.campaigns.contributed));
+          localStorage.setItem('fundedCampaigns', JSON.stringify(data.campaigns.funded));
+        }
       } else {
         const errorData = await response.json();
         setIsSuccess(false);
@@ -58,11 +73,11 @@ const Login = () => {
 
   const handleRoleSelection = (role) => {
     setUserRole(role);
-    localStorage.setItem('role', role); // Save user role to localStorage
+    localStorage.setItem('role', role);
     if (role === 'contributor') {
-      navigate('/capitalRaise'); // Navigate to CapitalRaise.js page
+      navigate('/capitalRaise');
     } else if (role === 'fundraiser') {
-      navigate('/campaignDetails/:id'); // Navigate to CampaignDetails.jsx page
+      navigate('/campaignDetails/:id');
     }
   };
 

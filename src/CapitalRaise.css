@@ -1,683 +1,399 @@
-/* General container styling */
-.capital-raise-container {
-    font-family: "Helvetica Neue", Arial, sans-serif;
-    padding: 60px 15px;
-    background-color: #ffffff;
-    color: #333;
-    line-height: 1.5;
-  }
-  
-  /* Header section */
-  .capital-raise-header {
-    text-align: center;
-    margin-bottom: 50px;
-  }
-  
-  .capital-raise-header h1 {
-    font-size: 2.5rem; /* Large bold font */
-     background: linear-gradient(90deg, #283044, gray);
-    font-weight: 600;
-    color: whitesmoke; /* Darker text */
-    margin: 0;
-  }
-  
-  .capital-raise-header p {
-    font-size: 1.2rem; /* Subheader font size */
-    color: #555; /* Light gray for the subtitle */
-    margin-top: 15px;
-  }
-  
-  /* Testimonial section layout */
-  .testimonial-section {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    align-items: flex-start;
-  }
-  
-  /* Sidebar for the list */
-  .testimonial-sidebar {
-    flex: 1;
-    max-width: 200px;
-    padding-top: 10px;
-  }
-  
-  .testimonial-sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .testimonial-sidebar li {
-    font-size: 1rem;
-    font-weight: 400;
-    color: #666; /* Soft gray color for sidebar text */
-    padding: 8px 0;
-    border-left: 3px solid transparent;
-    cursor: pointer;
-  }
-  
-  .testimonial-sidebar li:hover {
-    color: #007bff; /* Blue hover effect */
-    border-left: 3px solid #007bff;
-  }
-  
-  /* Testimonial content (quote & author) */
-  .testimonial-content {
-    flex: 3;
-    max-width: 600px;
-  }
-  
-  .testimonial-content blockquote {
-    font-size: 1.5rem; /* Bigger font for the quote */
-    font-style: italic;
-    color: #444; /* Medium dark gray */
-    margin: 0 0 20px 0;
-  }
-  
-  .testimonial-content blockquote span.highlight {
-    color: teal; /* Bright blue for emphasized text */
-    font-weight: bold;
-  }
-  
-  .testimonial-content .author {
-    font-size: 0.9rem;
-    color:  rgb(255, 127, 80); /* Light gray for author details */
-    margin-top: 10px;
-    line-height: 1.4;
-  }
-  
-  /* Image section */
-.testimonial-image {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    max-width: 400px; /* Increased container size for the image */
-  }
-  
-  .testimonial-image img {
-    width: 100%;
-    max-width: 250px; /* Increased image size */
-    border-radius: 10px; /* Keeps the rounded corners */
-  }
-  
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .testimonial-section {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .testimonial-sidebar {
-      max-width: 100%;
-      text-align: center;
-    }
-  
-    .testimonial-content {
-      max-width: 100%;
-      text-align: center;
-    }
-  
-    .testimonial-image {
-      max-width: 200px;
-    }
-  }
-  .capital-raise-container {
-    font-family: 'Arial', sans-serif;
-    margin: 20px auto;
-    max-width: 1200px;
-    padding: 20px;
-    background-color: #f9f9f9;
-  }
-  
-  .capital-raise-header h1 {
-    font-size: 36px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 10px;
-  }
-  
-  .capital-raise-header p {
-    font-size: 18px;
-    text-align: center;
-    color: #666;
-  }
-  
-  .testimonial-section {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  
-  .testimonial-sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .testimonial-sidebar li {
-    margin-bottom: 10px;
-    font-size: 18px;
-    color: #333;
-  }
-  
-  .testimonial-content blockquote {
-    font-style: italic;
-    color: #555;
-    margin-bottom: 15px;
-  }
-  
-  .author {
-    font-size: 16px;
-    color: #444;
-    text-align: left;
-  }
-  
-  .testimonial-image img {
-    max-width: 100%;
-    border-radius: 8px;
-  }
-  
-  .raise-page {
-    margin-top: 40px;
-  }
-  
-  .header-section .main-heading {
-    font-size: 32px;
-    text-align: center;
-    color: teal;
-  }
-  
-  
-  
-  
-  .sub-heading {
-    font-size: 18px;
-    text-align: center;
-    margin-bottom: 20px;
-    color: #666;
-  }
-  
-  .button-group {
-    text-align: center;
-    margin: 20px 0;
-  }
-  
-  .button-group .btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    margin: 5px;
-    border: 2px solid #333;
-    background-color: transparent;
-    color: #333;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  .button-group .btn.active {
-    background-color: #283044;
-    color: #fff;
-  }
-  
-  .timeline-section {
-    display: flex;
-    justify-content: space-around;
-    margin: 20px 0;
-  }
-  
-  .timeline-step {
-    flex: 1;
-    text-align: center;
-    padding: 10px;
-  }
-  
-  .step-card {
-    background: #fff;
-    border: 1px solid #ddd;
-    padding: 20px;
-    border-radius: 8px;
-  }
-  
-  .step-card h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  .step-card p {
-    font-size: 16px;
-    color: #555;
-  }
-  
-  .timeline-bar {
-    position: relative;
-    height: 5px;
-    background: #ddd;
-    margin: 20px auto;
-    width: 80%;
-    border-radius: 5px;
-  }
-  
-  .timeline-progress {
-    position: absolute;
-    height: 5px;
-    background: #333;
-    width: 75%; /* Adjust based on progress */
-    border-radius: 5px;
-  }
-  
-  .progress-indicator {
-    position: absolute;
-    top: -6px;
-    width: 12px;
-    height: 12px;
-    background: #333;
-    border-radius: 50%;
-  }
-  
-  /* General Timeline Line */
-.timeline-bar {
-  position: relative;
-  height: 5px;
-  background: #ddd;
-  margin: 20px auto;
-  width: 80%;
-  border-radius: 5px;
-}
-
-.timeline-progress {
-  position: absolute;
-  height: 5px;
-  background: #333;
-  width: 75%; /* Adjust based on progress */
-  border-radius: 5px;
-}
-
-.progress-indicator {
-  position: absolute;
-  top: -6px;
-  width: 12px;
-  height: 12px;
-  background: #333;
-  border-radius: 50%;
-}
-
-/* Connecting Lines for Additional Boxes */
-.additional-timeline {
-  position: relative;
-  margin: 20px auto;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 80%;
-}
-
-.additional-timeline::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 10%;
-  height: 5px;
-  width: 80%;
-  background: #ddd;
-  z-index: -1;
-}
-
-.timeline-step {
+body {
+  font-family: Arial, sans-serif;
+  background-color: #faf7f2;
   text-align: center;
-  position: relative;
 }
 
-.timeline-step::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 0;
-  height: 10px;
-  width: 10px;
-  background: #333;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
+.capital-raise-container {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 50px;
 }
 
-.step-card {
-  background: #fff;
-  border: 1px solid #ddd;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  max-width: 250px;
+.capital-raise-header h1 {
+  font-size: 2rem;
+  color: #174f52;
+  margin-bottom: 20px;
+  text-transform: uppercase;
 }
 
-.step-card h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.step-card p {
-  font-size: 16px;
+.capital-raise-header p {
+  font-size: 1.1rem;
   color: #555;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .additional-timeline {
-    flex-direction: column;
-    width: 90%;
-  }
-
-  .additional-timeline::before {
-    width: 5px;
-    height: 100%;
-    top: 0;
-    left: 50%;
-  }
-
-  
-}    
-.timeline-step::after, 
-.timeline-step::before {
-  content: none; /* Ensure no pseudo-elements appear */
-  display: none; /* Hide any generated content */
-  width: 0;
-  height: 0;
+.testimonial-section {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
 }
+
+.testimonial-sidebar {
+  width: 25%;
+  background-color: #f1f1f1;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.testimonial-sidebar ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.testimonial-sidebar li {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.testimonial-content {
+  width: 50%;
+}
+
+.testimonial-content blockquote {
+  font-style: italic;
+  font-size: 1.2rem;
+  color: #555;
+  border-left: 4px solid #6c757d;
+  padding-left: 15px;
+  margin: 20px 0;
+}
+
+.highlight {
+  color: teal;
+  font-weight: bold;
+}
+
+.testimonial-content .author {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.testimonial-image img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.raise-page .header-section {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.raise-page .highlight {
+  color: #174f52;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.btn {
+  background-color: #174f52;
+  color: white;
+  font-size: 1.1rem;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background-color: #136064;
+}
+
+.btn.active {
+  background-color: #107c7f;
+}
+
 .timeline-section {
   display: flex;
+  gap: 20px;
   justify-content: space-around;
-  margin: 20px 0;
+  margin-bottom: 40px;
 }
 
 .timeline-step {
-  flex: 1;
+  width: 25%;
   text-align: center;
-  padding: 10px;
-  position: relative;
 }
 
 .step-card {
-  background: #fff;
-  border: 1px solid #ddd;
+  background-color: #f8f9fa;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .step-card h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
+  font-size: 1.2rem;
+  color: #174f52;
 }
 
 .step-card p {
-  font-size: 16px;
+  font-size: 1rem;
   color: #555;
 }
 
-/* Connecting lines for the timeline */
-.timeline-bar {
-  position: relative;
-  height: 5px;
-  background: #ddd;
-  margin: 20px auto;
-  width: 80%;
-  border-radius: 5px;
-}
-
-.timeline-progress {
-  position: absolute;
-  height: 5px;
-  background: #333;
-  width: 75%; /* Adjust based on progress */
-  border-radius: 5px;
-}
-
-.progress-indicator {
-  position: absolute;
-  top: -6px;
-  width: 12px;
-  height: 12px;
-  background: #333;
-  border-radius: 50%;
-}
-
-/* Additional Box Timeline */
 .additional-timeline {
-  position: relative;
-  margin: 20px auto;
   display: flex;
+  gap: 20px;
   justify-content: space-around;
-  align-items: center;
-  width: 80%;
 }
-
-.additional-timeline::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 10%;
-  height: 5px;
-  width: 80%;
-  background: #ddd;
-  z-index: -1;
-}
-
-.timeline-step::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 0;
-  height: 10px;
-  width: 10px;
-  background: #333;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .additional-timeline {
-    flex-direction: column;
-    width: 90%;
-  }
-
-  .additional-timeline::before {
-    width: 5px;
-    height: 100%;
-    top: 0;
-    left: 50%;
-  }
-}
-/* General Page Styles */
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: Arial, sans-serif;
+  background-color: #faf7f2;
+  text-align: center;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
 }
 
-/* Capital Raise Section */
-.capital-raise-container {
-  max-width: 1100px;
-  margin: 50px auto;
-  padding: 20px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.capital-raise {
+  padding: 50px 20px;
 }
 
-/* Title */
-.capital-raise-title {
-  text-align: center;
-  font-size: 28px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-/* Description */
-.capital-raise-description {
-  text-align: center;
-  font-size: 18px;
-  color: #666;
+.capital-raise h2 {
+  font-size: 2rem;
+  color: #283044;
   margin-bottom: 30px;
 }
 
-/* Steps (Without Timeline Bar) */
-.capital-raise-steps {
+.timeline {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  margin-bottom: 30px;
+}
+
+.step {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 20px;
-}
-
-/* Individual Step */
-.capital-raise-step {
-  display: flex;
   align-items: center;
-  gap: 15px;
-  background: #e9ecef;
-  padding: 15px;
-  border-radius: 8px;
+  position: relative;
 }
 
-/* Step Number */
-.capital-raise-step-number {
-  width: 40px;
-  height: 40px;
-  background: #007bff;
-  color: white;
-  font-size: 18px;
+.circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: gray; /* Adjust color as needed */
+  color: white; /* Ensure contrast */
+  font-size: 20px; /* Make the number inside visible */
   font-weight: bold;
   display: flex;
-  justify-content: center;
   align-items: center;
-  border-radius: 50%;
-}
-
-/* Step Content */
-.capital-raise-step-content {
-  font-size: 16px;
-  color: #333;
-}
-
-/* Testimonials */
-.capital-raise-testimonials {
-  margin-top: 40px;
-  padding: 20px;
-  background: #f8f9fa;
-  border-radius: 10px;
-}
-
-/* Testimonial Item */
-.capital-raise-testimonial {
-  font-style: italic;
-  color: #555;
-  margin-bottom: 15px;
-}
-
-/* Buttons */
-.capital-raise-buttons {
-  display: flex;
   justify-content: center;
-  gap: 15px;
-  margin-top: 30px;
+  margin: 0 auto;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-.capital-raise-button {
-  padding: 12px 20px;
-  background: #007bff;
+.circle span {
+  display: inline-block;
+}
+
+
+.step-1 .circle {
+  background-color: #174f52;
+}
+
+.step-2 .circle {
+  background-color: #136064;
+}
+
+.step-3 .circle {
+  background-color: #107c7f;
+}
+
+.step-4 .circle {
+  background-color: #0f6a71;
+}
+
+.step-5 .circle {
+  background-color: #0e5f63;
+}
+
+.step p {
+  margin-top: 10px;
+  color: #174f52;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.get-started {
+  background-color: #283044;
   color: white;
-  font-size: 16px;
+  font-size: 1rem;
+  padding: 12px 24px;
+  border-radius: 5px;
   border: none;
   cursor: pointer;
-  border-radius: 5px;
-  transition: 0.3s;
-}
-
-.capital-raise-button:hover {
-  background: #0056b3;
-}
-.donation-status {
-  color: green;
-  font-size: 16px;
   font-weight: bold;
 }
-select {
-  padding: 10px;
-  font-size: 16px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100%;
-}
 
-select:focus {
-  outline: none;
-  border-color: #6c757d;
+.get-started:hover {
+  background-color: #136064;
 }
-/* Explore Section */
-.explore-section {
-  background-color: #f8f9fa;
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 40px;
+.footer {
+  width: 100%;
+  background-color: #333333; /* Dark gray for the background */
+  color: white;
+  padding: 20px 0; /* Reduced padding to make footer smaller */
+  font-family: 'Arial', sans-serif;
   text-align: center;
 }
 
-.explore-section h2 {
-  font-size: 2rem;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 20px;
+.footer-container {
+  width: 85%;
+  margin: 0 auto;
 }
 
-.explore-section p {
-  font-size: 1.5rem;
-  color: #555;
-  line-height: 1.6;
-  margin-bottom: 30px;
-}
-
-.explore-button {
-  padding: 12px 30px;
-  font-size: 1rem;
-  font-weight: 500;
-  color: #fff;
-  background-color: #283044;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s ease;
-}
-
-.explore-button:hover {
-  background-color: gray;
-  transform: scale(1.05);
-}
-
-.explore-button:focus {
-  outline: none;
-}
-
-.explore-button:active {
-  background-color: #283044;
-}
-.alert-message {
-  background-color: #f8d7da;
-  color: #721c24;
-  padding: 12px; /* Slightly reduced padding */
-  border-radius: 5px;
-  border: 1px solid #f5c6cb;
-  font-size: 0.5 rem; /* Smaller font size */
-  margin: 20px 0;
-  font-weight: 100; /* Adjusted font weight to be more readable */
+.footer-top {
   display: flex;
+  justify-content: center; /* Center the content horizontally */
   align-items: center;
+  margin-bottom: 20px; /* Reduced space between logo and links */
+  flex-wrap: wrap;
 }
 
-.alert-message .icon {
-  margin-right: 10px; /* Reduced margin for icon */
-  font-size: 2rem; /* Slightly smaller icon */
+.footer-logo {
+  text-align: center; /* Center the logo */
+}
+
+.footer-logo h2 {
+  font-size: 24px; /* Reduced font size for a smaller header */
+  margin-bottom: 8px; /* Reduced margin for closer proximity */
+}
+
+.footer-description {
+  font-size: 12px; /* Smaller description text */
+  color: #aaa; /* Lighter gray for description */
+  margin-bottom: 15px; /* Reduced margin for closer proximity */
+}
+
+.footer-links {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px; /* Reduced gap for a more compact design */
+  flex-wrap: wrap;
+}
+
+.footer-link-column {
+  margin-bottom: 15px; /* Reduced margin */
+  flex: 1;
+  min-width: 160px; /* Reduced min-width for columns */
+  padding-right: 15px; /* Reduced padding */
+}
+
+.footer-link-column h3 {
+  font-size: 16px; /* Smaller font size */
+  color: #fff;
+  margin-bottom: 12px; /* Reduced margin */
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.footer-link-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-link-column ul li {
+  margin: 6px 0; /* Reduced space between list items */
+}
+
+.footer-link-column ul li a {
+  text-decoration: none;
+  color: #bbb; /* Light gray for links */
+  font-size: 12px; /* Smaller link size */
+  transition: color 0.3s ease;
+}
+
+.footer-link-column ul li a:hover {
+  color: #fff;
+}
+
+.footer-social {
+  display: flex;
+  gap: 10px; /* Reduced gap */
+  justify-content: center; /* Centered the social media icons */
+  margin-top: 10px; /* Reduced space above social icons */
+}
+
+.social-link {
+  text-decoration: none;
+  color: #bbb;
+  font-size: 16px; /* Slightly smaller social icon size */
+  transition: color 0.3s ease;
+}
+
+.social-link:hover {
+  color: #fff;
+}
+
+.newsletter-input {
+  padding: 8px;
+  margin-top: 8px;
+  width: 200px; /* Reduced width for a smaller input */
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  font-size: 12px; /* Smaller input text */
+  margin-bottom: 12px; /* Reduced margin */
+}
+
+.newsletter-btn {
+  padding: 8px 16px;
+  background-color: #555; /* Slightly lighter gray */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px; /* Smaller button text */
+}
+
+.newsletter-btn:hover {
+  background-color: #444;
+}
+
+.footer-bottom {
+  margin-top: 20px; /* Reduced margin for clarity */
+  font-size: 12px; /* Smaller font size for copyright text */
+  color: #bbb;
+  text-align: center; /* Centered the "All Rights Reserved" text */
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .footer-top {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px; /* Reduced margin for mobile */
+  }
+
+  .footer-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Adjusted gap for mobile view */
+  }
+
+  .footer-link-column {
+    text-align: center;
+    margin-bottom: 15px;
+    padding-right: 0;
+  }
+
+  .newsletter-input {
+    width: 80%;
+  }
+
+  .newsletter-btn {
+    width: 80%;
+  }
 }
