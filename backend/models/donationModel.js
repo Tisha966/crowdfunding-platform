@@ -6,6 +6,11 @@ const donationSchema = new mongoose.Schema({
     ref: 'Campaign',
     required: true
   },
+  userId: {   // <-- Add this line
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
   donor: {
     type: String,
     required: true
@@ -23,5 +28,6 @@ const donationSchema = new mongoose.Schema({
     default: Date.now
   }
 });
+
 
 module.exports = mongoose.model('Donation', donationSchema);
