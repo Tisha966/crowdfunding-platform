@@ -31,23 +31,19 @@ const Login = ({ setUser }) => {
 
         localStorage.setItem('token', data.token);
 
-        // ✅ Store correct user data
-        if (data.user) {
-          localStorage.setItem('userEmail', data.user.email);
-          localStorage.setItem('username', data.user.username);
-          setUser({ name: data.user.username, token: data.token });
-        } else {
-          localStorage.setItem('userEmail', data.email);
-          localStorage.setItem('username', data.username);
-          setUser({ name: data.username, token: data.token });
-        }
-        // ✅ Save token and user info
-if (data.user && data.user.email) {
-  localStorage.setItem('userEmail', data.user.email); // ✅ Corrected!
-} else if (data.email) {
-  localStorage.setItem('userEmail', data.email);
+        // Save the full user object under 'user' key
+    if (data.user) {
+  // If _id missing, add it from another field or create dummy (only for testing)
+  if (!data.user._id && data.user.id) {
+    data.user._id = data.user.id;
+  }
+  localStorage.setItem('user', JSON.stringify(data.user));
+  setUser({ name: data.user.username, token: data.token });
 } else {
-  console.warn("Email not found in response");
+  // fallback if data.user is not present
+  const fallbackUser = { username: data.username, email: data.email, _id: 'dummy_id_for_testing' };
+  localStorage.setItem('user', JSON.stringify(fallbackUser));
+  setUser({ name: data.username, token: data.token });
 }
 
 

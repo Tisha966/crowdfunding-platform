@@ -35,35 +35,63 @@ const DonationPage = () => {
     };
 
     fetchCampaign();
+
+    // Prefill donor info from logged-in user in localStorage
+    const userString = localStorage.getItem('user');
+    if (userString) {
+      const user = JSON.parse(userString);
+      setDonorName(user.name || '');
+      setDonorEmail(user.email || '');
+    }
   }, [campaignId]);
 
   const handleDonation = async (e) => {
     e.preventDefault();
-  
+
     if (!donorName || !donorEmail || !amount) {
       setMessage('Please fill in all fields');
       return;
     }
-  
+
+    if (Number(amount) <= 0) {
+      setMessage('Please enter a valid donation amount greater than zero.');
+      return;
+    }
+
+    // Get user from localStorage and parse JSON
+    const userString = localStorage.getItem('user');
+    const user = userString ? JSON.parse(userString) : null;
+
+    if (!user) {
+      alert("You must be logged in to donate");
+      navigate('/login');
+      return;
+    }
+
+    // Prepare donation data dynamically with current logged-in user id
     const donationData = {
-      
+      userId:"683494fd9a0e6657e6c9333f",               // Dynamic per logged-in user
       campaignId: campaignId.trim(),
       amount: Number(amount),
       donor: donorEmail,
       name: donorName
     };
-  
+
     try {
-      const response = await axios.post('http://localhost:5002/api/campaigns/donate', donationData);
+      console.log('Sending donation data:', donationData);
+      console.log('User from localStorage:', user);
+      console.log('user._id:', user?._id);
+      console.log('Donation data to send:', donationData);
+
+      const response = await axios.post('http://localhost:5002/api/donations', donationData);
 
       if (response.status === 201) {
         setMessage('Donation successful! 🎉');
 
-        // ✅ Force a page reload after donation to show updated campaigns
         setTimeout(() => {
-          window.location.href = '/explore';  // ✅ Reloads the page with updated data
+          navigate('/explore', { state: { message: 'Donation successful! 🎉' } });
         }, 2000);
-        
+
       } else {
         setMessage('Failed to donate. Please try again.');
       }

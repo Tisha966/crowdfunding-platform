@@ -4,13 +4,23 @@ const Dashboard = () => {
   const [donations, setDonations] = useState([]);
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (!user) return;
+    const storedUser = localStorage.getItem('user');
 
-    fetch(`http://localhost:5002/api/user/dashboard?userId=${user._id}`)
-      .then(res => res.json())
-      .then(data => setDonations(data.donations))
-      .catch(err => console.log('Error:', err));
+    try {
+      const user = storedUser && storedUser !== 'undefined' ? JSON.parse(storedUser) : null;
+
+      if (!user) return;
+
+      fetch(`http://localhost:5002/api/donations?userId=${user._id}`)
+        .then(res => res.json())
+        .then(data => {
+          console.log('Fetched donations:', data);
+          setDonations(data.donations || []); // <-- FIX HERE
+        })
+        .catch(err => console.log('Error:', err));
+    } catch (error) {
+      console.error('Failed to parse user from localStorage:', error);
+    }
   }, []);
 
   return (

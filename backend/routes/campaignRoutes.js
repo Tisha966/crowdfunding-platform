@@ -90,36 +90,34 @@ router.get('/:id', async (req, res) => {
 });
 
 
+
 // ✅ POST: Add donation and update campaign
 router.post('/donate', async (req, res) => {
-  const { campaignId, donor, name, amount } = req.body;
+  const { campaignId, donor, name, amount, userId } = req.body; // <-- include userId
 
-  if (!campaignId || !donor || !name || !amount) {
+  if (!campaignId || !donor || !name || !amount || !userId) {
     return res.status(400).json({ error: 'All fields are required' });
   }
 
   try {
-    // ✅ Save donation
     const newDonation = new Donation({
       campaignId,
       donor,
       name,
-      amount: Number(amount)
+      amount: Number(amount),
+      userId                     // <-- save the userId
     });
 
     await newDonation.save();
 
-    // ✅ Update campaign dynamically
     const campaign = await Campaign.findById(campaignId);
 
     if (!campaign) {
       return res.status(404).json({ message: 'Campaign not found' });
     }
 
-    // Increment amountRaised and supporters
     campaign.amountRaised += Number(amount);
     campaign.supporters += 1;
-
     await campaign.save();
 
     res.status(201).json({
@@ -133,5 +131,16 @@ router.post('/donate', async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 });
+// ✅ GET: Fetch donations made by a specific user
+router.get('/user/:userId', async (req, res) => {
+  try {
+    const donations = await Donation.find({ userId: req.params.userId }).populate('campaignId');
+    res.status(200).json(donations);
+  } catch (err) {
+    console.error('Error fetching user donations:', err);
+    res.status(500).json({ error: 'Failed to fetch user donations' });
+  }
+});
+
 
 module.exports = router;
