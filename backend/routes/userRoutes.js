@@ -1,10 +1,10 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('../models/UserModel'); // Adjust the path
+const User = require('../models/UserModel'); // Adjust the path if needed
 const router = express.Router();
 
-// Register Route
+// REGISTER Route
 router.post('/register', async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -32,7 +32,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// Login Route
+// LOGIN Route
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -52,6 +52,20 @@ router.post('/login', async (req, res) => {
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
   res.status(200).json({ message: 'Login successful', token });
+});
+
+// GET USER BY ID Route (for dashboard to show user name)
+router.get('/user/:id', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).select('name email');
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    console.error('Error fetching user by ID:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
 });
 
 module.exports = router;
