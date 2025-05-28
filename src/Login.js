@@ -71,7 +71,7 @@ const Login = ({ setUser }) => {
     setUserRole(role);
     localStorage.setItem('role', role);
     if (role === 'contributor') {
-      navigate('/capitalRaise');
+      navigate('/explore');
     } else if (role === 'fundraiser') {
       navigate('/campaignDetails/:id');
     }
