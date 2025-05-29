@@ -71,7 +71,7 @@ const Login = ({ setUser }) => {
     if (role === 'contributor') {
       navigate('/explore');
     } else if (role === 'fundraiser') {
-      navigate('/campaignDetails');
+      navigate('/campaignDetails/:id');
     }
   };
 
