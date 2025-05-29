@@ -15,8 +15,6 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-
-// ✅ POST: Create a new campaign
 router.post('/create', upload.single('image'), async (req, res) => {
   console.log('Received form data:', req.body);
   console.log('Uploaded file:', req.file);
@@ -26,10 +24,10 @@ router.post('/create', upload.single('image'), async (req, res) => {
   }
 
   try {
-    const { title, description, daysLeft, numSupporters } = req.body;
+    const { title, description, daysLeft, numSupporters, creatorId } = req.body;
 
-    if (!title || !description || !daysLeft || !numSupporters) {
-      return res.status(400).json({ error: 'Missing required fields' });
+    if (!title || !description || !daysLeft || !numSupporters || !creatorId) {
+      return res.status(400).json({ error: 'Missing required fields including creatorId' });
     }
 
     const imagePath = req.file.path;
@@ -40,7 +38,8 @@ router.post('/create', upload.single('image'), async (req, res) => {
       imagePath,
       daysLeft: parseInt(daysLeft),
       supporters: parseInt(numSupporters),
-      amountRaised: 0   // ✅ Initialize amount raised to 0
+      amountRaised: 0,
+      creatorId  // <-- save creatorId here
     });
 
     await newCampaign.save();
@@ -51,7 +50,23 @@ router.post('/create', upload.single('image'), async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+ // GET campaigns by creator ID
+router.get('/byCreator/:creatorId', async (req, res) => {
+  const { creatorId } = req.params;
 
+  try {
+    const campaigns = await Campaign.find({ creatorId });
+
+    if (!campaigns || campaigns.length === 0) {
+      return res.status(404).json({ message: 'No campaigns found for this creator' });
+    }
+
+    res.status(200).json(campaigns);
+  } catch (error) {
+    console.error('Error fetching campaigns by creator:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
 
 // ✅ GET: Fetch all campaigns
 router.get('/', async (req, res) => {
