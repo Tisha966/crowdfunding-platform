@@ -8,38 +8,44 @@ const SignUp = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const userData = {
-      name,
-      email,
-      password,
-    };
-
-    try {
-      const response = await fetch('http://localhost:5002/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setMessage('Account created successfully!');
-        console.log('User details:', data);
-        navigate('/login');
-      } else {
-        setMessage(data.message || 'Error creating account');
-      }
-    } catch (error) {
-      setMessage(`Error: ${error.message}`);
-    }
+  const userData = {
+    name,
+    email,
+    password,
   };
+
+  try {
+    const response = await fetch('http://localhost:5002/api/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      setMessage('Account created successfully!');
+      console.log('User details:', data);
+
+      // Add this: Save user ID to localStorage if present
+      if (data.user && (data.user._id || data.user.id)) {
+        const userId = data.user._id || data.user.id;
+        localStorage.setItem('userId', userId);
+      }
+
+      navigate('/login');
+    } else {
+      setMessage(data.message || 'Error creating account');
+    }
+  } catch (error) {
+    setMessage(`Error: ${error.message}`);
+  }
+};
 
   return (
     <div className="signup-container">

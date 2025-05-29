@@ -51,7 +51,16 @@ router.post('/login', async (req, res) => {
   // Generate JWT token
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-  res.status(200).json({ message: 'Login successful', token });
+  // Respond with token and user info
+  res.status(200).json({
+    message: 'Login successful',
+    token,
+    user: {
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+    }
+  });
 });
 
 // GET USER BY ID Route (for dashboard to show user name)

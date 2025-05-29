@@ -25,39 +25,37 @@ const Login = ({ setUser }) => {
         body: JSON.stringify(loginData),
       });
 
+      const data = await response.json(); // Parse only once
+
       if (response.ok) {
-        const data = await response.json();
         console.log("✅ Login Response Data:", data);
 
         localStorage.setItem('token', data.token);
 
-        // Save the full user object under 'user' key
-    if (data.user) {
-  // If _id missing, add it from another field or create dummy (only for testing)
-  if (!data.user._id && data.user.id) {
-    data.user._id = data.user.id;
-  }
-  localStorage.setItem('user', JSON.stringify(data.user));
-  setUser({ name: data.user.username, token: data.token });
-} else {
-  // fallback if data.user is not present
-  const fallbackUser = { username: data.username, email: data.email, _id: 'dummy_id_for_testing' };
-  localStorage.setItem('user', JSON.stringify(fallbackUser));
-  setUser({ name: data.username, token: data.token });
-}
+        if (data.user) {
+          if (!data.user._id && data.user.id) {
+            data.user._id = data.user.id;
+          }
 
+          localStorage.setItem('user', JSON.stringify(data.user));
+          setUser({ name: data.user.username || data.user.name, token: data.token });
+        } else {
+          setIsSuccess(false);
+          setMessage('Login failed: No user data returned. Please check your credentials or try again later.');
+          return;
+        }
+
+        if (data.campaigns) {
+          localStorage.setItem('contributedCampaigns', JSON.stringify(data.campaigns.contributed || []));
+          localStorage.setItem('fundedCampaigns', JSON.stringify(data.campaigns.funded || []));
+        }
 
         setIsSuccess(true);
         setMessage('Logged in successfully! Please select your role: Contributor or Fundraiser');
-
-        if (data.campaigns) {
-          localStorage.setItem('contributedCampaigns', JSON.stringify(data.campaigns.contributed));
-          localStorage.setItem('fundedCampaigns', JSON.stringify(data.campaigns.funded));
-        }
       } else {
-        const errorData = await response.json();
+        console.error("❌ Login failed response:", data);
         setIsSuccess(false);
-        setMessage(errorData.message || 'Login failed. Please check your credentials.');
+        setMessage(data.message || 'Login failed. Please check your credentials.');
       }
     } catch (error) {
       setIsSuccess(false);
@@ -73,7 +71,7 @@ const Login = ({ setUser }) => {
     if (role === 'contributor') {
       navigate('/explore');
     } else if (role === 'fundraiser') {
-      navigate('/campaignDetails/:id');
+      navigate('/campaignDetails');
     }
   };
 
@@ -127,7 +125,11 @@ const Login = ({ setUser }) => {
             <p className="forgot-link">Forgot password?</p>
           </form>
 
-          {message && <p className={`message ${isSuccess ? 'success' : 'error'}`}>{message}</p>}
+          {message && (
+            <p className={`message ${isSuccess ? 'success' : 'error'}`}>
+              {message}
+            </p>
+          )}
 
           {isSuccess && !userRole && (
             <div className="role-selection">

@@ -4,7 +4,7 @@ import axios from 'axios';
 import './donationPage.css';
 
 const DonationPage = () => {
-  const { campaignId } = useParams();  
+  const { campaignId } = useParams();
   const navigate = useNavigate();
 
   const [campaign, setCampaign] = useState(null);
@@ -36,7 +36,7 @@ const DonationPage = () => {
 
     fetchCampaign();
 
-    // Prefill donor info from logged-in user in localStorage
+    // Get user info from localStorage if logged in
     const userString = localStorage.getItem('user');
     if (userString) {
       const user = JSON.parse(userString);
@@ -58,40 +58,30 @@ const DonationPage = () => {
       return;
     }
 
-    // Get user from localStorage and parse JSON
+    // Check if user is logged in (just by presence of user in localStorage)
     const userString = localStorage.getItem('user');
-    const user = userString ? JSON.parse(userString) : null;
-
-    if (!user) {
-      alert("You must be logged in to donate");
+    if (!userString) {
+      alert('You must be logged in to donate');
       navigate('/login');
       return;
     }
 
-    // Prepare donation data dynamically with current logged-in user id
+    // Send donation data WITHOUT userId, only donorEmail and donorName
     const donationData = {
-      userId:"683494fd9a0e6657e6c9333f",               // Dynamic per logged-in user
       campaignId: campaignId.trim(),
       amount: Number(amount),
-      donor: donorEmail,
-      name: donorName
+      donorEmail: donorEmail,
+      donorName: donorName,
     };
 
     try {
-      console.log('Sending donation data:', donationData);
-      console.log('User from localStorage:', user);
-      console.log('user._id:', user?._id);
-      console.log('Donation data to send:', donationData);
-
       const response = await axios.post('http://localhost:5002/api/donations', donationData);
 
       if (response.status === 201) {
         setMessage('Donation successful! 🎉');
-
         setTimeout(() => {
           navigate('/explore', { state: { message: 'Donation successful! 🎉' } });
         }, 2000);
-
       } else {
         setMessage('Failed to donate. Please try again.');
       }
@@ -107,19 +97,12 @@ const DonationPage = () => {
   return (
     <div className="donation-page">
       <h1>{campaign?.title}</h1>
-
       <p><strong>Amount Raised:</strong> ₹{campaign?.amountRaised}</p>
 
-      <img 
-        src={`http://localhost:5002/${campaign?.imagePath}`} 
+      <img
+        src={`http://localhost:5002/${campaign?.imagePath}`}
         alt={campaign?.title}
-        style={{ 
-          width: '50%',
-          maxHeight: '300px',
-          display: 'block',
-          margin: '0 auto',
-          borderRadius: '10px'
-        }} 
+        className="campaign-image"
       />
 
       <p>{campaign?.description}</p>
