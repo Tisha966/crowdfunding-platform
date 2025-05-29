@@ -1,18 +1,34 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './campaignDetails.css';
 
-const CampaignDetails = ({ userId }) => {
+const CampaignDetails = ({ userId: propUserId }) => {
+  const [userId, setUserId] = useState(propUserId || '');
+
+  useEffect(() => {
+    if (!propUserId) {
+      const storedUserId = localStorage.getItem('userId');
+      if (storedUserId) {
+        setUserId(storedUserId);
+      }
+    }
+  }, [propUserId]);
+
+  console.log("CampaignDetails userId:", userId);
+
   const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState({ type: '', text: '' });
+  const navigate = useNavigate();
+
 
   const createCampaign = async (campaignData) => {
     try {
       const formData = new FormData();
-      formData.append('image', campaignData.image);         // Image file
+      formData.append('image', campaignData.image);
       formData.append('title', campaignData.title);
       formData.append('description', campaignData.description);
-      formData.append('daysLeft', campaignData.daysLeft);   // as string or number, multer can handle
-      formData.append('numSupporters', campaignData.numSupporters); // name consistent with backend field
+      formData.append('daysLeft', campaignData.daysLeft);
+      formData.append('numSupporters', campaignData.numSupporters);
       formData.append('creatorId', userId);
 
       const response = await fetch('http://localhost:5002/api/campaigns/create', {
@@ -20,16 +36,17 @@ const CampaignDetails = ({ userId }) => {
         body: formData,
       });
 
-     if (response.ok) {
-        const data = await response.json();
-        alert('Campaign Created Successfully!');
+      if (response.ok) {
+        setMessage({ type: 'success', text: 'Campaign Created Successfully!' });
         document.getElementById('campaignForm').reset();
+        // Optional: redirect to another page after success
+        // navigate('/campaigns');
       } else {
         const errData = await response.json();
         throw new Error(errData.error || response.statusText);
       }
     } catch (error) {
-      alert('Error submitting campaign: ' + error.message);
+      setMessage({ type: 'error', text: 'Error submitting campaign: ' + error.message });
       console.error(error);
     } finally {
       setIsLoading(false);
@@ -37,19 +54,34 @@ const CampaignDetails = ({ userId }) => {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    setIsLoading(true);
+  event.preventDefault();
 
-    const campaignData = {
-      title: event.target.title.value.trim(),
-      description: event.target.description.value.trim(),
-      image: event.target.image.files[0],
-      daysLeft: event.target.daysLeft.value,
-      numSupporters: event.target.numSupporters.value,
-    };
+  // Check if userId is defined before proceeding
+  if (!userId) {
+    alert("User ID is missing! Please login or try again.");
+    return; // stop submission if no userId
+  }
 
-    await createCampaign(campaignData);
+  setIsLoading(true);
+  setMessage({ type: '', text: '' });
+
+  const campaignData = {
+    title: event.target.title.value.trim(),
+    description: event.target.description.value.trim(),
+    image: event.target.image.files[0],
+    daysLeft: event.target.daysLeft.value,
+    numSupporters: event.target.numSupporters.value,
   };
+
+  // Basic image validation
+  if (!campaignData.image || !campaignData.image.type.startsWith('image/')) {
+    setMessage({ type: 'error', text: 'Please upload a valid image file.' });
+    setIsLoading(false);
+    return;
+  }
+
+  await createCampaign(campaignData);
+};
 
   return (
     <div className="main-container">
@@ -71,7 +103,6 @@ const CampaignDetails = ({ userId }) => {
         </h1>
 
         <div className="campaign-layout">
-          {/* Left Side: Form */}
           <form
             id="campaignForm"
             onSubmit={handleSubmit}
@@ -128,6 +159,13 @@ const CampaignDetails = ({ userId }) => {
             <button type="submit" id="submitBtn" disabled={isLoading}>
               {isLoading ? 'Creating...' : 'Create Campaign'}
             </button>
+
+            {/* Feedback message */}
+            {message.text && (
+              <p className={message.type === 'error' ? 'error-message' : 'success-message'}>
+                {message.text}
+              </p>
+            )}
           </form>
 
           {/* Right Side: Information Section */}
@@ -142,60 +180,21 @@ const CampaignDetails = ({ userId }) => {
 
             <h2 style={{ color: '#283044' }}>Goals of Fundraising:</h2>
             <ul>
-              <li>
-                <strong>Support Your Cause:</strong> Raise funds for personal
-                projects, charity work, or community development.
-              </li>
-              <li>
-                <strong>Reach a Wider Audience:</strong> Engage with a broader
-                network of people who resonate with your project.
-              </li>
-              <li>
-                <strong>Build Credibility:</strong> A successful campaign helps
-                in building trust and credibility for your ideas.
-              </li>
-              <li>
-                <strong>Achieve Financial Independence:</strong> Empower
-                yourself or your community by creating opportunities for
-                financial growth.
-              </li>
-              <li>
-                <strong>Foster Innovation:</strong> Fund innovative ideas that
-                can lead to new products, services, or solutions to societal
-                challenges.
-              </li>
-              <li>
-                <strong>Create a Stronger Community:</strong> Bring people
-                together who share similar values, goals, or passions, helping
-                to build a strong, supportive community.
-              </li>
-              <li>
-                <strong>Make an Impact:</strong> Have a lasting effect by
-                funding projects that solve real-world problems, benefiting
-                others in the long term.
-              </li>
+              <li><strong>Support Your Cause:</strong> Raise funds for personal projects, charity work, or community development.</li>
+              <li><strong>Reach a Wider Audience:</strong> Engage with a broader network of people who resonate with your project.</li>
+              <li><strong>Build Credibility:</strong> A successful campaign helps in building trust and credibility for your ideas.</li>
+              <li><strong>Achieve Financial Independence:</strong> Empower yourself or your community by creating opportunities for financial growth.</li>
+              <li><strong>Foster Innovation:</strong> Fund innovative ideas that can lead to new products, services, or solutions to societal challenges.</li>
+              <li><strong>Create a Stronger Community:</strong> Bring people together who share similar values, goals, or passions, helping to build a strong, supportive community.</li>
+              <li><strong>Make an Impact:</strong> Have a lasting effect by funding projects that solve real-world problems, benefiting others in the long term.</li>
             </ul>
 
-            <h2 style={{ color: '#283044' }}>
-              Steps to Creating a Successful Campaign:
-            </h2>
+            <h2 style={{ color: '#283044' }}>Steps to Creating a Successful Campaign:</h2>
             <ol>
-              <li>
-                <strong>Set Clear Objectives:</strong> Clearly define your
-                campaign's purpose and the amount of money you need.
-              </li>
-              <li>
-                <strong>Tell Your Story:</strong> Share why your project
-                matters. People connect with stories.
-              </li>
-              <li>
-                <strong>Engage Your Audience:</strong> Promote your campaign
-                through social media, word of mouth, and other channels.
-              </li>
-              <li>
-                <strong>Offer Rewards:</strong> Consider offering incentives
-                to those who contribute to your cause.
-              </li>
+              <li><strong>Set Clear Objectives:</strong> Clearly define your campaign's purpose and the amount of money you need.</li>
+              <li><strong>Tell Your Story:</strong> Share why your project matters. People connect with stories.</li>
+              <li><strong>Engage Your Audience:</strong> Promote your campaign through social media, word of mouth, and other channels.</li>
+              <li><strong>Offer Rewards:</strong> Consider offering incentives to those who contribute to your cause.</li>
             </ol>
           </section>
         </div>
@@ -204,10 +203,9 @@ const CampaignDetails = ({ userId }) => {
       {/* Loader */}
       {isLoading && <div id="loader" className="loader">Loading...</div>}
 
-      {/* Footer */}
+      {/* Footer (add your own content if not already included globally) */}
       <footer className="footer">
-        {/* Footer content unchanged */}
-        {/* ... (as in your original code) */}
+        {/* Add footer content here if needed */}
       </footer>
     </div>
   );

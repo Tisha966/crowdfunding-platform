@@ -3,6 +3,8 @@ const multer = require('multer');
 const Campaign = require('../models/campaignModel');
 const Donation = require('../models/donationModel');  // Import Donation model
 const router = express.Router();
+const mongoose = require('mongoose');
+
 
 // ✅ Configure Multer for image uploads
 const storage = multer.diskStorage({
@@ -13,6 +15,7 @@ const storage = multer.diskStorage({
     cb(null, `${Date.now()}-${file.originalname}`);
   }
 });
+
 const upload = multer({ storage });
 
 router.post('/create', upload.single('image'), async (req, res) => {
@@ -30,6 +33,11 @@ router.post('/create', upload.single('image'), async (req, res) => {
       return res.status(400).json({ error: 'Missing required fields including creatorId' });
     }
 
+    // ✅ Validate creatorId
+    if (!mongoose.Types.ObjectId.isValid(creatorId)) {
+      return res.status(400).json({ error: 'Invalid creatorId' });
+    }
+
     const imagePath = req.file.path;
 
     const newCampaign = new Campaign({
@@ -39,7 +47,7 @@ router.post('/create', upload.single('image'), async (req, res) => {
       daysLeft: parseInt(daysLeft),
       supporters: parseInt(numSupporters),
       amountRaised: 0,
-      creatorId  // <-- save creatorId here
+   creatorId: req.body.creatorId,
     });
 
     await newCampaign.save();
@@ -52,21 +60,18 @@ router.post('/create', upload.single('image'), async (req, res) => {
 });
  // GET campaigns by creator ID
 router.get('/byCreator/:creatorId', async (req, res) => {
-  const { creatorId } = req.params;
-
   try {
-    const campaigns = await Campaign.find({ creatorId });
-
+    const campaigns = await Campaign.find({ creatorId: req.params.creatorId }); // 👈 Fix here
     if (!campaigns || campaigns.length === 0) {
       return res.status(404).json({ message: 'No campaigns found for this creator' });
     }
-
-    res.status(200).json(campaigns);
+    res.json(campaigns);
   } catch (error) {
     console.error('Error fetching campaigns by creator:', error);
-    res.status(500).json({ error: 'Server error' });
+    res.status(500).json({ message: 'Server error' });
   }
 });
+
 
 // ✅ GET: Fetch all campaigns
 router.get('/', async (req, res) => {
