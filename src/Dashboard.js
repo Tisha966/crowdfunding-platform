@@ -4,46 +4,59 @@ import './Dashboard.css';
 const Dashboard = () => {
   const [donations, setDonations] = useState([]);
   const [userName, setUserName] = useState('');
-  const userId = '683494fd9a0e6657e6c9333f'; // your actual user ID
+  const [userId, setUserId] = useState(null);
+
+  // Fetch user info and donations
+  const fetchUserAndDonations = async (uid) => {
+    try {
+      // Fetch username
+      const userResponse = await fetch(`http://localhost:5002/api/auth/user/${uid}`);
+      const userData = await userResponse.json();
+      setUserName(userData.name || 'User');
+
+      // Fetch donations for this user
+      const donationResponse = await fetch(`http://localhost:5002/api/donations?userId=${uid}`);
+      const donationData = await donationResponse.json();
+      setDonations(Array.isArray(donationData) ? donationData : []);
+    } catch (error) {
+      console.error('Error fetching user or donations:', error);
+      setUserName('User');
+      setDonations([]);
+    }
+  };
 
   useEffect(() => {
-    const fetchUserName = async () => {
-      try {
-        const response = await fetch(`http://localhost:5002/api/auth/user/${userId}`);
-        const data = await response.json();
-        setUserName(data.name || 'User');  // fallback if no name
-      } catch (err) {
-        console.error('Error fetching user name:', err);
-        setUserName('User');
-      }
-    };
+    const userString = localStorage.getItem('user');
+    if (!userString) return;
 
-    const fetchDonations = async () => {
-      try {
-        const response = await fetch(`http://localhost:5002/api/donations?userId=${userId}`);
-        const data = await response.json();
-        setDonations(Array.isArray(data) ? data : []);
-      } catch (err) {
-        console.error('Error fetching donations:', err);
-        setDonations([]);
-      }
-    };
+    const user = JSON.parse(userString);
+    if (!user || !user._id) {
+      console.error('User not logged in');
+      return;
+    }
 
-    fetchUserName();
-    fetchDonations();
-    
+    setUserId(user._id);
+    fetchUserAndDonations(user._id);
   }, []);
+
+  // Optional: function to manually refresh donations (call this after donation success)
+  const refreshDonations = () => {
+    if (userId) {
+      fetchUserAndDonations(userId);
+    }
+  };
 
   return (
     <div className="dashboard-container">
       <h1 className="dashboard-title">Welcome, {userName}</h1>
       <h2 className="donation-heading">Your Contributions</h2>
+
       {donations.length === 0 ? (
         <p className="no-donations">No donations found.</p>
       ) : (
         <div className="donation-list">
-          {donations.map((donation, index) => (
-            <div className="donation-card" key={index}>
+          {donations.map((donation) => (
+            <div className="donation-card" key={donation._id || donation.id}>
               <h3 className="campaign-name">{donation.title}</h3>
               <p className="donation-amount">₹ {donation.amount}</p>
             </div>
