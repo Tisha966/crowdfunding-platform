@@ -36,7 +36,7 @@ const Login = ({ setUser }) => {
           if (!data.user._id && data.user.id) {
             data.user._id = data.user.id;
           }
-
+          localStorage.setItem('userId', data.user._id);                         // if error comes remove this line
           localStorage.setItem('user', JSON.stringify(data.user));
           setUser({ name: data.user.username || data.user.name, token: data.token });
         } else {
