@@ -1,0 +1,96 @@
+/* Global body style */
+body {
+  margin: 0;
+  background-color: #d3d3d3; /* Light gray background for whole page */
+}
+
+/* Background and overlay */
+.role-selection-page {
+  position: relative;
+  min-height: 100vh;
+  background-color: #d3d3d3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #f0f0f0;
+  overflow: hidden;
+}
+
+.role-selection-page .overlay {
+  position: absolute;
+  inset: 0;
+  background-color: #283044; /* #283044 with opacity */
+  z-index: 0;
+}
+
+/* Container panel */
+.role-selection-container {
+  position: relative;
+  background-color: #283044;
+  padding: 40px 60px;
+  border-radius: 16px;
+  max-width: 700px;
+  width: 100%;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  text-align: center;
+  user-select: none;
+}
+
+/* Titles */
+.title {
+  font-size: 1.1 rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  
+}
+
+.subtitle {
+  font-size: 1 rem;
+  margin-bottom: 40px;
+  color: gray;
+  font-weight: 500;
+}
+
+/* Roles container */
+.roles {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+/* Role cards */
+.role-card {
+  background-color: #384157; /* Darker shade of #283044 */
+  flex: 1 1 280px;
+  border-radius: 14px;
+  padding: 30px 25px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  outline: none;
+}
+
+.role-card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+
+.role-card p {
+  font-size: 1rem;
+  line-height: 1.4;
+  color: #d6dce9;
+}
+
+/* Hover and focus effect */
+.role-card:hover,
+.role-card:focus {
+  background-color: #3f4a63;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  transform: translateY(-8px);
+  outline: none;
+}

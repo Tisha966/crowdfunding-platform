@@ -66,7 +66,7 @@ const handleSubmit = async (e) => {
         <div className="divider"></div>
 
         <div className="form-section">
-          <h1 className="title">Join Us and Invest in the Future</h1>
+          <h1 className="title" style={{ color: 'teal' }}>Join Us and Invest in the Future</h1>
           <p className="subtitle">
             Sign up now and be part of a community that believes in success, security, and boundless growth.
           </p>
