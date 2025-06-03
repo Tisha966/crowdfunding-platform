@@ -168,6 +168,7 @@ const PlaybookSection = () => {
 
         {status && <div className={`status ${status.type}`}>{status.message}</div>}
       </div>
+      
     </div>
   );
 };
