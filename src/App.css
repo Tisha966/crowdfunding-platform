@@ -143,25 +143,3 @@ body {
     }
 }
 /* Dark Mode Toggle */
-.dark-mode-toggle {
-  cursor: pointer;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  margin-right: 20px;
-}
-
-/* Dark Mode */
-body.dark-mode {
-  background-color: black;
-  color: white;
-}
-
-body.dark-mode .navbar {
-  background-color: black;
-  color: white;
-}
-
-body.dark-mode a {
-  color: white;
-}

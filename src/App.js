@@ -19,46 +19,45 @@ import FAQ from './FAQ';
 import Dashboard from './Dashboard';
 
 import Why from './Why';
-//import PrivateRoute from './PrivateRoute';
-//import TwoStepForm from './TwoStepForm';
+// import PrivateRoute from './PrivateRoute';
+// import TwoStepForm from './TwoStepForm';
 import CapitalRaise from './CapitalRaise';
 import PlayBook from './PlaybookSection';
 import QRScanner from './QRScanner'; 
 import QRCodeGenerator from './QRCodeGenerator';
 import DonationPage from './DonationPage';
 
-const App = () => {
+import RoleSelection from './RoleSelection.jsx';
 
+// Removed: import PhoneInputPage from './components/PhoneInputPage';
+
+const App = () => {
   const [user, setUser] = useState(null);
 
-  // ✅ Check for token and user info on app load
+  // Check for token and user info on app load
   useEffect(() => {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('username');
-    const userType = localStorage.getItem('userType'); // 👈
+    const userType = localStorage.getItem('userType');
   
     if (token && username) {
-      setUser({ name: username, token, type: userType }); // 👈 Add type
+      setUser({ name: username, token, type: userType });
     }
   }, []);
-  
-
-  // Toggle dark mode function
- 
 
   // Logout Function
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
+    localStorage.removeItem('userType');
     setUser(null);
   };
 
   return (
     <Router>
-      
-        
-        {/* Navigation Bar */}
-        <nav className="navbar">
+      {/* Navigation Bar */}
+      <nav className="navbar">
+        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
           <h1 className="logo">
             <FontAwesomeIcon
               icon={faHandHoldingUsd}
@@ -66,61 +65,52 @@ const App = () => {
             />
             CrowdFunding
           </h1>
-
-          {/* Dark Mode Toggle */}
-         
-
-          {/* Navigation Links */}
-          <ul className="nav-links">
+        </Link>
+       <ul className="nav-links">
   <li><Link to="/">Home</Link></li>
-
+  <li><Link to="/why">Why Us</Link></li>
+  <li><Link to="/explore">Explore</Link></li>
+  <li><Link to="/playbook">PlayBook</Link></li>
+  <li><Link to="/capitalRaise">CapitalRaise</Link></li>
+  <li><Link to="/blog">Blog</Link></li>
   {user ? (
     <>
       <li><Link to="/dashboard">Dashboard</Link></li>
       <li><button onClick={handleLogout}>Logout</button></li>
     </>
   ) : (
-    <li><Link to="/login">Login</Link></li>
+    <>
+      <li><Link to="/login">Login</Link></li>
+      {/* <li><Link to="/role-selection">Select Role</Link></li> */}
+    </>
   )}
-
-  <li><Link to="/why">Why Us</Link></li>
-  <li><Link to="/explore">Explore</Link></li>
-  <li><Link to="/playBook">PlayBook</Link></li>
-  <li><Link to="/capitalRaise">CapitalRaise</Link></li>
-  <li><Link to="/blog">Blog</Link></li>
 </ul>
 
-</nav>
+      </nav>
 
-        {/* Routes */}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/explore" element={<Explore />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/playbook" element={<PlayBook />} />
-          <Route path="/create-campaign" element={<CreateCampaign />} />
-          
-          <Route path="/login" element={<Login setUser={setUser} />} />
-
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/why" element={<Why />} />
-          <Route path="/capitalRaise" element={<CapitalRaise />} />
-          <Route path="/campaignDetails/:id" element={<CampaignDetails />} />
-          <Route path="/qrScanner" element={<QRScanner />} />
-          <Route path="/qrCodeGenerator" element={<QRCodeGenerator />} />
-          <Route path="/donate/:campaignId" element={<DonationPage />} />
-
-          {/* Private Routes */}
-          <Route path="/dashboard" element={<Dashboard />} />
-          
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/faq" element={<FAQ />} />
-
-          {/* Redirect unknown routes to home */}
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-   
+      {/* Routes */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/explore" element={<Explore />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/playbook" element={<PlayBook />} />
+        <Route path="/create-campaign" element={<CreateCampaign />} />
+        <Route path="/login" element={<Login setUser={setUser} />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/why" element={<Why />} />
+        <Route path="/capitalRaise" element={<CapitalRaise />} />
+        <Route path="/campaignDetails/:id" element={<CampaignDetails />} />
+        <Route path="/qrScanner" element={<QRScanner />} />
+        <Route path="/qrCodeGenerator" element={<QRCodeGenerator />} />
+        <Route path="/donate/:campaignId" element={<DonationPage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/faq" element={<FAQ />} />
+        {/* <Route path="/role-selection" element={<PhoneInputPage />} /> */}
+        <Route path="/role-selection" element={<RoleSelection user={user} setUser={setUser} />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
     </Router>
   );
 };

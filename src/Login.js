@@ -9,7 +9,6 @@ const Login = ({ setUser }) => {
   const [message, setMessage] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [userRole, setUserRole] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -25,7 +24,7 @@ const Login = ({ setUser }) => {
         body: JSON.stringify(loginData),
       });
 
-      const data = await response.json(); // Parse only once
+      const data = await response.json();
 
       if (response.ok) {
         console.log("✅ Login Response Data:", data);
@@ -36,9 +35,9 @@ const Login = ({ setUser }) => {
           if (!data.user._id && data.user.id) {
             data.user._id = data.user.id;
           }
-          localStorage.setItem('userId', data.user._id);                         // if error comes remove this line
+          localStorage.setItem('userId', data.user._id);
           localStorage.setItem('user', JSON.stringify(data.user));
-          setUser({ name: data.user.username || data.user.name, token: data.token });
+          setUser({ name: data.user.username || data.user.name, token: data.token, role: '' });
         } else {
           setIsSuccess(false);
           setMessage('Login failed: No user data returned. Please check your credentials or try again later.');
@@ -51,7 +50,11 @@ const Login = ({ setUser }) => {
         }
 
         setIsSuccess(true);
-        setMessage('Logged in successfully! Please select your role: Contributor or Fundraiser');
+        setMessage('Logged in successfully! Redirecting to role selection...');
+
+        setTimeout(() => {
+          navigate('/role-selection');
+        }, 2000);
       } else {
         console.error("❌ Login failed response:", data);
         setIsSuccess(false);
@@ -62,16 +65,6 @@ const Login = ({ setUser }) => {
       setMessage('An error occurred: ' + error.message);
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  const handleRoleSelection = (role) => {
-    setUserRole(role);
-    localStorage.setItem('role', role);
-    if (role === 'contributor') {
-      navigate('/explore');
-    } else if (role === 'fundraiser') {
-      navigate('/campaignDetails/:id');
     }
   };
 
@@ -94,7 +87,7 @@ const Login = ({ setUser }) => {
         <div className="divider"></div>
 
         <div className="form-section">
-          <h1 className="title">Hi! Welcome back!</h1>
+          <h1 className="title" style={{ color: 'teal' }}>Hi! Welcome back!</h1>
           <p className="subtitle">
             New to CrowdFunding?{' '}
             <span className="link" onClick={() => navigate('/signup')}>
@@ -129,14 +122,6 @@ const Login = ({ setUser }) => {
             <p className={`message ${isSuccess ? 'success' : 'error'}`}>
               {message}
             </p>
-          )}
-
-          {isSuccess && !userRole && (
-            <div className="role-selection">
-              <p>Select your role:</p>
-              <button onClick={() => handleRoleSelection('contributor')}>Contributor</button>
-              <button onClick={() => handleRoleSelection('fundraiser')}>Fundraiser</button>
-            </div>
           )}
         </div>
       </div>
