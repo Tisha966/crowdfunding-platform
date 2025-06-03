@@ -105,7 +105,7 @@ const Home = () => {
                 <div className="footer-social">
                   <a href="#" className="social-link"><i className="fab fa-facebook-f"></i></a>
                   <a href="#" className="social-link"><i className="fab fa-twitter"></i></a>
-                  <a href="#" className="social-link"><i className="fab fa-instagram"></i></a>
+                  <a href="#" className="social-link"><i className="fab fa-github"></i></a>
                   <a href="#" className="social-link"><i className="fab fa-linkedin-in"></i></a>
                 </div>
               </div>
