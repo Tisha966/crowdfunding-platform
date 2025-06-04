@@ -1,152 +1,306 @@
-/* Dashboard.css */
-
+/* Overall page wrapper */
 .dashboard-wrapper {
-  background-color: #f8f9fa;
+  background: #f0f0f0; /* soft gray */
+  padding: 2rem;
   min-height: 100vh;
-  padding: 40px 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Center content container */
 .dashboard-container {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-.dashboard-title {
-  font-size: 32px;
+/* HERO section with graph */
+.hero-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #283044, #3b4252);
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  margin-bottom: 3rem;
+  color: white;
+}
+
+.welcome-text {
+  flex: 1;
+  max-width: 40%;
+}
+.welcome-text p {
+  font-size: 2.5rem;
   font-weight: bold;
-  margin-bottom: 30px;
-  color: #333;
-  text-align: center;
+  color: #ffffff;
+  margin: 0;
 }
 
+.hero-graph {
+  flex: 1.5;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  overflow-x: auto;
+}
+
+/* Heatmap graph styling */
+.hero-graph rect {
+  rx: 50% !important;
+  ry: 50% !important;
+  width: 20px !important;
+  height: 20px !important;
+  shape-rendering: geometricPrecision;
+  transition: fill 0.2s ease;
+}
+
+
+
+/* Summary cards */
 .summary-cards {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  margin-bottom: 50px;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
 }
 
 .summary-card {
-  flex: 1 1 200px;
-  background-color: #ffffff;
-  padding: 25px;
+  flex: 1 1 240px;
+  background: white;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s;
   text-align: center;
-  transition: transform 0.3s ease;
 }
-
 .summary-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
 }
-
 .summary-card h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: #444;
+  margin-bottom: 0.5rem;
+  color: #283044;
 }
-
 .summary-card p {
-  font-size: 24px;
-  font-weight: bold;
-  color: #007bff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: gray;
 }
 
+/* Section headers */
 .section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
+  margin: 2rem 0 1rem;
 }
-
-.donation-heading,
-.fundraiser-heading {
-  font-size: 24px;
-  font-weight: 600;
-  color: #333;
+.section-header h2 {
+  color: #283044;
 }
-
-.search-box input {
-  padding: 8px 12px;
+.section-header input {
+  padding: 0.5rem 1rem;
   border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-  outline: none;
-  min-width: 220px;
-  transition: border-color 0.2s ease;
+  border-radius: 8px;
+  width: 240px;
+  background-color: #ffffff;
 }
 
-.search-box input:focus {
-  border-color: #007bff;
-}
-
+/* Card grid */
 .donation-list,
 .campaign-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
 }
 
 .donation-card,
 .campaign-card {
-  background-color: #ffffff;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
-  transition: transform 0.3s ease;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
+.donation-card h3,
+.campaign-card h3 {
+  color: #283044;
+}
+.donation-card p,
+.campaign-card p {
+  color: gray;
+  font-size: 0.95rem;
 }
 
-.donation-card:hover,
-.campaign-card:hover {
-  transform: translateY(-4px);
-}
-
-.campaign-title,
-.campaign-name {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 10px;
-  color: #222;
-}
-
-.donation-amount {
-  font-size: 20px;
-  font-weight: bold;
-  color: #28a745;
-  margin-bottom: 5px;
-}
-
-.donation-date {
-  font-size: 14px;
-  color: #777;
-}
-
-.button-group {
-  margin-top: 15px;
-}
-
-.button-group button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  margin-right: 10px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.button-group button:hover {
-  background-color: #0056b3;
-}
-
+/* Empty state text */
 .no-donations,
 .no-campaigns {
-  font-style: italic;
+  font-size: 1.1rem;
   color: #888;
   text-align: center;
-  margin: 20px 0;
+  padding: 2rem 0;
+}
+/* Hero section fix */
+.hero-section {
+  display: flex;
+  flex-wrap: wrap;
+  background: linear-gradient(135deg, #283044, #404a60);
+  border-radius: 16px;
+  padding: 2rem;
+  color: white;
+  margin-bottom: 3rem;
+}
+
+/* Ensure welcome text shows */
+
+
+/* Full width for graph */
+.hero-graph {
+  flex: 2 1 600px;
+  background: rgba(255, 255, 255, 0.07);
+  padding: 1rem;
+  border-radius: 12px;
+  overflow-x: auto;
+  width: 100%;
+}
+
+/* Make calendar heatmap responsive */
+
+/* Circle shape */
+.react-calendar-heatmap rect {
+  rx: 50% !important;
+  ry: 50% !important;
+  width: 15px !important;
+  height: 15px !important;
+  shape-rendering: geometricPrecision;
+  transition: fill 0.3s ease;
+}
+.react-calendar-heatmap .react-calendar-heatmap-value {
+  border-radius: 0 !important;  /* removes the circle rounding */
+  width: 15px !important;       /* adjust size to your liking */
+  height: 15px !important;
+  margin: 2px !important;       /* space between squares */
+  display: inline-block;
+  border: 1px solid #444;       /* optional: subtle border */
+}
+.color-empty {
+  background-color: #f0f0f0 !important; /* very light gray */
+}
+
+.color-github-1 {
+  background-color: #b0b0b0 !important; /* light gray */
+}
+
+.color-github-2 {
+  background-color: #808080 !important; /* medium gray */
+}
+
+.color-github-3 {
+  background-color: #505050 !important; /* dark gray */
+}
+
+.color-github-4 {
+  background-color: #283044 !important; /* your dark blue-gray */
+}
+.react-calendar-heatmap rect {
+  rx: 0 !important;
+  ry: 0 !important;
+  width: 15px !important;
+  height: 15px !important;
+  shape-rendering: geometricPrecision;
+  transition: fill 0.3s ease;
+}
+.react-calendar-heatmap text {
+  font-size: 10px;
+  fill: #ccc;
+}
+
+.react-calendar-heatmap rect {
+  width: 15px !important;
+  height: 15px !important;
+  rx: 0 !important;
+  ry: 0 !important;
+  shape-rendering: crispEdges;
+  transition: fill 0.2s ease-in-out;
+  stroke: #fff;
+  stroke-width: 1;
+}
+.color-empty {
+  fill: #f0f0f0 !important;
+}
+.color-github-1 {
+  fill: #b0b0b0 !important;
+}
+.color-github-2 {
+  fill: #808080 !important;
+}
+.color-github-3 {
+  fill: #505050 !important;
+}
+.color-github-4 {
+  fill: #283044 !important;
+}
+.react-calendar-heatmap {
+  display: inline-block;
+  overflow-x: auto;
+}
+/* Reset heatmap squares */
+.react-calendar-heatmap rect {
+  rx: 0 !important;
+  ry: 0 !important;
+  width: 15px !important;
+  height: 15px !important;
+  shape-rendering: crispEdges;
+  transition: fill 0.2s ease-in-out;
+  stroke: #fff;
+  stroke-width: 1;
+}
+
+/* Optional: day labels */
+.react-calendar-heatmap text {
+  font-size: 10px;
+  fill: #ccc;
+}
+
+/* Custom contribution colors - no darker than #283044 */
+.color-empty {
+  fill: #f0f0f0 !important;     /* lightest - soft gray */
+}
+.color-github-1 {
+  fill: #d7dae2 !important;     /* very light blue-gray */
+}
+.color-github-2 {
+  fill: #bfc4d3 !important;     /* light blue-gray */
+}
+.color-github-3 {
+  fill: #9aa1b6 !important;     /* soft medium shade */
+}
+.color-github-4 {
+  fill: #283044 !important;     /* base dark */
+}
+.react-calendar-heatmap rect {
+  width: 15px !important;
+  height: 15px !important;
+  rx: 0 !important;
+  ry: 0 !important;
+  shape-rendering: crispEdges;
+  stroke: #fff;
+  stroke-width: 1;
+  transition: fill 0.3s ease, stroke 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+/* Base fill colors */
+.react-calendar-heatmap rect.color-empty { fill: #f0f0f0; }
+.react-calendar-heatmap rect.color-github-1 { fill: #d7dae2; }
+.react-calendar-heatmap rect.color-github-2 { fill: #bfc4d3; }
+.react-calendar-heatmap rect.color-github-3 { fill: #9aa1b6; }
+.react-calendar-heatmap rect.color-github-4 { fill: #283044; }
+
+/* Hover effect */
+.react-calendar-heatmap rect:hover {
+  fill: #4a90e2 !important;    /* bright blue on hover */
+  stroke: #222 !important;     /* darker stroke on hover */
+  stroke-width: 2;
+  transform: scale(1.15);
+  cursor: pointer;
 }

@@ -80,9 +80,12 @@ router.get('/', async (req, res) => {
     const donations = await Donation.find(filter).populate('campaignId', 'title');
 
     const formattedDonations = donations.map(donation => ({
-      title: donation.campaignId?.title || 'Untitled Campaign',
-      amount: donation.amount,
-    }));
+  _id: donation._id,
+  title: donation.campaignId?.title || 'Untitled Campaign',
+  amount: donation.amount,
+  createdAt: donation.createdAt,
+}));
+
 
     return res.status(200).json(formattedDonations);
   } catch (error) {
