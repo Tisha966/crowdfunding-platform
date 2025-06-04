@@ -135,3 +135,49 @@ p.days-left,
   color: #e74c3c !important;   /* Red color */
   font-weight: bold;
 }
+
+
+.urgent-ticker {
+  background-color: #fff0f0;           /* Softer, lighter red background */
+  color: #cc0000;                      /* Strong red text, but not too harsh */
+  padding: 12px 24px;                  /* More comfortable padding */
+  font-weight: 700;                    /* Bold font */
+  font-size: 1.2rem;                   /* Slightly bigger font size for readability */
+  border-bottom: 3px solid #cc0000;   /* Slightly thicker border */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Clean readable font */
+  letter-spacing: 0.05em;              /* Slight letter spacing for clarity */
+  box-shadow: 0 2px 6px rgba(204, 0, 0, 0.2); /* Subtle shadow for depth */
+  user-select: none;                   /* Prevent accidental text selection while scrolling */
+  white-space: nowrap;                 /* Keep text in one line */
+  overflow: hidden;                   /* Hide overflow for neatness */
+}
+
+.search-box {
+  position: relative;
+  max-width: 400px;
+  margin: 20px auto 40px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 10px 40px 10px 15px; /* leave space for icon */
+  border-radius: 25px;
+  border: 2px solid #ccc;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: #283044;
+}
+
+.search-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #283044;
+  font-size: 18px;
+  pointer-events: none; /* Icon won't block input clicks */
+}
