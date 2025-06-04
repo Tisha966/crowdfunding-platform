@@ -71,7 +71,7 @@ const App = () => {
   <li><Link to="/why">Why Us</Link></li>
   <li><Link to="/explore">Explore</Link></li>
   <li><Link to="/playbook">PlayBook</Link></li>
-  <li><Link to="/capitalRaise">CapitalRaise</Link></li>
+  {/* <li><Link to="/capitalRaise">CapitalRaise</Link></li> */}
   <li><Link to="/blog">Blog</Link></li>
   {user ? (
     <>
@@ -99,7 +99,7 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/why" element={<Why />} />
-        <Route path="/capitalRaise" element={<CapitalRaise />} />
+        {/* <Route path="/capitalRaise" element={<CapitalRaise />} /> */}
         <Route path="/campaignDetails/:id" element={<CampaignDetails />} />
         <Route path="/qrScanner" element={<QRScanner />} />
         <Route path="/qrCodeGenerator" element={<QRCodeGenerator />} />

@@ -42,7 +42,7 @@ const Explore = () => {
 
   return (
     <div className="explore-container">
-      <h1>Explore Campaigns</h1>
+      <h1 style={{color:"#f16a38"}}>Explore Campaigns</h1>
 
       {/* Search box with icon */}
       <div className="search-box">

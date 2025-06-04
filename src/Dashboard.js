@@ -1,10 +1,7 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useRef } from 'react';
 import './Dashboard.css';
 import { Link } from 'react-router-dom';
 import CalendarHeatmap from 'react-calendar-heatmap';
-// Removed import of react-tooltip since we use custom tooltip now
-// import { Tooltip } from 'react-tooltip';
-// import 'react-tooltip/dist/react-tooltip.css';
 
 const Dashboard = () => {
   const [userName, setUserName] = useState('');
@@ -16,11 +13,31 @@ const Dashboard = () => {
   const [filteredCampaigns, setFilteredCampaigns] = useState([]);
   const [campaignSearch, setCampaignSearch] = useState('');
   const [loadingCampaigns, setLoadingCampaigns] = useState(true);
-
-  // Tooltip state for custom tooltip
   const [tooltipContent, setTooltipContent] = useState('');
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
+
+  const contributionsRef = useRef(null);
+  const campaignsRef = useRef(null);
+  const activityRef = useRef(null);
+
+  const scrollToContributions = () => {
+    if (contributionsRef.current) {
+      contributionsRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const scrollToCampaigns = () => {
+    if (campaignsRef.current) {
+      campaignsRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const scrollToActivity = () => {
+    if (activityRef.current) {
+      activityRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -65,17 +82,13 @@ const Dashboard = () => {
 
   useEffect(() => {
     setFilteredDonations(
-      donations.filter((d) =>
-        d.title?.toLowerCase().includes(donationSearch.toLowerCase())
-      )
+      donations.filter((d) => d.title?.toLowerCase().includes(donationSearch.toLowerCase()))
     );
   }, [donationSearch, donations]);
 
   useEffect(() => {
     setFilteredCampaigns(
-      campaigns.filter((c) =>
-        c.title?.toLowerCase().includes(campaignSearch.toLowerCase())
-      )
+      campaigns.filter((c) => c.title?.toLowerCase().includes(campaignSearch.toLowerCase()))
     );
   }, [campaignSearch, campaigns]);
 
@@ -86,7 +99,6 @@ const Dashboard = () => {
   const donationGraphData = useMemo(() => {
     const donationCounts = {};
     donations.forEach((d) => {
-      if (!d.createdAt) return;
       const dateObj = new Date(d.createdAt);
       if (isNaN(dateObj.getTime())) return;
       const date = dateObj.toISOString().split('T')[0];
@@ -95,7 +107,6 @@ const Dashboard = () => {
 
     const campaignCounts = {};
     campaigns.forEach((c) => {
-      if (!c.createdAt) return;
       const dateObj = new Date(c.createdAt);
       if (isNaN(dateObj.getTime())) return;
       const date = dateObj.toISOString().split('T')[0];
@@ -127,9 +138,8 @@ const Dashboard = () => {
     }));
   }, [donations, campaigns]);
 
-  // Custom tooltip handlers
   const handleMouseOver = (event, val) => {
-    if (val && val.date) {
+    if (val?.date) {
       setTooltipContent(
         `${val.donationCount} donation${val.donationCount !== 1 ? 's' : ''} & ${val.campaignCount} campaign${val.campaignCount !== 1 ? 's' : ''} on ${new Date(val.date).toLocaleDateString()}`
       );
@@ -143,12 +153,27 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="dashboard-wrapper">
-      <div className="dashboard-container">
-        <h1> Welcome, {userName} ! </h1>
+    <div className="dashboard-layout">
+     <aside className="sidebar">
+  <ul>
+    <li><button onClick={scrollToActivity} className="sidebar-btn">My Activity</button></li>
+    <li><button onClick={scrollToContributions} className="sidebar-btn">My Contributions</button></li>
+    <li><button onClick={scrollToCampaigns} className="sidebar-btn">My Campaigns</button></li>
+    <li>
+      <Link to="/campaigndetails/:id" className="sidebar-btn">Raise Fund Campaign</Link>
+    </li>
+    <li>
+      <Link to="/explore" className="sidebar-btn">Donate to Campaign</Link>
+    </li>
+    <li><Link to="/settings" className="sidebar-btn">Settings</Link></li>
+  </ul>
+</aside>
 
-        {/* USER ACTIVITY GRAPH */}
-        <div className="hero-section">
+
+      <div className="dashboard-wrapper">
+        <h1>Welcome, {userName}!</h1>
+
+        <div className="hero-section" ref={activityRef}>
           <div className="hero-graph">
             <h3>My Activity Graph</h3>
             <CalendarHeatmap
@@ -163,7 +188,7 @@ const Dashboard = () => {
                 return 'color-github-1';
               }}
               showWeekdayLabels
-              onMouseOver={(event, val) => handleMouseOver(event, val)}
+              onMouseOver={handleMouseOver}
               onMouseLeave={handleMouseLeave}
             />
             {tooltipVisible && (
@@ -188,16 +213,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* SUMMARY CARDS */}
-        <div className="summary-cards">
-          <div className="summary-card"><h3>Total Donations</h3><p>{donations.length}</p></div>
-          <div className="summary-card"><h3>Total Amount Donated</h3><p>₹ {totalDonated.toLocaleString()}</p></div>
-          <div className="summary-card"><h3>My Campaigns</h3><p>{totalCampaigns}</p></div>
-          <div className="summary-card"><h3>Total Raised</h3><p>₹ {totalRaised.toLocaleString()}</p></div>
-        </div>
-
-        {/* DONATION LIST */}
-        <div className="section-header">
+        <div ref={contributionsRef} className="section-header">
           <h2>My Contributions</h2>
           <input
             type="text"
@@ -221,8 +237,7 @@ const Dashboard = () => {
           </div>
         )}
 
-        {/* CAMPAIGN LIST */}
-        <div className="section-header" style={{ marginTop: '40px' }}>
+        <div ref={campaignsRef} className="section-header" style={{ marginTop: '40px' }}>
           <h2>My Created Campaigns</h2>
           <input
             type="text"

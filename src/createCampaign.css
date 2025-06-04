@@ -119,3 +119,9 @@ body {
   width: 100%; /* Ensures the header takes up the full width */
   overflow: visible; /* Ensures the text is visible even if it overflows */
 }
+.create-campaign-footer {
+  background-color: #343a40; /* Updated dark gray background */
+  
+  color: white;
+  font-family: 'Arial', sans-serif;
+}
