@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useMemo, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './Dashboard.css';
 import { Link } from 'react-router-dom';
-import CalendarHeatmap from 'react-calendar-heatmap';
+import { FaHandsHelping, FaPlusCircle, FaCog } from 'react-icons/fa';
+
 
 const Dashboard = () => {
   const [userName, setUserName] = useState('');
@@ -13,30 +14,16 @@ const Dashboard = () => {
   const [filteredCampaigns, setFilteredCampaigns] = useState([]);
   const [campaignSearch, setCampaignSearch] = useState('');
   const [loadingCampaigns, setLoadingCampaigns] = useState(true);
-  const [tooltipContent, setTooltipContent] = useState('');
-  const [tooltipVisible, setTooltipVisible] = useState(false);
-  const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
 
   const contributionsRef = useRef(null);
   const campaignsRef = useRef(null);
-  const activityRef = useRef(null);
 
   const scrollToContributions = () => {
-    if (contributionsRef.current) {
-      contributionsRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
+    contributionsRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const scrollToCampaigns = () => {
-    if (campaignsRef.current) {
-      campaignsRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const scrollToActivity = () => {
-    if (activityRef.current) {
-      activityRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
+    campaignsRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -92,129 +79,68 @@ const Dashboard = () => {
     );
   }, [campaignSearch, campaigns]);
 
-  const totalDonated = donations.reduce((sum, d) => sum + (d.amount || 0), 0);
-  const totalCampaigns = campaigns.length;
-  const totalRaised = campaigns.reduce((sum, c) => sum + (c.amountRaised || 0), 0);
-
-  const donationGraphData = useMemo(() => {
-    const donationCounts = {};
-    donations.forEach((d) => {
-      const dateObj = new Date(d.createdAt);
-      if (isNaN(dateObj.getTime())) return;
-      const date = dateObj.toISOString().split('T')[0];
-      donationCounts[date] = (donationCounts[date] || 0) + 1;
-    });
-
-    const campaignCounts = {};
-    campaigns.forEach((c) => {
-      const dateObj = new Date(c.createdAt);
-      if (isNaN(dateObj.getTime())) return;
-      const date = dateObj.toISOString().split('T')[0];
-      campaignCounts[date] = (campaignCounts[date] || 0) + 1;
-    });
-
-    const allDates = new Set([...Object.keys(donationCounts), ...Object.keys(campaignCounts)]);
-
-    if (allDates.size === 0) {
-      const today = new Date();
-      return Array.from({ length: 7 }, (_, i) => {
-        const d = new Date(today);
-        d.setDate(d.getDate() - i);
-        const date = d.toISOString().split('T')[0];
-        return {
-          date,
-          donationCount: i % 3,
-          campaignCount: (i + 1) % 2,
-          count: (i % 3) + ((i + 1) % 2),
-        };
-      });
-    }
-
-    return Array.from(allDates).map((date) => ({
-      date,
-      donationCount: donationCounts[date] || 0,
-      campaignCount: campaignCounts[date] || 0,
-      count: (donationCounts[date] || 0) + (campaignCounts[date] || 0),
-    }));
-  }, [donations, campaigns]);
-
-  const handleMouseOver = (event, val) => {
-    if (val?.date) {
-      setTooltipContent(
-        `${val.donationCount} donation${val.donationCount !== 1 ? 's' : ''} & ${val.campaignCount} campaign${val.campaignCount !== 1 ? 's' : ''} on ${new Date(val.date).toLocaleDateString()}`
-      );
-      setTooltipPos({ x: event.clientX, y: event.clientY });
-      setTooltipVisible(true);
-    }
-  };
-
-  const handleMouseLeave = () => {
-    setTooltipVisible(false);
-  };
-
   return (
     <div className="dashboard-layout">
      <aside className="sidebar">
+  <h2 className="sidebar-title">Dashboard</h2>
   <ul>
-    <li><button onClick={scrollToActivity} className="sidebar-btn">My Activity</button></li>
-    <li><button onClick={scrollToContributions} className="sidebar-btn">My Contributions</button></li>
-    <li><button onClick={scrollToCampaigns} className="sidebar-btn">My Campaigns</button></li>
     <li>
-      <Link to="/campaigndetails/:id" className="sidebar-btn">Raise Fund Campaign</Link>
+      <Link to="/campaigndetails/:id" className="sidebar-btn">
+        <FaPlusCircle className="sidebar-icon" />
+        Raise Fund Campaign
+      </Link>
     </li>
     <li>
-      <Link to="/explore" className="sidebar-btn">Donate to Campaign</Link>
+      <Link to="/explore" className="sidebar-btn">
+        <FaHandsHelping className="sidebar-icon" />
+        Donate to Campaign
+      </Link>
     </li>
-    <li><Link to="/settings" className="sidebar-btn">Settings</Link></li>
+    <li>
+      <Link to="/settings" className="sidebar-btn">
+        <FaCog className="sidebar-icon" />
+        Settings
+      </Link>
+    </li>
   </ul>
 </aside>
 
-
       <div className="dashboard-wrapper">
-        <h1>Welcome, {userName}!</h1>
+  <h2 style={{
+  fontSize: '2.2rem',
+  fontWeight: '700',
+  color: '#4b5563', // Cool gray tone
+  marginBottom: '2rem',
+  borderBottom: '2px solid #9ca3af', // Soft gray underline
+  paddingBottom: '0.6rem',
+  fontFamily: `'Poppins', 'Segoe UI', sans-serif`,
+  letterSpacing: '0.7px',
+  textAlign: 'center',
+  textShadow: '1px 1px 2px rgba(0, 0, 0, 0.1)', // subtle shadow for depth
+  textTransform: 'capitalize'
+}}>
+  Welcome, {userName}!
+</h2>
 
-        <div className="hero-section" ref={activityRef}>
-          <div className="hero-graph">
-            <h3>My Activity Graph</h3>
-            <CalendarHeatmap
-              startDate={new Date(new Date().getFullYear(), 0, 1)}
-              endDate={new Date(new Date().getFullYear(), 11, 31)}
-              values={donationGraphData}
-              classForValue={(val) => {
-                if (!val || val.count === 0) return 'color-empty';
-                if (val.count >= 8) return 'color-github-4';
-                if (val.count >= 5) return 'color-github-3';
-                if (val.count >= 3) return 'color-github-2';
-                return 'color-github-1';
-              }}
-              showWeekdayLabels
-              onMouseOver={handleMouseOver}
-              onMouseLeave={handleMouseLeave}
-            />
-            {tooltipVisible && (
-              <div
-                style={{
-                  position: 'fixed',
-                  top: tooltipPos.y + 10,
-                  left: tooltipPos.x + 10,
-                  background: 'rgba(0,0,0,0.7)',
-                  color: 'white',
-                  padding: '5px 10px',
-                  borderRadius: '4px',
-                  pointerEvents: 'none',
-                  zIndex: 9999,
-                  whiteSpace: 'nowrap',
-                  fontSize: '0.85rem',
-                }}
-              >
-                {tooltipContent}
-              </div>
-            )}
-          </div>
-        </div>
+
+      
 
         <div ref={contributionsRef} className="section-header">
-          <h2>My Contributions</h2>
+    <h2 style={{
+  fontSize: '2rem',
+  fontWeight: '700',
+  color: '#0d9488', // Teal shade
+  marginBottom: '1.5rem',
+  borderBottom: '2px solid #a7f3d0', // light teal
+  paddingBottom: '0.5rem',
+  fontFamily: `'Poppins', 'Segoe UI', sans-serif`,
+  letterSpacing: '0.5px',
+  textAlign: 'center'
+}}>
+  My Contributions
+</h2>
+
+
           <input
             type="text"
             placeholder="Search donations..."
@@ -238,7 +164,20 @@ const Dashboard = () => {
         )}
 
         <div ref={campaignsRef} className="section-header" style={{ marginTop: '40px' }}>
-          <h2>My Created Campaigns</h2>
+             <h2 style={{
+  fontSize: '2rem',
+  fontWeight: '700',
+  color: '#0d9488', // Teal shade
+  marginBottom: '1.5rem',
+  borderBottom: '2px solid #a7f3d0', // light teal
+  paddingBottom: '0.5rem',
+  fontFamily: `'Poppins', 'Segoe UI', sans-serif`,
+  letterSpacing: '0.5px',
+  textAlign: 'center'
+}}>
+  My Created Campaigns
+</h2>
+
           <input
             type="text"
             placeholder="Search campaigns..."

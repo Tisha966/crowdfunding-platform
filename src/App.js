@@ -21,14 +21,15 @@ import Dashboard from './Dashboard';
 import Why from './Why';
 // import PrivateRoute from './PrivateRoute';
 // import TwoStepForm from './TwoStepForm';
-import CapitalRaise from './CapitalRaise';
+
 import PlayBook from './PlaybookSection';
 import QRScanner from './QRScanner'; 
 import QRCodeGenerator from './QRCodeGenerator';
 import DonationPage from './DonationPage';
 
 import RoleSelection from './RoleSelection.jsx';
-
+import ForgotPassword from './ForgotPassword';
+import ResetPassword from './ResetPassword';
 // Removed: import PhoneInputPage from './components/PhoneInputPage';
 
 const App = () => {
@@ -107,8 +108,12 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/faq" element={<FAQ />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+<Route path="/reset-password/:token" element={<ResetPassword />} />
+
         {/* <Route path="/role-selection" element={<PhoneInputPage />} /> */}
         <Route path="/role-selection" element={<RoleSelection user={user} setUser={setUser} />} />
+        
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>

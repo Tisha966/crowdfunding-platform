@@ -77,4 +77,47 @@ router.get('/user/:id', async (req, res) => {
   }
 });
 
+// Forgot Password - generate token and simulate sending reset link
+router.post('/forgot-password', async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(200).json({ message: 'If this email exists, a reset link has been sent.' });
+    }
+
+    // Generate a reset token
+    const resetToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '15m' });
+
+    // Simulate sending email
+    console.log(`🛠 Reset password link: http://localhost:3000/reset-password/${resetToken}`);
+
+    res.status(200).json({ message: 'Reset link sent. Check console for token (mock mode).' });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error during password reset' });
+  }
+});
+
+
+// Reset Password - use token to update the password
+router.post('/reset-password/:token', async (req, res) => {
+  const { token } = req.params;
+  const { password } = req.body;
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const userId = decoded.id;
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    await User.findByIdAndUpdate(userId, { password: hashedPassword });
+
+    res.status(200).json({ message: 'Password reset successful!' });
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({ message: 'Invalid or expired token' });
+  }
+});
+
+
 module.exports = router;
