@@ -1,436 +1,232 @@
-/* Overall page wrapper */
-.dashboard-wrapper {
-  background: #f0f0f0; /* soft gray */
-  padding: 2rem;
+/* === Layout === */
+.dashboard-layout {
+  display: flex;
   min-height: 100vh;
-}
-
-/* Center content container */
-.dashboard-container {
-  max-width: 1200px;
-  margin: 0 auto;
+  background-color: #f9fafb;
   font-family: 'Segoe UI', sans-serif;
 }
 
-
-/* Summary cards */
-.summary-cards {
+/* === Sidebar === */
+.sidebar {
+  width: 240px;
+  background-color: #ffffff;
+  border-right: 1px solid #e5e7eb;
+  padding: 2rem 1.5rem;
   display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  margin-bottom: 2.5rem;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
 }
 
-.summary-card {
-  flex: 1 1 240px;
-  background: white;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  transition: transform 0.2s;
-  text-align: center;
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
-.summary-card:hover {
-  transform: translateY(-4px);
-}
-.summary-card h3 {
-  margin-bottom: 0.5rem;
-  color: #283044;
-}
-.summary-card p {
-  font-size: 1.2rem;
+
+.sidebar-btn,
+.sidebar a.sidebar-btn {
+  background: none;
+  border: none;
+  color: #374151;
   font-weight: 600;
-  color: gray;
+  font-size: 1rem;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background 0.3s, transform 0.2s, color 0.3s;
+  cursor: pointer;
+  text-decoration: none;
 }
 
-/* Section headers */
+.sidebar-btn:hover,
+.sidebar a.sidebar-btn:hover {
+  background-color: #f3f4f6;
+  transform: translateX(4px);
+  color: #1f2937;
+}
+
+/* === Main Content === */
+.dashboard-wrapper {
+  flex-grow: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dashboard-wrapper h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #111827;
+}
+
+/* === Section Header === */
 .section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 2rem 0 1rem;
 }
+
 .section-header h2 {
-  color: #283044;
-}
-.section-header input {
-  padding: 0.5rem 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  width: 240px;
-  background-color: #ffffff;
+  font-size: 1.5rem;
+  color: #1f2937;
+  font-weight: 600;
 }
 
-/* Card grid */
+.section-header input {
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  width: 260px;
+  background-color: #ffffff;
+  font-size: 0.95rem;
+}
+
+/* === Cards Grid === */
 .donation-list,
 .campaign-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 1.5rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .donation-card,
 .campaign-card {
-  background: white;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  padding: 1rem;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-}
-.donation-card h3,
-.campaign-card h3 {
-  color: #283044;
-}
-.donation-card p,
-.campaign-card p {
-  color: gray;
-  font-size: 0.95rem;
-}
-
-/* Empty state text */
-.no-donations,
-.no-campaigns {
-  font-size: 1.1rem;
-  color: #888;
-  text-align: center;
-  padding: 2rem 0;
-}
-/* Hero section fix */
-.hero-section {
-  display: flex;
-  flex-wrap: wrap;
-  background: linear-gradient(135deg, #283044, #404a60);
-  border-radius: 16px;
-  padding: 2rem;
-  color: white;
-  margin-bottom: 3rem;
-}
-
-.hero-graph {
-  flex: 2 1 600px;
-  background: rgba(255, 255, 255, 0.07);
-  padding: 1rem;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
   border-radius: 12px;
-  overflow-x: auto;
-  width: 100%;
-}
-.react-calendar-heatmap rect {
-  rx: 0 !important;
-  ry: 0 !important;
-  width: 15px !important;
-  height: 15px !important;
-  shape-rendering: geometricPrecision;
-  transition: fill 0.3s ease;
-}
-.react-calendar-heatmap text {
-  font-size: 10px;
-  fill: #ccc;
-}
-
-.react-calendar-heatmap rect {
-  width: 15px !important;
-  height: 15px !important;
-  rx: 0 !important;
-  ry: 0 !important;
-  shape-rendering: crispEdges;
-  transition: fill 0.2s ease-in-out;
-  stroke: #fff;
-  stroke-width: 1;
-}
-.color-empty {
-  fill: #f0f0f0 !important;
-}
-.color-github-1 {
-  fill: #b0b0b0 !important;
-}
-.color-github-2 {
-  fill: #808080 !important;
-}
-.color-github-3 {
-  fill: #505050 !important;
-}
-.color-github-4 {
-  fill: #283044 !important;
-}
-.react-calendar-heatmap {
-  display: inline-block;
-  overflow-x: auto;
-}
-/* Reset heatmap squares */
-.react-calendar-heatmap rect {
-  rx: 0 !important;
-  ry: 0 !important;
-  width: 15px !important;
-  height: 15px !important;
-  shape-rendering: crispEdges;
-  transition: fill 0.2s ease-in-out;
-  stroke: #fff;
-  stroke-width: 1;
-}
-
-/* Optional: day labels */
-.react-calendar-heatmap text {
-  font-size: 10px;
-  fill: #ccc;
-}
-
-/* Custom contribution colors - no darker than #283044 */
-.color-empty {
-  fill: #f0f0f0 !important;     /* lightest - soft gray */
-}
-.color-github-1 {
-  fill: #d7dae2 !important;     /* very light blue-gray */
-}
-.color-github-2 {
-  fill: #bfc4d3 !important;     /* light blue-gray */
-}
-.color-github-3 {
-  fill: #9aa1b6 !important;     /* soft medium shade */
-}
-.color-github-4 {
-  fill: #283044 !important;     /* base dark */
-}
-.react-calendar-heatmap rect {
-  width: 15px !important;
-  height: 15px !important;
-  rx: 0 !important;
-  ry: 0 !important;
-  shape-rendering: crispEdges;
-  stroke: #fff;
-  stroke-width: 1;
-  transition: fill 0.3s ease, stroke 0.3s ease, transform 0.3s ease;
-  cursor: pointer;
-}
-
-/* Base fill colors */
-.react-calendar-heatmap rect.color-empty { fill: #f0f0f0; }
-.react-calendar-heatmap rect.color-github-1 { fill: #d7dae2; }
-.react-calendar-heatmap rect.color-github-2 { fill: #bfc4d3; }
-.react-calendar-heatmap rect.color-github-3 { fill: #9aa1b6; }
-.react-calendar-heatmap rect.color-github-4 { fill: #283044; }
-
-/* Hover effect */
-.react-calendar-heatmap rect:hover {
-  fill: #4a90e2 !important;    /* bright blue on hover */
-  stroke: #222 !important;     /* darker stroke on hover */
-  stroke-width: 2;
-  transform: scale(1.15);
-  cursor: pointer;
-}
-
-.dashboard-layout {
-  display: flex;
-  min-height: 100vh;
-  background-color: #f7f7f7;
-}
-
-/* Sidebar */
-.sidebar {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  width: 220px;
-  background-color: #cbcbcc;
-  color: #283044;
-  padding: 2rem 1rem;
-  flex-shrink: 0;
-  overflow-y: auto;
-}
-
-.sidebar h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-
-.sidebar li {
-  margin-bottom: 1rem;
-}
-
-.sidebar a {
-  color: #c16a38;
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.2s;
-  font-size: larger;
-}
-
-.sidebar a:hover {
-  color: gray;
-}
-
-/* Content wrapper */
-.dashboard-wrapper {
-  flex-grow: 1;
-  padding: 2rem;
-  overflow-x: hidden;
-}
-
-.sidebar-btn {
-  background: none;
-  border: none;
-  color: #c16a38;
-  font: inherit;
-  cursor: pointer;
-  text-align: left;
-  padding: 0;
-  font-weight: 600;
-  font-size: large;
-}
-
-.sidebar-btn:hover {
-  color: #404a60;
-}
-/* Sidebar container */
-.sidebar {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  width: 240px;
-  background-color: #f1f1f3;
-  border-right: 1px solid #d3d3d3;
-  padding: 2rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Sidebar list */
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-
-/* Sidebar items */
-.sidebar li {
-  display: flex;
-}
-
-/* Buttons and Links */
-.sidebar-btn {
-  background: none;
-  border: none;
-  color: #283044;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  text-align: left;
-  width: 100%;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-  text-decoration: none;
-}
-
-.sidebar-btn:hover {
-  background-color: #e0e0e0;
-  color: #3a3a3a;
-  transform: translateX(3px);
-}
-
-/* When using <Link> directly with the class */
-.sidebar a.sidebar-btn {
-  display: block;
-  color: #283044;
-}
-
-.sidebar a.sidebar-btn:hover {
-  background-color: #d5d5d9;
-  color: #404a60;
-}
-/* Sidebar container */
-.sidebar {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  width: 240px;
-  background-color: #f9f9fb;
-  border-right: 1px solid #dcdcdc;
-  padding: 1.5rem 1rem;
-  display: flex;
-  flex-direction: column;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Sidebar list */
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem; /* reduced gap */
-}
-
-/* Sidebar items */
-.sidebar li {
-  display: flex;
-  align-items: center; /* vertically center text */
-}
-
-/* Buttons and Links */
-.sidebar-btn {
-  background: none;
-  border: none;
-  color: #283044;
-  font-weight: 500;
-  font-size: 0.95rem; /* more concise font size */
-  cursor: pointer;
-  text-align: left;
-  width: 100%;
-  padding: 0.4rem 0.75rem;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  line-height: 1.2;
-}
-
-.sidebar-btn:hover {
-  background-color: #e8e8e8;
-  color: #2d2d2d;
-  transform: translateX(2px);
-}
-
-/* When using <Link> directly with the class */
-.sidebar a.sidebar-btn {
-  display: block;
-  color: #283044;
-  font-size: 0.95rem;
-  font-weight: 500;
-}
-
-.sidebar a.sidebar-btn:hover {
-  background-color: #dcdce0;
-  color: #404a60;
-}
-.donation-card,
-.campaign-card {
-  background-color: #e0e0e0; /* Solid greyish tone */
-  border-radius: 12px;
-  padding: 20px;
-  margin: 15px 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 1.25rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .donation-card:hover,
 .campaign-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
 .donation-card h3,
-.campaign-card h3,
+.campaign-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #111827;
+}
+
 .donation-card p,
 .campaign-card p {
-  color: #222; /* Dark text for readability */
+  color: #4b5563;
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+}
+
+/* === Empty States === */
+.no-donations,
+.no-campaigns {
+  font-size: 1.1rem;
+  color: #9ca3af;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+/* === Tooltip === */
+.__react_component_tooltip {
+  font-size: 13px;
+  background-color: #1f2937;
+  color: #ffffff;
+  border-radius: 4px;
+  padding: 6px 10px;
+}
+/* === Sidebar === */
+.sidebar {
+  width: 240px;
+  background-color: #f3f4f6; /* Light grey background */
+  border-right: 1px solid #d1d5db;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.03); /* soft shadow */
+}
+
+/* Sidebar Title */
+.sidebar-title {
+  font-size: 1.4rem;
+  color: #374151;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  padding-left: 0.5rem;
+}
+
+/* Sidebar List */
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Sidebar Buttons */
+.sidebar-btn,
+.sidebar a.sidebar-btn {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  color: #4b5563;
+  font-weight: 500;
+  font-size: 1rem;
+  text-align: left;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  transition: background 0.3s, transform 0.2s, color 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.sidebar-btn:hover,
+.sidebar a.sidebar-btn:hover {
+  background-color: #e5e7eb;
+  transform: translateX(4px);
+  color: #1f2937;
+}
+
+/* Sidebar Icons */
+.sidebar-icon {
+  margin-right: 10px;
+  vertical-align: middle;
+  font-size: 1.1rem;
+  color: #6b7280;
+  transition: color 0.3s ease;
+}
+
+.sidebar-btn:hover .sidebar-icon {
+  color: #1d4ed8;
+}
+.donation-card:hover,
+.campaign-card:hover {
+  background-color: #e5e7eb; /* Grey shade on hover */
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.donation-card,
+.campaign-card {
+  background: #f9fafb; /* default soft grey */
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }

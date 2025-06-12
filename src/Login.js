@@ -115,11 +115,14 @@ const Login = ({ setUser }) => {
             <button type="submit" className="submit-btn" disabled={isLoading}>
               {isLoading ? 'Logging in...' : 'Log in'}
             </button>
-            <p className="forgot-link">Forgot password?</p>
+            <p className="forgot-link" onClick={() => navigate('/forgot-password')} style={{ cursor: 'pointer', color: 'teal' }}>
+  Forgot password?
+</p>
+
           </form>
 
           {message && (
-            <p className={`message ${isSuccess ? 'success' : 'error'}`}>
+            <p className={`message ${isSuccess ? 'success' : 'error'}`}> 
               {message}
             </p>
           )}
