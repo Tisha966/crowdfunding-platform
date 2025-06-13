@@ -69,7 +69,7 @@ const App = () => {
         </Link>
        <ul className="nav-links">
   <li><Link to="/">Home</Link></li>
-  <li><Link to="/why">Why Us</Link></li>
+  <li><Link to="/why">Our Impact</Link></li>
   <li><Link to="/explore">Explore</Link></li>
   <li><Link to="/playbook">PlayBook</Link></li>
   {/* <li><Link to="/capitalRaise">CapitalRaise</Link></li> */}
@@ -77,7 +77,26 @@ const App = () => {
   {user ? (
     <>
       <li><Link to="/dashboard">Dashboard</Link></li>
-      <li><button onClick={handleLogout}>Logout</button></li>
+     <li>
+  <button
+    onClick={handleLogout}
+    style={{
+      backgroundColor: '#888',     // Gray background
+      color: '#fff',               // White text
+      border: 'none',
+      borderRadius: '6px',
+      padding: '8px 16px',
+      fontWeight: 'bold',
+      cursor: 'pointer',
+      transition: 'background-color 0.3s ease'
+    }}
+    onMouseOver={(e) => (e.target.style.backgroundColor = '#666')}
+    onMouseOut={(e) => (e.target.style.backgroundColor = '#888')}
+  >
+    Logout
+  </button>
+</li>
+
     </>
   ) : (
     <>

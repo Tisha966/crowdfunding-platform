@@ -10,17 +10,18 @@ const About = () => {
         <h2 className="stats-header" style={{color:"teal"}}>JOIN OVER 1 MILLION INVESTORS</h2>
         <div className="stats">
           <div className="stat">
-          <h1>₹18,750</h1>
-        <p>Median Investment</p>
-      </div>
-      <div className="stat">
-        <h1>3,571</h1>
-        <p>Founders Funded</p>
-      </div>
-      <div className="stat">
-        <h1 style={{ color:"#ff7f50"}}>₹6,300 Cr</h1>
-        <p>Raised on Wefunder</p>
-      </div>
+  <h1>₹12,400</h1> {/* Replace with real median investment */}
+  <p>Median Investment</p>
+</div>
+<div className="stat">
+  <h1>1,245</h1> {/* Replace with actual number of founders funded */}
+  <p>Founders Funded</p>
+</div>
+<div className="stat">
+  <h1 style={{ color:"#ff7f50" }}>₹3,200 Cr</h1> {/* Replace with real total raised */}
+  <p>Raised on [CROWDFUNDING]</p>
+</div>
+
         </div>
         <div className="tags-container">
   <div className="tags">

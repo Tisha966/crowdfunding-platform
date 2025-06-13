@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import './ResetPassword.css';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const ResetPassword = () => {
   const { token } = useParams();
@@ -9,11 +11,12 @@ const ResetPassword = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
   const [success, setSuccess] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleReset = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      setMessage("Passwords do not match");
+      setMessage('Passwords do not match');
       return;
     }
 
@@ -41,25 +44,39 @@ const ResetPassword = () => {
 
   return (
     <div className="reset-container">
-      <h2>Reset Your Password</h2>
-      <form onSubmit={handleReset}>
-        <input
-          type="password"
-          placeholder="New password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Confirm new password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Reset Password</button>
-      </form>
-      {message && <p style={{ color: success ? 'green' : 'red' }}>{message}</p>}
+      <div className="reset-box">
+        <h2>Reset Password</h2>
+        <form onSubmit={handleReset}>
+          <div className="input-group">
+            <input
+              type={showPassword ? 'text' : 'password'}
+              placeholder="New password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <span onClick={() => setShowPassword(!showPassword)} className="toggle-icon">
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
+
+          <div className="input-group">
+            <input
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Confirm new password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+            <span onClick={() => setShowPassword(!showPassword)} className="toggle-icon">
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
+
+          <button type="submit">Reset Password</button>
+        </form>
+        {message && <p className={success ? 'success' : 'error'}>{message}</p>}
+      </div>
     </div>
   );
 };

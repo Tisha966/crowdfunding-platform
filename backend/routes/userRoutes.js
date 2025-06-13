@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel'); // Adjust the path if needed
 const router = express.Router();
+const transporter = require('../utils/mailer');
 
 // REGISTER Route
 router.post('/register', async (req, res) => {
@@ -78,6 +79,7 @@ router.get('/user/:id', async (req, res) => {
 });
 
 // Forgot Password - generate token and simulate sending reset link
+// Forgot Password - generate token and send reset link via email
 router.post('/forgot-password', async (req, res) => {
   const { email } = req.body;
 
@@ -87,18 +89,38 @@ router.post('/forgot-password', async (req, res) => {
       return res.status(200).json({ message: 'If this email exists, a reset link has been sent.' });
     }
 
-    // Generate a reset token
     const resetToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '15m' });
 
-    // Simulate sending email
-    console.log(`🛠 Reset password link: http://localhost:3000/reset-password/${resetToken}`);
+    const resetLink = `http://localhost:3000/reset-password/${resetToken}`;
 
-    res.status(200).json({ message: 'Reset link sent. Check console for token (mock mode).' });
+    console.log(`📧 Sending reset email to ${user.email} using ${process.env.EMAIL_USER}`);
+
+    try {
+      await transporter.sendMail({
+        from: `"Crowdfunding Support" <${process.env.EMAIL_USER}>`,
+        to: user.email,
+        subject: 'Reset your password',
+        html: `
+          <p>Hi ${user.name || 'there'},</p>
+          <p>You requested a password reset. Click the link below to reset your password:</p>
+          <a href="${resetLink}">${resetLink}</a>
+          <p>This link will expire in 15 minutes.</p>
+        `
+      });
+
+      console.log('✅ Email sent successfully');
+      res.status(200).json({ message: 'Password reset link sent to your email.' });
+
+    } catch (emailErr) {
+      console.error('❌ Failed to send email:', emailErr);
+      res.status(500).json({ message: 'Email service failed. Try again later.' });
+    }
+
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: 'Server error during password reset' });
   }
 });
-
 
 // Reset Password - use token to update the password
 router.post('/reset-password/:token', async (req, res) => {
