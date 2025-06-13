@@ -1,5 +1,5 @@
-// src/pages/ForgotPassword.js
 import React, { useState } from 'react';
+import './ForgotPassword.css'; // ✅ Make sure this file exists
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -27,20 +27,22 @@ const ForgotPassword = () => {
 
   return (
     <div className="forgot-password-container">
-      <h2>Forgot Password</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Enter your email"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <button type="submit">Send Reset Link</button>
-      </form>
-      {message && (
-        <p className={isSuccess ? 'success' : 'error'}>{message}</p>
-      )}
+      <div className="forgot-password-box">
+        <h2>Forgot Password</h2>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            placeholder="Enter your email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <button type="submit">Send Reset Link</button>
+        </form>
+        {message && (
+          <p className={isSuccess ? 'success' : 'error'}>{message}</p>
+        )}
+      </div>
     </div>
   );
 };
