@@ -38,12 +38,17 @@ const CampaignDetails = ({ userId: propUserId }) => {
         body: formData,
       });
 
-      if (response.ok) {
-        setMessage({ type: 'success', text: 'Campaign Created Successfully!' });
-        document.getElementById('campaignForm').reset();
-        // Optional: redirect to another page after success
-        // navigate('/campaigns');
-      } else {
+     if (response.ok) {
+  setMessage({ type: 'success', text: 'Campaign Created Successfully!' });
+  document.getElementById('campaignForm').reset();
+
+  // Redirect to dashboard
+  setTimeout(() => {
+    navigate('/dashboard');
+  }, 1500);
+}
+
+      else {
         const errData = await response.json();
         throw new Error(errData.error || response.statusText);
       }

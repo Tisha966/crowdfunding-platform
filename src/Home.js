@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; 
-import moneyImage from './assets/images/moneyimg.jpg'; 
+
 import fundsImage from './assets/images/fund3.jpg';
 import './home.css';
 
@@ -50,24 +50,167 @@ const Home = () => {
           </div>
         </div>
       </section>
+<section
+  style={{
+    backgroundColor: 'lightgray',
+    padding: '100px 20px',
+    textAlign: 'center',
+    borderTop: '1px solid #ddd',
+    borderBottom: '1px solid #ddd',
+  }}
+>
+  {/* Moving Testimonials */}
+  <div style={{ overflow: 'hidden', marginBottom: '50px', position: 'relative' }}>
+    <h2
+      style={{
+        color: '#283044',
+        fontSize: '2rem',
+        fontWeight: '600',
+        marginBottom: '30px',
+      }}
+    >
+      Backers' Voices: Every Perspective Matters
+    </h2>
 
-      <section className="features">
-        <h2 style={{color: "#ff7f50"}}>Why Choose Us?</h2>
-        <div className="feature-cards">
-          <div className="feature-card">
-            <h3>Easy to Use</h3>
-            <p>Simple tools to get your project up and running in minutes.</p>
+    <div
+      style={{
+        display: 'flex',
+        animation: 'scrollMarquee 30s linear infinite',
+        width: 'max-content',
+      }}
+    >
+      {[
+        "“Incredible support. My idea finally took off!” — Riya Sharma",
+        "“Funding made simple and impactful. Loved it!” — Ravi Patel",
+        "“Smooth process, real change. I'm impressed.” — Meena Kapoor",
+        "“Great UI. Felt part of something bigger.” — Ankit Desai",
+        "“Dreams met funding. Truly empowering platform.” — Sneha Roy",
+        "“Very easy to contribute. Super intuitive.” — Dhruv Mehta",
+        "“Big difference with small help. Beautiful!” — Kavita Bansal",
+        "“Crowdfunding reimagined. I’m now a believer.” — Aarav Khanna",
+      ]
+        .concat([
+          "“Incredible support. My idea finally took off!” — Riya Sharma",
+          "“Funding made simple and impactful. Loved it!” — Ravi Patel",
+          "“Smooth process, real change. I'm impressed.” — Meena Kapoor",
+          "“Great UI. Felt part of something bigger.” — Ankit Desai",
+          "“Dreams met funding. Truly empowering platform.” — Sneha Roy",
+          "“Very easy to contribute. Super intuitive.” — Dhruv Mehta",
+          "“Big difference with small help. Beautiful!” — Kavita Bansal",
+          "“Crowdfunding reimagined. I’m now a believer.” — Aarav Khanna",
+        ])
+        .map((text, index) => (
+          <div
+            key={index}
+            style={{
+              display: 'inline-block',
+              backgroundColor: '#fff',
+              padding: '16px 24px',
+              borderRadius: '12px',
+              boxShadow: '0 3px 10px rgba(0, 0, 0, 0.08)',
+              minWidth: '320px',
+              maxWidth: '360px',
+              fontStyle: 'italic',
+              color: '#333',
+              fontSize: '1rem',
+              lineHeight: '1.5',
+              marginRight: '30px',
+            }}
+          >
+            {text}
           </div>
-          <div className="feature-card">
-            <h3>Community Driven</h3>
-            <p>Join a community of creators and supporters worldwide.</p>
-          </div>
-          <div className="feature-card">
-            <h3>Secure Payments</h3>
-            <p>Fast and secure transactions to keep your contributions safe.</p>
-          </div>
-        </div>
-      </section>
+        ))}
+    </div>
+
+    <style>
+      {`
+        @keyframes scrollMarquee {
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-50%); }
+        }
+      `}
+    </style>
+  </div>
+
+  {/* Main Call-to-Action */}
+  <div style={{ maxWidth: '850px', margin: '0 auto' }}>
+    <h2
+      style={{
+        color: '#283044',
+        fontSize: '2.8rem',
+        fontWeight: '700',
+        marginBottom: '20px',
+      }}
+    >
+      Ready to Make a Difference?
+    </h2>
+    <p style={{ color: '#444', fontSize: '1.2rem', margin: '12px 0' }}>
+      Whether you're launching a new idea or supporting a cause — the time is now.
+    </p>
+    <p style={{ color: '#444', fontSize: '1.2rem', margin: '12px 0' }}>
+      Join us to empower communities and turn visions into reality.
+    </p>
+
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        gap: '20px',
+        marginTop: '30px',
+      }}
+    >
+      <Link
+        to="/campaigndetails/:id"
+        style={{
+          padding: '14px 30px',
+          borderRadius: '10px',
+          backgroundColor: '#283044',
+          color: '#fff',
+          fontWeight: 'bold',
+          fontSize: '1.1rem',
+          textDecoration: 'none',
+        }}
+      >
+        🎯 Start a Campaign
+      </Link>
+      <Link
+        to="/explore"
+        style={{
+          padding: '14px 30px',
+          borderRadius: '10px',
+          border: '2px solid #283044',
+          color: '#283044',
+          fontWeight: 'bold',
+          fontSize: '1.1rem',
+          textDecoration: 'none',
+          backgroundColor: 'transparent',
+        }}
+      >
+        🤝 Contribute Now
+      </Link>
+    </div>
+  </div>
+ 
+
+</section>
+<div className="crowdfunding-warning" style={{ backgroundColor: 'white', padding: '20px', borderRadius: '8px', marginTop: '40px' }}>
+  <div className="crowdfunding-warning-content">
+    <p>
+  Invest with purpose and awareness.
+  <br />
+  While startups offer exciting opportunities and big rewards, it’s important to understand the risks.
+  <br />
+  Learn how to make informed decisions in our <strong>Investor FAQ</strong> below.
+</p>
+
+    <Link to="/faq" className="faq-button">
+      Learn more in our Investor FAQ →
+    </Link>
+  </div>
+</div>
+
+
 
       <footer className="footer">
         <div className="footer-container">

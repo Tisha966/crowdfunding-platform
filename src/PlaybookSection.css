@@ -164,3 +164,16 @@ body {
   color: #721c24;
   border: 1px solid #f5c6cb;
 }
+.status.success {
+  color: green;
+  margin-top: 1rem;
+}
+
+.status.error {
+  color: red;
+  margin-top: 1rem;
+}
+
+.login-reminder {
+  margin-top: 1rem;
+}
