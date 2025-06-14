@@ -47,7 +47,10 @@ const handleDonate = (campaignId) => {
 };
 
   // Urgent campaigns (10 days or less)
-  const urgentCampaigns = campaigns.filter(c => c.daysLeft <= 10);
+ const urgentCampaigns = campaigns
+  .filter(c => c.daysLeft <= 10)
+  .sort((a, b) => a.daysLeft - b.daysLeft);
+
 
   // Search filter
   const filteredCampaigns = campaigns.filter(c =>
