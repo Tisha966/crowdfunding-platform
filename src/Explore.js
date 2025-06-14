@@ -6,13 +6,20 @@ import './explore.css';
 const Explore = () => {
   const location = useLocation();
   const navigate = useNavigate();
-
   const message = location.state?.message;
+
   const [campaigns, setCampaigns] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Fetch campaigns from backend API
+  // Check if user is logged in
+  const isUserLoggedIn = () => {
+  const userId = localStorage.getItem('userId');
+  const token = localStorage.getItem('token'); // if you use JWT or any auth token
+  return userId && token; // both must exist
+};
+
+  // Fetch campaigns from backend
   const fetchCampaigns = async () => {
     try {
       const res = await axios.get('http://localhost:5002/api/campaigns');
@@ -28,23 +35,30 @@ const Explore = () => {
     fetchCampaigns();
   }, [message]);
 
-  const handleDonate = (campaignId) => {
-    navigate(`/donate/${campaignId.trim()}`);
-  };
+  // Handle Donate button click
+const handleDonate = (campaignId) => {
+  if (!isUserLoggedIn()) {
+    alert('You must be logged in to donate!');
+    navigate('/login');
+    return;
+  }
 
-  // Filter urgent campaigns (10 days or less)
+  navigate(`/donate/${campaignId.trim()}`);
+};
+
+  // Urgent campaigns (10 days or less)
   const urgentCampaigns = campaigns.filter(c => c.daysLeft <= 10);
 
-  // Filter campaigns based on search term (case insensitive)
+  // Search filter
   const filteredCampaigns = campaigns.filter(c =>
     c.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
     <div className="explore-container">
-      <h1 style={{color:"#f16a38"}}>Explore Campaigns</h1>
+      <h1 style={{ color: "#f16a38" }}>Explore Campaigns</h1>
 
-      {/* Search box with icon */}
+      {/* Search bar */}
       <div className="search-box">
         <input
           type="text"
@@ -53,10 +67,10 @@ const Explore = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           aria-label="Search campaigns"
         />
-        <span className="search-icon" aria-hidden="true">&#128269;</span> {/* Unicode magnifying glass */}
+        <span className="search-icon" aria-hidden="true">&#128269;</span>
       </div>
 
-      {/* Urgent campaigns ticker */}
+      {/* Urgent campaigns */}
       {urgentCampaigns.length > 0 && (
         <div className="urgent-ticker">
           <marquee behavior="scroll" direction="left" scrollamount="8">
@@ -64,7 +78,11 @@ const Explore = () => {
               <span
                 key={c._id}
                 onClick={() => handleDonate(c._id)}
-                style={{ cursor: 'pointer', marginRight: index === urgentCampaigns.length - 1 ? '0' : '2rem', textDecoration: 'underline' }}
+                style={{
+                  cursor: 'pointer',
+                  marginRight: index === urgentCampaigns.length - 1 ? '0' : '2rem',
+                  textDecoration: 'underline'
+                }}
                 title={`Donate to ${c.title}`}
               >
                 {c.title} - Only {c.daysLeft} day{c.daysLeft > 1 ? 's' : ''} left!
@@ -76,6 +94,7 @@ const Explore = () => {
 
       {message && <p className="success-message">{message}</p>}
 
+      {/* Campaign list */}
       {loading ? (
         <p>Loading...</p>
       ) : (
@@ -99,7 +118,19 @@ const Explore = () => {
                   <p>{campaign.description}</p>
                   <p style={{ color: "teal" }}>₹{campaign.amountRaised} raised</p>
                   <p style={{ color: '#e74c3c', fontWeight: 'bold' }}>{campaign.daysLeft} Days Left</p>
-                  <button onClick={() => handleDonate(campaign._id)}>Donate</button>
+
+                  {/* Donate Button with conditional disabling */}
+                 <button
+  onClick={() => handleDonate(campaign._id)}
+  disabled={!isUserLoggedIn()}
+  style={{
+    backgroundColor: !isUserLoggedIn() ? '#ccc' : '',
+    cursor: !isUserLoggedIn() ? 'not-allowed' : 'pointer',
+  }}
+>
+  Donate
+</button>
+
                 </div>
               );
             })
