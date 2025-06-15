@@ -55,3 +55,8 @@
     background: #219653;
     transform: translateY(-2px);
   }
+.error-message {
+  color: crimson;
+  font-weight: bold;
+  margin-top: 10px;
+}

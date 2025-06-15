@@ -1,140 +1,130 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './donationPage.css';
+import { useParams } from 'react-router-dom';
 
-const DonationPage = () => {
-  const { campaignId } = useParams();
-  const navigate = useNavigate();
-
-  const [campaign, setCampaign] = useState(null);
-  const [amount, setAmount] = useState('');
+function DonationPage() {
+  const [loading, setLoading] = useState(false);
+  const [sdkReady, setSdkReady] = useState(false);
   const [donorName, setDonorName] = useState('');
   const [donorEmail, setDonorEmail] = useState('');
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [message, setMessage] = useState('');
+  const [amount, setAmount] = useState('');
+  const [campaignName, setCampaignName] = useState('Loading...');
+  const { campaignId } = useParams();
 
+  // ✅ Load Cashfree v3 SDK
   useEffect(() => {
-    const fetchCampaign = async () => {
-      try {
-        const sanitizedId = encodeURIComponent(campaignId.trim());
-        const res = await axios.get(`http://localhost:5002/api/campaigns/${sanitizedId}`);
+    const script = document.createElement('script');
+    script.src = "https://sdk.cashfree.com/js/v3/cashfree.js";
+    script.async = true;
 
-        if (res.status === 200) {
-          setCampaign(res.data);
-        } else {
-          setError('Campaign not found');
-        }
-      } catch (error) {
-        console.error('Error fetching campaign details:', error);
-        setError('Failed to fetch campaign details');
-      } finally {
-        setLoading(false);
-      }
+    script.onload = () => {
+      console.log("✅ Cashfree v3 SDK loaded");
+      setSdkReady(true);
     };
 
-    fetchCampaign();
+    script.onerror = () => {
+      console.error("❌ Failed to load Cashfree SDK");
+      alert("⚠️ Cashfree SDK not loaded properly. Please refresh.");
+    };
 
-    // Get user info from localStorage if logged in
-    const userString = localStorage.getItem('user');
-    if (userString) {
-      const user = JSON.parse(userString);
-      setDonorName(user.name || '');
-      setDonorEmail(user.email || '');
-    }
+    document.body.appendChild(script);
+  }, []);
+
+  // ✅ Fetch campaign title
+  useEffect(() => {
+    axios.get(`http://localhost:5002/api/campaigns/${campaignId}`)
+      .then(res => setCampaignName(res.data.title || 'Unknown Campaign'))
+      .catch(() => setCampaignName('Unknown Campaign'));
   }, [campaignId]);
 
-  const handleDonation = async (e) => {
-    e.preventDefault();
+  // ✅ Handle donation
+  const handleDonate = async () => {
+    if (!sdkReady || !window.Cashfree) {
+      alert("⚠️ Payment gateway not ready. Please wait.");
+      return;
+    }
 
     if (!donorName || !donorEmail || !amount) {
-      setMessage('Please fill in all fields');
+      alert("❗ Please fill in all fields.");
       return;
     }
 
-    if (Number(amount) <= 0) {
-      setMessage('Please enter a valid donation amount greater than zero.');
-      return;
-    }
-
-    // Check if user is logged in (just by presence of user in localStorage)
-    const userString = localStorage.getItem('user');
-    if (!userString) {
-      alert('You must be logged in to donate');
-      navigate('/login');
-      return;
-    }
-
-    // Send donation data WITHOUT userId, only donorEmail and donorName
-    const donationData = {
-      campaignId: campaignId.trim(),
-      amount: Number(amount),
-      donorEmail: donorEmail,
-      donorName: donorName,
-    };
+    setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:5002/api/donations', donationData);
+      const res = await axios.post('http://localhost:5002/api/cashfree/create-order', {
+        amount,
+        donorEmail,
+        donorName,
+        campaignId,
+      });
 
-      if (response.status === 201) {
-        setMessage('Donation successful! 🎉');
-        setTimeout(() => {
-          navigate('/explore', { state: { message: 'Donation successful! 🎉' } });
-        }, 2000);
-      } else {
-        setMessage('Failed to donate. Please try again.');
+      const { payment_session_id } = res.data;
+      if (!payment_session_id) {
+        alert("❌ No session ID received.");
+        return;
       }
-    } catch (error) {
-      console.error('Error processing donation:', error);
-      setMessage('Error: Unable to process donation.');
+
+      const cf = window.Cashfree({ mode: 'sandbox' }); // Use 'production' in live mode
+
+      await cf.checkout({
+        paymentSessionId: payment_session_id,
+        redirectTarget: '_self', // Use "_blank" if you want to open in new tab
+      });
+
+    } catch (err) {
+      console.error("❌ Error during Cashfree payment:", err);
+      alert("Payment failed. Check console.");
+    } finally {
+      setLoading(false);
     }
   };
 
-  if (loading) return <p>Loading campaign details...</p>;
-  if (error) return <p>{error}</p>;
-
   return (
-    <div className="donation-page">
-      <h1>{campaign?.title}</h1>
-      <p><strong>Amount Raised:</strong> ₹{campaign?.amountRaised}</p>
+    <div style={{ padding: '20px', maxWidth: '400px', margin: '0 auto' }}>
+      <h2>Donate to <strong>{campaignName}</strong></h2>
 
-      <img
-        src={`http://localhost:5002/${campaign?.imagePath}`}
-        alt={campaign?.title}
-        className="campaign-image"
+      <input
+        type="text"
+        value={donorName}
+        onChange={e => setDonorName(e.target.value)}
+        placeholder="Your Name"
+        style={{ display: 'block', width: '100%', margin: '10px 0', padding: '8px' }}
+      />
+      <input
+        type="email"
+        value={donorEmail}
+        onChange={e => setDonorEmail(e.target.value)}
+        placeholder="Your Email"
+        style={{ display: 'block', width: '100%', margin: '10px 0', padding: '8px' }}
+      />
+      <input
+        type="number"
+        value={amount}
+        onChange={e => setAmount(e.target.value)}
+        placeholder="Amount (₹)"
+        style={{ display: 'block', width: '100%', margin: '10px 0', padding: '8px' }}
       />
 
-      <p>{campaign?.description}</p>
+      <button
+        onClick={handleDonate}
+        disabled={loading || !sdkReady}
+        style={{
+          backgroundColor: '#238044',
+          color: 'white',
+          border: 'none',
+          padding: '10px 20px',
+          cursor: loading || !sdkReady ? 'not-allowed' : 'pointer',
+          width: '100%',
+          fontSize: '16px'
+        }}
+      >
+        {loading ? "Loading Payment..." : "Donate"}
+      </button>
 
-      <form onSubmit={handleDonation}>
-        <input
-          type="text"
-          placeholder="Your Name"
-          value={donorName}
-          onChange={(e) => setDonorName(e.target.value)}
-          required
-        />
-        <input
-          type="email"
-          placeholder="Your Email"
-          value={donorEmail}
-          onChange={(e) => setDonorEmail(e.target.value)}
-          required
-        />
-        <input
-          type="number"
-          placeholder="Amount"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          required
-        />
-        <button type="submit">Donate</button>
-      </form>
-
-      {message && <p>{message}</p>}
+      <div id="payment-form" style={{ marginTop: '20px' }}></div>
     </div>
   );
-};
+}
 
 export default DonationPage;

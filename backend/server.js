@@ -9,6 +9,9 @@ const campaignRoutes = require('./routes/campaignRoutes');
 const feedbackRoutes = require('./routes/feedbackRoutes');
 const donationRoutes = require('./routes/donationRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');  // Import dashboard routes
+const cashfreeRoutes = require('./routes/cashfreeRoutes');
+
+
 
 dotenv.config();
 
@@ -35,6 +38,8 @@ app.use('/api/auth', authRoutes);
 app.use('/api/campaigns', campaignRoutes);
 app.use('/api/feedback', feedbackRoutes);
 app.use('/api/donations', donationRoutes);
+app.use('/api/cashfree', cashfreeRoutes); // ✅ new
+
 
 // ✅ Adding the new route for the personalized dashboard
 app.use('/api/user', dashboardRoutes);  // Now this will handle requests like /api/user/dashboard

@@ -12,11 +12,11 @@ const PlaybookSection = () => {
   const navigate = useNavigate();
 
   // Check login status
-  const isUserLoggedIn = () => {
-    const token = localStorage.getItem("token");
-    const userId = localStorage.getItem("userId");
-    return token && token.length > 10 && userId;
-  };
+ const isUserLoggedIn = () => {
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
+  return token && token.length > 10 && userId;
+};
 
   useEffect(() => {
     const loggedIn = isUserLoggedIn();

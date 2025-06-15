@@ -19,15 +19,15 @@ const isUserLoggedIn = () => {
   if (!token || !userId) return false;
 
   try {
-    const payload = JSON.parse(atob(token.split('.')[1])); // decode payload
+    const payload = JSON.parse(atob(token.split('.')[1])); // decode JWT payload
     const expiry = payload.exp * 1000; // convert to milliseconds
-    const now = Date.now();
-    return now < expiry; // true if not expired
+    return Date.now() < expiry;
   } catch (error) {
-    console.error("Token decoding failed:", error);
+    console.warn("Invalid or corrupted token:", error);
     return false;
   }
 };
+
 
 
 
