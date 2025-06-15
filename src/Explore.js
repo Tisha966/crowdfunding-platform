@@ -12,12 +12,24 @@ const Explore = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Check if user is logged in
-  const isUserLoggedIn = () => {
-  const userId = localStorage.getItem('userId');
-  const token = localStorage.getItem('token'); // if you use JWT or any auth token
-  return userId && token; // both must exist
+const isUserLoggedIn = () => {
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
+
+  if (!token || !userId) return false;
+
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1])); // decode payload
+    const expiry = payload.exp * 1000; // convert to milliseconds
+    const now = Date.now();
+    return now < expiry; // true if not expired
+  } catch (error) {
+    console.error("Token decoding failed:", error);
+    return false;
+  }
 };
+
+
 
   // Fetch campaigns from backend
   const fetchCampaigns = async () => {
@@ -56,6 +68,8 @@ const handleDonate = (campaignId) => {
   const filteredCampaigns = campaigns.filter(c =>
     c.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
+  console.log("🔍 Debug - isUserLoggedIn:", isUserLoggedIn());
+
 
   return (
     <div className="explore-container">
@@ -123,7 +137,7 @@ const handleDonate = (campaignId) => {
                   <p style={{ color: '#e74c3c', fontWeight: 'bold' }}>{campaign.daysLeft} Days Left</p>
 
                   {/* Donate Button with conditional disabling */}
-                 <button
+                <button
   onClick={() => handleDonate(campaign._id)}
   disabled={!isUserLoggedIn()}
   style={{
@@ -133,6 +147,7 @@ const handleDonate = (campaignId) => {
 >
   Donate
 </button>
+
 
                 </div>
               );
