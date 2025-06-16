@@ -31,14 +31,14 @@ const App = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    const username = localStorage.getItem('username');
-    const userType = localStorage.getItem('userType');
+  const token = localStorage.getItem('token');
+  const savedUser = JSON.parse(localStorage.getItem('user'));
 
-    if (token && username) {
-      setUser({ name: username, token, type: userType });
-    }
-  }, []);
+  if (token && savedUser) {
+    setUser({ name: savedUser.username || savedUser.name, token, role: '' });
+  }
+}, []);
+
 
   const handleLogout = () => {
     localStorage.clear();

@@ -29,6 +29,22 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/', async (req, res) => {
+  const { userId } = req.query;
+
+  if (!userId) {
+    return res.status(400).json({ error: 'Missing userId' });
+  }
+
+  try {
+    const donations = await Donation.find({ userId }).sort({ createdAt: -1 });
+    res.json(donations);
+  } catch (err) {
+    console.error('❌ Error fetching donations:', err.message);
+    res.status(500).json({ error: 'Failed to fetch donations' });
+  }
+});
+
 // Optional: Secure route using token authentication
 router.get('/dashboard-secure', authenticateToken, async (req, res) => {
   try {
