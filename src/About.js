@@ -1,149 +1,212 @@
 import React from "react";
 import "./about.css";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+
+import profileImage from "./assets/images/fund10.jpg";
+
+import img3 from "./assets/images/tishaimage.jpg";
+
+import img1 from "./assets/images/hunger.jpg";
+import img2 from "./assets/images/surgical.jpg";
+
+import img4 from "./assets/images/orphan.jpg";
 
 const About = () => {
   return (
-    <div className="about-page">
-      {/* Investor Stats Section */}
-      <div className="stats-container">
-        <h2 className="stats-header" style={{color:"teal"}}>JOIN OVER 1 MILLION INVESTORS</h2>
+    <>
+      {/* Hero / Mission Section */}
+      <div className="about-bg-wrapper">
+        <div className="about-box">
+        <h2 className="stats-header" style={{ color: "teal" }}>
+         Invest in the In-Between : Where Ideas Become Reality
+        </h2>
+        <hr className="line" />
+
         <div className="stats">
           <div className="stat">
-  <h1>₹12,400</h1> {/* Replace with real median investment */}
-  <p>Median Investment</p>
-</div>
-<div className="stat">
-  <h1>1,245</h1> {/* Replace with actual number of founders funded */}
-  <p>Founders Funded</p>
-</div>
-<div className="stat">
-  <h1 style={{ color:"#ff7f50" }}>₹3,200 Cr</h1> {/* Replace with real total raised */}
-  <p>Raised on [CROWDFUNDING]</p>
-</div>
-
+            <h1>₹12,400</h1>
+            <p>Median Investment</p>
+          </div>
+          <div className="stat">
+            <h1>1,245</h1>
+            <p>Founders Funded</p>
+          </div>
+          <div className="stat">
+            <h1 style={{ color: "#ff7f50" }}>₹3,200 Cr</h1>
+            <p>Raised on CROWDFUNDING</p>
+          </div>
         </div>
-        <div className="tags-container">
-  <div className="tags">
-    <span className="no-move">📊 Virtual Reality Workspaces</span>
-    <span className="no-move">🐾 A Cure for Cancer in Dogs</span>
-    <span className="no-move">📰 Increasing Media Literacy</span>
-    <span className="no-move">🛒 Community-Owned Supermarkets</span>
-    <span className="no-move">🍶 Artisanal Korean Rice Wines</span>
-    <span className="no-move">💉 Vaccine Distribution at Scale</span>
-    <span className="no-move">🍺 A Brewery in the Heart of America</span>
-    <span className="no-move">🌍 Global Climate Change Solutions</span>
-    <span className="no-move">🎓 Free Education for Underprivileged Kids</span>
-    <span className="no-move">🛠️ Innovations in Renewable Energy</span>
-    <span className="no-move">🌱 Urban Farming Initiatives</span>
-    <span className="move">🤖 AI-Powered Healthcare Systems</span>
-    <span className="move">🚀 Space Exploration Technologies</span>
-    <span className="move">📱 Next-Gen Mobile Applications</span>
-    <span className="move">🍃 Zero-Waste Sustainable Products</span>
-    <span className="move">📚 AI-Driven Learning Platforms</span>
-    <span className="move">📰 Increasing Media Literacy</span>
-    <span className="move">🛒 Community-Owned Supermarkets</span>
-    <span className="move">🍶 Artisanal Korean Rice Wines</span>
-    <span className="move">💉 Vaccine Distribution at Scale</span>
+          
+
+          <div className="about-flex">
+            <div className="about-text">
+              <p>
+                Hello! We are a passionate team committed to making crowdfunding more transparent,
+                more personal, and more powerful. We believe in helping dreamers take bold steps.
+              </p>
+              <p>
+                With a presence in 25+ countries, thousands of creators, and millions raised, our
+                platform supports you from idea to impact.
+              </p>
+              <p>
+                We're here not just to fund dreams—but to fuel revolutions, communities, and change.
+              </p>
+            </div>
+            <div className="about-float-img">
+              <img src={profileImage} alt="Founder" />
+            </div>
+          </div>
+        </div>
     
-  </div>
-</div>
+
+      {/* Stats Section */}
+   
+
+        <div className="tags-container">
+          <div className="tags">
+            <span className="no-move">📊 Virtual Reality Workspaces</span>
+            <span className="no-move">🐾 A Cure for Cancer in Dogs</span>
+            <span className="no-move">📰 Increasing Media Literacy</span>
+            <span className="no-move">🛒 Community-Owned Supermarkets</span>
+            <span className="no-move">🍶 Artisanal Korean Rice Wines</span>
+            <span className="no-move">💉 Vaccine Distribution at Scale</span>
+            <span className="no-move">🍺 A Brewery in the Heart of America</span>
+            <span className="no-move">🌍 Global Climate Change Solutions</span>
+            <span className="no-move">🎓 Free Education for Underprivileged Kids</span>
+            <span className="no-move">🛠 Innovations in Renewable Energy</span>
+            <span className="no-move">🌱 Urban Farming Initiatives</span>
+
+            <span className="move">🤖 AI-Powered Healthcare Systems</span>
+            <span className="move">🚀 Space Exploration Technologies</span>
+            <span className="move">📱 Next-Gen Mobile Applications</span>
+            <span className="move">🍃 Zero-Waste Sustainable Products</span>
+            <span className="move">📚 AI-Driven Learning Platforms</span>
+          </div>
+        </div>
       </div>
 
-      {/* Testimonials Section */}
-      <div className="testimonials-container">
-  <div className="testimonial-card">
-    <p>"Investing in sustainable agriculture is the future. I believe in supporting farmers and their innovations."</p>
-    <h4>Ravi Kumar</h4>
-    <span>Invested in Organic Farm Innovations</span>
-  </div>
+      {/* Crowdfunding Guide Section */}
+    <div className="crowdfunding-container">
+  <section className="section-block">
+    <div className="text-content">
+      <h2 >What is Crowdfunding?<br />Everything You Should Know</h2>
+      <p>
+        Crowdfunding harnesses the power of online and offline communities to raise money for good causes.
+      </p>
+      <p>
+        From supporting social causes or raising funds for disaster relief, crowdfunding allows everyday people to donate what they can to make the world a better place.
+      </p>
+      <p>
+        Crowdfunding can be used to support an individual in need or a nonprofit organization. The core principle is that you can help a friend or help an entire community with your fundraising efforts.
+      </p>
+      <p>
+        You can also easily share your crowdfunding fundraiser via WhatsApp with friends and family or on TikTok and Instagram to use the power of social media.
+      </p>
+      <p>
+        If you’ve ever found yourself wondering about crowdfunding, we’ll answer your questions and give you top tips on bringing in donations.
+      </p>
+      <button className="start-btn" >Start a Fund</button>
+    </div>
+    <div className="image-content">
+      <img src={img3} alt="Crowdfunding explanation" />
+    </div>
+  </section>
 
-  <div className="testimonial-card">
-    <p>"This platform gives us an opportunity to invest in the green energy sector. Great way to be part of the change!"</p>
-    <h4>Anjali Sharma</h4>
-    <span>Invested in Solar Energy Solutions</span>
-  </div>
 
-  <div className="testimonial-card">
-    <p>"I love that I can support local artisans. Crowdfunding is a fantastic way to empower Indian entrepreneurs!"</p>
-    <h4>Vikram Singh</h4>
-    <span>Invested in Handmade Indian Artifacts</span>
+        {/* SECTION 2 */}
+        <section className="section-block reverse">
+  <div className="text-content">
+    <h2 style={{ color: "#283044" }}>Tell a Compelling Story</h2>
+    <p>
+      Whether you're fundraising for medical needs, education, or social causes in India,
+      your story matters. From the title to the images, clearly communicate the urgency,
+      background, and how the funds will be used. Using real photos and heartfelt narratives
+      can significantly improve trust and support from donors.
+    </p>
   </div>
+  <div className="image-content">
+    <img src={img1} alt="Fundraising in India" />
+  </div>
+</section>
 
-  <div className="testimonial-card">
-    <p>"The idea of making education affordable and accessible to everyone in India is something I'm deeply passionate about."</p>
-    <h4>Priya Gupta</h4>
-    <span>Invested in EdTech for Rural India</span>
+{/* SECTION 3 */}
+<section className="section-block">
+  <div className="text-content">
+    <h2 style={{ color: "#283044" }}>Share and Stay Connected</h2>
+    <p>
+      Fundraisers in India often succeed through frequent sharing on platforms like WhatsApp,
+      Instagram, and Facebook. Each share helps bring in more visibility and contributions.
+      Keeping donors updated about progress or milestones builds credibility and motivates
+      continued support.
+    </p>
   </div>
+  <div className="image-content">
+    <img src={img2} alt="Sharing fundraiser updates" />
+  </div>
+</section>
 
-  <div className="testimonial-card">
-    <p>"This platform is enabling a new era of crowdfunding in India. Exciting to see projects grow and make a difference!"</p>
-    <h4>Raghav Mehta</h4>
-    <span>Invested in India’s First Smart Village</span>
+<section className="section-block reverse">
+  <div className="text-content">
+    <h2 style={{ color: "#283044" }}>Thank Your Donors</h2>
+    <p>
+      A personal thank you goes a long way in India’s closely-knit communities. Whether it’s a
+      message, email, or a social media shoutout, expressing gratitude makes donors feel valued.
+      It also encourages them to share your campaign with others, increasing your reach.
+    </p>
   </div>
+  <div className="image-content">
+    <img src={img4} alt="Thanking donors in India" />
+  </div>
+</section>
+
+      </div>
+
+      {/* Milestones Timeline */}
+    
   
-  <div className="testimonial-card">
-    <p>"I love that I can support local artisans. Crowdfunding is a fantastic way to empower Indian entrepreneurs!"</p>
-    <h4>Mansi Shukla</h4>
-    <span>Invested in Handmade Indian Artifacts</span>
+  {/* FAQ Section */}
+<div className="faq-section">
+  <h2 className="faq-title">4 of the most common questions about crowdfunding</h2>
+  <div className="faq-list">
+    <details>
+      <summary>How do I know if crowdfunding is right for me?</summary>
+      <p>
+        Crowdfunding is ideal if you have a clear goal, a compelling story, and a supportive network. It's great for both personal needs and larger social causes.
+      </p>
+    </details>
+    <details>
+      <summary>What are the different types of crowdfunding?</summary>
+      <p>
+        There are several types, including donation-based, reward-based, equity-based, and debt crowdfunding—each suited for different funding goals.
+      </p>
+    </details>
+    <details open>
+      <summary>Is it okay to raise money for myself?</summary>
+      <p>
+        Absolutely. Asking for help online can feel hard, but many people understand financial hardship. You'll likely find generous people willing to support you.
+      </p>
+    </details>
+    <details>
+      <summary>What is the best way to get more donations?</summary>
+      <p>
+        Share your story regularly, add updates, post across social media, and thank your supporters. Engaging content leads to more visibility and support.
+      </p>
+    </details>
   </div>
 </div>
 
-      <footer className="footer">
-              <div className="footer-container">
-                <div className="footer-top">
-                  <div className="footer-logo">
-                    <h2>CrowdFunding</h2>
-                    <p className="footer-description">Empowering dreams and bringing projects to life. Join us to create change.</p>
-                  </div>
-      
-                  <div className="footer-links">
-                    <div className="footer-link-column">
-                      <h3>Quick Links</h3>
-                      <ul>
-                        <li><Link to="/">Home</Link></li>
-                        <li><Link to="/about">About</Link></li>
-                        <li><Link to="/explore">Explore</Link></li>
-                        <li><Link to="/contact">Contact</Link></li>
-                        <li><Link to="/login">Login</Link></li>
-                      </ul>
-                    </div>
-      
-                    <div className="footer-link-column">
-                      <h3>Resources</h3>
-                      <ul>
-                        <li><a href="/about">Help Center</a></li>
-                        <li><a href="/about">Terms of Service</a></li>
-                        <li><a href="/about">Privacy Policy</a></li>
-                        <li><a href="/about">FAQ</a></li>
-                      </ul>
-                    </div>
-      
-                    <div className="footer-link-column">
-                      <h3>Follow Us</h3>
-                      <div className="footer-social">
-                        <a href="/about" className="social-link"><i className="fab fa-facebook-f"></i></a>
-                        <a href="/about" className="social-link"><i className="fab fa-twitter"></i></a>
-                        <a href="/about" className="social-link"><i className="fab fa-instagram"></i></a>
-                        <a href="/about" className="social-link"><i className="fab fa-linkedin-in"></i></a>
-                      </div>
-                    </div>
-      
-                    <div className="footer-link-column">
-                      <h3>Newsletter</h3>
-                      <p style={{color:"gray"}}>Stay updated with our latest news and campaigns.</p>
-                      <input type="email" placeholder="Your Email" className="newsletter-input" />
-                      <button className="newsletter-btn">Subscribe</button>
-                    </div>
-                  </div>
-                </div>
-      
-                <div className="footer-bottom">
-                  <p style={{color:"whitesmoke"}}>&copy; 2024 CrowdFunding. All Rights Reserved.</p>
-                </div>
-              </div>
-            </footer>
-    </div>
+      {/* Call to Action */}
+      <div className="call-to-action">
+        <h3>Ready to Get Started?</h3>
+        <p>
+          Whether you're looking to invest in the next big idea or raise funds for your own, we're
+          here to support your journey.
+        </p>
+        <Link to="/explore">
+          <button className="cta-button">Explore Campaigns</button>
+        </Link>
+      </div>
+    </>
   );
 };
 
