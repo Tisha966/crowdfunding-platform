@@ -198,7 +198,9 @@ const Dashboard = () => {
                 <p>{c.description}</p>
                 <p>Days Left: {c.daysLeft}</p>
                 <p>Supporters: {c.supporters}</p>
-                <p>Amount Raised: ₹ {c.amountRaised}</p>
+             <p>Amount Raised: ₹ {c.amountRaised.toLocaleString('en-IN')}</p>
+
+
               </div>
             ))}
           </div>

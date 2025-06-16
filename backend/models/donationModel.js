@@ -1,12 +1,17 @@
 const mongoose = require('mongoose');
 
 const donationSchema = new mongoose.Schema({
+  orderId: {
+    type: String,
+    unique: true,
+    required: true
+  },
   campaignId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Campaign',
     required: true
   },
-  userId: {   // <-- Add this line
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
@@ -28,6 +33,5 @@ const donationSchema = new mongoose.Schema({
     default: Date.now
   }
 });
-
 
 module.exports = mongoose.model('Donation', donationSchema);

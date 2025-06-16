@@ -71,11 +71,20 @@ function DonationPage() {
 
     const cf = window.Cashfree({ mode: 'sandbox' });
 
-    // ✅ Start the Cashfree Checkout
-    await cf.checkout({
-      paymentSessionId: payment_session_id,
-      redirectTarget: 'self', // Will go to return_url after payment
-    });
+   // ✅ Save donation details
+localStorage.setItem('donationDetails', JSON.stringify({
+  donorEmail,
+  donorName,
+  campaignId,
+  amount,
+  userId: user?._id,
+}));
+
+// ✅ Launch Cashfree checkout
+await cf.checkout({
+  paymentSessionId: payment_session_id,
+  redirectTarget: 'self',
+});
 
     // ❌ Do NOT call verify-and-save here — payment isn't completed yet
   } catch (err) {
