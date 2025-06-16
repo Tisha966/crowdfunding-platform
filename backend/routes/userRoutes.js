@@ -91,7 +91,9 @@ router.post('/forgot-password', async (req, res) => {
 
     const resetToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '15m' });
 
-    const resetLink = `http://localhost:3000/reset-password/${resetToken}`;
+const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:3000';
+const resetLink = `${CLIENT_URL}/reset-password/${resetToken}`;
+
 
     console.log(`📧 Sending reset email to ${user.email} using ${process.env.EMAIL_USER}`);
 
@@ -124,6 +126,7 @@ router.post('/forgot-password', async (req, res) => {
 
 // Reset Password - use token to update the password
 router.post('/reset-password/:token', async (req, res) => {
+  console.log("✅ reset-password route HIT");
   const { token } = req.params;
   const { password } = req.body;
 

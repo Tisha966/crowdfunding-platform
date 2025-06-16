@@ -8,10 +8,8 @@ const authRoutes = require('./routes/userRoutes');
 const campaignRoutes = require('./routes/campaignRoutes');
 const feedbackRoutes = require('./routes/feedbackRoutes');
 const donationRoutes = require('./routes/donationRoutes');
-const dashboardRoutes = require('./routes/dashboardRoutes');  // Import dashboard routes
+const dashboardRoutes = require('./routes/dashboardRoutes');
 const cashfreeRoutes = require('./routes/cashfreeRoutes');
-
-
 
 dotenv.config();
 
@@ -20,15 +18,17 @@ const port = process.env.PORT || 5002;
 
 // ✅ CORS Configuration
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://your-frontend-app.com'],
+  origin: [
+    'http://localhost:3000',
+    'https://your-frontend-app.com',
+    'https://1c88-2401-4900-3106-dde9-c1fb-a87a-d1f5-e47b.ngrok-free.app'
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
 };
 
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
-
-
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -38,14 +38,20 @@ app.use('/api/auth', authRoutes);
 app.use('/api/campaigns', campaignRoutes);
 app.use('/api/feedback', feedbackRoutes);
 app.use('/api/donations', donationRoutes);
-app.use('/api/cashfree', cashfreeRoutes); // ✅ new
-
-
-// ✅ Adding the new route for the personalized dashboard
-app.use('/api/user', dashboardRoutes);  // Now this will handle requests like /api/user/dashboard
+app.use('/api/cashfree', cashfreeRoutes);
+app.use('/api/user', dashboardRoutes);
 
 // ✅ Serve static images from the uploads folder
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use(express.static(path.join(__dirname, '../build')));
+
+app.get('*', (req, res) => {
+  if (!req.originalUrl.startsWith('/api')) {
+    res.sendFile(path.join(__dirname, '../build/index.html'));
+  }
+});
+// ✅ Serve React frontend build
+
 
 // ✅ Database Connection
 mongoose
