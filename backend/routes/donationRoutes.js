@@ -28,16 +28,17 @@ router.post('/', async (req, res) => {
     });
 
     await donation.save();
-
-    // Update campaign's total amount raised
-    const parsedAmount = parseFloat(amount);
+const parsedAmount = parseFloat(amount);
 if (isNaN(parsedAmount) || parsedAmount <= 0) {
   return res.status(400).json({ message: 'Invalid donation amount' });
 }
 
-campaign.amountRaised += parsedAmount;
-campaign.supporters += 1;
+campaign.amountRaised = (campaign.amountRaised || 0) + parsedAmount;
+campaign.supporters = (campaign.supporters || 0) + 1;
+
 await campaign.save();
+
+
 
     
     return res.status(201).json({ message: 'Donation successful', donation });

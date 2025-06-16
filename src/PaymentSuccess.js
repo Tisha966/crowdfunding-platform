@@ -1,24 +1,39 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 function PaymentSuccess() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [verifying, setVerifying] = useState(false);
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const orderId = queryParams.get('order_id');
 
     async function verifyPayment() {
-      try {
-        // Call backend to verify payment & update donations and campaigns
-        await axios.post('http://localhost:5002/api/cashfree/verify-payment', { orderId });
+      if (verifying) return; // ✅ Prevent duplicate call
+      setVerifying(true);
 
-        // After successful verification, redirect to dashboard
+      // ✅ Avoid re-verifying same order from localStorage
+      const verified = localStorage.getItem(`verified_${orderId}`);
+      if (verified) {
+        console.log('✅ Payment already verified for', orderId);
+        navigate('/dashboard');
+        return;
+      }
+
+      try {
+        await axios.post('http://localhost:5002/api/cashfree/verify-payment', {
+          orderId,
+        });
+
+        // ✅ Save that this order is already verified
+        localStorage.setItem(`verified_${orderId}`, 'true');
+        localStorage.removeItem('donationDetails');
         navigate('/dashboard');
       } catch (err) {
-        console.error('Payment verification failed', err);
+        console.error('❌ Payment verification failed:', err);
         alert('Payment verification failed. Please contact support.');
       }
     }
@@ -28,9 +43,9 @@ function PaymentSuccess() {
     } else {
       navigate('/dashboard');
     }
-  }, [location, navigate]);
+  }, [location, navigate, verifying]);
 
-  return <p>Verifying payment, please wait...</p>;
+  return <p style={{ textAlign: 'center', marginTop: '60px' }}>✅ Verifying payment, please wait...</p>;
 }
 
 export default PaymentSuccess;

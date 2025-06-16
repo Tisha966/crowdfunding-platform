@@ -26,7 +26,7 @@ import RoleSelection from './RoleSelection.jsx';
 import ForgotPassword from './ForgotPassword';
 import ResetPassword from './ResetPassword';
 import PrivateRoute from './PrivateRoute'; // ✅ NEW
-import ThankYou from './ThankYou';
+import PaymentSuccess from './PaymentSuccess';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -110,7 +110,7 @@ const App = () => {
         <Route path="/donate/:campaignId" element={<DonationPage />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/faq" element={<FAQ />} />
-         <Route path="/thankyou" element={<ThankYou />} />
+         <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/role-selection" element={<RoleSelection user={user} setUser={setUser} />} />
