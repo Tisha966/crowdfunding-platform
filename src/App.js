@@ -27,6 +27,7 @@ import ForgotPassword from './ForgotPassword';
 import ResetPassword from './ResetPassword';
 import PrivateRoute from './PrivateRoute'; // ✅ NEW
 import PaymentSuccess from './PaymentSuccess';
+import VerifyDonation from './VerifyDonation'; // ✅ NEW
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -110,6 +111,8 @@ const App = () => {
         <Route path="/donate/:campaignId" element={<DonationPage />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/faq" element={<FAQ />} />
+        <Route path="/verify-donation" element={<VerifyDonation />} />
+
          <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />

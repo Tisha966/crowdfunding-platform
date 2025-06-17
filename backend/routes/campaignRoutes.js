@@ -1,10 +1,8 @@
 const express = require('express');
 const multer = require('multer');
 const Campaign = require('../models/campaignModel');
-const Donation = require('../models/donationModel');  // Import Donation model
 const router = express.Router();
 const mongoose = require('mongoose');
-
 
 // ✅ Configure Multer for image uploads
 const storage = multer.diskStorage({
@@ -18,6 +16,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+// ✅ POST: Create new campaign
 router.post('/create', upload.single('image'), async (req, res) => {
   console.log('Received form data:', req.body);
   console.log('Uploaded file:', req.file);
@@ -33,7 +32,6 @@ router.post('/create', upload.single('image'), async (req, res) => {
       return res.status(400).json({ error: 'Missing required fields including creatorId' });
     }
 
-    // ✅ Validate creatorId
     if (!mongoose.Types.ObjectId.isValid(creatorId)) {
       return res.status(400).json({ error: 'Invalid creatorId' });
     }
@@ -47,7 +45,7 @@ router.post('/create', upload.single('image'), async (req, res) => {
       daysLeft: parseInt(daysLeft),
       supporters: parseInt(numSupporters),
       amountRaised: 0,
-   creatorId: req.body.creatorId,
+      creatorId,
     });
 
     await newCampaign.save();
@@ -58,30 +56,28 @@ router.post('/create', upload.single('image'), async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
- // GET campaigns by creator ID
+
+// ✅ GET: Campaigns by creator ID
 router.get('/byCreator/:creatorId', async (req, res) => {
   try {
-    const campaigns = await Campaign.find({ creatorId: req.params.creatorId }); // 👈 Fix here
+    const campaigns = await Campaign.find({ creatorId: req.params.creatorId });
     if (!campaigns || campaigns.length === 0) {
       return res.status(404).json({ message: 'No campaigns found for this creator' });
     }
-    res.json(campaigns);
+    res.status(200).json(campaigns);
   } catch (error) {
     console.error('Error fetching campaigns by creator:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
 
-
-// ✅ GET: Fetch all campaigns
+// ✅ GET: All campaigns
 router.get('/', async (req, res) => {
   try {
     const campaigns = await Campaign.find({});
-
     if (!campaigns || campaigns.length === 0) {
       return res.status(404).json({ message: 'No campaigns available' });
     }
-
     res.status(200).json(campaigns);
   } catch (error) {
     console.error('Error fetching campaigns:', error);
@@ -89,78 +85,21 @@ router.get('/', async (req, res) => {
   }
 });
 
-
-// ✅ GET: Fetch a single campaign by ID
+// ✅ GET: Single campaign by ID
 router.get('/:id', async (req, res) => {
-  const id = req.params.id.trim();  // ✅ Trim whitespace
+  const id = req.params.id.trim();
   console.log('Received ID:', id);
 
   try {
     const campaign = await Campaign.findById(id);
-
     if (!campaign) {
       return res.status(404).json({ message: 'Campaign not found' });
     }
-
     res.status(200).json(campaign);
   } catch (error) {
     console.error('Error fetching campaign:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
-
-
-
-// ✅ POST: Add donation and update campaign
-router.post('/donate', async (req, res) => {
-  const { campaignId, donor, name, amount, userId } = req.body; // <-- include userId
-
-  if (!campaignId || !donor || !name || !amount || !userId) {
-    return res.status(400).json({ error: 'All fields are required' });
-  }
-
-  try {
-    const newDonation = new Donation({
-      campaignId,
-      donor,
-      name,
-      amount: Number(amount),
-      userId                     // <-- save the userId
-    });
-
-    await newDonation.save();
-
-    const campaign = await Campaign.findById(campaignId);
-
-    if (!campaign) {
-      return res.status(404).json({ message: 'Campaign not found' });
-    }
-
-    campaign.amountRaised += Number(amount);
-    campaign.supporters += 1;
-    await campaign.save();
-
-    res.status(201).json({
-      message: 'Donation successful',
-      donation: newDonation,
-      updatedCampaign: campaign
-    });
-
-  } catch (error) {
-    console.error('Error processing donation:', error);
-    res.status(500).json({ error: 'Server error' });
-  }
-});
-// ✅ GET: Fetch donations made by a specific user
-router.get('/user/:userId', async (req, res) => {
-  try {
-    const donations = await Donation.find({ userId: req.params.userId }).populate('campaignId');
-    res.status(200).json(donations);
-  } catch (err) {
-    console.error('Error fetching user donations:', err);
-    res.status(500).json({ error: 'Failed to fetch user donations' });
-  }
-});
-
 
 module.exports = router;

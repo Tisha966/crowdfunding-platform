@@ -4,6 +4,7 @@ import './ResetPassword.css';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5002';
+console.log("Backend URL:", BACKEND_URL);
 
 const ResetPassword = () => {
   const { token } = useParams();
@@ -53,6 +54,7 @@ const ResetPassword = () => {
   };
 
   return (
+    
     <div className="reset-container">
       <div className="reset-box">
         <h2>Reset Password</h2>

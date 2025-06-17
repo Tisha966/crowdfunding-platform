@@ -4,51 +4,58 @@ const Donation = require('../models/donationModel');
 const Campaign = require('../models/campaignModel');
 const User = require('../models/userModel');
 
-// ✅ POST: Create a donation (typically called from payment callback or testing)
-router.post('/', async (req, res) => {
-  try {
-    const { campaignId, amount, donorEmail, donorName } = req.body;
+// POST: Add donation and update campaign
+router.post('/donate', async (req, res) => {
+  const { campaignId, donorEmail, donorName, amount, userId, orderId } = req.body;
 
-    if (!campaignId || !amount || !donorEmail || !donorName) {
-      return res.status(400).json({ message: 'Missing donation details' });
+  if (!campaignId || !donorEmail || !donorName || !amount || !userId || !orderId) {
+    return res.status(400).json({ error: 'Missing required fields' });
+  }
+
+  try {
+    // Prevent duplicate order
+    const existing = await Donation.findOne({ orderId });
+    if (existing) {
+      return res.status(200).json({ message: 'Donation already recorded' });
     }
 
-    const user = await User.findOne({ email: donorEmail });
-    if (!user) return res.status(404).json({ message: 'User not found' });
-
-    const campaign = await Campaign.findById(campaignId);
-    if (!campaign) return res.status(404).json({ message: 'Campaign not found' });
-
     const donation = new Donation({
-      userId: user._id,
       campaignId,
-      amount,
       donor: donorEmail,
       name: donorName,
+      amount: Number(amount),
+      userId,
+      orderId
     });
 
     await donation.save();
-const parsedAmount = parseFloat(amount);
-if (isNaN(parsedAmount) || parsedAmount <= 0) {
-  return res.status(400).json({ message: 'Invalid donation amount' });
-}
 
-campaign.amountRaised = (campaign.amountRaised || 0) + parsedAmount;
-campaign.supporters = (campaign.supporters || 0) + 1;
+    const campaign = await Campaign.findById(campaignId);
+    if (campaign) {
+      campaign.amountRaised += Number(amount);
+      campaign.supporters += 1;
+      await campaign.save();
+    }
 
-await campaign.save();
-
-
-
-    
-    return res.status(201).json({ message: 'Donation successful', donation });
-  } catch (error) {
-    console.error('Donation POST error:', error);
-    return res.status(500).json({ message: 'Server error' });
+    res.status(201).json({ message: 'Donation recorded', donation });
+  } catch (err) {
+    console.error('Error recording donation:', err);
+    res.status(500).json({ error: 'Server error' });
   }
 });
 
-// ✅ GET: Fetch donations by userId or donor email
+// GET: Donations made by specific user (userId)
+router.get('/user/:userId', async (req, res) => {
+  try {
+    const donations = await Donation.find({ userId: req.params.userId }).populate('campaignId');
+    res.status(200).json(donations);
+  } catch (err) {
+    console.error('Error fetching user donations:', err);
+    res.status(500).json({ error: 'Failed to fetch user donations' });
+  }
+});
+
+// GET: Donations by userId or donor email
 router.get('/', async (req, res) => {
   const { userId, donor } = req.query;
 
@@ -72,10 +79,10 @@ router.get('/', async (req, res) => {
       createdAt: d.createdAt,
     }));
 
-    return res.status(200).json(formatted);
+    res.status(200).json(formatted);
   } catch (error) {
     console.error('Donation GET error:', error);
-    return res.status(500).json({ error: 'Server error' });
+    res.status(500).json({ error: 'Server error' });
   }
 });
 

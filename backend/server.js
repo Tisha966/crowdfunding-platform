@@ -21,7 +21,7 @@ const corsOptions = {
   origin: [
     'http://localhost:3000',
     'https://your-frontend-app.com',
-    'https://1c88-2401-4900-3106-dde9-c1fb-a87a-d1f5-e47b.ngrok-free.app'
+    process.env.CLIENT_URL,
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
