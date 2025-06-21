@@ -4,33 +4,19 @@ import { useLocation } from 'react-router-dom';
 
 function ThankYou() {
   const location = useLocation();
-  const hasPosted = useRef(false); // 🧠 prevent double post
+  const hasPosted = useRef(false);
 
-  useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    const orderId = queryParams.get('order_id');
-
-    const donationData = JSON.parse(localStorage.getItem('donationDetails'));
-
-    if (orderId && donationData && !hasPosted.current) {
+useEffect(() => {
+  setTimeout(() => {
+    if (orderId && !hasPosted.current) {
       hasPosted.current = true;
-
-      axios.post('http://localhost:5002/api/cashfree/verify-and-save', {
-        order_id: orderId,
-        campaignId: donationData.campaignId,
-        userId: donationData.userId,
-        donor: donationData.donorEmail,
-        name: donationData.donorName,
-        amount: donationData.amount,
-      })
-      .then(res => {
-        console.log("✅ Donation saved:", res.data);
-      })
-      .catch(err => {
-        console.error("❌ Failed to save donation:", err);
-      });
+      axios.post('http://localhost:5002/api/cashfree/verify-payment', { orderId })
+        .then(res => console.log(res.data))
+        .catch(err => console.error(err));
     }
-  }, [location]);
+  }, 3000); // ⏱️ Wait 3 seconds
+}, [location]);
+
 
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>

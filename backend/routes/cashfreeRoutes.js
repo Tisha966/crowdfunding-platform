@@ -4,7 +4,6 @@ const axios = require('axios');
 const Campaign = require('../models/campaignModel');
 const User = require('../models/userModel');
 const Donation = require('../models/donationModel');
-const mongoose = require('mongoose'); // ✅ Add this
 
 const APP_ID = process.env.CASHFREE_APP_ID;
 const SECRET_KEY = process.env.CASHFREE_SECRET_KEY;
@@ -32,10 +31,9 @@ router.post('/create-order', async (req, res) => {
           customer_name: donorName,
           customer_phone: '9999999999',
         },
-      order_meta: {
-  return_url: 'http://localhost:3000/payment-success?order_id={order_id}',
-},
-
+        order_meta: {
+          return_url: 'http://localhost:3000/payment-success?order_id={order_id}',
+        },
         order_tags: {
           campaignId,
           donorEmail,
@@ -61,26 +59,20 @@ router.post('/create-order', async (req, res) => {
   }
 });
 
-// ✅ Verify payment and save donation
-// ✅ verify-payment: verifies and records donation once
+// ✅ Verify and Save Donation (Atomic Insert)
 router.post('/verify-payment', async (req, res) => {
   const { orderId } = req.body;
   if (!orderId) return res.status(400).json({ error: 'Order ID is required' });
 
   try {
-    const existingDonation = await Donation.findOne({ orderId });
-    if (existingDonation) {
-      return res.status(200).json({ message: 'Donation already recorded' });
-    }
-
     const response = await axios.get(
       `https://sandbox.cashfree.com/pg/orders/${orderId}`,
       {
         headers: {
           'x-client-id': APP_ID,
           'x-client-secret': SECRET_KEY,
-          'x-api-version': '2022-09-01'
-        }
+          'x-api-version': '2022-09-01',
+        },
       }
     );
 
@@ -98,15 +90,28 @@ router.post('/verify-payment', async (req, res) => {
     const user = await User.findOne({ email: donor });
     if (!user) return res.status(404).json({ error: 'User not found' });
 
-    // ✅ Save donation
-    await Donation.create({
-      orderId,
-      campaignId,
-      userId: user._id,
-      donor,
-      name,
-      amount
-    });
+    // ✅ Atomic Insert — prevents duplicate donations
+    const donation = await Donation.findOneAndUpdate(
+      { orderId },
+      {
+        $setOnInsert: {
+          orderId,
+          campaignId,
+          userId: user._id,
+          donor,
+          name,
+          amount,
+        }
+      },
+      {
+        upsert: true,
+        new: false // will return null if just inserted
+      }
+    );
+
+    if (donation) {
+      return res.status(200).json({ message: 'Donation already recorded' });
+    }
 
     // ✅ Update user and campaign
     await Promise.all([
@@ -134,7 +139,5 @@ router.post('/verify-payment', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
-
 
 module.exports = router;
