@@ -177,3 +177,85 @@ body {
 .login-reminder {
   margin-top: 1rem;
 }
+.feedback-options {
+  background-color: #f7f7f7;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  margin-top: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.feedback-options p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+.highlight-link {
+  color: #283044;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.highlight-link:hover {
+  color: #555;
+  text-decoration: underline;
+}
+.grayish-box {
+  background-color: #f0f0f0; /* Light gray tone */
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+.feedback-options {
+  margin-top: 1rem;
+}
+
+.feedback-options p {
+  margin: 0.6rem 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+.highlight-link {
+  color: #283044;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.highlight-link:hover {
+  color: #555;
+  text-decoration: underline;
+}
+.grayish-box {
+  background-color: #f0f0f0;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+.feedback-login-prompt p {
+  font-size: 1rem;
+  color: #444;
+}
+
+.feedback-options p {
+  margin: 0.6rem 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+.highlight-link {
+  color: red;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.highlight-link:hover {
+  color: #555;
+  text-decoration: underline;
+}

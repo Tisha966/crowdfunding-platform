@@ -134,6 +134,8 @@ const handleDonate = (campaignId) => {
                   <h2>{campaign.title}</h2>
                   <p>{campaign.description}</p>
                   <p style={{ color: "teal" }}>₹{campaign.amountRaised} raised</p>
+                  <p style={{ color: 'green' }}>{campaign.supporters || 0} Supporter{campaign.supporters !== 1 ? 's' : ''}</p>
+
                   <p style={{ color: '#e74c3c', fontWeight: 'bold' }}>{campaign.daysLeft} Days Left</p>
 
                   {/* Donate Button with conditional disabling */}

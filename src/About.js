@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 
 import profileImage from "./assets/images/fund10.jpg";
 
-import img3 from "./assets/images/tishaimage.jpg";
+import img3 from "./assets/images/tishapic_blackcrop.jpg";
 
-import img1 from "./assets/images/hunger.jpg";
-import img2 from "./assets/images/surgical.jpg";
+import img1 from "./assets/images/1_img.jpg";
+import img2 from "./assets/images/2_img.jpg";
 
-import img4 from "./assets/images/orphan.jpg";
+import img4 from "./assets/images/3_img.jpg";
 
 const About = () => {
   return (
@@ -86,26 +86,28 @@ const About = () => {
       </div>
 
       {/* Crowdfunding Guide Section */}
-    <div className="crowdfunding-container">
+   <div className="crowdfunding-container">
   <section className="section-block">
     <div className="text-content">
-      <h2 >What is Crowdfunding?<br />Everything You Should Know</h2>
+      <h2>What is Crowdfunding?<br />Everything You Should Know</h2>
       <p>
-        Crowdfunding harnesses the power of online and offline communities to raise money for good causes.
+        Our crowdfunding platform is a user-friendly space where individuals and organizations in India can raise funds for causes that truly matter—whether it's medical emergencies, educational support, community development, or animal welfare.
       </p>
       <p>
-        From supporting social causes or raising funds for disaster relief, crowdfunding allows everyday people to donate what they can to make the world a better place.
+        Campaigners can easily create a fundraiser, add compelling stories, set a funding goal, and upload real photos or videos to build trust. Each campaign is designed to connect emotionally and transparently with potential supporters.
+      </p>
+      {/* <p>
+        We’ve made sharing seamless across WhatsApp, Instagram, Facebook, and more, helping you reach friends, family, and generous strangers in just a few clicks.
+      </p> */}
+      <p>
+        Whether you're raising funds for yourself, someone you care about, or a larger cause, our platform offers real-time tracking, donor visibility, and updates to keep your supporters engaged throughout your journey.
       </p>
       <p>
-        Crowdfunding can be used to support an individual in need or a nonprofit organization. The core principle is that you can help a friend or help an entire community with your fundraising efforts.
+        If you're ready to make a difference, start your own campaign and be part of a community that's creating real impact—one donation at a time.
       </p>
-      <p>
-        You can also easily share your crowdfunding fundraiser via WhatsApp with friends and family or on TikTok and Instagram to use the power of social media.
-      </p>
-      <p>
-        If you’ve ever found yourself wondering about crowdfunding, we’ll answer your questions and give you top tips on bringing in donations.
-      </p>
-      <button className="start-btn" >Start a Fund</button>
+      <Link to={"/campaignDetails/:id"}>
+        <button className="start-btn">Start a Campaign</button>
+      </Link>
     </div>
     <div className="image-content">
       <img src={img3} alt="Crowdfunding explanation" />
@@ -113,16 +115,27 @@ const About = () => {
   </section>
 
 
+
+
         {/* SECTION 2 */}
         <section className="section-block reverse">
   <div className="text-content">
     <h2 style={{ color: "#283044" }}>Tell a Compelling Story</h2>
-    <p>
-      Whether you're fundraising for medical needs, education, or social causes in India,
-      your story matters. From the title to the images, clearly communicate the urgency,
-      background, and how the funds will be used. Using real photos and heartfelt narratives
-      can significantly improve trust and support from donors.
-    </p>
+   <p>
+  Whether you're fundraising for medical needs, education, or social causes in India, your story is the heartbeat of your campaign. A powerful narrative doesn't just inform—it inspires. From the very first line of your title to the images you use, every element should clearly convey why this cause matters.
+
+  Begin by painting a vivid picture of the situation: Who is affected? What challenges are they facing? Why is immediate help needed? Be honest and transparent about the background—this builds credibility. Explain how the funds will be used in a step-by-step manner, whether for hospital bills, school fees, rehabilitation, or community development.
+</p>
+
+<br>
+
+</br>
+<p>
+  Use real, high-quality photos to humanize your story. Show the faces behind the cause—smiles, struggles, and everyday moments. This creates a connection and reminds supporters that their contributions are impacting real lives. Include quotes, short testimonials, or updates to maintain engagement and show progress.
+
+  Lastly, keep your tone hopeful yet urgent. People give not just because there's a need—but because they believe they can help create change. Your story should make them feel that.
+</p>
+
   </div>
   <div className="image-content">
     <img src={img1} alt="Fundraising in India" />
@@ -138,12 +151,15 @@ const About = () => {
       Instagram, and Facebook. Each share helps bring in more visibility and contributions.
       Keeping donors updated about progress or milestones builds credibility and motivates
       continued support.
+      <br /><br />
+      On our crowdfunding platform, sharing is seamless—campaigners can easily generate shareable links and update supporters with just a few clicks. The more your story is seen, the greater the chances of reaching your fundraising goals. Community involvement grows with every post, helping turn awareness into action.
     </p>
   </div>
   <div className="image-content">
     <img src={img2} alt="Sharing fundraiser updates" />
   </div>
 </section>
+
 
 <section className="section-block reverse">
   <div className="text-content">
@@ -152,12 +168,16 @@ const About = () => {
       A personal thank you goes a long way in India’s closely-knit communities. Whether it’s a
       message, email, or a social media shoutout, expressing gratitude makes donors feel valued.
       It also encourages them to share your campaign with others, increasing your reach.
+      <br /><br />
+      Our platform makes it easy to send quick thank-you notes or post public acknowledgments.
+      You can highlight your top supporters, share updates that showcase their impact, and build lasting trust. Gratitude fosters a community of recurring donors who are more likely to support future causes and spread the word further.
     </p>
   </div>
   <div className="image-content">
     <img src={img4} alt="Thanking donors in India" />
   </div>
 </section>
+
 
       </div>
 

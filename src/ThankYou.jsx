@@ -6,17 +6,20 @@ function ThankYou() {
   const location = useLocation();
   const hasPosted = useRef(false);
 
-useEffect(() => {
-  setTimeout(() => {
-    if (orderId && !hasPosted.current) {
-      hasPosted.current = true;
-      axios.post('http://localhost:5002/api/cashfree/verify-payment', { orderId })
-        .then(res => console.log(res.data))
-        .catch(err => console.error(err));
-    }
-  }, 3000); // ⏱️ Wait 3 seconds
-}, [location]);
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const orderId = queryParams.get('order_id');
 
+    setTimeout(() => {
+      if (orderId && !hasPosted.current) {
+        hasPosted.current = true;
+
+        axios.post('http://localhost:5002/api/cashfree/verify-payment', { orderId })
+          .then(res => console.log("✅", res.data.message))
+          .catch(err => console.error("❌", err.response?.data || err.message));
+      }
+    }, 6000); // Wait 6 seconds
+  }, [location]);
 
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>

@@ -116,52 +116,36 @@ const PlaybookSection = () => {
           <div className="list-item"><a href="/videos/landing-page">Optimizing Your Campaign Landing Page</a><span>4 min watch</span></div>
         </div>
       </div>
-
-      {/* Feedback Form Section */}
-      <div className="section feedback-form">
-        <h2>Questions? Feedback?</h2>
-        <p>We'd love to know how we can make these guides more helpful for you. Drop us a note below!</p>
-
-        {!isLoggedIn ? (
-          <div className="login-reminder">
-            <p className="status error">
-              Please <a href="/login">log in</a> to submit feedback.
-            </p>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit}>
-            <label>Your Name</label>
-            <input
-              type="text"
-              placeholder="Enter your name"
-              required
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-
-            <label>Your Email</label>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-
-            <label>What's on your mind?</label>
-            <textarea
-              placeholder="Share your thoughts..."
-              required
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-            />
-
-            <button type="submit">Submit</button>
-          </form>
-        )}
-
-        {status && <div className={`status ${status.type}`}>{status.message}</div>}
+<div className="section feedback-form grayish-box">
+  <h2>Got Feedback or Questions?</h2>
+  {!isLoggedIn ? (
+    <div className="feedback-login-prompt">
+      <p>If you have any feedback about our site or need help, please <a href="/login" className="highlight-link">log in</a> to get in touch with us.</p>
+    </div>
+  ) : (
+    <>
+      <p>We're here to help and love hearing from you!</p>
+      <div className="feedback-options">
+        <p>
+          📬 Email us at{" "}
+          <a href="mailto:support@example.com" className="highlight-link">
+           tishagupta19nov@gmail.com
+          </a>
+        </p>
+        <p>
+          💡 Visit our{" "}
+          <a href="/faq" className="highlight-link">
+            Help Center
+          </a>{" "}
+          for FAQs and guides.
+        </p>
       </div>
+    </>
+  )}
+</div>
+
+
+
     </div>
   );
 };

@@ -62,7 +62,7 @@ const App = () => {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/why">Our Impact</Link></li>
           <li><Link to="/explore">Explore</Link></li>
-          <li><Link to="/playbook">PlayBook</Link></li>
+          <li><Link to="/playbook">Ask Us</Link></li>
           <li><Link to="/blog">Blog</Link></li>
 
           {user ? (

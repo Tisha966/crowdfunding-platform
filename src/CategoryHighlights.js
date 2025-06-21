@@ -6,6 +6,7 @@ import hunger from "./assets/images/hunger.jpg";
 import mental from "./assets/images/mental.jpg";
 import oldlady from "./assets/images/oldlady.jpeg";
 import orphan from "./assets/images/orphan.jpg";
+import { Link } from "react-router-dom";
 
 const categories = [
   { name: "Medical", image: tech },
@@ -30,7 +31,9 @@ const CategoryHighlights = () => {
           </div>
         ))}
       </div>
-      <button className="highlight-btn">Start Exploring</button>
+      <Link to="/create-campaign" className="highlight-link">
+      <button className="highlight-btn">Ideas await - let's explore!</button>
+      </Link>
     </section>
   );
 };
