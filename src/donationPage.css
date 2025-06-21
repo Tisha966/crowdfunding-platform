@@ -1,62 +1,69 @@
 .donation-page {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 40px;
-    background: #f5f5f5;
-    border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  /* Smaller, centered image for Donate page */
-  .donation-image {
-    width: 50%;              /* Smaller size */
-    max-height: 300px;        /* Limit height */
-    object-fit: cover;
-    border-radius: 10px;
-    margin: 0 auto 25px;      /* Center horizontally */
-    display: block;           /* Ensure it takes full width space */
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .donation-image:hover {
-    transform: scale(1.05);
-  }
-  
-  form {
-    display: grid;
-    gap: 20px;
-  }
-  
-  input, button {
-    padding: 12px 18px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    transition: all 0.3s;
-  }
-  
-  input:focus {
-    border-color: #27ae60;
-    box-shadow: 0 0 8px rgba(39, 174, 96, 0.3);
-    outline: none;
-  }
-  
-  button {
-    background: #27ae60;
-    color: white;
-    cursor: pointer;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-  }
-  
-  button:hover {
-    background: #219653;
-    transform: translateY(-2px);
-  }
-.error-message {
-  color: crimson;
-  font-weight: bold;
-  margin-top: 10px;
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 40px;
+  background: #f5f5f5;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', sans-serif;
+  color: #222;
+}
+
+.donation-title {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 20px;
+  color: rgb(227, 142, 45);
+}
+
+.donation-title span {
+  color: #283044;
+  font-size: 26px;
+}
+
+.donation-image {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  display: block;
+}
+
+.campaign-description {
+  margin-bottom: 30px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #444;
+}
+
+.donation-form {
+  display: grid;
+  gap: 20px;
+}
+
+input, button {
+  padding: 12px 18px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+input:focus {
+  border-color: #228304;
+  box-shadow: 0 0 8px rgba(34, 131, 4, 0.3);
+  outline: none;
+}
+
+button {
+  background: #228304;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #1a6b03;
 }

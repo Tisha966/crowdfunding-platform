@@ -1,7 +1,7 @@
-// DonationPage.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import './donationPage.css';
 
 function DonationPage() {
   const [loading, setLoading] = useState(false);
@@ -9,11 +9,20 @@ function DonationPage() {
   const [donorName, setDonorName] = useState('');
   const [donorEmail, setDonorEmail] = useState('');
   const [amount, setAmount] = useState('');
-  const [campaignName, setCampaignName] = useState('Loading...');
+  const [campaign, setCampaign] = useState(null);
   const { campaignId } = useParams();
+
   const user = JSON.parse(localStorage.getItem('user'));
 
-  // Load Cashfree SDK
+  // ✅ Autofill name and email from user
+  useEffect(() => {
+    if (user) {
+      setDonorName(user.name || '');
+      setDonorEmail(user.email || '');
+    }
+  }, [user]);
+
+  // ✅ Load Cashfree SDK
   useEffect(() => {
     const script = document.createElement('script');
     script.src = "https://sdk.cashfree.com/js/v3/cashfree.js";
@@ -23,11 +32,11 @@ function DonationPage() {
     document.body.appendChild(script);
   }, []);
 
-  // Fetch campaign title
+  // ✅ Fetch campaign details
   useEffect(() => {
     axios.get(`http://localhost:5002/api/campaigns/${campaignId}`)
-      .then(res => setCampaignName(res.data.title || 'Unknown Campaign'))
-      .catch(() => setCampaignName('Unknown Campaign'));
+      .then(res => setCampaign(res.data))
+      .catch(() => setCampaign(null));
   }, [campaignId]);
 
   const handleDonate = async () => {
@@ -48,7 +57,6 @@ function DonationPage() {
       const { payment_session_id, order_id } = res.data;
       if (!payment_session_id) throw new Error("No session ID returned");
 
-      // Store details locally
       localStorage.setItem('donationDetails', JSON.stringify({
         donorEmail,
         donorName,
@@ -72,15 +80,49 @@ function DonationPage() {
     }
   };
 
+  if (!campaign) return <p className="loading">Loading campaign...</p>;
+
+  const imageUrl = `http://localhost:5002/${campaign.imagePath?.replace(/\\/g, '/')}`;
+
   return (
-    <div style={{ padding: '30px', maxWidth: '450px', margin: '40px auto', backgroundColor: '#283044', color: '#eee', borderRadius: '8px' }}>
-      <h2>Donate to <strong>{campaignName}</strong></h2>
-      <input value={donorName} onChange={e => setDonorName(e.target.value)} placeholder="Your Name" />
-      <input value={donorEmail} onChange={e => setDonorEmail(e.target.value)} placeholder="Your Email" type="email" />
-      <input value={amount} onChange={e => setAmount(e.target.value)} placeholder="Amount (₹)" type="number" />
-      <button disabled={loading || !sdkReady} onClick={handleDonate}>
-        {loading ? "Processing..." : "Donate"}
-      </button>
+    <div className="donation-page">
+      <h1 className="donation-title">Donate to <span>{campaign.title}</span></h1>
+
+      <img
+        className="donation-image"
+        src={imageUrl}
+        alt={campaign.title}
+        onError={(e) => { e.target.src = '/fallback.jpg' }}
+      />
+
+      <p className="campaign-description">{campaign.description}</p>
+
+      <form className="donation-form">
+        <input
+          value={donorName}
+          onChange={e => setDonorName(e.target.value)}
+          placeholder="Your Name"
+        />
+        <input
+          value={donorEmail}
+          onChange={e => setDonorEmail(e.target.value)}
+          placeholder="Your Email"
+          type="email"
+        />
+        <input
+          value={amount}
+          onChange={e => setAmount(e.target.value)}
+          placeholder="Amount (₹)"
+          type="number"
+        />
+        <button
+          disabled={loading || !sdkReady}
+          onClick={handleDonate}
+          type="button"
+        >
+          {loading ? "Processing..." : "Donate Now"}
+        </button>
+      </form>
     </div>
   );
 }

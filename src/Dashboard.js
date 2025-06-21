@@ -3,7 +3,6 @@ import './Dashboard.css';
 import { Link } from 'react-router-dom';
 import { FaHandsHelping, FaPlusCircle, FaCog } from 'react-icons/fa';
 
-
 const Dashboard = () => {
   const [userName, setUserName] = useState('');
   const [userId, setUserId] = useState(null);
@@ -43,9 +42,18 @@ const Dashboard = () => {
 
       const donationRes = await fetch(`http://localhost:5002/api/donations?userId=${uid}`);
       const donationData = await donationRes.json();
-      const sorted = Array.isArray(donationData)
-        ? donationData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-        : [];
+
+      // ✅ Deduplicate by orderId
+      const seenOrderIds = new Set();
+      const uniqueDonations = [];
+      donationData.forEach(d => {
+        if (!seenOrderIds.has(d.orderId)) {
+          seenOrderIds.add(d.orderId);
+          uniqueDonations.push(d);
+        }
+      });
+
+      const sorted = uniqueDonations.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
       setDonations(sorted);
       setFilteredDonations(sorted);
     } catch (err) {
@@ -81,66 +89,61 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-layout">
-     <aside className="sidebar">
-  <h2 className="sidebar-title">Dashboard</h2>
-  <ul>
-    <li>
-      <Link to="/campaigndetails/:id" className="sidebar-btn">
-        <FaPlusCircle className="sidebar-icon" />
-        Raise Fund Campaign
-      </Link>
-    </li>
-    <li>
-      <Link to="/explore" className="sidebar-btn">
-        <FaHandsHelping className="sidebar-icon" />
-        Donate to Campaign
-      </Link>
-    </li>
-    <li>
-      <Link to="/settings" className="sidebar-btn">
-        <FaCog className="sidebar-icon" />
-        Settings
-      </Link>
-    </li>
-  </ul>
-</aside>
+      <aside className="sidebar">
+        <h2 className="sidebar-title">Dashboard</h2>
+        <ul>
+          <li>
+            <Link to="/campaigndetails/:id" className="sidebar-btn">
+              <FaPlusCircle className="sidebar-icon" />
+              Raise Fund Campaign
+            </Link>
+          </li>
+          <li>
+            <Link to="/explore" className="sidebar-btn">
+              <FaHandsHelping className="sidebar-icon" />
+              Donate to Campaign
+            </Link>
+          </li>
+          <li>
+            <Link to="/settings" className="sidebar-btn">
+              <FaCog className="sidebar-icon" />
+              Settings
+            </Link>
+          </li>
+        </ul>
+      </aside>
 
       <div className="dashboard-wrapper">
-  <h2 style={{
-  fontSize: '2.2rem',
-  fontWeight: '700',
-  color: '#4b5563', // Cool gray tone
-  marginBottom: '2rem',
-  borderBottom: '2px solid #9ca3af', // Soft gray underline
-  paddingBottom: '0.6rem',
-  fontFamily: `'Poppins', 'Segoe UI', sans-serif`,
-  letterSpacing: '0.7px',
-  textAlign: 'center',
-  textShadow: '1px 1px 2px rgba(0, 0, 0, 0.1)', // subtle shadow for depth
-  textTransform: 'capitalize'
-}}>
-  Welcome, {userName}!
-</h2>
-
-
-      
+        <h2 style={{
+          fontSize: '2.2rem',
+          fontWeight: '700',
+          color: '#4b5563',
+          marginBottom: '2rem',
+          borderBottom: '2px solid #9ca3af',
+          paddingBottom: '0.6rem',
+          fontFamily: `'Poppins', 'Segoe UI', sans-serif`,
+          letterSpacing: '0.7px',
+          textAlign: 'center',
+          textShadow: '1px 1px 2px rgba(0, 0, 0, 0.1)',
+          textTransform: 'capitalize'
+        }}>
+          Welcome, {userName}!
+        </h2>
 
         <div ref={contributionsRef} className="section-header">
-    <h2 style={{
-  fontSize: '2rem',
-  fontWeight: '700',
-  color: '#0d9488', // Teal shade
-  marginBottom: '1.5rem',
-  borderBottom: '2px solid #a7f3d0', // light teal
-  paddingBottom: '0.5rem',
-  fontFamily: `'Poppins', 'Segoe UI', sans-serif`,
-  letterSpacing: '0.5px',
-  textAlign: 'center'
-}}>
-  My Contributions
-</h2>
-
-
+          <h2 style={{
+            fontSize: '2rem',
+            fontWeight: '700',
+            color: '#0d9488',
+            marginBottom: '1.5rem',
+            borderBottom: '2px solid #a7f3d0',
+            paddingBottom: '0.5rem',
+            fontFamily: `'Poppins', 'Segoe UI', sans-serif`,
+            letterSpacing: '0.5px',
+            textAlign: 'center'
+          }}>
+            My Contributions
+          </h2>
           <input
             type="text"
             placeholder="Search donations..."
@@ -164,20 +167,19 @@ const Dashboard = () => {
         )}
 
         <div ref={campaignsRef} className="section-header" style={{ marginTop: '40px' }}>
-             <h2 style={{
-  fontSize: '2rem',
-  fontWeight: '700',
-  color: '#0d9488', // Teal shade
-  marginBottom: '1.5rem',
-  borderBottom: '2px solid #a7f3d0', // light teal
-  paddingBottom: '0.5rem',
-  fontFamily: `'Poppins', 'Segoe UI', sans-serif`,
-  letterSpacing: '0.5px',
-  textAlign: 'center'
-}}>
-  My Created Campaigns
-</h2>
-
+          <h2 style={{
+            fontSize: '2rem',
+            fontWeight: '700',
+            color: '#0d9488',
+            marginBottom: '1.5rem',
+            borderBottom: '2px solid #a7f3d0',
+            paddingBottom: '0.5rem',
+            fontFamily: `'Poppins', 'Segoe UI', sans-serif`,
+            letterSpacing: '0.5px',
+            textAlign: 'center'
+          }}>
+            My Created Campaigns
+          </h2>
           <input
             type="text"
             placeholder="Search campaigns..."
@@ -198,9 +200,7 @@ const Dashboard = () => {
                 <p>{c.description}</p>
                 <p>Days Left: {c.daysLeft}</p>
                 <p>Supporters: {c.supporters}</p>
-             <p>Amount Raised: ₹ {c.amountRaised.toLocaleString('en-IN')}</p>
-
-
+                <p>Amount Raised: ₹ {c.amountRaised.toLocaleString('en-IN')}</p>
               </div>
             ))}
           </div>

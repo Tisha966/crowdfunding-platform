@@ -10,15 +10,21 @@ function ThankYou() {
     const queryParams = new URLSearchParams(location.search);
     const orderId = queryParams.get('order_id');
 
-    setTimeout(() => {
-      if (orderId && !hasPosted.current) {
-        hasPosted.current = true;
+    // ✅ Also use sessionStorage to persist across refreshes
+    const alreadyPosted = sessionStorage.getItem(`verified-${orderId}`);
 
+    if (orderId && !hasPosted.current && !alreadyPosted) {
+      hasPosted.current = true;
+
+      setTimeout(() => {
         axios.post('http://localhost:5002/api/cashfree/verify-payment', { orderId })
-          .then(res => console.log("✅", res.data.message))
+          .then(res => {
+            console.log("✅", res.data.message);
+            sessionStorage.setItem(`verified-${orderId}`, 'true'); // Mark as done
+          })
           .catch(err => console.error("❌", err.response?.data || err.message));
-      }
-    }, 6000); // Wait 6 seconds
+      }, 6000); // Delay
+    }
   }, [location]);
 
   return (
