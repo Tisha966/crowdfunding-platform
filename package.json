@@ -1,7 +1,9 @@
 {
+
   "name": "crowdfunding",
   "version": "0.1.0",
   "private": true,
+  
   "proxy": "http://localhost:5002",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
@@ -30,11 +32,13 @@
     "react-tooltip": "^5.28.1",
     "web-vitals": "^2.1.4"
   },
-  "scripts": {
+ "scripts": {
   "start": "react-scripts --openssl-legacy-provider start",
   "build": "react-scripts build",
   "test": "react-scripts test",
-  "eject": "react-scripts eject"
+  "eject": "react-scripts eject",
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d build"
 },
 
   "eslintConfig": {
@@ -56,6 +60,8 @@
     ]
   },
   "devDependencies": {
-    "cross-env": "^7.0.3"
-  }
+    "cross-env": "^7.0.3",
+    "gh-pages": "^6.3.0"
+  },
+  "homepage": "https://Tisha966.github.io/crowdfunding-platform"
 }
