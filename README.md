@@ -1,4 +1,4 @@
-# CROWDFUNDING APPLICATION
+# CROWDFUNDING PLATFORM
 
 Created using MERN Stack 
 
@@ -24,26 +24,15 @@ CASHFREE_SECRET_KEY=your_cashfree_secret_key
 ## Features
 
 - [x] Register/Login functionality using JWT
-
 - [x]Role-based access: login as Fundraiser or Contributor
-
 - [x]Fundraisers can:
-
-Create fundraising campaigns with title, description, target amount, category, and image
-
-View/manage their created campaigns
-
+- [x]Create fundraising campaigns with title, description, target amount, category, and image
+- [x]View/manage their created campaigns
 - [x]Contributors can:
-
-Explore all listed campaigns
-
-Filter by category
-
+- [x]Explore all listed campaigns
+- [x]Filter by category
 - [x]Donate securely using Cashfree Payment Gateway
-
 - [x]Live donation tracking
-
 - [x]Search campaigns using keywords
-
 - [x]Clean and responsive UI dashboard for both user types
 
