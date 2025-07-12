@@ -580,3 +580,8 @@
 .faq-button:hover {
   background-color: #e86e42;
 }
+@keyframes blink {
+  from, to { border-color: transparent; }
+  50% { border-color: white; }
+}
+

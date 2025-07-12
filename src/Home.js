@@ -1,36 +1,81 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; 
 
+
 import fundsImage from './assets/images/fund3.jpg';
 import './home.css';
 
 const Home = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const isDarkMode = false;
+  const messages = [
+  "Empowering ideas, one contribution at a time.",
+  "Fuel your dreams with community support.",
+  "Turn passion into progress through crowdfunding.",
+  "Every rupee counts toward change.",
+  "Start a journey of innovation and hope."
+];
 
-  useEffect(() => {
-    // Check if the user has a saved theme preference in localStorage
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      setIsDarkMode(savedTheme === 'dark');
+const [displayedText, setDisplayedText] = useState('');
+const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
+const [charIndex, setCharIndex] = useState(0);
+
+useEffect(() => {
+  const currentMessage = messages[currentMessageIndex];
+
+  // Timer to type one character at a time
+  const typingInterval = setInterval(() => {
+    if (charIndex < currentMessage.length) {
+      setDisplayedText((prev) => prev + currentMessage[charIndex]);
+      setCharIndex((prev) => prev + 1);
+    } else {
+      clearInterval(typingInterval);
+      // Wait 2 seconds, then move to next message
+      setTimeout(() => {
+        setDisplayedText('');
+        setCharIndex(0);
+        setCurrentMessageIndex((prevIndex) => (prevIndex + 1) % messages.length);
+      }, 2000);
     }
-  }, []);
+  }, 50); // typing speed
+
+  return () => clearInterval(typingInterval);
+}, [charIndex, currentMessageIndex]);
 
 
 const [hoveredBtn, setHoveredBtn] = useState(null);
   return (
     <div className={`home-page ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
       <header className="home-hero">
-      {/* <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-  /> */}
-        <h1>Welcome to CrowdFunding</h1>
-        <p style={{color:"white"}}>Empowering ideas, one contribution at a time.</p>
-        <Link to="/about">
-          <button className="cta-button" style={{backgroundColor:"#ff7f50"}}>ABOUT CROWDFUNDING</button>
-        </Link>
-      </header>
+      <h1>Welcome to CrowdFunding</h1>
+     <p
+  style={{
+    color: "white",
+    minHeight: "40px",
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: "1.3rem",
+    fontWeight: "500",
+    letterSpacing: "0.5px",
+    transition: "all 0.3s ease",
+    textShadow: "1px 1px 2px rgba(0, 0, 0, 0.4)",
+  }}
+>
+  {displayedText}
+  <span
+    style={{
+      borderRight: "2px solid white",
+      animation: "blink 1s step-end infinite",
+      marginLeft: "3px",
+    }}
+  ></span>
+</p>
 
+
+      <Link to="/about">
+        <button className="cta-button" style={{ backgroundColor: "#ff7f50" }}>
+          ABOUT CROWDFUNDING
+        </button>
+      </Link>
+    </header>
       <section className="hero">
         <div className="hero-container">
           <div className="hero-content">
@@ -298,11 +343,11 @@ const [hoveredBtn, setHoveredBtn] = useState(null);
 
               <div className="footer-link-column">
                 <h3>How It Works?</h3>
-                <p style={{color:"gray"}}>Create Account</p>
-                <p style={{color:"gray"}}>Share Idea and Set Goals</p>
+                <p style={{color:"gray",fontSize: "14px" }}>Create Account</p>
+                <p style={{color:"gray",fontSize: "14px" }}>Share Idea and Set Goals</p>
                 {/* <p style={{color:"gray"}}>Set Goals</p> */}
                 {/* <p style={{color:"gray"}}>Promote Widely</p> */}
-                <p style={{color:"gray"}}>Collect Funds and Track Progress with our latest news and campaigns.</p>
+                <p style={{color:"gray",fontSize: "14px" }}>Collect Funds and Track Progress with our latest news and campaigns.</p>
                 {/* <input type="email" placeholder="Your Email" className="newsletter-input" /> */}
                 {/* <button className="newsletter-btn">Subscribe</button> */}
               </div>

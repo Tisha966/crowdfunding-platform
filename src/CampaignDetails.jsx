@@ -265,11 +265,11 @@ const CampaignDetails = ({ userId: propUserId }) => {
 
               <div className="footer-link-column">
                 <h3>How It Works?</h3>
-                <p style={{color:"gray"}}>Create Account</p>
-                <p style={{color:"gray"}}>Share Idea and Set Goals</p>
+                <p style={{color:"gray",fontSize: "14px" }}>Create Account</p>
+                <p style={{color:"gray",fontSize: "14px" }}>Share Idea and Set Goals</p>
                 {/* <p style={{color:"gray"}}>Set Goals</p> */}
                 {/* <p style={{color:"gray"}}>Promote Widely</p> */}
-                <p style={{color:"gray"}}>Collect Funds and Track Progress with our latest news and campaigns.</p>
+                <p style={{color:"gray",fontSize: "14px" }}>Collect Funds and Track Progress with our latest news and campaigns.</p>
                 {/* <input type="email" placeholder="Your Email" className="newsletter-input" /> */}
                 {/* <button className="newsletter-btn">Subscribe</button> */}
               </div>
