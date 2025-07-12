@@ -238,28 +238,40 @@ const CampaignDetails = ({ userId: propUserId }) => {
               <div className="footer-link-column">
                 <h3>Resources</h3>
                 <ul>
-                  <li><a href="#">Help Center</a></li>
-                  <li><a href="#">Terms of Service</a></li>
-                  <li><a href="#">Privacy Policy</a></li>
+                  <li><a href="/faq">Help Center</a></li>
+                  <li><a href="/faq">Terms of Service</a></li>
+                  <li><a href="/faq">Privacy Policy</a></li>
                   <li><a href="/faq">FAQ</a></li>
                 </ul>
               </div>
 
               <div className="footer-link-column">
                 <h3>Follow Us</h3>
-                <div className="footer-social">
-                  <a href="#" className="social-link"><i className="fab fa-facebook-f"></i></a>
-                  <a href="#" className="social-link"><i className="fab fa-twitter"></i></a>
-                  <a href="#" className="social-link"><i className="fab fa-github"></i></a>
-                  <a href="#" className="social-link"><i className="fab fa-linkedin-in"></i></a>
-                </div>
+               <div className="footer-social">
+  <a href="mailto:tishagupta19nov@gmail.com" className="social-link" title="Email">
+    <i className="fas fa-envelope"></i>
+  </a>
+  <a href="https://www.instagram.com/tishaguptaa" target="_blank" rel="noopener noreferrer" className="social-link" title="Instagram">
+    <i className="fab fa-instagram"></i>
+  </a>
+  <a href="https://github.com/Tisha966" target="_blank" rel="noopener noreferrer" className="social-link" title="GitHub">
+    <i className="fab fa-github"></i>
+  </a>
+  <a href="https://www.linkedin.com/in/tisha-gupta-762626283/" target="_blank" rel="noopener noreferrer" className="social-link" title="LinkedIn">
+    <i className="fab fa-linkedin-in"></i>
+  </a>
+</div>
               </div>
 
               <div className="footer-link-column">
-                <h3>Newsletter</h3>
-                <p style={{color:"gray"}}>Stay updated with our latest news and campaigns.</p>
-                <input type="email" placeholder="Your Email" className="newsletter-input" />
-                <button className="newsletter-btn">Subscribe</button>
+                <h3>How It Works?</h3>
+                <p style={{color:"gray"}}>Create Account</p>
+                <p style={{color:"gray"}}>Share Idea and Set Goals</p>
+                {/* <p style={{color:"gray"}}>Set Goals</p> */}
+                {/* <p style={{color:"gray"}}>Promote Widely</p> */}
+                <p style={{color:"gray"}}>Collect Funds and Track Progress with our latest news and campaigns.</p>
+                {/* <input type="email" placeholder="Your Email" className="newsletter-input" /> */}
+                {/* <button className="newsletter-btn">Subscribe</button> */}
               </div>
             </div>
           </div>

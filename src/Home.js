@@ -16,7 +16,7 @@ const Home = () => {
   }, []);
 
 
-
+const [hoveredBtn, setHoveredBtn] = useState(null);
   return (
     <div className={`home-page ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
       <header className="home-hero">
@@ -34,15 +34,50 @@ const Home = () => {
       <section className="hero">
         <div className="hero-container">
           <div className="hero-content">
-            <h1 className="hero-heading">Empower Ideas, Fund Dreams</h1>
+            <h1 className="hero-heading" style={{fontSize:'300%'}}>Empower Ideas, Fund Dreams</h1>
             <p className="hero-subtext">
               Join our community to explore and support creative campaigns that bring change to the world.
             </p>
             
-            <div className="hero-buttons">
-              <Link to="/explore" className="btn-primary">Explore Campaigns</Link>
-              <a href="/create-campaign" className="btn-secondary">Explore Ideas</a>
-            </div>
+           <div className="hero-buttons" style={{ display: "flex", gap: "16px", flexWrap: "wrap", marginTop: "20px" }}>
+  <Link
+    to="/explore"
+    onMouseEnter={() => setHoveredBtn("explore")}
+    onMouseLeave={() => setHoveredBtn(null)}
+    style={{
+      padding: '12px 24px',
+      backgroundColor: hoveredBtn === "explore" ? "#3a475e" : "#283044",
+      color: 'white',
+      borderRadius: '8px',
+      textDecoration: 'none',
+      fontWeight: 'bold',
+      fontSize: '1rem',
+      transform: hoveredBtn === "explore" ? "scale(1.05)" : "scale(1)",
+      transition: 'all 0.3s ease',
+    }}
+  >
+    Explore Campaigns
+  </Link>
+
+  <a
+    href="/create-campaign"
+    onMouseEnter={() => setHoveredBtn("ideas")}
+    onMouseLeave={() => setHoveredBtn(null)}
+    style={{
+      padding: '12px 24px',
+      backgroundColor: hoveredBtn === "ideas" ? "#888" : "gray",
+      color: 'white',
+      borderRadius: '8px',
+      textDecoration: 'none',
+      fontWeight: 'bold',
+      fontSize: '1rem',
+      transform: hoveredBtn === "ideas" ? "scale(1.05)" : "scale(1)",
+      transition: 'all 0.3s ease',
+    }}
+  >
+    Explore Ideas
+  </a>
+</div>
           </div>
 
           <div className="hero-image">
@@ -236,28 +271,40 @@ const Home = () => {
               <div className="footer-link-column">
                 <h3>Resources</h3>
                 <ul>
-                  <li><a href="#">Help Center</a></li>
-                  <li><a href="#">Terms of Service</a></li>
-                  <li><a href="#">Privacy Policy</a></li>
+                  <li><a href="/faq">Help Center</a></li>
+                  <li><a href="/faq">Terms of Service</a></li>
+                  <li><a href="/faq">Privacy Policy</a></li>
                   <li><a href="/faq">FAQ</a></li>
                 </ul>
               </div>
 
-              <div className="footer-link-column">
+               <div className="footer-link-column">
                 <h3>Follow Us</h3>
-                <div className="footer-social">
-                  <a href="#" className="social-link"><i className="fab fa-facebook-f"></i></a>
-                  <a href="#" className="social-link"><i className="fab fa-twitter"></i></a>
-                  <a href="#" className="social-link"><i className="fab fa-github"></i></a>
-                  <a href="#" className="social-link"><i className="fab fa-linkedin-in"></i></a>
-                </div>
-              </div>
+               <div className="footer-social">
+  <a href="mailto:tishagupta19nov@gmail.com" className="social-link" title="Email">
+    <i className="fas fa-envelope"></i>
+  </a>
+  <a href="https://www.instagram.com/tishaguptaa" target="_blank" rel="noopener noreferrer" className="social-link" title="Instagram">
+    <i className="fab fa-instagram"></i>
+  </a>
+  <a href="https://github.com/Tisha966" target="_blank" rel="noopener noreferrer" className="social-link" title="GitHub">
+    <i className="fab fa-github"></i>
+  </a>
+  <a href="https://www.linkedin.com/in/tisha-gupta-762626283/" target="_blank" rel="noopener noreferrer" className="social-link" title="LinkedIn">
+    <i className="fab fa-linkedin-in"></i>
+  </a>
+</div>
+</div>
 
               <div className="footer-link-column">
-                <h3>Newsletter</h3>
-                <p style={{color:"gray"}}>Stay updated with our latest news and campaigns.</p>
-                <input type="email" placeholder="Your Email" className="newsletter-input" />
-                <button className="newsletter-btn">Subscribe</button>
+                <h3>How It Works?</h3>
+                <p style={{color:"gray"}}>Create Account</p>
+                <p style={{color:"gray"}}>Share Idea and Set Goals</p>
+                {/* <p style={{color:"gray"}}>Set Goals</p> */}
+                {/* <p style={{color:"gray"}}>Promote Widely</p> */}
+                <p style={{color:"gray"}}>Collect Funds and Track Progress with our latest news and campaigns.</p>
+                {/* <input type="email" placeholder="Your Email" className="newsletter-input" /> */}
+                {/* <button className="newsletter-btn">Subscribe</button> */}
               </div>
             </div>
           </div>
@@ -266,8 +313,9 @@ const Home = () => {
             <p style={{color:"whitesmoke"}}>&copy; 2024 CrowdFunding. All Rights Reserved.</p>
           </div>
         </div>
+        
       </footer>
-      
+   
     </div>
   );
 };
