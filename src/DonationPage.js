@@ -81,8 +81,8 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   };
 
   if (!campaign) return <p className="loading">Loading campaign...</p>;
-
-  const imageUrl = `http://localhost:5002/${campaign.imagePath?.replace(/\\/g, '/')}`;
+const REACT_APP_API_BASE_URL=process.env.REACT_APP_API_BASE_URL
+  const imageUrl = `${REACT_APP_API_BASE_URL}/${campaign.imagePath?.replace(/\\/g, '/')}`;
 
   return (
     <div className="donation-page">

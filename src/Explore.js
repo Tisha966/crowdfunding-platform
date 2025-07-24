@@ -70,7 +70,7 @@ const handleDonate = (campaignId) => {
   );
   console.log("🔍 Debug - isUserLoggedIn:", isUserLoggedIn());
 
-
+const REACT_APP_API_BASE_URL=process.env.REACT_APP_API_BASE_URL
   return (
     <div className="explore-container">
       <h1 style={{ color: "#f16a38" }}>Explore Campaigns</h1>
@@ -118,7 +118,7 @@ const handleDonate = (campaignId) => {
         <div className="campaign-grid">
           {filteredCampaigns.length > 0 ? (
             filteredCampaigns.map((campaign) => {
-              const imageUrl = `http://localhost:5002/${campaign.imagePath.replace(/\\/g, '/')}`;
+              const imageUrl = `${REACT_APP_API_BASE_URL}/${campaign.imagePath.replace(/\\/g, '/')}`;
 
               return (
                 <div key={campaign._id} className="campaign-card">
