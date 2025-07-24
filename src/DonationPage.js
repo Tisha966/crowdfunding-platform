@@ -31,10 +31,10 @@ function DonationPage() {
     script.onerror = () => alert("Cashfree SDK failed to load.");
     document.body.appendChild(script);
   }, []);
-
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   // ✅ Fetch campaign details
   useEffect(() => {
-    axios.get(`https://cf-backend-57jj.onrender.com/api/campaigns/${campaignId}`)
+    axios.get(`${API_BASE_URL}/api/campaigns/${campaignId}`)
       .then(res => setCampaign(res.data))
       .catch(() => setCampaign(null));
   }, [campaignId]);

@@ -9,7 +9,7 @@ const Login = ({ setUser }) => {
   const [message, setMessage] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   const handleLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -72,17 +72,15 @@ const Login = ({ setUser }) => {
     <div className="login-container">
       <div className="login-box">
         <div className="social-section">
-          <h1 className="social-title">Continue with</h1>
-          <button className="social-btn google-btn" style={{ color: 'gray' }}>
-            <img src="https://img.icons8.com/color/24/google-logo.png" alt="Google" /> Google
-          </button>
-          <button className="social-btn facebook-btn" style={{ color: 'gray' }}>
-            <img src="https://img.icons8.com/color/24/facebook-new.png" alt="Facebook" /> Facebook
-          </button>
-          <button className="social-btn apple-btn" style={{ color: 'gray' }}>
-            <img src="https://img.icons8.com/ios-filled/24/mac-os.png" alt="Apple" /> Apple
-          </button>
-        </div>
+<h1 className="social-title" style={{fontSize:"250%"}}>Access Your Account</h1>
+
+  <p style={{ fontSize: '14px', color: '#555', marginTop: '8px' }}>
+    Use your registered email and password to log in to your CrowdFunding account.
+  </p>
+  <p style={{ fontSize: '14px', color: '#555' }}>
+    Make sure your credentials are correct to access your dashboard and campaigns.
+  </p>
+</div>
 
         <div className="divider"></div>
 

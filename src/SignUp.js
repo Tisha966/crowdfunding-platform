@@ -16,9 +16,9 @@ const handleSubmit = async (e) => {
     email,
     password,
   };
-
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   try {
-    const response = await fetch('https://cf-backend-57jj.onrender.com/api/auth/register', {
+    const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -51,17 +51,16 @@ const handleSubmit = async (e) => {
     <div className="signup-container">
       <div className="signup-box">
         <div className="social-section">
-          <h2 className="social-title">Continue with</h2>
-          <button className="social-btn google-btn" style={{ color: 'gray' }}>
-            <img src="https://img.icons8.com/color/24/google-logo.png" alt="Google" /> Google
-          </button>
-          <button className="social-btn facebook-btn" style={{ color: 'gray' }}>
-            <img src="https://img.icons8.com/color/24/facebook-new.png" alt="Facebook" /> Facebook
-          </button>
-          <button className="social-btn apple-btn" style={{ color: 'gray' }}>
-            <img src="https://img.icons8.com/ios-filled/24/mac-os.png" alt="Apple" /> Apple
-          </button>
-        </div>
+<h1 className="social-title" style={{fontSize:"250%"}}>Sign In to Continue</h1>
+
+  <p style={{ fontSize: '14px', color: '#555', marginTop: '8px' }}>
+    Use your registered email and password to log in to your CrowdFunding account.
+  </p>
+  <p style={{ fontSize: '14px', color: '#555' }}>
+    Make sure your credentials are correct to access your dashboard and campaigns.
+  </p>
+</div>
+
 
         <div className="divider"></div>
 

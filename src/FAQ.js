@@ -138,7 +138,7 @@ function FAQ() {
       <div className="faq-header">
         <h1>Got a question? We'd love to help!</h1>
         <h2 style={{ color: 'gray' }}>Can't find what you're looking for?</h2>
-        <a href="mailto:support@crowdfunding123.com">Email us: support@crowdfunding123.com</a>
+        <a href="mailto:support@crowdfunding123.com">Email us: tishagupta19nov@gmail.com</a>
         <div className="faq-search">
           <input
             type="text"

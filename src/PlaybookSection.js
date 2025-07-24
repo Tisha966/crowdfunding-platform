@@ -40,10 +40,10 @@ const PlaybookSection = () => {
       navigate("/login");
       return;
     }
-
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     try {
       await axios.post(
-        "https://cf-backend-57jj.onrender.com/api/feedback/submit",
+        `${API_BASE_URL}/api/feedback/submit`,
         { name, email, message },
         { headers: { "Content-Type": "application/json" } }
       );

@@ -14,7 +14,7 @@ const Home = () => {
   "Every rupee counts toward change.",
   "Start a journey of innovation and hope."
 ];
-
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 const [displayedText, setDisplayedText] = useState('');
 const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
 const [charIndex, setCharIndex] = useState(0);

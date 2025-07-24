@@ -20,10 +20,10 @@ const VerifyDonation = () => {
       setStatus('Donation already verified.');
       return;
     }
-
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     const verifyDonation = async () => {
       try {
-        await axios.post('https://cf-backend-57jj.onrender.com/api/donations/donate', {
+        await axios.post(`${API_BASE_URL}/api/donations/donate`, {
           ...donationDetails,
         });
 

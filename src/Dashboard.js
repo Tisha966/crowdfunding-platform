@@ -52,10 +52,10 @@ const Dashboard = () => {
       console.error('Error fetching user or donations:', err);
     }
   };
-
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL
   const fetchCampaigns = async (uid) => {
     try {
-      const res = await fetch(`https://cf-backend-57jj.onrender.com/api/campaigns/byCreator/${uid}`);
+      const res = await fetch(`${API_BASE_URL}/api/campaigns/byCreator/${uid}`);
       const data = await res.json();
       const safeData = Array.isArray(data) ? data : [];
       setCampaigns(safeData);

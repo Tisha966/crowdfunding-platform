@@ -29,12 +29,12 @@ const isUserLoggedIn = () => {
 };
 
 
-
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   // Fetch campaigns from backend
   const fetchCampaigns = async () => {
     try {
-      const res = await axios.get('https://cf-backend-57jj.onrender.com/api/campaigns');
+      const res = await axios.get(`${API_BASE_URL}/api/campaigns`);
       setCampaigns(res.data);
     } catch (error) {
       console.error('Error fetching campaigns:', error);

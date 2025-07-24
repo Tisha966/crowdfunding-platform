@@ -32,8 +32,8 @@ const CampaignDetails = ({ userId: propUserId }) => {
       formData.append('daysLeft', campaignData.daysLeft);
       formData.append('numSupporters', campaignData.numSupporters);
       formData.append('creatorId', userId);
-
-      const response = await fetch('https://cf-backend-57jj.onrender.com/api/campaigns/create', {
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL
+      const response = await fetch(`${API_BASE_URL}/api/campaigns/create`, {
         method: 'POST',
         body: formData,
       });
