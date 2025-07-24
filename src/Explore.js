@@ -34,7 +34,7 @@ const isUserLoggedIn = () => {
   // Fetch campaigns from backend
   const fetchCampaigns = async () => {
     try {
-      const res = await axios.get('http://localhost:5002/api/campaigns');
+      const res = await axios.get('https://cf-backend-57jj.onrender.com/api/campaigns');
       setCampaigns(res.data);
     } catch (error) {
       console.error('Error fetching campaigns:', error);

@@ -34,7 +34,7 @@ function DonationPage() {
 
   // ✅ Fetch campaign details
   useEffect(() => {
-    axios.get(`http://localhost:5002/api/campaigns/${campaignId}`)
+    axios.get(`https://cf-backend-57jj.onrender.com/api/campaigns/${campaignId}`)
       .then(res => setCampaign(res.data))
       .catch(() => setCampaign(null));
   }, [campaignId]);
@@ -47,7 +47,7 @@ function DonationPage() {
 
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5002/api/cashfree/create-order', {
+      const res = await axios.post('https://cf-backend-57jj.onrender.com/api/cashfree/create-order', {
         amount,
         donorEmail,
         donorName,

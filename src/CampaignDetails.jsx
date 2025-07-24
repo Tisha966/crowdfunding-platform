@@ -33,7 +33,7 @@ const CampaignDetails = ({ userId: propUserId }) => {
       formData.append('numSupporters', campaignData.numSupporters);
       formData.append('creatorId', userId);
 
-      const response = await fetch('http://localhost:5002/api/campaigns/create', {
+      const response = await fetch('https://cf-backend-57jj.onrender.com/api/campaigns/create', {
         method: 'POST',
         body: formData,
       });
@@ -138,7 +138,7 @@ const CampaignDetails = ({ userId: propUserId }) => {
               required
               placeholder="Describe your campaign"
             />
-
+     
             <label htmlFor="campaignImage">Campaign Image</label>
             <input
               type="file"

@@ -43,7 +43,7 @@ const PlaybookSection = () => {
 
     try {
       await axios.post(
-        "http://localhost:5002/api/feedback/submit",
+        "https://cf-backend-57jj.onrender.com/api/feedback/submit",
         { name, email, message },
         { headers: { "Content-Type": "application/json" } }
       );

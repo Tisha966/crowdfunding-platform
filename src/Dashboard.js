@@ -37,11 +37,11 @@ const Dashboard = () => {
 
   const fetchUserAndDonations = async (uid) => {
     try {
-      const userRes = await fetch(`http://localhost:5002/api/auth/user/${uid}`);
+      const userRes = await fetch(`https://cf-backend-57jj.onrender.com/api/auth/user/${uid}`);
       const userData = await userRes.json();
       setUserName(userData.name || 'User');
 
-      const donationRes = await fetch(`http://localhost:5002/api/donations?userId=${uid}`);
+      const donationRes = await fetch(`https://cf-backend-57jj.onrender.com/api/donations?userId=${uid}`);
       const donationData = await donationRes.json();
       const sorted = Array.isArray(donationData)
         ? donationData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
@@ -55,7 +55,7 @@ const Dashboard = () => {
 
   const fetchCampaigns = async (uid) => {
     try {
-      const res = await fetch(`http://localhost:5002/api/campaigns/byCreator/${uid}`);
+      const res = await fetch(`https://cf-backend-57jj.onrender.com/api/campaigns/byCreator/${uid}`);
       const data = await res.json();
       const safeData = Array.isArray(data) ? data : [];
       setCampaigns(safeData);

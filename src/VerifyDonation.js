@@ -23,7 +23,7 @@ const VerifyDonation = () => {
 
     const verifyDonation = async () => {
       try {
-        await axios.post('http://localhost:5002/api/donations/donate', {
+        await axios.post('https://cf-backend-57jj.onrender.com/api/donations/donate', {
           ...donationDetails,
         });
 

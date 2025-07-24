@@ -18,7 +18,7 @@ const handleSubmit = async (e) => {
   };
 
   try {
-    const response = await fetch('http://localhost:5002/api/auth/register', {
+    const response = await fetch('https://cf-backend-57jj.onrender.com/api/auth/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -24,7 +24,7 @@ function PaymentSuccess() {
       }
 
       try {
-        await axios.post('http://localhost:5002/api/cashfree/verify-payment', {
+        await axios.post('https://cf-backend-57jj.onrender.com/api/cashfree/verify-payment', {
           orderId,
         });
 

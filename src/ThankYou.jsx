@@ -16,7 +16,7 @@ function ThankYou() {
       hasPosted.current = true;
 
       const timer = setTimeout(() => {
-        axios.post('http://localhost:5002/api/cashfree/verify-payment', { orderId })
+        axios.post('https://cf-backend-57jj.onrender.com/api/cashfree/verify-payment', { orderId })
           .then(res => {
             console.log("✅", res.data.message);
             sessionStorage.setItem(`verified-${orderId}`, 'true');
