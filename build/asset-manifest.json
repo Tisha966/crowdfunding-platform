@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "./static/css/main.116cc0cd.css",
+    "main.js": "./static/js/main.7bcf4f77.js",
+    "static/js/453.fff97db3.chunk.js": "./static/js/453.fff97db3.chunk.js",
+    "static/media/tishapic_blackcrop.jpg": "./static/media/tishapic_blackcrop.2f2f3ae07bfebd26e3a9.jpg",
+    "static/media/2_img.jpg": "./static/media/2_img.2a7aecc0414a5baf0d02.jpg",
+    "static/media/fund10.jpg": "./static/media/fund10.4f9f6dbf9ecce2ad8342.jpg",
+    "static/media/tisha.jpg": "./static/media/tisha.74edb84334c0d773a80c.jpg",
+    "static/media/1_img.jpg": "./static/media/1_img.7f31c7cc662d43aacc91.jpg",
+    "static/media/3_img.jpg": "./static/media/3_img.46dfb857bc746c7b72e5.jpg",
+    "static/media/orphan.jpg": "./static/media/orphan.5f9289455d6644808c8d.jpg",
+    "static/media/fund3.jpg": "./static/media/fund3.bec72bc61baaf9826b8f.jpg",
+    "static/media/funding15.jpg": "./static/media/funding15.cc18955e585bd0dccc73.jpg",
+    "static/media/fund12.jpg": "./static/media/fund12.9e6de92dbf7f4bfc66a6.jpg",
+    "static/media/hunger.jpg": "./static/media/hunger.af699ead70ead73f05d9.jpg",
+    "index.html": "./index.html",
+    "main.116cc0cd.css.map": "./static/css/main.116cc0cd.css.map",
+    "main.7bcf4f77.js.map": "./static/js/main.7bcf4f77.js.map",
+    "453.fff97db3.chunk.js.map": "./static/js/453.fff97db3.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.116cc0cd.css",
+    "static/js/main.7bcf4f77.js"
+  ]
+}
