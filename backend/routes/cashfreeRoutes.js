@@ -17,7 +17,7 @@ router.post('/create-order', async (req, res) => {
   }
 
   const orderId = `order_${Date.now()}`;
-
+  const REACT_APP_API_URL = process.env.REACT_APP_API_URL
   try {
     const response = await axios.post(
       'https://sandbox.cashfree.com/pg/orders',
@@ -32,7 +32,7 @@ router.post('/create-order', async (req, res) => {
           customer_phone: '9999999999',
         },
         order_meta: {
-          return_url: 'http://localhost:3000/payment-success?order_id={order_id}',
+          return_url: `${REACT_APP_API_URL}/payment-success?order_id={order_id}`,
         },
         order_tags: {
           campaignId,
