@@ -27,25 +27,26 @@ const cashfreeRoutes = require('./routes/cashfreeRoutes');
 //   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
 //   credentials: true,
 // };
+
 const allowedOrigins = [
   process.env.CLIENT_URL,
   process.env.REACT_APP_API_URL,
-];
+].filter(Boolean); // removes undefined/null
 
 const corsOptions = {
   origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl)
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
     }
   },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 };
 
-
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
 
 // ✅ Middleware - Body Parsers
 app.use(express.json());
